@@ -1,10 +1,4 @@
-.bgShow {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.bgShow img {
+.bgImg {
     mask-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8), rgba(0,0,0,0.2));
     filter: brightness(80%);
 }
