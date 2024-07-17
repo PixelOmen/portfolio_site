@@ -1,5 +1,5 @@
 .navbar {
-    left: 0px;
+    right: 0px;
     top: 0px;
     transition: top 0.5s, background 0.4s;
     min-width: 100%;
@@ -11,10 +11,10 @@
 }
 
 .navbarSmall {
-    left: 50%;
+    right: 10%;
     top: 30px;
-    transform: translateX(-50%);
+    transform: translateX(50%);
     min-width: 0%;
     background: rgba(0,0,0,0.5);
-    transition: min-width 0.5s, top 1s, background 0.4s;
+    transition: transform 2s, min-width 0.5s, top 1s, background 0.4s;
 }
