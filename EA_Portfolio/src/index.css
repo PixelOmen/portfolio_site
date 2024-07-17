@@ -13,5 +13,6 @@
 }
 
 body {
-  background-color: #172533;
+  @apply bg-gray-900;
+  @apply text-slate-50;
 }

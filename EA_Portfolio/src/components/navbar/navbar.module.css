@@ -1,18 +1,26 @@
 .navbar {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
     right: 0px;
     top: 0px;
     transition: top 0.5s, background 0.4s;
     min-width: 100%;
     max-width: 100% !important;
-    background: rgba(0,0,0,0);
-    border-radius: 20px;
     text-align: center;
     transform: translateX(50%, 0);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .navbarSmall {
     right: 10%;
     top: 30px;
+    border-radius: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    column-gap: 0px;
+    gap: 0px;
     transform: translateX(50%);
     min-width: 0%;
     background: rgba(0,0,0,0.5);
