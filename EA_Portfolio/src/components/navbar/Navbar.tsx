@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
   <>
   {/* <div ref={topAnchorBar} className="Spacer absolute w-full border border-red-600 py-10"></div> */}
-  <div ref={topAnchorBar} className="Spacer absolute w-full py-10"></div>
+  <div ref={topAnchorBar} className="Spacer absolute py-10"></div>
   <div ref={navbarContainer}
     className={`${styles.navbar} text-gray-50 p-4 bg-stone-900 bg-opacity-90`}
   >

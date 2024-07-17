@@ -14,13 +14,21 @@ interface HeroProps {
 export default function hero({ children }: HeroProps) {
   return (
     <>
-      <div className={`w-full overflow-hidden`}>
-        {/* <img src={landingbg} alt="landingbg" className={`${styles.bgImg} mx-auto'`}/> */}
-        <HeroCanvas/>
-        <div className='absolute h-full w-full top-0 left-0'>
-          <Navbar/>
-          <div className='pt-24'>
-            {children}
+        {/* <img src={landingbg} alt="landingbg" className={`${styles.bgImg} absolute mx-auto'`}/> */}
+      <div className="h-screen border-2">
+        <div className='relative h-full border-2 border-red-500 box-border'>
+          <div className='relative z-10'>
+            <Navbar/>
+          </div>
+          <div className='h-full pt-20'>
+            <div className='relative z-10'>
+              {children}
+            </div>
+            <div
+              className='absolute z-0 h-full w-full left-0 top-0 overflow-hidden'
+            >
+              <HeroCanvas/>
+            </div>
           </div>
         </div>
       </div>

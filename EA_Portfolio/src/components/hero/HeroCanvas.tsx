@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 
 export default function HeroCanvas() {
     return (
-    <div className="w-screen">
+    <div className="">
+        {/* <div className="h-[500px]">Test</div> */}
         <Grid/>
+        test
     </div>
     )
 }
@@ -16,7 +18,7 @@ function Grid() {
         height: number;
     }
 
-    function dimByScreen(wRatio = 20, hRatio = 30): DotGrid {
+    function dimByScreen(wRatio = 30, hRatio = 30): DotGrid {
         return {
             width: Math.floor(window.innerWidth / wRatio),
             height: Math.floor(window.innerHeight / hRatio)
@@ -33,7 +35,7 @@ function Grid() {
         for (let gridY = 0; gridY < gridDim.height; gridY++) {
             dots.push(
                 <div
-                    className="group rounded-full p-2"
+                    className="rounded border-2 border-slate-800 p-2 hover:bg-slate-400"
                     data-index={index}
                     key={`${gridX}-${gridY}`}
                 >
@@ -66,7 +68,7 @@ function Grid() {
     return (
         <div
             style={{ gridTemplateColumns: `repeat(${gridDim.width}, 1fr)`}}
-            className="grid w-fit border-b-2 box-border overflow-hidden h-screen"
+            className="grid w-fit"
         >
             {dots}
         </div>
