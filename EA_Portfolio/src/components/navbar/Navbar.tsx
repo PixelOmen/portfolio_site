@@ -6,7 +6,7 @@ export default function Navbar() {
   const topAnchorBar = useRef<HTMLDivElement>(null);
   const navbarContainer = useRef<HTMLDivElement>(null);
   const contentsFull = useRef<HTMLDivElement>(null);
-  const contentsSmall = useRef<HTMLDivElement>(null);
+  const contentsSmall = useRef<HTMLButtonElement>(null);
   const observer = new IntersectionObserver((elements) => {
     elements.forEach((e) => {
       if (e.isIntersecting) {
@@ -37,11 +37,19 @@ export default function Navbar() {
     className={`${styles.navbar} text-gray-50 p-4 bg-stone-900 bg-opacity-90`}
   >
     <div ref={contentsFull} className="flex justify-between text-2xl font-bold">
-      Emmanuel Acosta
+      <header className="ml-auto mr-[10%]">
+        <ul className="flex gap-10">
+          <li ><a href="#navWork" className={`${styles.navLinks}`}>Work</a></li>
+          <li><a href="#navResume" className={styles.navLinks}>Resume</a></li>
+          <li><a href="#navContact" className={styles.navLinks}>Contact</a></li>
+        </ul>
+      </header>
     </div>
-    <div ref={contentsSmall} className="text-2xl font-bold hidden p-4">
-      X
-    </div>
+    <button ref={contentsSmall} className={`${styles.smallMenuBtn} group text-2xl rounded-full font-bold hidden p-4 hover:bg-[#b9f5f5]`}>
+      <span className="group-hover:text-black">
+        Menu
+      </span>
+    </button>
   </nav>
   </>
   )

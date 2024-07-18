@@ -18,7 +18,7 @@ function Grid() {
     }
 
 
-    function dimByScreen(wRatio = 35, hRatio = 35): DotGrid {
+    function dimByScreen(wRatio = 50, hRatio = 50): DotGrid {
         return {
             width: Math.floor(window.innerWidth / wRatio),
             height: Math.floor(window.innerHeight / hRatio)
@@ -57,11 +57,11 @@ function Grid() {
                 { value: 0, easing: "easeInOutSine", duration: 50 },
             ],
             opacity: [
-                { value: 0.8, easing: "easeOutSine", duration: 250 },
-                { value: 0.3, easing: "easeInOutSine", duration: 1200 },
+                { value: 1, easing: "easeOutSine", duration: 250 },
+                { value: 0.1, easing: "easeInOutSine", duration: 1200 },
             ],
-            delay: anime.stagger(80, {
-                grid: [Math.floor(gridDim.width), gridDim.height],
+            delay: anime.stagger(50, {
+                grid: [gridDim.width, gridDim.height],
                 from: Math.floor(Math.random() * dotIndex),
             }),
         })
@@ -76,12 +76,12 @@ function Grid() {
         for (let gridY = 0; gridY < gridDim.height; gridY++) {
             dots.push(
                 <div
-                    className="rounded-md border-2 border-slate-800 p-2 hover:bg-slate-400"
+                    className="rounded-xl border-2 opacity-40 border-slate-800 p-4"
                     data-index={dotIndex}
                     key={`${gridX}-${gridY}`}
                 >
                     <div
-                        className="gridPoint rounded-md h-4 w-4 opacity-30 bg-slate-600"
+                        className="gridPoint rounded-md h-4 w-6 opacity-10 bg-slate-600"
                         data-index={dotIndex}
                     >                        
                     </div>

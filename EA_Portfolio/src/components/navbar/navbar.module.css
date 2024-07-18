@@ -11,6 +11,25 @@
     border-bottom-right-radius: 5px;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.navLinks {
+    opacity: 1;
+    animation: fadeIn 1s forwards;
+    transition: color 0.3s;
+}
+
+.navLinks:hover {
+    color: #b9f5f5;
+}
+
 .navbarSmall {
     right: 10%;
     top: 30px;
@@ -20,8 +39,13 @@
     gap: 0px;
     transform: translateX(50%);
     min-width: 0%;
-    background: rgba(0,0,0,0.5);
-    transition: transform 2s, min-width 0.5s, top 1s, background 0.4s;
+    transition: transform 2s, min-width 0.5s, top 1s, background 0.4s, border-color 1s;
+    border: 3px solid #96BBBB;
+}
+
+.navbarSmall:hover {
+    transition: border-color 1s, transform 2s;
+    border-color: rgb(35, 35, 35);
 }
 
 @keyframes navRotate {
@@ -34,5 +58,13 @@
 }
 
 .navbarSmallRotate {
-    animation: navRotate 0.3s ease-in-out 2 alternate;
+    animation: navRotate 0.2s ease-in-out 2 alternate;
+}
+
+.smallMenuBtn {
+    transition: background-color 0.2s;
+}
+
+.smallMenuBtn:hover {
+    transition: background-color 1s;
 }
