@@ -22,7 +22,7 @@ export default function App() {
           </h1> */}
         </div>
       </Hero>
-      <h1 className="h-[3000px] text-gray-200 font-roboto">Outside</h1>
+      <h1 id="navWork" className="h-[3000px] text-gray-200 font-roboto">Outside</h1>
     </>
   )
 }

@@ -30,7 +30,7 @@
     color: #b9f5f5;
 }
 
-.navbarSmall {
+.navbarContainerSmall {
     right: 10%;
     top: 30px;
     border-radius: 50px;
@@ -41,6 +41,12 @@
     min-width: 0%;
     transition: transform 2s, min-width 0.5s, top 1s, background 0.4s, border-color 1s;
     border: 3px solid #96BBBB;
+}
+
+@media (max-width: 480px) {
+    .navbarContainerSmall {
+        transform: translateX(0%);;
+    }
 }
 
 .navbarSmall:hover {
