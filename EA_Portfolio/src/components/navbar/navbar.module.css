@@ -1,23 +1,20 @@
 .navbar {
     position: fixed;
-    display: flex;
-    justify-content: space-between;
     right: 0px;
     top: 0px;
-    transition: top 0.5s, background 0.4s;
+    transition: top 0.5s, min-width 0.3s, background 0.4s;
     min-width: 100%;
     max-width: 100% !important;
     text-align: center;
     transform: translateX(50%, 0);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .navbarSmall {
     right: 10%;
     top: 30px;
-    border-radius: 20px;
-    flex-direction: column;
+    border-radius: 50px;
     justify-content: flex-start;
     column-gap: 0px;
     gap: 0px;
@@ -25,4 +22,17 @@
     min-width: 0%;
     background: rgba(0,0,0,0.5);
     transition: transform 2s, min-width 0.5s, top 1s, background 0.4s;
+}
+
+@keyframes navRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-90deg);
+    }
+}
+
+.navbarSmallRotate {
+    animation: navRotate 0.3s ease-in-out 2 alternate;
 }
