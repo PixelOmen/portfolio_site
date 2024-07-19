@@ -48,7 +48,7 @@ export default function Navbar() {
     </div>
     <button
       ref={contentsSmall}
-      className={`${styles.smallMenuBtn} group sm:text-2xl rounded-full font-bold p-2 hidden sm:px-4 hover:bg-[#b9f5f5]`}
+      className={`${styles.smallMenuBtn} z-50 group sm:text-2xl rounded-full font-bold p-2 hidden sm:px-4 hover:bg-[#b9f5f5]`}
     >
       <span className="group-hover:text-black">
         Menu

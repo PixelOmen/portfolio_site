@@ -8,17 +8,19 @@ interface ScrollSectionProps {
 }
 
 export default function ScrollSection({scrollY, onInit, children}: ScrollSectionProps) {
-    const sectionRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        scrollY.settriggerElement(sectionRef.current);
+        scrollY.settriggerElement(triggerRef.current);
         scrollY.setContentElement(contentRef.current);
         onInit((prev: number) => prev + 1);
     }, [])
+
   return (
-    <section ref={sectionRef} className="h-[1000px] mt-2 bg-slate-600 overflow-hidden">
-        <div ref={contentRef} className="hidden fadeInUp">
+    <section ref={triggerRef} className="mt-20 border-2 border-red-500">
+        <div />
+        <div ref={contentRef}>
             {children}
         </div>
     </section>

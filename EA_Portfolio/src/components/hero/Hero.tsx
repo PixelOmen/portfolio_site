@@ -3,7 +3,6 @@ import { ReactNode } from 'react'
 // import styles from './hero.module.css'
 // import landingbg from '../../assets/landingbg.jpg'
 
-import Navbar from "../navbar/Navbar"
 import HeroCanvas from './HeroCanvas'
 
 
@@ -15,7 +14,7 @@ export default function hero({ children }: HeroProps) {
   return (
     <>
       {/* <img src={landingbg} alt="landingbg" className={`${styles.bgImg} absolute mx-auto'`}/> */}
-      <section className='relative h-screen'>
+      <div className='relative h-screen'>
         <div className='relative h-full pt-20'>
           <div className='relative h-full z-10'>
             {children}
@@ -26,7 +25,7 @@ export default function hero({ children }: HeroProps) {
             <HeroCanvas/>
           </div>
         </div>
-      </section>
+      </div>
     </>
   )
 }

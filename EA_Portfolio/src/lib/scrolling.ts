@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { opacityAnim } from "./animUtils";
 
 export interface ScrollState {
     triggerElement: HTMLElement | null;
     settriggerElement: (value: any) => void;
     contentElement: HTMLElement | null;
     setContentElement: (value: any) => void;
+    wasTriggered: boolean;
+    setWasTriggered: (value: any) => void;
 }
 
 export function sectionScrollStates(amount = 1) : ScrollState[] {
@@ -12,11 +15,14 @@ export function sectionScrollStates(amount = 1) : ScrollState[] {
     for (let i = 0; i < amount; i++) {
         const [triggerElement, setTriggerElement] = useState(null);
         const [contentElement, setContentElement] = useState(null);
+        const [wasTriggered, setWasTriggered] = useState(false);
         const scrollState: ScrollState = {
             triggerElement: triggerElement,
             settriggerElement: setTriggerElement,
             contentElement: contentElement,
-            setContentElement: setContentElement
+            setContentElement: setContentElement,
+            wasTriggered: wasTriggered,
+            setWasTriggered: setWasTriggered
         }
         scrollStates.push(scrollState);
     }
@@ -24,9 +30,10 @@ export function sectionScrollStates(amount = 1) : ScrollState[] {
 }
 
 export function scrollObserve(scrollStates: ScrollState[]): void {
-    const triggerObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
 
+    const triggerObserver = new IntersectionObserver((entries) => {
+
+        entries.forEach((entry) => {
             let element = entry.target as HTMLElement;
             let state = scrollStates.find((e) => e.triggerElement === element);
             if (!state) throw new Error("Element not found in scrollStates");
@@ -34,11 +41,13 @@ export function scrollObserve(scrollStates: ScrollState[]): void {
             if (!contentElement) throw new Error("Content Element is null");
 
             if (entry.isIntersecting) {
-                contentElement.classList.remove('hidden')                    
+                opacityAnim(contentElement, 'enterUp');
+                state.setWasTriggered(true);
             } else {
-                contentElement.classList.add('hidden')
+                state.setWasTriggered(false);
             }
-        })
+        });
+
     });
 
     scrollStates.forEach((state) => {
@@ -48,4 +57,5 @@ export function scrollObserve(scrollStates: ScrollState[]): void {
             console.error("Scroll Element is null");
         }
     });
+
 }
