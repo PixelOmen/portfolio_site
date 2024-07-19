@@ -6,17 +6,19 @@ export default function Navbar() {
   const topAnchorBar = useRef<HTMLDivElement>(null);
   const navbarContainer = useRef<HTMLDivElement>(null);
   const contentsFull = useRef<HTMLDivElement>(null);
-  const contentsSmall = useRef<HTMLButtonElement>(null);
+  const contentsSmall = useRef<HTMLDivElement>(null);
   const observer = new IntersectionObserver((elements) => {
     elements.forEach((e) => {
       if (e.isIntersecting) {
-        contentsFull.current?.classList.remove('hidden');
-        contentsSmall.current?.classList.add('hidden');
-        contentsSmall.current?.classList.remove(styles.navbarSmallRotate);
-        navbarContainer.current?.classList.remove(styles.navbarContainerSmall);
+        contentsFull.current?.classList.remove('sm:hidden');
+        contentsSmall.current?.classList.add('sm:hidden');
+        if (window.innerWidth >= 640) {
+          contentsSmall.current?.classList.remove(styles.navbarSmallRotate);
+          navbarContainer.current?.classList.remove(styles.navbarContainerSmall);
+        }
       } else {
-        contentsFull.current?.classList.add('hidden');
-        contentsSmall.current?.classList.remove('hidden');
+        contentsFull.current?.classList.add('sm:hidden');
+        contentsSmall.current?.classList.remove('sm:hidden');
         contentsSmall.current?.classList.add(styles.navbarSmallRotate);
         navbarContainer.current?.classList.add(styles.navbarContainerSmall);
       }
@@ -27,6 +29,15 @@ export default function Navbar() {
     if (topAnchorBar.current && navbarContainer.current) {
       observer.observe(topAnchorBar.current);
     }
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 640) {
+        contentsSmall.current?.classList.add(styles.navbarSmallRotate);
+        navbarContainer.current?.classList.add(styles.navbarContainerSmall);
+      } else if (window.scrollY < 10) {
+        contentsSmall.current?.classList.remove(styles.navbarSmallRotate);
+        navbarContainer.current?.classList.remove(styles.navbarContainerSmall);
+      }
+    });
   }, [])
 
   return (
@@ -35,9 +46,10 @@ export default function Navbar() {
   <div ref={topAnchorBar} className="Spacer absolute py-10" aria-hidden="true"></div>
   <nav 
     ref={navbarContainer}
-    className={`${styles.navbar} text-gray-50 bg-stone-900 bg-opacity-90`}
+    className={`${styles.navbar} sm:${styles.navbarContainerSmall} text-gray-50 bg-stone-900 bg-opacity-90`}
   >
-    <div ref={contentsFull} className="flex text-xl sm:text-2xl py-4 font-bold">
+
+    <div ref={contentsFull} className="hidden sm:flex text-xl sm:text-2xl py-4 font-bold">
       <header className="ml-auto mr-auto sm:mr-[10%]">
         <ul className="flex gap-5 sm:gap-10">
           <li><a href="#navWork" className={styles.navLinks}>Work</a></li>
@@ -46,14 +58,17 @@ export default function Navbar() {
         </ul>
       </header>
     </div>
-    <button
-      ref={contentsSmall}
-      className={`${styles.smallMenuBtn} z-50 group sm:text-2xl rounded-full font-bold p-2 hidden sm:px-4 hover:bg-[#b9f5f5]`}
-    >
-      <span className="group-hover:text-black">
-        Menu
-      </span>
-    </button>
+
+    <div ref={contentsSmall} className="">
+      <button
+        type="button"
+        className={`${styles.smallMenuBtn} z-50 group sm:text-2xl rounded-full font-bold p-2 sm:px-4 hover:bg-[#b9f5f5]`}
+      >
+        <span className="group-hover:text-black">
+          Menu
+        </span>
+      </button>
+    </div>
   </nav>
   </>
   )
