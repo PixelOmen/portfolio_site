@@ -16,9 +16,6 @@ export default function hero({ children }: HeroProps) {
     <>
       {/* <img src={landingbg} alt="landingbg" className={`${styles.bgImg} absolute mx-auto'`}/> */}
       <section className='relative h-screen'>
-        <nav className='relative z-50'>
-          <Navbar/>
-        </nav>
         <div className='relative h-full pt-20'>
           <div className='relative h-full z-10'>
             {children}
