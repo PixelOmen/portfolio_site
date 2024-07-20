@@ -46,6 +46,7 @@ export default function App() {
       <ScrollSection
         scrollY={scrollStates[0]}
         onInit={setSectionInit}
+        classNameProp="rounded-2xl bg-slate-500 p-4"
       >
         <WorkSection startAnim={scrollStates[0].wasTriggered}/>
       </ScrollSection>
@@ -53,13 +54,11 @@ export default function App() {
       <ScrollSection
         scrollY={scrollStates[1]}
         onInit={setSectionInit}
+        classNameProp="rounded-2xl bg-slate-500 p-4"
       >
-        <div className="h-[1000px] bg-slate-600">
-          <h1 className="border-2">
-            Section2
-          </h1>
-        </div>
+        <WorkSection startAnim={scrollStates[1].wasTriggered}/>
       </ScrollSection>
+      <div className="h-[1000px]"></div>
 
     </>
   )

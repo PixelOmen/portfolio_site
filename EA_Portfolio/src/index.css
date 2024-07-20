@@ -28,9 +28,9 @@ body {
   }
 }
 
-@keyframes transX- {
+@keyframes -transX {
   from {
-      transform: translateX(-5%);
+      transform: translateX(-20%);
   }
   to {
       transform: translateX(0px);
@@ -39,7 +39,7 @@ body {
 
 @keyframes transX {
   from {
-      transform: translateX(5%);
+      transform: translateX(20%);
   }
   to {
       transform: translateX(0px);
@@ -48,7 +48,7 @@ body {
 
 @keyframes transY {
   from {
-      transform: translateY(5%);
+      transform: translateY(20%);
   }
   to {
       transform: translateY(0px);
@@ -57,7 +57,7 @@ body {
 
 @keyframes -transY {
   from {
-      transform: translateY(-5%);
+      transform: translateY(-20%);
   }
   to {
       transform: translateY(0px);

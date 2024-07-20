@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { opacityAnim } from "./animUtils";
 
 export interface ScrollState {
     triggerElement: HTMLElement | null;
@@ -41,7 +40,6 @@ export function scrollObserve(scrollStates: ScrollState[]): void {
             if (!contentElement) throw new Error("Content Element is null");
 
             if (entry.isIntersecting) {
-                opacityAnim(contentElement, 'enterUp');
                 state.setWasTriggered(true);
             } else {
                 state.setWasTriggered(false);
