@@ -1,5 +1,9 @@
 import { useEffect, useState, useRef } from "react"
-import * as animUtils from "../../lib/animUtils";
+import * as animUtils from "../../../lib/animUtils";
+import ImgCarousel from "../../ui/images/ImgCarousel";
+
+import testImage1 from "../../../assets/testImage1.png";
+import testImage2 from "../../../assets/testImage2.png";
 
 interface WorkSectionProps {
   startAnim: boolean;
@@ -48,16 +52,21 @@ export default function WorkSection({startAnim}: WorkSectionProps) {
   }, [startAnim])
 
   return (
-    <div className="shapeHolder h-[500px]">
-      <div ref={container} className="hidden h-full fadeIn border-2 border-red-500">
-        <div ref={testRef} className="flex fadeIn justify-center">
+    <div className="shapeHolder min-h-[500px]">
+      <div ref={container} className="hidden h-full">
+        {/* <div ref={testRef} className="flex fadeIn justify-center">
           <ul className="text-2xl border-2">
             <li className="casc-fadeInLeft opacity-0">test</li>
             <li className="casc-fadeInRight opacity-0">test</li>
             <li>test</li>
           </ul>
+        </div> */}
+        <div className="flex justify-center gap-3">
+          <ImgCarousel 
+            imgURLs={[testImage1, testImage2, testImage1]}
+            className="border-8 rounded-3xl border-slate-700"
+          />
         </div>
-        <div className="border-4 enterLeft">Bottom</div>
       </div>
     </div>
   )

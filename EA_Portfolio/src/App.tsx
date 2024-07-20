@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Hero from "./components/hero/Hero"
 import Navbar from "./components/navbar/Navbar"
 import ScrollSection from "./components/scrollSection/ScrollSection";
-import WorkSection from "./components/workSection/WorkSection";
+import WorkSection from "./components/scrollSection/workSection/WorkSection";
 // import TestComponent from "./components/_testing/testComponent/TestComponent"
 
 import { sectionScrollStates, scrollObserve } from "./lib/scrolling";
@@ -46,7 +46,7 @@ export default function App() {
       <ScrollSection
         scrollY={scrollStates[0]}
         onInit={setSectionInit}
-        classNameProp="rounded-2xl bg-slate-500 p-4"
+        classNameProp="bg-slate-500 p-4 mb-10"
       >
         <WorkSection startAnim={scrollStates[0].wasTriggered}/>
       </ScrollSection>
@@ -54,7 +54,7 @@ export default function App() {
       <ScrollSection
         scrollY={scrollStates[1]}
         onInit={setSectionInit}
-        classNameProp="rounded-2xl bg-slate-500 p-4"
+        classNameProp="bg-slate-200 p-4"
       >
         <WorkSection startAnim={scrollStates[1].wasTriggered}/>
       </ScrollSection>

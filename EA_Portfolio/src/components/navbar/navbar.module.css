@@ -38,7 +38,7 @@
     column-gap: 0px;
     gap: 0px;
     min-width: 0%;
-    transition: transform 2s, min-width 0.5s, top 1s, background 0.4s, border-color 1s;
+    transition: transform 2s, min-width 0.5s, top 1s, background 0.4s, border-color 1s, right 3s;
     border: 3px solid #96BBBB;
 }
 

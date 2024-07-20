@@ -20,7 +20,7 @@ export default function ScrollSection({
 
 
     function contractOnScroll(
-        _: Event, topRatio: number = 0.95, bottomRatio: number = 0.3
+        _: Event, topRatio: number = 0.95, bottomRatio: number = 0.4
     ) {
         if (!contentRef.current || !triggerRef.current) {
             throw new Error("ScrollSection:scroll listener: element not found");   
@@ -46,11 +46,11 @@ export default function ScrollSection({
     }, [])
 
   return (
-    <section ref={triggerRef} className="mt-10">
+    <section ref={triggerRef} className="flex justify-center">
         <div />
         <div
             ref={contentRef}
-            className={`mx-4 scale-75 transition-transform duration-700 ease-out overflow-hidden ${classNameProp}`}
+            className={`mx-10 max-w-[2000px] scale-75 transition-all scal rounded-2xl duration-700 ease-out overflow-hidden ${classNameProp}`}
         >
             {children}
         </div>
