@@ -15,7 +15,8 @@ export function cascadeAnim(
     delay = 100,
     prefix: string = 'casc',
     opacityResetElems: HTMLElement[] = []
-): HTMLElement[] {
+): HTMLElement[]
+{
     if (!parent) return [];
     let classArray = Array.from(parent.classList)
     let classIndex = classArray.findIndex((className) => className.includes(prefix));
@@ -28,7 +29,6 @@ export function cascadeAnim(
         }, delay);
     }
     Array.from(parent.children).forEach((element, index) => {
-        console.log(index * delay)
         cascadeAnim(element as HTMLElement, (index + 1) * delay, prefix, opacityResetElems);
     });
     return opacityResetElems;
@@ -36,8 +36,8 @@ export function cascadeAnim(
 
 export function enterAnim(
     element: HTMLElement, anim: string, reset = 3000
-): number {
-    console.log('entered')
+): number
+{
     if (!classNames.includes(anim)) {
         throw new Error("Animation not found: " + anim);
     }

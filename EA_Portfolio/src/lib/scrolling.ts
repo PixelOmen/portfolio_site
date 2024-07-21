@@ -1,3 +1,5 @@
+import * as animUtils from "./animUtils";
+
 type PortableState = {
     value: any,
     setFunc: (value: any) => void
@@ -7,34 +9,55 @@ export interface IScrollState {
     wasTriggered: PortableState;
     triggerElement: HTMLElement | null;
     setTriggerElement: (e: HTMLElement | null) => void;
+    handleAnims: (parent: HTMLElement | null, opacityResetElems: PortableState) => void;
 }
 
-export interface IAnimHandler {
+export interface IScrollObserver {
     observe: (state: IScrollState) => void;
 }
 
 export class ScrollState implements IScrollState {
     triggerElement: HTMLElement | null = null;
     wasTriggered: PortableState;
-    private animHandler: IAnimHandler
+    private animHandler: IScrollObserver
+    private resetTimerID: number;
 
-    constructor(animHandler: IAnimHandler, wasTriggered: PortableState) {
+    constructor(animHandler: IScrollObserver, wasTriggered: PortableState) {
         this.animHandler = animHandler;
         this.wasTriggered = wasTriggered;
+        this.resetTimerID = -1;
     }
     
     setTriggerElement(element: HTMLElement | null) {
         this.triggerElement = element;
         this.animHandler.observe(this);
     }
+
+    handleAnims(parent: HTMLElement | null, opacityResetElems: PortableState): void {
+        if (this.wasTriggered.value) {
+            clearTimeout(this.resetTimerID);
+            opacityResetElems.setFunc(this.startAnims(parent));
+        } else {      
+            clearTimeout(this.resetTimerID);
+            this.resetTimerID = setTimeout(() => {
+                this.reset(opacityResetElems.value);
+            }, 1000);
+        }
+    }
+    
+    private startAnims(parent: HTMLElement | null): HTMLElement[] {
+        let opacityResetElems = animUtils.cascadeAnim(parent, 500);
+        return opacityResetElems
+    }
+    
+    private reset(opacityResetElems: HTMLElement[]): void {
+        opacityResetElems.forEach((element) => {
+          element.classList.add('opacity-0');
+        });
+    }
 }
 
-
-// private resetTimerID: number;
-// private setResetTimerID: (value: number) => void;
-// [this.resetTimerID, this.setResetTimerID] = useState(-1);
-
-export class ScrollAnimHandler implements IAnimHandler {
+export class ScrollObserver implements IScrollObserver {
     private _scrollStates: IScrollState[] = [];
     private _observer: IntersectionObserver;
 
@@ -78,47 +101,3 @@ export class ScrollAnimHandler implements IAnimHandler {
         });
     }
 }
-
-// export function sectionScrollStates(amount = 1) : ScrollState[] {
-//     const scrollStates: ScrollState[] = [];
-//     for (let i = 0; i < amount; i++) {
-//         const [triggerElement, setTriggerElement] = useState(null);
-//         const [wasTriggered, setWasTriggered] = useState(false);
-//         const scrollState: ScrollState = {
-//             triggerElement: triggerElement,
-//             setTriggerElement: setTriggerElement,
-//             wasTriggered: wasTriggered,
-//             setWasTriggered: setWasTriggered
-//         }
-//         scrollStates.push(scrollState);
-//     }
-//     return scrollStates;
-// }
-
-// export function scrollObserve(scrollStates: ScrollState[]): void {
-
-//     const triggerObserver = new IntersectionObserver((entries) => {
-
-//         entries.forEach((entry) => {
-//             let element = entry.target as HTMLElement;
-//             let state = scrollStates.find((e) => e.triggerElement === element);
-//             if (!state) throw new Error("Element not found in scrollStates");
-
-//             if (entry.isIntersecting) {
-//                 state.setWasTriggered(true);
-//             } else {
-//                 state.setWasTriggered(false);
-//             }
-//         });
-
-//     });
-
-//     scrollStates.forEach((state) => {
-//         if (state.triggerElement) {
-//             triggerObserver.observe(state.triggerElement);
-//         } else {
-//             console.error("Scroll Element is null");
-//         }
-//     });
-
-// }

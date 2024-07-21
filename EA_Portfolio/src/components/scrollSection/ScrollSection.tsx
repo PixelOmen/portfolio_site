@@ -1,14 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import { ScrollState, IAnimHandler } from "../../lib/scrolling";
+import React, { useEffect, useRef, useState } from "react";
+import { ScrollState } from "../../lib/scrolling";
+import type { IScrollObserver, IScrollState } from "../../lib/scrolling";
 
 interface ScrollSectionProps {
-    animHandler: IAnimHandler;
+    scrollObserver: IScrollObserver;
     classNameProp?: string;
     children?: React.ReactNode;
 }
 
 export default function ScrollSection({
-    animHandler,
+    scrollObserver,
     classNameProp = "",
     children,
 }: ScrollSectionProps) {
@@ -16,8 +17,7 @@ export default function ScrollSection({
     const triggerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
-    function contractOnScroll
-    (
+    function contractOnScroll(
         _: Event,
         topRatio: number = 0.95,
         bottomRatio: number = 0.4
@@ -39,23 +39,39 @@ export default function ScrollSection({
         }
     }
 
-    const [wasTriggered, setWasTriggered] = useState(null);
-    const PortWasTriggered = {
-        value: wasTriggered,
-        setFunc: setWasTriggered
+    function initScrollState(): IScrollState {
+        const [wasTriggered, setWasTriggered] = useState(null);
+        const scrollState = new ScrollState(
+            scrollObserver,
+            {
+                value: wasTriggered,
+                setFunc: setWasTriggered
+            }
+        )
+        useEffect(() => {
+            scrollState.setTriggerElement(triggerRef.current);
+            window.addEventListener("scroll", contractOnScroll);
+        }, [])
+        return scrollState
     }
-    const scrollState = new ScrollState(
-        animHandler, PortWasTriggered
-    )
 
-    useEffect(() => {
-        scrollState.setTriggerElement(triggerRef.current);
-        window.addEventListener("scroll", contractOnScroll);
-    }, [])
+    function modifyChildren(scrollState: IScrollState) {
+        const scrollChildren = React.Children.map(children, (child) => {
+            if (React.isValidElement(child)) {
+                if (typeof child.type === 'string') return child;
+                let props = { scrollState }
+                return React.cloneElement(child, props)
+            }
+        });
+        return scrollChildren;
+    }
 
-    useEffect(() => {
-        console.log(scrollState.wasTriggered)
-    }, [scrollState.wasTriggered])
+    const scrollState = initScrollState();
+
+    // useEffect(() => {
+    //     console.log(scrollState.wasTriggered)
+    // }, [scrollState.wasTriggered])
+    
 
     
   return (
@@ -65,7 +81,7 @@ export default function ScrollSection({
             ref={contentRef}
             className={`mx-2 max-w-[2000px] scale-75 transition-all rounded-2xl duration-700 ease-out overflow-hidden ${classNameProp}`}
         >
-            {children}
+            {modifyChildren(scrollState)}
         </div>
     </section>
   )
