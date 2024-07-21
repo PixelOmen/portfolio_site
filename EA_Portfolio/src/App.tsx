@@ -1,25 +1,17 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 import Hero from "./components/hero/Hero"
 import Navbar from "./components/navbar/Navbar"
 import ScrollSection from "./components/scrollSection/ScrollSection";
-import WorkSection from "./components/scrollSection/workSection/WorkSection";
+// import WorkSection from "./components/scrollSection/workSection/WorkSection";
 // import TestComponent from "./components/_testing/testComponent/TestComponent"
 
-import { sectionScrollStates, scrollObserve } from "./lib/scrolling";
+// import { sectionScrollStates, scrollObserve } from "./lib/scrolling";
+import { ScrollAnimHandler } from "./lib/scrolling";
 
 
 export default function App() {
-  const sections = 2;
-  const scrollStates = sectionScrollStates(sections);
-
-  var [sectionsInitCounter, setSectionInit] = useState(0);
-
-  useEffect(() => {
-    if (sectionsInitCounter >= sections) {
-      scrollObserve(scrollStates);
-    }
-  }, [sectionsInitCounter]);
+  const scrollAnimHandler = new ScrollAnimHandler();
 
   return (
     <>
@@ -44,19 +36,25 @@ export default function App() {
       <div className="h-screen left-0 box-border"></div>
 
       <ScrollSection
-        scrollY={scrollStates[0]}
-        onInit={setSectionInit}
+        animHandler={scrollAnimHandler}
         classNameProp="bg-slate-500 p-4 mb-10"
       >
-        <WorkSection startAnim={scrollStates[0].wasTriggered}/>
+        <div className="flex bg-slate-900">
+          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
+          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
+          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
+          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
+          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
+          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
+        </div>
+        {/* <WorkSection startAnim={scrollStates[0].wasTriggered}/> */}
       </ScrollSection>
 
       <ScrollSection
-        scrollY={scrollStates[1]}
-        onInit={setSectionInit}
-        classNameProp="bg-slate-200 p-4"
+        animHandler={scrollAnimHandler}
+        classNameProp="bg-slate-500 p-4 mb-10"
       >
-        <WorkSection startAnim={scrollStates[1].wasTriggered}/>
+        <div className="h-[1000px] w-[1000px] bg-slate-400"></div>
       </ScrollSection>
       <div className="h-[1000px]"></div>
 

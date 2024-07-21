@@ -5,6 +5,8 @@ import ImgCarousel from "../../ui/images/ImgCarousel";
 import testImage1 from "../../../assets/testImage1.png";
 import testImage2 from "../../../assets/testImage2.png";
 
+// import { test } from "../ScrollSection";
+
 interface WorkSectionProps {
   startAnim: boolean;
 }

@@ -1,16 +1,14 @@
-import { useEffect, useRef } from "react";
-import type { ScrollState } from "../../lib/scrolling";
+import { useEffect, useRef, useState } from "react";
+import { ScrollState, IAnimHandler } from "../../lib/scrolling";
 
 interface ScrollSectionProps {
-    scrollY: ScrollState;
-    onInit: (value: any) => void;
+    animHandler: IAnimHandler;
     classNameProp?: string;
     children?: React.ReactNode;
 }
 
 export default function ScrollSection({
-    scrollY,
-    onInit,
+    animHandler,
     classNameProp = "",
     children,
 }: ScrollSectionProps) {
@@ -18,10 +16,13 @@ export default function ScrollSection({
     const triggerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
-
-    function contractOnScroll(
-        _: Event, topRatio: number = 0.95, bottomRatio: number = 0.4
-    ) {
+    function contractOnScroll
+    (
+        _: Event,
+        topRatio: number = 0.95,
+        bottomRatio: number = 0.4
+    ): void
+    {
         if (!contentRef.current || !triggerRef.current) {
             throw new Error("ScrollSection:scroll listener: element not found");   
         }
@@ -38,19 +39,31 @@ export default function ScrollSection({
         }
     }
 
+    const [wasTriggered, setWasTriggered] = useState(null);
+    const PortWasTriggered = {
+        value: wasTriggered,
+        setFunc: setWasTriggered
+    }
+    const scrollState = new ScrollState(
+        animHandler, PortWasTriggered
+    )
+
     useEffect(() => {
-        scrollY.settriggerElement(triggerRef.current);
-        scrollY.setContentElement(contentRef.current);
-        onInit((prev: number) => prev + 1);
+        scrollState.setTriggerElement(triggerRef.current);
         window.addEventListener("scroll", contractOnScroll);
     }, [])
 
+    useEffect(() => {
+        console.log(scrollState.wasTriggered)
+    }, [scrollState.wasTriggered])
+
+    
   return (
     <section ref={triggerRef} className="flex justify-center">
         <div />
         <div
             ref={contentRef}
-            className={`mx-10 max-w-[2000px] scale-75 transition-all scal rounded-2xl duration-700 ease-out overflow-hidden ${classNameProp}`}
+            className={`mx-2 max-w-[2000px] scale-75 transition-all rounded-2xl duration-700 ease-out overflow-hidden ${classNameProp}`}
         >
             {children}
         </div>

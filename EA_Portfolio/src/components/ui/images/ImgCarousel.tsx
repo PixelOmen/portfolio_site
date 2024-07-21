@@ -25,7 +25,9 @@ export default function ImgCarousel({
         >
           {imgURLs.map((url, index) => { return (
             <div key={index} className="min-w-full m-auto overflow-hidden">
-              <img src={url} alt="carousel image"/>
+              <img src={url} alt="carousel image"
+                className='hover:scale-105 transition-all duration-300'
+              />
             </div>
         )})}
       </div>
@@ -49,7 +51,7 @@ export default function ImgCarousel({
         onClick={prevImage}
       >
         <div
-          className='w-[70%] ml-6 bg-[#585243] p-4 rounded-[20%] shadow-inner group-hover:bg-[#b9e6e6] group-hover:scale-y-125 group-hover:rounded-[80%] transition-all duration-300 group-active:bg-stone-800 border-1 border-black'
+          className='w-[70%] ml-6 bg-[#585243] fadeInDown p-4 rounded-[20%] shadow-inner group-hover:bg-[#b9e6e6] group-hover:scale-y-125 group-hover:rounded-[80%] transition-all duration-300 group-active:bg-stone-800 border-1 border-black'
         >
           <img src={rightArrow} alt="Previous Image" 
             className='rotate-180 group-active:rotate-[270deg] group-hover:scale-[110%] group-hover:brightness-0 transition-all'/>
@@ -63,7 +65,7 @@ export default function ImgCarousel({
           className='w-[70%] bg-[#585243] p-4 rounded-[20%] group-hover:bg-[#b9e6e6] group-hover:scale-y-125 group-hover:rounded-[80%] transition-all duration-300 group-active:bg-stone-800 border-1 border-black'
         >
           <img src={rightArrow} alt="Next Image"
-            className='group-active:rotate-[-90deg] group-hover:scale-[110%] grou-hover:border-2 group-hover:brightness-0 transition-transform'
+            className='group-active:rotate-[-90deg] fadeInRight group-hover:scale-[110%] grou-hover:border-2 group-hover:brightness-0 transition-transform'
           />
         </div>
       </button>
