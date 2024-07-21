@@ -52,11 +52,22 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        classNameProp="bg-slate-500 p-4 mb-10"
+        classNameProp="bg-slate-500 p-4 mb-20"
       >
         <div className="h-[1000px] w-[1000px] bg-slate-400"></div>
       </ScrollSection>
-      <div className="h-[1000px]"></div>
+
+      <ScrollSection
+        scrollObserver={scrollObserver}
+        scrollContract={false}
+        classNameProp="bg-slate-800"
+      >
+      <div className="w-screen h-[500px] bg-slate-800">
+        <svg preserveAspectRatio="none" viewBox="0 0 100 102" height="75" width="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L50 100 L100 0 Z" fill="#618985"></path>
+        </svg>
+      </div>
+      </ScrollSection>
 
     </>
   )

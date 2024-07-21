@@ -4,25 +4,28 @@ import type { IScrollObserver, IScrollState } from "../../lib/scrolling";
 
 interface ScrollSectionProps {
     scrollObserver: IScrollObserver;
+    scrollContract?: boolean;
     classNameProp?: string;
     children?: React.ReactNode;
 }
 
 export default function ScrollSection({
     scrollObserver,
+    scrollContract = true,
     classNameProp = "",
     children,
 }: ScrollSectionProps) {
 
     const triggerRef = useRef<HTMLDivElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);    
+    const startingScale = scrollContract ? "scale-75" : "";
+
 
     function contractOnScroll(
         _: Event,
         topRatio: number = 0.95,
         bottomRatio: number = 0.4
-    ): void
-    {
+    ): void {
         if (!contentRef.current || !triggerRef.current) {
             throw new Error("ScrollSection:scroll listener: element not found");   
         }
@@ -39,6 +42,7 @@ export default function ScrollSection({
         }
     }
 
+
     function initScrollState(): IScrollState {
         const [wasTriggered, setWasTriggered] = useState(null);
         const scrollState = new ScrollState(
@@ -48,13 +52,10 @@ export default function ScrollSection({
                 setFunc: setWasTriggered
             }
         )
-        useEffect(() => {
-            scrollState.setTriggerElement(triggerRef.current);
-            window.addEventListener("scroll", contractOnScroll);
-        }, [])
         return scrollState
     }
 
+    
     function modifyChildren(scrollState: IScrollState) {
         const scrollChildren = React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
@@ -65,21 +66,26 @@ export default function ScrollSection({
         });
         return scrollChildren;
     }
+    
+
+
 
     const scrollState = initScrollState();
 
-    // useEffect(() => {
-    //     console.log(scrollState.wasTriggered)
-    // }, [scrollState.wasTriggered])
-    
+    useEffect(() => {
+        scrollState.setTriggerElement(triggerRef.current);
+        if (scrollContract) {
+            window.addEventListener("scroll", contractOnScroll);
+        }
+    }, []);
 
-    
+
+
   return (
     <section ref={triggerRef} className="flex justify-center">
-        <div />
         <div
             ref={contentRef}
-            className={`mx-2 max-w-[2000px] scale-75 transition-all rounded-2xl duration-700 ease-out overflow-hidden ${classNameProp}`}
+            className={`${startingScale} transition-all rounded-2xl duration-700 ease-out overflow-hidden ${classNameProp}`}
         >
             {modifyChildren(scrollState)}
         </div>

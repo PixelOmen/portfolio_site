@@ -11,25 +11,35 @@ interface WorkSectionProps {
   scrollState?: IScrollState;
 }
 
-export default function WorkSection({
-  scrollState
-}: WorkSectionProps) {
+export default function WorkSection({ scrollState }: WorkSectionProps) {
+  
+  var [animTimer, setAnimTimer] = useState(-1);
+  var [resetComplete, setResetComplete] = useState(true);
   var [opacityResetElems, setOpacityResetElems] = useState<HTMLElement[]>([]);
 
-  const container = useRef<HTMLDivElement>(null);
-  const testRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    scrollState?.handleAnims(testRef.current, {
-      value: opacityResetElems,
-      setFunc: setOpacityResetElems
-    })
+    scrollState?.handleAnims(contentRef.current,
+      {
+        value: opacityResetElems,
+        setFunc: setOpacityResetElems
+      },
+      {
+        value: animTimer,
+        setFunc: setAnimTimer
+      },
+      {
+        value: resetComplete,
+        setFunc: setResetComplete
+      }
+    )
   }, [scrollState?.wasTriggered]);
 
   return (
     <div className="shapeHolder min-h-[500px]">
-      <div ref={container} className="h-full">
-        <div ref={testRef} className="flex fadeIn justify-center">
+      <div className="h-full">
+        <div ref={contentRef} className="flex fadeIn justify-center">
           <ul className="text-2xl border-2">
             <li className="casc-fadeInLeft opacity-0">test</li>
             <li className="casc-fadeInRight opacity-0">test</li>
