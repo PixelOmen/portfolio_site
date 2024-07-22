@@ -42,7 +42,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
           <div
             className="flex flex-col items-center sm:mt-10"
           >
-            <h1 className="enterUp">Contact</h1>
+            <h1 className="enterRight">Contact</h1>
             <hr className="w-40 mt-2 mb-10"/>
 
             <div
@@ -73,7 +73,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
                 />              
                 <button
                   type="submit"
-                  className="bg-[#fd6d5e] rounded-md p-2 text-slate-50 font-medium text-xl shake hover:brightness-125 active:bg-[#c53e2f] transition-all shadow-xl"
+                  className={`mx-auto w-full bg-[#fd6d5e] rounded-md p-2 text-slate-50 font-medium text-xl shake hover:brightness-125 active:bg-[#c53e2f]  active:w-3/4 transition-all shadow-xl`}
                 >
                   Submit
                 </button>

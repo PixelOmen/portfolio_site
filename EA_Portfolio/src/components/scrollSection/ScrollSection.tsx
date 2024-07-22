@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import { ScrollState } from "../../lib/scrolling";
 import type { IScrollObserver, IScrollState } from "../../lib/scrolling";
 
@@ -59,14 +60,13 @@ export default function ScrollSection({
 
     
     function modifyChildren(scrollState: IScrollState) {
-        const scrollChildren = React.Children.map(children, (child) => {
+        return React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
                 if (typeof child.type === 'string') return child;
                 let props = { scrollState }
                 return React.cloneElement(child, props)
             }
         });
-        return scrollChildren;
     }
     
 

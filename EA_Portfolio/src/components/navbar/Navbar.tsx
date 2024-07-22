@@ -53,7 +53,7 @@ export default function Navbar() {
       <header className="ml-auto mr-auto sm:mr-[10%]">
         <ul className="flex gap-5 sm:gap-10">
           <li><a href="#navWork" className={styles.navLinks}>Work</a></li>
-          <li><a href="#navResume" className={styles.navLinks}>Resume</a></li>
+          <li><a href="#navResume" className={styles.navLinks}>Demos</a></li>
           <li><a href="#navContact" className={styles.navLinks}>Contact</a></li>
         </ul>
       </header>

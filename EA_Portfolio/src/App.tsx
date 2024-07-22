@@ -5,9 +5,15 @@ import Navbar from "./components/navbar/Navbar"
 import ScrollSection from "./components/scrollSection/ScrollSection";
 import WorkSection from "./components/scrollSection/workSection/WorkSection";
 import ContactSection from "./components/scrollSection/contactSection/ContactSection";
-// import TestComponent from "./components/_testing/testComponent/TestComponent"
 
-// import { sectionScrollStates, scrollObserve } from "./lib/scrolling";
+// import TestComponent from "./components/_testing/testComponent/TestComponent";
+// import TestComponent2 from "./components/_testing/testComponent/TestComponent2";
+
+import MaskPicker from "./components/maskPicker/MaskPicker";
+import MaskContainer from "./components/maskPicker/maskContainer/MaskContainer";
+import MaskItem from "./components/maskPicker/maskItems/MaskItem";
+import MaskItem2 from "./components/maskPicker/maskItems/MaskItem2";
+
 import { ScrollObserver } from "./lib/scrolling";
 
 
@@ -38,7 +44,24 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        classNameProp="bg-slate-500 p-4 mb-10 rounded-2xl"
+        classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2000px] drop-shadow-2xl shadow-black"
+      >
+        <MaskPicker>
+
+          <MaskContainer>
+            <MaskItem/>
+          </MaskContainer>
+          {/* <MaskContainer>
+            <MaskItem2/>
+          </MaskContainer> */}
+
+        </MaskPicker>
+
+      </ScrollSection>
+
+      <ScrollSection
+        scrollObserver={scrollObserver}
+        classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2000px] drop-shadow-2xl shadow-black"
       >
         <div className="flex bg-slate-900">
           <div className="h-[200px] w-80 bg-red-400 border-2"></div>
@@ -53,15 +76,6 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2000px] drop-shadow-2xl shadow-black"
-      >
-        <div className="h-[1000px] flex bg-slate-400 drop-shadow-xl shadow-black">
-          <div>Test</div>
-        </div>
-      </ScrollSection>
-
-      <ScrollSection
-        scrollObserver={scrollObserver}
         scrollContract={false}
         classNameProp="bg-gray-800 w-screen"
       >
@@ -71,3 +85,4 @@ export default function App() {
     </>
   )
 }
+
