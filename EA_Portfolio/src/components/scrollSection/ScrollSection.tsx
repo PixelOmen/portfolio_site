@@ -35,9 +35,11 @@ export default function ScrollSection({
         bottom < (window.innerHeight * bottomRatio)) 
         {
             contentRef.current.classList.add("scale-75");
+            contentRef.current.classList.add("blur-sm");
             contentRef.current.classList.remove("scale-100");
         } else {
             contentRef.current.classList.remove("scale-75");
+            contentRef.current.classList.remove("blur-sm");
             contentRef.current.classList.add("scale-100");
         }
     }
@@ -85,7 +87,7 @@ export default function ScrollSection({
     <section ref={triggerRef} className="flex justify-center">
         <div
             ref={contentRef}
-            className={`${startingScale} transition-all rounded-2xl duration-700 ease-out overflow-hidden ${classNameProp}`}
+            className={`${startingScale} transition-all duration-700 ease-out overflow-hidden ${classNameProp}`}
         >
             {modifyChildren(scrollState)}
         </div>

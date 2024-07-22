@@ -4,6 +4,7 @@ import Hero from "./components/hero/Hero"
 import Navbar from "./components/navbar/Navbar"
 import ScrollSection from "./components/scrollSection/ScrollSection";
 import WorkSection from "./components/scrollSection/workSection/WorkSection";
+import ContactSection from "./components/scrollSection/contactSection/ContactSection";
 // import TestComponent from "./components/_testing/testComponent/TestComponent"
 
 // import { sectionScrollStates, scrollObserve } from "./lib/scrolling";
@@ -37,7 +38,7 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        classNameProp="bg-slate-500 p-4 mb-10"
+        classNameProp="bg-slate-500 p-4 mb-10 rounded-2xl"
       >
         <div className="flex bg-slate-900">
           <div className="h-[200px] w-80 bg-red-400 border-2"></div>
@@ -52,21 +53,19 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        classNameProp="bg-slate-500 p-4 mb-20"
+        classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2000px] drop-shadow-2xl shadow-black"
       >
-        <div className="h-[1000px] w-[1000px] bg-slate-400"></div>
+        <div className="h-[1000px] flex bg-slate-400 drop-shadow-xl shadow-black">
+          <div>Test</div>
+        </div>
       </ScrollSection>
 
       <ScrollSection
         scrollObserver={scrollObserver}
         scrollContract={false}
-        classNameProp="bg-slate-800"
+        classNameProp="bg-gray-800 w-screen"
       >
-      <div className="w-screen h-[500px] bg-slate-800">
-        <svg preserveAspectRatio="none" viewBox="0 0 100 102" height="75" width="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0 L50 100 L100 0 Z" fill="#618985"></path>
-        </svg>
-      </div>
+        <ContactSection/>
       </ScrollSection>
 
     </>

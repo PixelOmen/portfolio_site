@@ -12,7 +12,7 @@ interface WorkSectionProps {
 }
 
 export default function WorkSection({ scrollState }: WorkSectionProps) {
-  
+
   var [animTimer, setAnimTimer] = useState(-1);
   var [resetComplete, setResetComplete] = useState(true);
   var [opacityResetElems, setOpacityResetElems] = useState<HTMLElement[]>([]);

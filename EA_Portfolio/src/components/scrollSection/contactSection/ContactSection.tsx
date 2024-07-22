@@ -1,6 +1,88 @@
+import { useEffect, useRef, useState } from "react"
 
-export default function ContactSection() {
+import type { IScrollState } from "../../../lib/scrolling";
+
+interface ContactSectionProps {
+  scrollState?: IScrollState
+}
+
+
+export default function ContactSection({ scrollState }: ContactSectionProps) {
+
+  const content = useRef<HTMLDivElement>(null);
+  const [init, setInit] = useState(0);
+
+  function formSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    console.log('sent')
+    const formEvent = e.target as HTMLFormElement
+    const formData = new FormData(formEvent)
+  }
+
+
+  useEffect(() => {
+    if (init > 1) {
+      content.current?.classList.toggle('hidden');
+    } else {
+      setInit(value => value + 1);
+    }
+  }, [scrollState?.wasTriggered]);
+
   return (
-    <div>ContactSection</div>
+    <div id='navContact' className="relative min-h-[100px] pt-8 border-t-2 border-[black]">
+      <div className="absolute w-full top-4 blur-2xl z-0">
+        <svg preserveAspectRatio="none" viewBox="0 0 100 130" height="50" width="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 L50 100 L100 0 Z" fill="#56a199" stroke="" strokeWidth='2px'>        
+          </path>
+        </svg>
+      </div>
+      <div className="relative h-[510px] sm:h-[660px] z-1">
+        <div ref={content} className="w-full hidden">
+
+          <div
+            className="flex flex-col items-center sm:mt-10"
+          >
+            <h1 className="enterUp">Contact</h1>
+            <hr className="w-40 mt-2 mb-10"/>
+
+            <div
+              className="p-8 max-w-[800px] w-screen"
+            >
+              <form
+                onSubmit={formSubmit}
+                method="POST"
+                className="flex flex-col gap-4 text-black"
+              >
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="h-8 p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
+                  required={true}
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="h-8 p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
+                  required={true}
+                />
+                <textarea
+                  placeholder="Message"
+                  rows={5}
+                  className="p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
+                  required={true}
+                />              
+                <button
+                  type="submit"
+                  className="bg-[#fd6d5e] rounded-md p-2 text-slate-50 font-medium text-xl shake hover:brightness-125 active:bg-[#c53e2f] transition-all shadow-xl"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   )
 }
