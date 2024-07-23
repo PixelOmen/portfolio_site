@@ -8,6 +8,10 @@ import ContactSection from "./components/scrollSection/contactSection/ContactSec
 
 // import TestComponent from "./components/_testing/testComponent/TestComponent";
 // import TestComponent2 from "./components/_testing/testComponent/TestComponent2";
+import TestImage1 from "./assets/testImage1.png";
+import TestImage2 from "./assets/testImage2.png";
+
+import Projectview from "./components/projectview/Projectview";
 
 import MaskPicker from "./components/maskPicker/MaskPicker";
 import MaskContainer from "./components/maskPicker/maskContainer/MaskContainer";
@@ -44,24 +48,31 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2000px] drop-shadow-2xl shadow-black"
+        classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2200px] drop-shadow-2xl shadow-black"
       >
-        <MaskPicker>
+        {/* <MaskPicker>
 
           <MaskContainer>
             <MaskItem/>
           </MaskContainer>
-          {/* <MaskContainer>
+          <MaskContainer>
             <MaskItem2/>
-          </MaskContainer> */}
+          </MaskContainer>
 
-        </MaskPicker>
-
+        </MaskPicker> */}
+        <Projectview
+          active={true}
+          className="w-[900px]"
+          title = "LittleLemon REST API"
+          description="The LittleLemon REST API is a peer-reviewed REST API project required for the Meta Back-End Developer Professional Certification. Implements proper token authentication, user group permissions, filtering, pagination, and throttling. Made with Django and Django REST Framework (DRF)."
+          images={[TestImage2]}
+          techStack={['Python', 'Django', 'Django REST Framework']}
+        />
       </ScrollSection>
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2000px] drop-shadow-2xl shadow-black"
+        classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2200px] drop-shadow-2xl shadow-black"
       >
         <div className="flex bg-slate-900">
           <div className="h-[200px] w-80 bg-red-400 border-2"></div>

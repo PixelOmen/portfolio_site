@@ -1,0 +1,2 @@
+primary: #EF8275
+secondary: #b9f5f5
