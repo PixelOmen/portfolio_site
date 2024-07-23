@@ -57,7 +57,7 @@ body {
 
 @keyframes -transY {
   from {
-      transform: translateY(-20%);
+      transform: translateY(-30%);
   }
   to {
       transform: translateY(0px);
@@ -103,11 +103,11 @@ body {
 
 
 .enterRight {
-  animation: transX 1s;
+  animation: transX 1.5s;
 }
 
 .enterLeft {
-  animation: -transX 1s;
+  animation: -transX 1.5s;
 }
 
 .enterUp {
@@ -115,5 +115,5 @@ body {
 }
 
 .enterDown {
-  animation: -transY 1s;
+  animation: -transY 1.5s;
 }

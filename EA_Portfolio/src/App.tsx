@@ -6,17 +6,18 @@ import ScrollSection from "./components/scrollSection/ScrollSection";
 import WorkSection from "./components/scrollSection/workSection/WorkSection";
 import ContactSection from "./components/scrollSection/contactSection/ContactSection";
 
+// import MaskPicker from "./components/maskPicker/MaskPicker";
+// import MaskContainer from "./components/maskPicker/maskContainer/MaskContainer";
+// import MaskItem from "./components/maskPicker/maskItems/MaskItem";
+// import MaskItem2 from "./components/maskPicker/maskItems/MaskItem2";
 // import TestComponent from "./components/_testing/testComponent/TestComponent";
 // import TestComponent2 from "./components/_testing/testComponent/TestComponent2";
 import TestImage1 from "./assets/testImage1.png";
 import TestImage2 from "./assets/testImage2.png";
 
 import Projectview from "./components/projectview/Projectview";
+import AnimReset from "./components/animReset/AnimReset"
 
-import MaskPicker from "./components/maskPicker/MaskPicker";
-import MaskContainer from "./components/maskPicker/maskContainer/MaskContainer";
-import MaskItem from "./components/maskPicker/maskItems/MaskItem";
-import MaskItem2 from "./components/maskPicker/maskItems/MaskItem2";
 
 import { ScrollObserver } from "./lib/scrolling";
 
@@ -50,39 +51,37 @@ export default function App() {
         scrollObserver={scrollObserver}
         classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2200px] drop-shadow-2xl shadow-black"
       >
-        {/* <MaskPicker>
-
-          <MaskContainer>
-            <MaskItem/>
-          </MaskContainer>
-          <MaskContainer>
-            <MaskItem2/>
-          </MaskContainer>
-
-        </MaskPicker> */}
-        <Projectview
-          active={true}
-          className="w-[900px]"
-          title = "LittleLemon REST API"
-          description="The LittleLemon REST API is a peer-reviewed REST API project required for the Meta Back-End Developer Professional Certification. Implements proper token authentication, user group permissions, filtering, pagination, and throttling. Made with Django and Django REST Framework (DRF)."
-          images={[TestImage2]}
-          techStack={['Python', 'Django', 'Django REST Framework']}
-        />
+        <header className="mb-4">
+          <div className="text-4xl text-center font-roboto font-bold fadeInDown">
+            Projects
+          </div>
+        </header>
+        <div className="flex justify-center">
+          <Projectview
+            active={true}
+            className="w-[900px]"
+            title = "LittleLemon REST API"
+            description="The LittleLemon REST API is a peer-reviewed REST API project required for the Meta Back-End Developer Professional Certification. Implements proper token authentication, user group permissions, filtering, pagination, and throttling. Made with Django and Django REST Framework (DRF)."
+            images={[TestImage1, TestImage2]}
+            techStack={['Python', 'Django', 'Django REST Framework']}
+            github={{url: "https://github.com/PixelOmen/littlelemon_drf_rest_api"}}
+          />
+        </div>
       </ScrollSection>
 
       <ScrollSection
         scrollObserver={scrollObserver}
         classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2200px] drop-shadow-2xl shadow-black"
       >
-        <div className="flex bg-slate-900">
-          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
-          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
-          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
-          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
-          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
-          <div className="h-[200px] w-80 bg-red-400 border-2"></div>
-        </div>
-        <WorkSection/>
+        <AnimReset>
+          <div className="flex justify-center">
+            <ul className="text-2xl border-2">
+              <li className="casc-fadeInLeft opacity-0">test</li>
+              <li className="casc-fadeInRight opacity-0">test</li>
+              <li>test</li>
+            </ul>
+          </div>
+        </AnimReset>
       </ScrollSection>
 
       <ScrollSection
