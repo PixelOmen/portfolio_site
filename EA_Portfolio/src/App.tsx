@@ -15,7 +15,7 @@ import TestComponent from "./components/_testing/testComponent/TestComponent";
 import TestImage1 from "./assets/testImage1.png";
 import TestImage2 from "./assets/testImage2.png";
 
-import Projectview from "./components/projectview/Projectview";
+import ProjectView from "./components/projectview/ProjectView";
 import AnimReset from "./components/animReset/AnimReset"
 
 
@@ -56,24 +56,22 @@ export default function App() {
             Projects
           </div>
         </header>
-        <div className="flex justify-center">
-          <Projectview
-            active={true}
-            className="w-[900px]"
-            title = "LittleLemon REST API"
-            description="The LittleLemon REST API is a peer-reviewed REST API project required for the Meta Back-End Developer Professional Certification. Implements proper token authentication, user group permissions, filtering, pagination, and throttling. Made with Django and Django REST Framework (DRF)."
-            images={[TestImage1, TestImage2]}
-            techStack={['Python', 'Django', 'Django REST Framework']}
-            github={{url: "https://github.com/PixelOmen/littlelemon_drf_rest_api"}}
-          />
-        </div>
+
+        <TestComponent/>
       </ScrollSection>
 
       <ScrollSection
         scrollObserver={scrollObserver}
         classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2200px] drop-shadow-2xl shadow-black"
       >
-        <TestComponent/>
+        <header className="mb-4">
+          <div className="text-4xl text-center font-roboto font-bold fadeInDown">
+            Demos
+          </div>
+        </header>
+
+        <TestComponent/>        
+        
       </ScrollSection>
 
       <ScrollSection

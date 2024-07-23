@@ -5,12 +5,14 @@ import * as animUtils from "../../lib/animUtils";
 
 interface AnimResetProps {
   active?: boolean;
+  cascadeDelay?: number;
   resetDelay?: number;
   children?: React.ReactNode;
 }
 
 export default function AnimReset({
   active = true,
+  cascadeDelay = 200,
   resetDelay = 500,
   children
 }: AnimResetProps) {
@@ -40,7 +42,7 @@ export default function AnimReset({
   }
 
   function startAnims(parent: HTMLElement | null): HTMLElement[] {
-    return animUtils.cascadeAnim(parent, 500);
+    return animUtils.cascadeAnim(parent, cascadeDelay);
   }
 
   function reset(opacityResetElems: HTMLElement[]): void {
