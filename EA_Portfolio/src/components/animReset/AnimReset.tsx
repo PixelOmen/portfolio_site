@@ -3,12 +3,17 @@ import { useEffect, useState, useRef } from "react"
 import * as animUtils from "../../lib/animUtils";
 
 
-interface WorkSectionProps {
+interface AnimResetProps {
   active?: boolean;
+  resetDelay?: number;
   children?: React.ReactNode;
 }
 
-export default function WorkSection({ active = true, children }: WorkSectionProps) {
+export default function AnimReset({
+  active = true,
+  resetDelay = 500,
+  children
+}: AnimResetProps) {
 
   const [animTimer, setAnimTimer] = useState(-1);
   const [resetComplete, setResetComplete] = useState(true);
@@ -29,7 +34,7 @@ export default function WorkSection({ active = true, children }: WorkSectionProp
         setTimeout(() => {
           setResetComplete(true);
           reset(opacityResetElems);
-        }, 1000)
+        }, resetDelay)
       );
     }
   }

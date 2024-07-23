@@ -1,52 +1,37 @@
 import React, { useRef, useState, useEffect } from "react"
 import styles from './testcomp.module.css'
 
+import AnimReset from "../../animReset/AnimReset"
+import Projectview from "../../projectview/Projectview"
+import TestImage1 from "../../../assets/testImage1.png"
+import TestImage2 from "../../../assets/testImage2.png"
+
 interface TestComponentProps {
   children?: React.ReactNode
 }
 
 export default function TestComponent({ children }: TestComponentProps) {
 
-  const maskElem = useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  function openMask() {
-    if (isOpen || !maskElem.current) return;
-    maskElem.current.classList.add(styles.testCovered);
-    maskElem.current.classList.remove(styles.test);
-    setIsOpen(true);
-  }
-
-  function closeMask() {
-    if (!maskElem.current) return;
-    maskElem.current.classList.remove(styles.testCovered);
-    maskElem.current.classList.add(styles.test);
-    setIsOpen(false);
-    console.log('closed')
-  }
-
-  function modifyChildren() {
-    const scrollChildren = React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-            if (typeof child.type === 'string') return child;
-            let props = { closeMask }
-            return React.cloneElement(child, props)
-        }
-    });
-    return scrollChildren;
-}
-
-  useEffect(() => {
-  }, [])
+  const [activate, setActivate] = useState(false);
 
   return (
     <div className="border-2">
-      <div
-        ref={maskElem}
-        className={`relative w-full bg-red-400 ${styles.test}`}
-        onClick={openMask}
-      >
-        {modifyChildren()}
+      <AnimReset active={activate}>
+        <div className="flex justify-center">
+          <ul className="text-2xl border-2">
+            <li className="casc-fadeInLeft opacity-0">test</li>
+            <li className="casc-fadeInRight opacity-0">test</li>
+            <li>test</li>
+          </ul>
+        </div>
+      </AnimReset>
+      <div className="flex justify-center mt-10">
+        <button
+          onClick={() => setActivate(!activate)}
+          className="border-2 p-2"
+        >
+          Test
+        </button>
       </div>
     </div>
   )

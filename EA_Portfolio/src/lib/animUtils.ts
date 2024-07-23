@@ -10,6 +10,22 @@ const classNames = [
     'enterDown',
 ];
 
+export function enterAnim(
+    element: HTMLElement,
+    anim: string,
+    reset = 2000
+): number
+{
+    if (!classNames.includes(anim)) {
+        throw new Error("Animation not found: " + anim);
+    }
+    element.classList.remove(anim);
+    element.classList.add(anim);
+    return setTimeout(() => {
+        element.classList.remove(anim);
+    }, reset);
+}
+
 export function cascadeAnim(
     parent: HTMLElement | null,
     delay = 100,
@@ -33,18 +49,3 @@ export function cascadeAnim(
     });
     return opacityResetElems;
 }
-
-export function enterAnim(
-    element: HTMLElement, anim: string, reset = 3000
-): number
-{
-    if (!classNames.includes(anim)) {
-        throw new Error("Animation not found: " + anim);
-    }
-    element.classList.remove(anim);
-    element.classList.add(anim);
-    return setTimeout(() => {
-        element.classList.remove(anim);
-    }, reset);
-}
-

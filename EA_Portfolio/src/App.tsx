@@ -10,7 +10,7 @@ import ContactSection from "./components/scrollSection/contactSection/ContactSec
 // import MaskContainer from "./components/maskPicker/maskContainer/MaskContainer";
 // import MaskItem from "./components/maskPicker/maskItems/MaskItem";
 // import MaskItem2 from "./components/maskPicker/maskItems/MaskItem2";
-// import TestComponent from "./components/_testing/testComponent/TestComponent";
+import TestComponent from "./components/_testing/testComponent/TestComponent";
 // import TestComponent2 from "./components/_testing/testComponent/TestComponent2";
 import TestImage1 from "./assets/testImage1.png";
 import TestImage2 from "./assets/testImage2.png";
@@ -73,15 +73,7 @@ export default function App() {
         scrollObserver={scrollObserver}
         classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2200px] drop-shadow-2xl shadow-black"
       >
-        <AnimReset>
-          <div className="flex justify-center">
-            <ul className="text-2xl border-2">
-              <li className="casc-fadeInLeft opacity-0">test</li>
-              <li className="casc-fadeInRight opacity-0">test</li>
-              <li>test</li>
-            </ul>
-          </div>
-        </AnimReset>
+        <TestComponent/>
       </ScrollSection>
 
       <ScrollSection
