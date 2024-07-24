@@ -1,47 +1,38 @@
-import { useEffect, useState, useRef } from "react"
+import React, { useState } from "react"
 
-import type { IScrollState } from "../../../lib/scrolling";
-
+import AnimReset from "../../animReset/AnimReset";
+import ProjectView from "../../projectview/ProjectView";
+import TestImage1 from "../../../assets/testImage1.png";
+import TestImage2 from "../../../assets/testImage2.png";
 
 interface WorkSectionProps {
-  scrollState?: IScrollState;
+  children?: React.ReactNode
 }
 
-export default function WorkSection({ scrollState }: WorkSectionProps) {
+export default function WorkSection({}: WorkSectionProps) {
 
-  var [animTimer, setAnimTimer] = useState(-1);
-  var [resetComplete, setResetComplete] = useState(true);
-  var [opacityResetElems, setOpacityResetElems] = useState<HTMLElement[]>([]);
-
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    scrollState?.handleAnims(contentRef.current,
-      {
-        value: opacityResetElems,
-        setFunc: setOpacityResetElems
-      },
-      {
-        value: animTimer,
-        setFunc: setAnimTimer
-      },
-      {
-        value: resetComplete,
-        setFunc: setResetComplete
-      }
-    )
-  }, [scrollState?.wasTriggered]);
+  const [activate, setActivate] = useState(false);
 
   return (
-    <div className="shapeHolder min-h-[500px]">
-      <div className="h-full">
-        <div ref={contentRef} className="flex fadeIn justify-center">
-          <ul className="text-2xl border-2">
-            <li className="casc-fadeInLeft opacity-0">test</li>
-            <li className="casc-fadeInRight opacity-0">test</li>
-            <li>test</li>
-          </ul>
-        </div>
+    <div className="border-2">
+      <AnimReset active={activate} cascadeDelay={300}>
+        <ProjectView
+          hideOnStart={true}
+          className="w-[900px]"
+          title = "LittleLemon REST API"
+          description="The LittleLemon REST API is a peer-reviewed REST API project required for the Meta Back-End Developer Professional Certification. Implements proper token authentication, user group permissions, filtering, pagination, and throttling. Made with Django and Django REST Framework (DRF)."
+          images={[TestImage1, TestImage2]}
+          techStack={['Python', 'Django', 'Django REST Framework']}
+          github={{url: "https://github.com/PixelOmen/littlelemon_drf_rest_api"}}
+        />
+      </AnimReset>
+      <div className="flex justify-center mt-10">
+        <button
+          onClick={() => setActivate(!activate)}
+          className="border-2 p-2"
+        >
+          Test
+        </button>
       </div>
     </div>
   )

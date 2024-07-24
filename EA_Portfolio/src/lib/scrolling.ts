@@ -1,5 +1,3 @@
-import * as animUtils from "./animUtils";
-
 type PortableState = {
     value: any,
     setFunc: (value: any) => void
@@ -9,12 +7,6 @@ export interface IScrollState {
     wasTriggered: PortableState;
     triggerElement: HTMLElement | null;
     setTriggerElement: (e: HTMLElement | null) => void;
-    handleAnims: (
-        parent: HTMLElement | null,
-        opacityResetElems: PortableState,
-        resetTimer: PortableState,
-        isReset: PortableState
-    ) => void;
 }
 
 export interface IScrollObserver {
@@ -34,40 +26,6 @@ export class ScrollState implements IScrollState {
     setTriggerElement(element: HTMLElement | null) {
         this.triggerElement = element;
         this.animHandler.observe(this);
-    }
-
-    handleAnims(
-        parent: HTMLElement | null,
-        opacityResetElems: PortableState,
-        resetTimer: PortableState,
-        isReset: PortableState
-    ): void {
-        if (this.wasTriggered.value) {
-            clearTimeout(resetTimer.value);
-            if (isReset.value) {
-                isReset.setFunc(false);
-                opacityResetElems.setFunc(this.startAnims(parent));
-            }
-        } else {
-            clearTimeout(resetTimer.value);
-            resetTimer.setFunc(
-                setTimeout(() => {
-                    isReset.setFunc(true);
-                    this.reset(opacityResetElems.value);
-                }, 1000)
-            );
-        }
-    }
-    
-    private startAnims(parent: HTMLElement | null): HTMLElement[] {
-        let opacityResetElems = animUtils.cascadeAnim(parent, 500);
-        return opacityResetElems
-    }
-    
-    private reset(opacityResetElems: HTMLElement[]): void {
-        opacityResetElems.forEach((element) => {
-          element.classList.add('opacity-0');
-        });
     }
 }
 
