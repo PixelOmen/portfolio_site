@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 
-import type { IScrollState } from "../../../lib/scrolling";
+import type { IScrollState } from "../../lib/scrolling";
 
 interface ContactSectionProps {
   scrollState?: IScrollState
@@ -73,7 +73,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
                 />              
                 <button
                   type="submit"
-                  className={`mx-auto w-full bg-[#fd6d5e] rounded-md p-2 text-slate-50 font-medium text-xl shake hover:brightness-125 active:bg-[#c53e2f]  active:w-3/4 transition-all shadow-xl`}
+                  className={`mx-auto w-full bg-[#fd6d5e] rounded-md p-2 text-slate-50 font-medium text-xl shake hover:brightness-125 active:bg-[#c53e2f]  active:w-[90%] transition-all shadow-xl`}
                 >
                   Submit
                 </button>

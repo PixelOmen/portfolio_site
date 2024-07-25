@@ -9,6 +9,7 @@ export default {
     fontFamily: {
       sans: ['Poppins', 'sans-serif'],
       roboto : ['Roboto', 'sans-serif'],
+      sourcecode : ['Source Code Pro', 'monospace'],
     },    
   },
   plugins: [],

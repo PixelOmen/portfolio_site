@@ -39,9 +39,9 @@ export default function AnimReset({
     } else {
       clearTimeout(animTimer);
       setAnimTimer(
-        setTimeout(() => {
-          setResetComplete(true);
-          reset(opacityResetElems);
+          setTimeout(() => {
+            reset(opacityResetElems);
+            setResetComplete(true);
         }, deActivateDelay)
       );
     }

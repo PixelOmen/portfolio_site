@@ -1,12 +1,7 @@
 import React, { useState } from "react"
 
-import JSHeader from "../../components/jsheader/JSHeader";
 import ProjectThumb from "../../components/projectview/ProjectThumb";
 import TestImage1 from "../../assets/testImage1.png";
-
-import AnimReset from "../../components/animReset/AnimReset";
-import ProjectView from "../../components/projectview/ProjectView";
-import TestImage2 from "../../assets/testImage2.png";
 
 
 interface WorkSectionProps {
@@ -16,39 +11,65 @@ interface WorkSectionProps {
 export default function WorkSection({}: WorkSectionProps) {
 
   const [activate, setActivate] = useState(false);
-  var recentWork = {}
+
+  function projects() {
+    return [
+      <ProjectThumb
+        title="Etools V2"
+        bgImage={TestImage1}
+        tags={['Python', 'Flask', 'Svelte', 'C++', 'QT7 SDK', 'ReportLab', 'Dolby Metafier', 'More...']}
+      />,
+      <ProjectThumb
+        title="Little Lemon API"
+        bgImage={TestImage1}
+        tags={['Python', 'Django', 'DRF', 'RESTful API']}
+      />,
+      <ProjectThumb
+        title="QTSDK"
+        bgImage={TestImage1}
+        tags={['C++', 'QT7 SDK']}
+      />,
+      <ProjectThumb
+        title="AmazonMMC"
+        bgImage={TestImage1}
+        tags={['Python', 'XML-ElementTree']}
+      />,
+      <ProjectThumb
+      title="PyEmail"
+      bgImage={TestImage1}
+      tags={['Python', "SMTP/IMAP"]}
+      />,
+      <ProjectThumb
+      title="Mediaprobe"
+      bgImage={TestImage1}
+      tags={['Python', "MediaInfo"]}
+      />,
+      <ProjectThumb
+        title="TCLIB3"
+        bgImage={TestImage1}
+        tags={['Python']}
+      />,
+      <ProjectThumb
+        title="RosettaPath"
+        bgImage={TestImage1}
+        tags={['Python']}
+      />,      
+    ]
+  }
 
   return (
-    <div className="">
-      <div className="p-4 flex justify-center gap-6 flex-wrap">
-        <div className="border-4 border-black rounded-md">
-          <ProjectThumb
-            title="Little Lemon API"
-            bgImage={TestImage1}
-            tags={['Python', 'Django', 'DRF']}
-          />
-        </div>
-        <div className="border-2 border-gray-500 rounded-md">
-          <ProjectThumb
-            title="Little Lemon API"
-            bgImage={TestImage1}
-            tags={['Python', 'Django', 'DRF']}
-          />
-        </div>
-        <div className="border-2 border-gray-500 rounded-md">
-          <ProjectThumb
-            title="Little Lemon API"
-            bgImage={TestImage1}
-            tags={['Python', 'Django', 'DRF']}
-          />
-        </div>
-        <div className="border-2 border-gray-500 rounded-md">
-          <ProjectThumb
-            title="Little Lemon API"
-            bgImage={TestImage1}
-            tags={['Python', 'Django', 'DRF']}
-          />
-        </div>                    
+    <div className="overflow-hidden">
+      <div className="py-6 px-10 flex justify-center gap-10 flex-wrap">
+        {projects().map((project, index) => {
+          return (
+          <div
+            key={index}
+            className="border-2 border-gray-500 rounded-md w-[300px] h-[200px]"
+          >
+            {project}
+          </div>
+          )
+        })}
       </div>
     </div>
   )

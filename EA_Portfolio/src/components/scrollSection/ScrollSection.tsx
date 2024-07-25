@@ -24,7 +24,7 @@ export default function ScrollSection({
 
     function contractOnScroll(
         _: Event,
-        topRatio: number = 0.65,
+        topRatio: number = 0.8,
         bottomRatio: number = 0.4
     ): void {
         if (!contentRef.current || !triggerRef.current) {

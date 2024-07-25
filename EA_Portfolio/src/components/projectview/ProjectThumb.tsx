@@ -27,14 +27,14 @@ export default function ProjectThumb({
   function slideDown() {
     if (hoverSlide.current) {
       setActivateTags(true);
-      hoverSlide.current.style.transform = 'translateY(0)';
+      hoverSlide.current.classList.remove('translate-y-[-100%]');
     }
   }
   
   function slideUp() {
     if (hoverSlide.current) {
       setActivateTags(false);
-      hoverSlide.current.style.transform = 'translateY(-100%)';
+      hoverSlide.current.classList.add('translate-y-[-100%]');
     }
   }
 
@@ -46,22 +46,23 @@ export default function ProjectThumb({
     >
       <div
         ref={hoverSlide}
-        style={{transform: 'translateY(-100%)'}}
-        className="transition-all duration-200 ease-in-out h-full"
+        className="transition-all duration-200 ease-in-out h-full translate-y-[-100%]"
       >
         <div
-          className="bg-gray-200 h-full text-black p-8"
+          style={{background: 'radial-gradient(circle, #e5e7eb  0%, #c8cace 100%)'}}
+          className="h-full w-full text-black "
         >
-          <div className="p-6 h-full">
+          <div className="w-full h-full py-4">
             <AnimReset
               hideOnStart={true}
               active={activateTags}
               cascadeDelay={100}
-              resetDelay={400}
+              resetDelay={500}
+              deActivateDelay={700}
               className="h-full"
             >
               <div
-                className="flex h-full border-2 border-black justify-center items-center"
+                className="flex flex-wrap h-full rounded-lg border-black justify-center items-center"
               >
                 {tags.map((tag, index) => {
                   return (
@@ -69,7 +70,7 @@ export default function ProjectThumb({
                       key={index}
                       className=""
                     >
-                      <FlipOutTag content={tag} className=""/>
+                      <FlipOutTag content={tag}/>
                     </div>
                   )
                 })}
@@ -78,10 +79,19 @@ export default function ProjectThumb({
           </div>
         </div>
         <div
-          style={{backgroundImage: `url(${bgImage})`, backgroundSize: 'cover'}}
-          className="h-full w-full flex flex-col"
+          className="relative h-full w-full flex flex-col"
         >
-          <ChromeHeader fakeUrl={fakeURL}/>
+          <div
+            style={{backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}
+            className="absolute top-0 h-full w-full blur-[4px]"
+          >
+          </div>
+          <div className="relative z-10">
+            <ChromeHeader fakeUrl={fakeURL}/>
+          </div>
+          <div className="relative flex justify-center items-center h-full font-sourcecode font-normal text-2xl">
+            {title}
+          </div>
         </div>
       </div>
     </div>

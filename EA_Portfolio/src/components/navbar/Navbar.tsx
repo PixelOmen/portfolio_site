@@ -46,10 +46,10 @@ export default function Navbar() {
   <div ref={topAnchorBar} className="Spacer absolute py-10" aria-hidden="true"></div>
   <nav 
     ref={navbarContainer}
-    className={`${styles.navbar} sm:${styles.navbarContainerSmall} text-gray-50 bg-stone-900 bg-opacity-90`}
+    className={`${styles.navbar} sm:${styles.navbarContainerSmall} text-gray-200 bg-stone-900 bg-opacity-90 font-sourcecode`}
   >
 
-    <div ref={contentsFull} className="hidden sm:flex text-xl sm:text-2xl py-4 font-bold">
+    <div ref={contentsFull} className="hidden sm:flex text-xl sm:text-3xl py-4 font-bold">
       <header className="ml-auto mr-auto sm:mr-[10%]">
         <ul className="flex gap-5 sm:gap-10">
           <li><a href="#navWork" className={styles.navLinks}>Work</a></li>
@@ -62,7 +62,7 @@ export default function Navbar() {
     <div ref={contentsSmall} className="">
       <button
         type="button"
-        className={`${styles.smallMenuBtn} z-50 group sm:text-2xl rounded-full font-bold p-2 sm:px-4 hover:bg-[#b9f5f5]`}
+        className={`${styles.smallMenuBtn} z-50 group text-xl sm:text-2xl rounded-full font-bold p-2 px-4 hover:bg-[#b9f5f5]`}
       >
         <span className="group-hover:text-black">
           Menu

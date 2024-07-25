@@ -15,21 +15,21 @@ export default function JSHeader({
 }: JSHeaderProps ) {
   return (
     <>
-    <header className="mb-6">
-      <div className="text-4xl flex gap-4 text-center font-roboto font-bold fadeInDown text-gray-200">
+    <header className="sm:mb-6 mt-2">
+      <div className="text-3xl sm:text-4xl flex gap-4 font-normal fadeInDown">
         
-        <div className="text-sky-800">
+        <div className="text-blue-700">
           {prefix}
         </div>
 
 
         {asFunction ? (
           <>
-          <span className="font-normal">
+          <span className="">
             <span className="text-yellow-200 brightness-90">
               {title}
             </span>
-            <span className="font-medium text-pink-400">
+            <span className="text-pink-400">
               {"("}
               {functionParams.map((param, index) => {
                 return (
@@ -49,17 +49,17 @@ export default function JSHeader({
           </>
         ) : (
           <>
-          <div className="text-green-400 brightness-90 font-normal">
+          <div className="text-green-400 brightness-90">
             {title}
           </div>
-          <div className="font-medium">
+          <div className="">
             =
           </div>          
           </>
         )}
 
 
-        <div className="text-pink-400 font-normal">
+        <div className="text-pink-400">
           {"{"}
         </div>
       </div>
@@ -68,7 +68,7 @@ export default function JSHeader({
     {children}
 
     <header>
-      <div className="text-pink-400 font-roboto text-4xl mt-6">
+      <div className="text-pink-400 text-3xl sm:text-4xl flex gap-4 font-normal fadeInDown">
       {"}"}
       </div>
     </header>
