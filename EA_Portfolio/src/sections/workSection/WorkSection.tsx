@@ -1,9 +1,13 @@
 import React, { useState } from "react"
 
-import AnimReset from "../../animReset/AnimReset";
-import ProjectView from "../../projectview/ProjectView";
+import JSHeader from "../../components/jsheader/JSHeader";
+
+import AnimReset from "../../components/animReset/AnimReset";
+import ProjectView from "../../components/projectview/ProjectView";
 import TestImage1 from "../../../assets/testImage1.png";
 import TestImage2 from "../../../assets/testImage2.png";
+
+import ProjectThumb from "../../components/projectview/ProjectThumb";
 
 interface WorkSectionProps {
   children?: React.ReactNode
@@ -12,10 +16,20 @@ interface WorkSectionProps {
 export default function WorkSection({}: WorkSectionProps) {
 
   const [activate, setActivate] = useState(false);
+  var recentWork = {}
 
   return (
-    <div className="border-2">
-      <AnimReset active={activate} cascadeDelay={300}>
+    <div className="">
+      <JSHeader title="recentWork">
+        <div className="mb-6 h-[300px] w-[550px] border-2">
+          <ProjectThumb
+            title="Little Lemon API"
+            tags={['Python', 'Django', 'DRF']}
+          />
+        </div>
+      </JSHeader>
+
+      {/* <AnimReset active={activate} cascadeDelay={300}>
         <ProjectView
           hideOnStart={true}
           className="w-[900px]"
@@ -33,7 +47,7 @@ export default function WorkSection({}: WorkSectionProps) {
         >
           Test
         </button>
-      </div>
+      </div> */}
     </div>
   )
 }

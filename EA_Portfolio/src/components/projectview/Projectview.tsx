@@ -37,7 +37,7 @@ export default function ProjectView({
     <div
       ref={container}
       style={{background: 'radial-gradient(circle, #4c6c7c  0%, #334454 70%)'}}
-      className={`font-roboto p-6 rounded-lg text-[#ede9e0] transition-all overflow-hidden ${className}`}
+      className={`font-roboto py-8 px-10 rounded-lg text-gray-300 transition-all overflow-hidden ${className}`}
     >
       <div>
         <div className='text-3xl text-center casc-fadeInDown mb-6 font-bold'>

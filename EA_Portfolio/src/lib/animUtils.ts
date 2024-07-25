@@ -8,6 +8,7 @@ const classNames = [
     'enterUp',
     'fadeInDown',
     'enterDown',
+    "bounceDown",
 ];
 
 export function enterAnim(

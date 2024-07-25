@@ -3,8 +3,9 @@
 import Hero from "./components/hero/Hero"
 import Navbar from "./components/navbar/Navbar"
 import ScrollSection from "./components/scrollSection/ScrollSection";
-import WorkSection from "./components/scrollSection/workSection/WorkSection";
-import ContactSection from "./components/scrollSection/contactSection/ContactSection";
+import WorkSection from './sections/workSection/WorkSection';
+import ContactSection from "./sections/contactSection/ContactSection";
+import DemoSection from "./sections/demoSection/DemoSection";
 
 // import TestComponent from "./components/_testing/testComponent/TestComponent";
 // import TestComponent2 from "./components/_testing/testComponent/TestComponent2";
@@ -40,20 +41,14 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2200px] drop-shadow-2xl shadow-black"
+        className="bg-gray-800 p-8 mb-10 rounded-lg w-full max-w-[2200px] drop-shadow-2xl shadow-black"
       >
-        <header className="mb-4">
-          <div className="text-4xl text-center font-roboto font-bold fadeInDown">
-            Recent Work
-          </div>
-        </header>
-
         <WorkSection/>
       </ScrollSection>
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        classNameProp="bg-slate-500 p-4 mb-20 rounded-2xl w-full max-w-[2200px] drop-shadow-2xl shadow-black"
+        className="bg-gray-800 p-8 mb-10 rounded-lg w-full max-w-[2200px] drop-shadow-2xl shadow-black"
       >
         <header className="mb-4">
           <div className="text-4xl text-center font-roboto font-bold fadeInDown">
@@ -61,14 +56,14 @@ export default function App() {
           </div>
         </header>
 
-        <WorkSection/>        
+        <DemoSection/>
         
       </ScrollSection>
 
       <ScrollSection
         scrollObserver={scrollObserver}
         scrollContract={false}
-        classNameProp="bg-gray-800 w-screen"
+        className="bg-gray-800 w-screen"
       >
         <ContactSection/>
       </ScrollSection>

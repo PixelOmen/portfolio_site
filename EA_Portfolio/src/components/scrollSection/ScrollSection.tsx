@@ -6,25 +6,25 @@ import type { IScrollObserver, IScrollState } from "../../lib/scrolling";
 interface ScrollSectionProps {
     scrollObserver: IScrollObserver;
     scrollContract?: boolean;
-    classNameProp?: string;
+    className?: string;
     children?: React.ReactNode;
 }
 
 export default function ScrollSection({
     scrollObserver,
     scrollContract = true,
-    classNameProp = "",
+    className = "",
     children,
 }: ScrollSectionProps) {
 
     const triggerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);    
-    const startingScale = scrollContract ? "scale-75" : "";
+    const startingScale = scrollContract ? "scale-90" : "";
 
 
     function contractOnScroll(
         _: Event,
-        topRatio: number = 0.95,
+        topRatio: number = 0.65,
         bottomRatio: number = 0.4
     ): void {
         if (!contentRef.current || !triggerRef.current) {
@@ -35,12 +35,14 @@ export default function ScrollSection({
         if (top > (window.innerHeight * topRatio) ||
         bottom < (window.innerHeight * bottomRatio)) 
         {
-            contentRef.current.classList.add("scale-75");
+            contentRef.current.classList.add("scale-90");
             contentRef.current.classList.add("blur-sm");
+            contentRef.current.classList.add("rounded-3xl");
             contentRef.current.classList.remove("scale-100");
         } else {
-            contentRef.current.classList.remove("scale-75");
+            contentRef.current.classList.remove("scale-90");
             contentRef.current.classList.remove("blur-sm");
+            contentRef.current.classList.remove("rounded-3xl");
             contentRef.current.classList.add("scale-100");
         }
     }
@@ -87,7 +89,7 @@ export default function ScrollSection({
     <section ref={triggerRef} className="flex justify-center">
         <div
             ref={contentRef}
-            className={`${startingScale} transition-all duration-700 ease-out overflow-hidden ${classNameProp}`}
+            className={`${startingScale} transition-all duration-700 ease-out overflow-hidden ${className}`}
         >
             {modifyChildren(scrollState)}
         </div>
