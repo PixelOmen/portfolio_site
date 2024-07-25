@@ -20,7 +20,11 @@ export default function DemoSection({}: DemoSectionProps) {
           Recent Work
         </div>
       </header>
-      <AnimReset active={activate} cascadeDelay={300}>
+      <AnimReset
+        active={activate}
+        cascadeDelay={300}
+        resetDelay={1000}
+      >
         <ProjectView
           hideOnStart={true}
           className="w-[900px]"

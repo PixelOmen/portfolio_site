@@ -33,12 +33,17 @@ export function cascadeAnim(
     opacityResetElems: HTMLElement[] = [],
     options: {
         prefix?: string,
-        hideOnly?: boolean
+        hideOnly?: boolean,
+        resetDelay?: number
     } = {}
 ): HTMLElement[]
 {
     if (!parent) return [];
-    const { prefix = 'casc', hideOnly = false } = options;
+    const {
+        prefix = 'casc',
+        hideOnly = false,
+        resetDelay = 2000
+    } = options;
     
     let classArray = Array.from(parent.classList)
     let classIndex = classArray.findIndex((className) => className.includes(prefix));
@@ -49,7 +54,7 @@ export function cascadeAnim(
             if (hideOnly) {
                 parent.classList.add('opacity-0');
             } else {
-                enterAnim(parent, animName);
+                enterAnim(parent, animName, resetDelay);
                 parent.classList.remove('opacity-0');
             }
         }, delay);

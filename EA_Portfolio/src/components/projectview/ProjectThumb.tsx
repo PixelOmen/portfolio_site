@@ -55,8 +55,8 @@ export default function ProjectThumb({
           >
             <AnimReset
               active={activateTags}
-              cascadeDelay={300}
-              resetDelay={100}
+              cascadeDelay={100}
+              resetDelay={400}
             >
               {tags.map((tag, index) => {
                 return (
