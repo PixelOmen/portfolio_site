@@ -1,8 +1,5 @@
-import { useEffect, useRef } from 'react';
-
 import GitHubIcon from '../ui/icons/GitHubIcon';
 import ImgCarousel from '../ui/images/ImgCarousel';
-import * as animUtils from '../../lib/animUtils';
 
 
 interface ProjectViewProps {
@@ -12,7 +9,6 @@ interface ProjectViewProps {
   github?: {name?: string, url: string};
   images?: string[];
   className?: string;
-  hideOnStart?: boolean;
 }
 
 export default function ProjectView({
@@ -22,20 +18,10 @@ export default function ProjectView({
   techStack = [],
   images = [],
   className = '',
-  hideOnStart = false
 }: ProjectViewProps) {
-
-  const container = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (hideOnStart) {
-      animUtils.cascadeAnim(container.current, 10, [], {hideOnly: true});
-    }
-  }, []);
 
   return (
     <div
-      ref={container}
       style={{background: 'radial-gradient(circle, #4c6c7c  0%, #334454 70%)'}}
       className={`font-roboto py-8 px-10 rounded-lg text-gray-300 transition-all overflow-hidden ${className}`}
     >

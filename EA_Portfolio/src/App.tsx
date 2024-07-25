@@ -3,6 +3,8 @@
 import Hero from "./components/hero/Hero"
 import Navbar from "./components/navbar/Navbar"
 import ScrollSection from "./components/scrollSection/ScrollSection";
+import JSHeader from "./components/jsheader/JSHeader";
+
 import WorkSection from './sections/workSection/WorkSection';
 import ContactSection from "./sections/contactSection/ContactSection";
 import DemoSection from "./sections/demoSection/DemoSection";
@@ -41,22 +43,33 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        className="bg-gray-800 p-8 mb-10 rounded-lg w-full max-w-[2200px] drop-shadow-2xl shadow-black"
+        className="bg-gray-800 p-2 mb-10 rounded-lg w-full drop-shadow-2xl shadow-black"
       >
-        <WorkSection/>
+        <div className="bg-[#1f1f1f] p-4 flex justify-center">
+          <div className="max-w-[2200px] px-10">
+            <JSHeader title="recentWork">
+              <WorkSection/>
+            </JSHeader>
+          </div>
+        </div>
       </ScrollSection>
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        className="bg-gray-800 p-8 mb-10 rounded-lg w-full max-w-[2200px] drop-shadow-2xl shadow-black"
+        className="bg-gray-800 p-2 mb-10 rounded-lg w-full drop-shadow-2xl shadow-black"
       >
-        <header className="mb-4">
-          <div className="text-4xl text-center font-roboto font-bold fadeInDown">
-            Demos
+        <div className="bg-[#1f1f1f] p-4 flex justify-center">
+          <div className="max-w-[2200px] px-10">
+            <JSHeader
+              title="demos"
+              prefix="function"
+              asFunction={true}
+              functionParams={["aws", "django"]}
+            >
+              <DemoSection/>
+            </JSHeader>
           </div>
-        </header>
-
-        <DemoSection/>
+        </div>        
         
       </ScrollSection>
 

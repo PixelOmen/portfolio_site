@@ -8,6 +8,8 @@ interface AnimResetProps {
   cascadeDelay?: number;
   deActivateDelay?: number;
   resetDelay?: number;
+  hideOnStart?: boolean;
+  className?: string;
   children?: React.ReactNode;
 }
 
@@ -16,6 +18,8 @@ export default function AnimReset({
   cascadeDelay = 200,
   deActivateDelay = 300,
   resetDelay = 500,
+  hideOnStart = false,
+  className = '',
   children
 }: AnimResetProps) {
 
@@ -54,11 +58,17 @@ export default function AnimReset({
   }
 
   useEffect(() => {
+    if (hideOnStart) {
+      animUtils.cascadeAnim(contentRef.current, 10, [], {hideOnly: true});
+    }
+  }, []);
+
+  useEffect(() => {
     handleAnims(active);
   }, [active]);
 
   return (
-    <div ref={contentRef}>
+    <div ref={contentRef} className={`${className}`}>
       {children}
     </div>
   )

@@ -9,11 +9,13 @@ import AnimReset from "../animReset/AnimReset";
 interface ProjectThumbProps {
   title: string;
   tags: string[];
+  bgImage: string;
   children?: React.ReactNode
 }
 
 export default function ProjectThumb({
   title,
+  bgImage,
   tags
 }: ProjectThumbProps ) {
 
@@ -38,7 +40,7 @@ export default function ProjectThumb({
 
   return (
     <div
-      className="h-full w-full rounded-lg overflow-hidden cursor-pointer"
+      className="h-full w-full rounded-sm overflow-hidden cursor-pointer"
       onMouseEnter={slideDown}
       onMouseLeave={slideUp}
     >
@@ -50,29 +52,35 @@ export default function ProjectThumb({
         <div
           className="bg-gray-200 h-full text-black p-8"
         >
-          <div
-            className="p-6 gap-2 h-full border-2 flex justify-center items-center transition-all duration-200 ease-in-out border-black"
-          >
+          <div className="p-6 h-full">
             <AnimReset
+              hideOnStart={true}
               active={activateTags}
               cascadeDelay={100}
               resetDelay={400}
+              className="h-full"
             >
-              {tags.map((tag, index) => {
-                return (
-                  <div
-                    key={index}
-                    data-flipindex={index}
-                    className=""
-                  >
-                    <FlipOutTag content={tag} className=""/>
-                  </div>
-                )
-              })}
+              <div
+                className="flex h-full border-2 border-black justify-center items-center"
+              >
+                {tags.map((tag, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className=""
+                    >
+                      <FlipOutTag content={tag} className=""/>
+                    </div>
+                  )
+                })}
+              </div>
             </AnimReset>
           </div>
         </div>
-        <div className="h-full flex flex-col">
+        <div
+          style={{backgroundImage: `url(${bgImage})`, backgroundSize: 'cover'}}
+          className="h-full w-full flex flex-col"
+        >
           <ChromeHeader fakeUrl={fakeURL}/>
         </div>
       </div>
