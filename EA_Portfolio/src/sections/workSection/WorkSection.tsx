@@ -17,7 +17,7 @@ export default function WorkSection({}: WorkSectionProps) {
       <ProjectThumb
         title="Etools V2"
         bgImage={TestImage1}
-        tags={['Python', 'Flask', 'Svelte', 'C++', 'QT7 SDK', 'ReportLab', 'Dolby Metafier', 'More...']}
+        tags={['Python', 'Flask', 'Svelte', 'TypeScript', 'C++', 'QT7 SDK', 'ReportLab', 'More...']}
       />,
       <ProjectThumb
         title="Little Lemon API"

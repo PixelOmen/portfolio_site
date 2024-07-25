@@ -43,9 +43,9 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        className="bg-gray-800 mb-10 rounded-lg w-full drop-shadow-2xl shadow-black"
+        className="bg-gray-800 rounded-lg w-full"
       >
-        <div className="bg-[#1f1f1f] p-4 sm:p-6 flex justify-center overflow-hidden">
+        <div className="bg-[#1f1f1f] p-6 sm:p-8 flex justify-center overflow-hidden">
           <div className="max-w-[1500px] overflow-hidden">
             <JSHeader title="work">
               <WorkSection/>
@@ -56,17 +56,20 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        className="bg-gray-800 p-2 mb-10 rounded-lg w-full drop-shadow-2xl shadow-black"
+        className="bg-gray-800 mb-10 rounded-lg w-full"
       >
-        <div className="bg-[#1f1f1f] p-4 flex justify-center">
-          <div className="max-w-[2200px] px-10">
+        <div className="bg-[#1f1f1f] p-6 sm:p-8 flex justify-center overflow-hidden">
+          <div className="max-w-[1500px] w-full">
             <JSHeader
+              className="text-xl"
               title="demos"
               prefix="function"
               asFunction={true}
               functionParams={["aws", "django"]}
             >
-              <DemoSection/>
+              <div className="mt-10">
+                <DemoSection/>
+              </div>
             </JSHeader>
           </div>
         </div>        

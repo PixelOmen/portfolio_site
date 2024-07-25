@@ -3,6 +3,7 @@ interface JSHeaderProps {
   prefix?: string;
   asFunction?: boolean;
   functionParams?: string[];
+  className?: string;
   children?: React.ReactNode
 }
 
@@ -11,12 +12,13 @@ export default function JSHeader({
   prefix = 'var',
   asFunction = false,
   functionParams = [],
+  className = '',
   children
 }: JSHeaderProps ) {
   return (
     <>
     <header className="sm:mb-6 mt-2">
-      <div className="text-3xl sm:text-4xl flex gap-4 font-normal fadeInDown">
+      <div className={`text-3xl sm:text-4xl flex gap-4 font-normal fadeInDown ${className}`}>
         
         <div className="text-blue-700">
           {prefix}
@@ -68,7 +70,7 @@ export default function JSHeader({
     {children}
 
     <header>
-      <div className="text-pink-400 text-3xl sm:text-4xl flex gap-4 font-normal fadeInDown">
+      <div className={`text-pink-400 text-xl sm:text-4xl flex gap-4 font-normal fadeInDown ${className}`}>
       {"}"}
       </div>
     </header>
