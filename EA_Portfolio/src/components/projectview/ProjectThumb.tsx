@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 
 import ChromeHeader from "./ChromeHeader"
+import VSCodeHeader from "./VSCodeHeader";
 import FlipOutTag from "../ui/tags/FlipOutTag";
 
 import AnimReset from "../animReset/AnimReset";
@@ -87,7 +88,7 @@ export default function ProjectThumb({
           >
           </div>
           <div className="relative z-10">
-            <ChromeHeader fakeUrl={fakeURL}/>
+            <VSCodeHeader tabName={fakeURL}/>
           </div>
           <div className="relative flex justify-center items-center h-full font-sourcecode font-normal text-2xl">
             {title}

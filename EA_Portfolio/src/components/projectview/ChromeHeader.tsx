@@ -6,7 +6,7 @@ interface ChromeHeaderProps {
 
 export default function ChromeHeader( {fakeUrl = ''}: ChromeHeaderProps ) {
   return (
-    <div className='bg-[#3c3c3c] flex py-1'>
+    <div className='bg-[#3c3c3c] flex py-[5px]'>
       <div className='flex-1'>
         <img src={chromeBar} alt="" height=""/>
       </div>

@@ -26,7 +26,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
       <ProjectThumb
         title="Little Lemon API"
         bgImage={TestImage1}
-        tags={['Python', 'Django', 'DRF', 'RESTful API']}
+        tags={['Python', 'Django', 'Django REST framework', 'RESTful API']}
       />,
       <ProjectThumb
         title="Etools V2"
@@ -98,7 +98,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         return (
           <div
             key={index}
-            className={`border-2 ${anim} border-gray-500 rounded-md w-[300px] h-[200px]`}
+            className={`border-2 ${anim} border-gray-600 rounded-md w-[300px] h-[200px]`}
             onClick={() => setContent(project(index))}
           >
             {thumb}
