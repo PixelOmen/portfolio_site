@@ -5,6 +5,7 @@ import ImgCarousel from '../ui/images/ImgCarousel';
 interface ProjectViewProps {
   title: string;
   description: string;
+  backCallback: () => void;
   techStack?: string[];
   github?: {name?: string, url: string};
   images?: string[];
@@ -14,6 +15,7 @@ interface ProjectViewProps {
 export default function ProjectView({
   title,
   description,
+  backCallback,
   github,
   techStack = [],
   images = [],
@@ -22,9 +24,14 @@ export default function ProjectView({
 
   return (
     <div
-      style={{background: 'radial-gradient(circle, #4c6c7c  0%, #334454 70%)'}}
-      className={`font-roboto py-8 px-10 rounded-lg text-gray-300 transition-all overflow-hidden ${className}`}
+      style={{background: 'radial-gradient(circle, #4c6c7c 0%, #334454 70%)'}}
+      className={`font-roboto py-8 px-10 pb-12 rounded-lg text-gray-300 transition-all overflow-hidden ${className}`}
     >
+      <button onClick={backCallback}>
+        <div className='text-3xl text-center casc-fadeInDown font-bold'>
+          {"<----"}
+        </div>
+      </button>
       <div>
         <div className='text-3xl text-center casc-fadeInDown mb-6 font-bold'>
           {title}
@@ -32,7 +39,7 @@ export default function ProjectView({
       </div>
       {images && (
         <div
-          className='flex justify-center casc-fadeInRight rounded-lg bg-gradient-to-tl from-slate-800 to-[#4c6c7c] border-2 border-[#304646]'
+          className='flex justify-center casc-fadeInRight rounded-lg bg-gradient-to-tl from-slate-800 '
         >
           <ImgCarousel
             imgURLs={images}
@@ -56,14 +63,16 @@ export default function ProjectView({
         </div>
       )}
       {github && (
-        <div className='mt-6 flex items-center casc-fadeIn'>
+        <div
+          className='mt-6 flex items-center casc-fadeIn group w-max'
+        >
           <GitHubIcon
             fillColor='#ede9e0'
             className='mb-1'
             width='30px'
             height='30px'
           />
-          <div className='ml-2'>
+          <div className='px-2 pb-1 rounded-lg border-2 border-[rgba(0,0,0,0)] group-hover:ml-2 group-hover:bg-[#b9f5f5] group-hover:text-black group-hover:border-[rgba(1,1,1,0.5)] font-sourcecode transition-all duration-300'>
             <a href={github.url} target='_blank'>{github.name ? github.name : "Source Code"}</a>
           </div>
         </div>          

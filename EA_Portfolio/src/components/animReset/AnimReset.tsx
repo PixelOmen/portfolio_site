@@ -59,7 +59,7 @@ export default function AnimReset({
 
   useEffect(() => {
     if (hideOnStart) {
-      animUtils.cascadeAnim(contentRef.current, 10, [], {hideOnly: true});
+      animUtils.cascadeAnim(contentRef.current, 0, [], {hideOnly: true});
     }
   }, []);
 

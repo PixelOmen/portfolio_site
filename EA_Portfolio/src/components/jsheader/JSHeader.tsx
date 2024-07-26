@@ -17,7 +17,7 @@ export default function JSHeader({
 }: JSHeaderProps ) {
   return (
     <>
-    <header className="sm:mb-6 mt-2">
+    <header className="">
       <div className={`text-3xl sm:text-4xl flex gap-4 font-normal fadeInDown ${className}`}>
         
         <div className="text-blue-700">

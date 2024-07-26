@@ -17,6 +17,7 @@ body {
   @apply bg-gray-900;
   @apply text-slate-50;
   scroll-behavior: smooth;
+  min-width: 390px;
 }
 
 
@@ -87,10 +88,6 @@ body {
   100% {
     transform: translateY(0%);
   }
-}
-
-.test {
-  background-color: #c8cace;
 }
 
 

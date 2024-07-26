@@ -1,13 +1,11 @@
-// import { useEffect, useState } from "react";
-
 import Hero from "./components/hero/Hero"
 import Navbar from "./components/navbar/Navbar"
 import ScrollSection from "./components/scrollSection/ScrollSection";
 import JSHeader from "./components/jsheader/JSHeader";
 
 import WorkSection from './sections/workSection/WorkSection';
-import ContactSection from "./sections/contactSection/ContactSection";
 import DemoSection from "./sections/demoSection/DemoSection";
+import ContactSection from "./sections/contactSection/ContactSection";
 
 // import TestComponent from "./components/_testing/testComponent/TestComponent";
 // import TestComponent2 from "./components/_testing/testComponent/TestComponent2";
@@ -45,13 +43,7 @@ export default function App() {
         scrollObserver={scrollObserver}
         className="bg-gray-800 rounded-lg w-full"
       >
-        <div className="bg-[#1f1f1f] p-6 sm:p-8 flex justify-center overflow-hidden">
-          <div className="max-w-[1500px] overflow-hidden">
-            <JSHeader title="work">
-              <WorkSection/>
-            </JSHeader>
-          </div>
-        </div>
+        <WorkSection className=""/>
       </ScrollSection>
 
       <ScrollSection

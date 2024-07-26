@@ -28,7 +28,7 @@ export default function DemoSection({}: DemoSectionProps) {
             className="w-[900px]"
             title = "LittleLemon REST API"
             description="The LittleLemon REST API is a peer-reviewed REST API project required for the Meta Back-End Developer Professional Certification. Implements proper token authentication, user group permissions, filtering, pagination, and throttling. Made with Django and Django REST Framework (DRF)."
-            images={[TestImage1, TestImage2]}
+            // images={[TestImage1, TestImage2]}
             techStack={['Python', 'Django', 'Django REST Framework']}
             github={{url: "https://github.com/PixelOmen/littlelemon_drf_rest_api"}}
           />
