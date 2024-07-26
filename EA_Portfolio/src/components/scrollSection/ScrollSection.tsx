@@ -19,7 +19,7 @@ export default function ScrollSection({
 
     const triggerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);    
-    const startingScale = scrollContract ? "scale-90" : "";
+    const startingScale = scrollContract ? "scale-95" : "";
 
 
     function contractOnScroll(
@@ -36,13 +36,13 @@ export default function ScrollSection({
         bottom < (window.innerHeight * bottomRatio)) 
         {
             contentRef.current.classList.add("p-4");
-            contentRef.current.classList.add("scale-90");
+            contentRef.current.classList.add("scale-95");
             contentRef.current.classList.add("blur-sm");
             contentRef.current.classList.add("rounded-3xl");
             contentRef.current.classList.remove("scale-100");
         } else {
             contentRef.current.classList.remove("p-4");
-            contentRef.current.classList.remove("scale-90");
+            contentRef.current.classList.remove("scale-95");
             contentRef.current.classList.remove("blur-sm");
             contentRef.current.classList.remove("rounded-3xl");
             contentRef.current.classList.add("scale-100");

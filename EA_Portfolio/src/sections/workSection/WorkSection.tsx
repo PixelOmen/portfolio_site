@@ -129,17 +129,17 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   }
 
   useEffect(() => {
-    setContent(menu())
-  }, [scrollState?.wasTriggered])
+    setContent(menu());
+  }, []);
 
   return (
-    <div className={`bg-[#1f1f1f] p-6 sm:p-12 flex justify-center overflow-hidden ${className}`}>
+    <div className={`bg-[#1f1f1f] p-6 sm:py-12 flex justify-center overflow-hidden ${className}`}>
       <div className="relative w-full max-w-[1500px] overflow-hidden">
         <JSHeader
           className="relative mb-5"
           title="work"
         >
-          <div className={`relative overflow-hidden w-full mb-2 p-10`}>
+          <div className={`relative overflow-hidden w-full mb-2 sm:p-10`}>
             <div ref={container} className="w-full">
               {content}
             </div>

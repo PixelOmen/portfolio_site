@@ -47,16 +47,16 @@ export default function App() {
         scrollObserver={scrollObserver}
         className="bg-gray-800 rounded-lg w-full"
       >
-        <div className="bg-[#1f1f1f] p-6 sm:p-8 flex justify-center overflow-hidden">
+        <div className="bg-[#1f1f1f] p-8 flex justify-center overflow-hidden">
           <div className="max-w-[1500px] w-full">
             <JSHeader
-              className="text-xl"
+              className="text-xl sm:text-[2rem]"
               title="demos"
               prefix="function"
               asFunction={true}
               functionParams={["aws", "django"]}
             >
-              <div className="mt-10">
+              <div className="mt-10 p-4">
                 <DemoSection/>
               </div>
             </JSHeader>

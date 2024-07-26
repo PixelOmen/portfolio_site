@@ -39,7 +39,7 @@ export default function JSHeader({
                     {param}
                     {index < functionParams.length - 1 && (
                       <span className="text-slate-300">
-                        {", "}
+                        {","}
                       </span>
                     )}
                   </span>
