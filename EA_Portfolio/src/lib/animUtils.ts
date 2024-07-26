@@ -32,18 +32,33 @@ export function cascadeAnim(
     delay = 100,
     opacityResetElems: HTMLElement[] = [],
     options: {
-        prefix?: string,
-        hideOnly?: boolean,
-        resetDelay?: number
+        prefix?: string;
+        hideOnly?: boolean;
+        resetDelay?: number;
+        isNested?: boolean;
     } = {}
 ): HTMLElement[]
 {
     if (!parent) return [];
-    const {
+
+    var {
         prefix = 'casc',
         hideOnly = false,
-        resetDelay = 2000
+        resetDelay = 2000,
+        isNested = false
     } = options;
+
+    if (parent.dataset.animrecurse) {
+        if (isNested) return opacityResetElems;
+        isNested = true;
+    }
+    
+    const newOptions = {
+        prefix: prefix,
+        hideOnly: hideOnly,
+        resetDelay: resetDelay,
+        isNested: isNested
+    }
     
     let classArray = Array.from(parent.classList)
     let classIndex = classArray.findIndex((className) => className.includes(prefix));
@@ -60,7 +75,7 @@ export function cascadeAnim(
         }, delay);
     }
     Array.from(parent.children).forEach((element, index) => {
-        cascadeAnim(element as HTMLElement, (index + 1) * delay, opacityResetElems, options);
+        cascadeAnim(element as HTMLElement, (index + 1) * delay, opacityResetElems, newOptions);
     });
     return opacityResetElems;
 }

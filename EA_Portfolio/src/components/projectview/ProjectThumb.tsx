@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react"
 
-import ChromeHeader from "./ChromeHeader"
 import VSCodeHeader from "./VSCodeHeader";
 import FlipOutTag from "../ui/tags/FlipOutTag";
 

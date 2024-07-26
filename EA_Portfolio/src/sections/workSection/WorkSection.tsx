@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 
 import type { IScrollState } from "../../lib/scrolling";
 
@@ -17,9 +17,9 @@ interface WorkSectionProps {
 
 export default function WorkSection({ scrollState, className = ''}: WorkSectionProps) {
 
-  // const [activate, setActivate] = useState(false);
-  const [content, setContent] = useState<React.ReactNode | null>(null);
-  const container = useRef<HTMLDivElement>(null);
+  const [activate, setActivate] = useState(true);
+  const [isMenu, setIsMenu] = useState(true);
+  const [projectID, setProjectID] = useState(0);
 
   function thumbnails() {
     return [
@@ -89,48 +89,13 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     ]
   }
 
-  function menu() {
-    return (
-      <div className="py-6 px-10 flex justify-center gap-10 flex-wrap">
-      {thumbnails().map((thumb, index) => {
-        const anims = ['enterUp', 'enterLeft', 'enterRight', 'enterDown'];
-        const anim = anims[Math.floor(Math.random() * anims.length)];
-        return (
-          <div
-            key={index}
-            className={`border-2 ${anim} border-gray-600 rounded-md w-[300px] h-[200px]`}
-            onClick={() => setContent(project(index))}
-          >
-            {thumb}
-          </div>
-        )
-      })}
-    </div>
-    )
-  }
-
-  function project(id: number) {
-    return (
-      <div className="w-full flex justify-center mb-2">
-        <AnimReset
-          hideOnStart={true}
-          active={true}
-          cascadeDelay={50}
-          resetDelay={1000}
-        >
-          {projectViews()[id]}
-        </AnimReset>
-      </div>
-    )
-  }
-
   function returnToMenu() {
-    setContent(menu())
+    setIsMenu(true);
   }
 
   useEffect(() => {
-    setContent(menu());
-  }, []);
+    scrollState?.wasTriggered.value ? setActivate(true) : setActivate(false);
+  }, [scrollState?.wasTriggered.value]);
 
   return (
     <div className={`bg-[#1f1f1f] p-6 sm:py-12 flex justify-center overflow-hidden ${className}`}>
@@ -140,8 +105,38 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
           title="work"
         >
           <div className={`relative overflow-hidden w-full mb-2 sm:p-10`}>
-            <div ref={container} className="w-full">
-              {content}
+            <div className="w-full">
+              {isMenu ? (
+                <div className="py-6 px-10 flex justify-center gap-10 flex-wrap">
+                  {thumbnails().map((thumb, index) => {
+                    const anims = ['fadeInUp', 'fadeInLeft', 'fadeInRight', 'fadeInDown'];
+                    const anim = anims[Math.floor(Math.random() * anims.length)];
+                    return (
+                      <div
+                        key={index}
+                        className={`border-2 ${anim} border-gray-600 rounded-md w-[300px] h-[200px]`}
+                        onClick={() => {
+                          setProjectID(index);
+                          setIsMenu(false);
+                        }}
+                      >
+                          {thumb}
+                      </div>
+                    )        
+                  })}
+                </div>
+              ) : (
+                <div className="w-full flex justify-center mb-2">
+                  <AnimReset
+                    hideOnStart={true}
+                    active={activate}
+                    cascadeDelay={50}
+                    resetDelay={1000}
+                  >
+                    {projectViews()[projectID]}
+                  </AnimReset>
+                </div>
+              )}
             </div>
           </div>
         </JSHeader>

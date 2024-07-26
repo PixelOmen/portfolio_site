@@ -64,11 +64,15 @@ export default function AnimReset({
   }, []);
 
   useEffect(() => {
-    handleAnims(active);
+    handleAnims(active);    
   }, [active]);
 
   return (
-    <div ref={contentRef} className={`${className}`}>
+    <div
+      ref={contentRef}
+      data-animrecurse = {true}
+      className={`${className}`}
+    >
       {children}
     </div>
   )

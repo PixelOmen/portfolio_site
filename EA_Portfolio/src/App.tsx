@@ -56,8 +56,8 @@ export default function App() {
               asFunction={true}
               functionParams={["aws", "django"]}
             >
-              <div className="mt-10 p-4">
-                <DemoSection/>
+              <div className="mt-10 p-4 h-[800px]">
+                {/* <DemoSection/> */}
               </div>
             </JSHeader>
           </div>
