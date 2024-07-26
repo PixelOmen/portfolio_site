@@ -15,8 +15,8 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
   function formSubmit(e: React.FormEvent) {
     e.preventDefault();
     console.log('sent')
-    const formEvent = e.target as HTMLFormElement
-    const formData = new FormData(formEvent)
+    // const formEvent = e.target as HTMLFormElement
+    // const formData = new FormData(formEvent)
   }
 
 

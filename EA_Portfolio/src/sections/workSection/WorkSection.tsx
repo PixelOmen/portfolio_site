@@ -17,7 +17,7 @@ interface WorkSectionProps {
 
 export default function WorkSection({ scrollState, className = ''}: WorkSectionProps) {
 
-  const [activate, setActivate] = useState(false);
+  // const [activate, setActivate] = useState(false);
   const [content, setContent] = useState<React.ReactNode | null>(null);
   const container = useRef<HTMLDivElement>(null);
 
@@ -93,7 +93,8 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     return (
       <div className="py-6 px-10 flex justify-center gap-10 flex-wrap">
       {thumbnails().map((thumb, index) => {
-        const anim = index % 2 === 0 ? 'enterDown' : 'enterUp';
+        const anims = ['enterUp', 'enterLeft', 'enterRight', 'enterDown'];
+        const anim = anims[Math.floor(Math.random() * anims.length)];
         return (
           <div
             key={index}
@@ -138,7 +139,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
           className="relative mb-5"
           title="work"
         >
-          <div className={`relative overflow-hidden w-full pt-1 mb-2`}>
+          <div className={`relative overflow-hidden w-full mb-2 p-10`}>
             <div ref={container} className="w-full">
               {content}
             </div>

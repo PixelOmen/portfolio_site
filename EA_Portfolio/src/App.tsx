@@ -7,9 +7,6 @@ import WorkSection from './sections/workSection/WorkSection';
 import DemoSection from "./sections/demoSection/DemoSection";
 import ContactSection from "./sections/contactSection/ContactSection";
 
-// import TestComponent from "./components/_testing/testComponent/TestComponent";
-// import TestComponent2 from "./components/_testing/testComponent/TestComponent2";
-
 
 import { ScrollObserver } from "./lib/scrolling";
 

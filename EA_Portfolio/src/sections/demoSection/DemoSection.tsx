@@ -2,10 +2,6 @@ import React, { useState } from "react"
 
 import AnimReset from "../../components/animReset/AnimReset";
 import ProjectView from "../../components/projectview/ProjectView";
-import TestImage2 from "../../assets/testImage2.png";
-
-import JSHeader from "../../components/jsheader/JSHeader";
-import TestImage1 from "../../assets/testImage1.png";
 
 interface DemoSectionProps {
   children?: React.ReactNode
@@ -25,6 +21,7 @@ export default function DemoSection({}: DemoSectionProps) {
           resetDelay={1000}
         >
           <ProjectView
+            backCallback={() => {}}
             className="w-[900px]"
             title = "LittleLemon REST API"
             description="The LittleLemon REST API is a peer-reviewed REST API project required for the Meta Back-End Developer Professional Certification. Implements proper token authentication, user group permissions, filtering, pagination, and throttling. Made with Django and Django REST Framework (DRF)."

@@ -56,7 +56,7 @@ export default function ProjectThumb({
             <AnimReset
               hideOnStart={true}
               active={activateTags}
-              cascadeDelay={100}
+              cascadeDelay={70}
               resetDelay={500}
               deActivateDelay={700}
               className="h-full"
