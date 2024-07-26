@@ -36,7 +36,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
           </path>
         </svg>
       </div>
-      <div className="relative h-[510px] sm:h-[660px] z-1">
+      <div className="relative mb-24 z-1">
         <div ref={content} className="w-full hidden">
 
           <div

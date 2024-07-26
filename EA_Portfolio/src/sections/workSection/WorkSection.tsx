@@ -93,7 +93,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     return (
       <div className="py-6 px-10 flex justify-center gap-10 flex-wrap">
       {thumbnails().map((thumb, index) => {
-        const anim = index % 2 === 0 ? 'enterLeft' : 'enterRight';
+        const anim = index % 2 === 0 ? 'enterDown' : 'enterUp';
         return (
           <div
             key={index}
@@ -110,11 +110,11 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
 
   function project(id: number) {
     return (
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center mb-2">
         <AnimReset
           hideOnStart={true}
           active={true}
-          cascadeDelay={300}
+          cascadeDelay={50}
           resetDelay={1000}
         >
           {projectViews()[id]}
@@ -132,17 +132,17 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   }, [scrollState?.wasTriggered])
 
   return (
-    <div className={`bg-[#1f1f1f] p-6 sm:p-8 flex justify-center overflow-hidden ${className}`}>
-      <div className="w-full max-w-[1500px] overflow-hidden">
+    <div className={`bg-[#1f1f1f] p-6 sm:p-12 flex justify-center overflow-hidden ${className}`}>
+      <div className="relative w-full max-w-[1500px] overflow-hidden">
         <JSHeader
-          className="mb-6"
+          className="relative mb-5"
           title="work"
         >
-        <div className={`overflow-hidden w-full pt-1 mb-2`}>
-          <div ref={container} className="w-full">
-            {content}
+          <div className={`relative overflow-hidden w-full pt-1 mb-2`}>
+            <div ref={container} className="w-full">
+              {content}
+            </div>
           </div>
-        </div>
         </JSHeader>
       </div>
     </div>

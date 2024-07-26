@@ -24,16 +24,19 @@ export default function ProjectView({
 
   return (
     <div
-      style={{background: 'radial-gradient(circle, #4c6c7c 0%, #334454 70%)'}}
-      className={`font-roboto py-8 px-10 pb-12 rounded-lg text-gray-300 transition-all overflow-hidden ${className}`}
+      style={{background: 'radial-gradient(circle, #e5e7eb  0%, #c8cace 100%)'}}
+      className={`w-full font-sourcecode py-8 px-10 pb-12 rounded-lg text-black transition-all overflow-hidden ${className}`}
     >
-      <button onClick={backCallback}>
+      <button
+        onClick={backCallback}
+        className='hover:scale-x-125 hover:scale-y-90 transition-all duration-300 hover:text-[#EF8275]'
+      >
         <div className='text-3xl text-center casc-fadeInDown font-bold'>
-          {"<----"}
+          {"<---"}
         </div>
       </button>
       <div>
-        <div className='text-3xl text-center casc-fadeInDown mb-6 font-bold'>
+        <div className='text-3xl text-center casc-fadeInRight mb-6 font-bold text-[#EF8275]'>
           {title}
         </div>
       </div>
@@ -67,14 +70,17 @@ export default function ProjectView({
           className='mt-6 flex items-center casc-fadeIn group w-max'
         >
           <GitHubIcon
-            fillColor='#ede9e0'
+            fillColor=''
             className='mb-1'
             width='30px'
             height='30px'
           />
-          <div className='px-2 pb-1 rounded-lg border-2 border-[rgba(0,0,0,0)] group-hover:ml-2 group-hover:bg-[#b9f5f5] group-hover:text-black group-hover:border-[rgba(1,1,1,0.5)] font-sourcecode transition-all duration-300'>
-            <a href={github.url} target='_blank'>{github.name ? github.name : "Source Code"}</a>
-          </div>
+            <a
+              href={github.url} target='_blank'
+              className='px-2 pb-1 rounded-lg border-1 border-[rgba(0,0,0,0)] group-hover:ml-2 group-hover:bg-[#EF8275] group-hover:text-white group-hover:border-[rgba(1,1,1,0.2)] font-sourcecode transition-all duration-300 box-border'
+            >
+              {github.name ? github.name : "Source Code"}
+            </a>
         </div>          
       )}
     </div>

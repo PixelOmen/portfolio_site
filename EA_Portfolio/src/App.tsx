@@ -48,7 +48,7 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        className="bg-gray-800 mb-10 rounded-lg w-full"
+        className="bg-gray-800 rounded-lg w-full"
       >
         <div className="bg-[#1f1f1f] p-6 sm:p-8 flex justify-center overflow-hidden">
           <div className="max-w-[1500px] w-full">
