@@ -18,6 +18,7 @@ body {
   @apply text-slate-50;
   scroll-behavior: smooth;
   min-width: 390px;
+  overflow: hidden; /* AppLoading component removes this on load */
 }
 
 

@@ -13,7 +13,6 @@ interface HeroProps {
 export default function hero({ children }: HeroProps) {
   return (
     <>
-      {/* <img src={landingbg} alt="landingbg" className={`${styles.bgImg} absolute mx-auto'`}/> */}
       <div className='relative h-screen'>
         <div className='relative h-full pt-20'>
           <div className='relative h-full z-10'>

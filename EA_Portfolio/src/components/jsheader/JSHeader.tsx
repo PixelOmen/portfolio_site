@@ -20,13 +20,11 @@ export default function JSHeader({
     <header className="">
       <div className={`text-3xl sm:text-4xl font-sourcecode flex gap-4 font-normal fadeInDown ${className}`}>
         
-        <div className="text-[#368cd6]">
-          {prefix}
-        </div>
-
-
         {asFunction ? (
           <>
+          <div className="text-[#368cd6] max-[420px]:hidden ">
+            {prefix}
+          </div>
           <span className="">
             <span className="text-yellow-200 brightness-90">
               {title}
@@ -39,7 +37,7 @@ export default function JSHeader({
                     {param}
                     {index < functionParams.length - 1 && (
                       <span className="text-slate-300">
-                        {","}
+                        {", "}
                       </span>
                     )}
                   </span>
@@ -51,6 +49,9 @@ export default function JSHeader({
           </>
         ) : (
           <>
+          <div className="text-[#368cd6]">
+            {prefix}
+          </div>          
           <div className="text-green-400 brightness-90">
             {title}
           </div>

@@ -2,9 +2,10 @@ import Hero from "./components/hero/Hero"
 import Navbar from "./components/navbar/Navbar"
 import ScrollSection from "./components/scrollSection/ScrollSection";
 import JSHeader from "./components/jsheader/JSHeader";
+import AppLoading from "./components/ui/loading/AppLoading";
 
 import WorkSection from './sections/workSection/WorkSection';
-import DemoSection from "./sections/demoSection/DemoSection";
+// import DemoSection from "./sections/demoSection/DemoSection";
 import ContactSection from "./sections/contactSection/ContactSection";
 
 
@@ -16,7 +17,8 @@ export default function App() {
 
   return (
     <>
-      <nav className='relative h-[30px] z-50'>
+      <AppLoading className="z-50"/>
+      <nav className='relative h-[30px] z-40'>
         <Navbar/>
       </nav>
 
@@ -38,14 +40,14 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        className="bg-gray-800 rounded-lg w-full"
+        className="bg-gray-800 w-full"
       >
         <WorkSection className=""/>
       </ScrollSection>
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        className="bg-gray-800 rounded-lg w-full"
+        className="bg-gray-800 w-full"
       >
         <div className="bg-[#1f1f1f] p-8 flex justify-center overflow-hidden">
           <div className="max-w-[1500px] w-full">

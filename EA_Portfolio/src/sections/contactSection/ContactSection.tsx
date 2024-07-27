@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 import type { IScrollState } from "../../lib/scrolling";
+import AnimReset from "../../components/animReset/AnimReset";
 
 interface ContactSectionProps {
   scrollState?: IScrollState
@@ -9,8 +10,7 @@ interface ContactSectionProps {
 
 export default function ContactSection({ scrollState }: ContactSectionProps) {
 
-  const content = useRef<HTMLDivElement>(null);
-  const [init, setInit] = useState(0);
+  const [triggered, setTriggered] = useState(false);
 
   function formSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -21,68 +21,80 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
 
 
   useEffect(() => {
-    if (init > 1) {
-      content.current?.classList.toggle('hidden');
+    console.log(scrollState?.wasTriggered.value)
+    if (scrollState?.wasTriggered.value) {
+      setTriggered(true);
     } else {
-      setInit(value => value + 1);
+      setTriggered(false);
     }
-  }, [scrollState?.wasTriggered]);
+  }, [scrollState?.wasTriggered.value]);
 
   return (
-    <div id='navContact' className="relative min-h-[100px] pt-8 border-t-2 border-[black]">
+    <div className="relative pt-8 border-t-2 border-[black]">
+
       <div className="absolute w-full top-4 blur-2xl z-0">
         <svg preserveAspectRatio="none" viewBox="0 0 100 130" height="50" width="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 0 L50 100 L100 0 Z" fill="#56a199" stroke="" strokeWidth='2px'>        
           </path>
         </svg>
       </div>
-      <div className="relative mb-24 z-1">
-        <div ref={content} className="w-full hidden">
 
+      <AnimReset
+        active={triggered}
+        cascadeDelay={10}
+        resetDelay={1500}
+      >
+
+        <div className="relative mb-24 z-1">
           <div
-            className="flex flex-col items-center sm:mt-10"
+            data-active={triggered}
+            className="w-full"
           >
-            <h1 className="enterRight">Contact</h1>
-            <hr className="w-40 mt-2 mb-10"/>
-
             <div
-              className="p-8 max-w-[800px] w-screen"
+              className="flex flex-col items-center sm:mt-10"
             >
-              <form
-                onSubmit={formSubmit}
-                method="POST"
-                className="flex flex-col gap-4 text-black"
+              <h1 className="casc-enterRight">Contact</h1>
+              <hr className="w-40 mt-2 mb-10"/>
+
+              <div
+                className="p-8 max-w-[800px] w-screen"
               >
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="h-8 p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
-                  required={true}
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="h-8 p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
-                  required={true}
-                />
-                <textarea
-                  placeholder="Message"
-                  rows={5}
-                  className="p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
-                  required={true}
-                />              
-                <button
-                  type="submit"
-                  className={`mx-auto w-full bg-[#fd6d5e] rounded-md p-2 text-slate-50 font-medium text-xl shake hover:brightness-125 active:bg-[#c53e2f]  active:w-[90%] transition-all shadow-xl`}
+                <form
+                  onSubmit={formSubmit}
+                  method="POST"
+                  className="flex flex-col gap-4 text-black"
                 >
-                  Submit
-                </button>
-              </form>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    className="h-8 p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
+                    required={true}
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    className="h-8 p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
+                    required={true}
+                  />
+                  <textarea
+                    placeholder="Message"
+                    rows={5}
+                    className="p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
+                    required={true}
+                  />              
+                  <button
+                    type="submit"
+                    className={`mx-auto w-full bg-[#fd6d5e] rounded-md p-2 text-slate-50 font-medium text-xl shake hover:brightness-125 active:bg-[#c53e2f]  active:w-[90%] transition-all shadow-xl`}
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-
         </div>
-      </div>
+      </AnimReset>
+
     </div>
   )
 }
