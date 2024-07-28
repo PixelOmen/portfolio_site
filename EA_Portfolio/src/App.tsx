@@ -24,7 +24,7 @@ export default function App() {
 
       <section className="fixed top-0 w-full overflow-hidden -z-10">
         <Hero>
-          <div className="relative rounded-md top-1/3 mx-auto overflow-hidden p-4">
+          <div className="relative rounded-md top-[25%] sm:top-1/3 mx-auto overflow-hidden p-4">
             <header className="max-w-max text-5xl sm:text-6xl justify-center text-center mx-auto">
                 <span className="text-[#EF8275] font-medium">
                   Emmanuel Acosta

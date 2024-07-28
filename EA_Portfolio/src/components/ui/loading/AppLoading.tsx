@@ -7,7 +7,6 @@ interface AppLoadingProps {
 export default function AppLoading( { className = "" }: AppLoadingProps ) {
 
   const container = useRef<HTMLDivElement>(null);
-  const translateDuration = 500;
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,7 +21,7 @@ export default function AppLoading( { className = "" }: AppLoadingProps ) {
   return (
     <div 
       ref={container}
-      className={`fixed h-screen w-screen top-0 right-0 flex justify-center items-center bg-slate-800 transition-all duration-${translateDuration} ${className}`}
+      className={`fixed h-screen w-screen top-0 right-0 flex justify-center items-center bg-[#111827] transition-all duration-500 ${className}`}
     >
       <div className="">&#x261D; Just a second...</div>
     </div>

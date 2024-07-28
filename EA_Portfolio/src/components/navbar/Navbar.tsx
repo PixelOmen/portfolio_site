@@ -38,6 +38,10 @@ export default function Navbar() {
         navbarContainer.current?.classList.remove(styles.navbarContainerSmall);
       }
     });
+    if (window.innerWidth < 640) {
+      contentsSmall.current?.classList.add(styles.navbarSmallRotate);
+      navbarContainer.current?.classList.add(styles.navbarContainerSmall);
+    }    
   }, [])
 
   return (

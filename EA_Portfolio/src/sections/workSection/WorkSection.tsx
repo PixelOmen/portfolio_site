@@ -45,12 +45,12 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
       <ProjectThumb
         title="AmazonMMC"
         bgImage={TestImage1}
-        tags={['Python', 'XML-ElementTree']}
+        tags={['Pure Python', 'XML-ElementTree']}
       />,
       <ProjectThumb
         title="PyEmail"
         bgImage={TestImage1}
-        tags={['Python', "SMTP/IMAP"]}
+        tags={['Pure Python', "SMTP/IMAP"]}
       />,
       <ProjectThumb
         title="Mediaprobe"
@@ -60,12 +60,12 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
       <ProjectThumb
         title="TCLIB3"
         bgImage={TestImage1}
-        tags={['Python']}
+        tags={['Pure Python']}
       />,
       <ProjectThumb
         title="RosettaPath"
         bgImage={TestImage1}
-        tags={['Python']}
+        tags={['Pure Python']}
       />,      
     ]
   }
@@ -90,6 +90,60 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         techStack={['Python', 'Flask', 'Svelte', 'TypeScript', 'C++', 'QT7 SDK', 'ReportLab']}
         github={{url: "https://github.com/PixelOmen/etools_v2"}}
       />,
+      <ProjectView
+        backCallback={returnToMenu}
+        className="w-full"
+        title = "QTSDK"
+        description='QTSDK is a command-line program that leverages the QuickTime 7 SDK for Windows to perform various operations on QuickTime files on Windows, including audio channel flagging and modifying embedded timecode. Enables QuickTime modifications to be programmatically integrated into other tools and scripts.'
+        // images={[TestImage1, TestImage2]}
+        techStack={['C++', 'QT7 SDK']}
+        github={{url: "https://github.com/PixelOmen/QTSDK"}}
+      />,
+      <ProjectView
+        backCallback={returnToMenu}
+        className="w-full"
+        title = "AmazonMMC"
+        description='AmazonMMC is a CLI tool designed to facilitate the creation of Amazon Media Entertainment Core (MEC) and Media Manifest Core (MMC) XML files. Also provides functionality to generate MD5 checksums and sample directories for Amazon deliveries.'
+        // images={[TestImage1, TestImage2]}
+        techStack={['Python', 'XML-ElementTree']}
+        github={{url: "https://github.com/PixelOmen/amazonmmc"}}
+      />,
+      <ProjectView
+        backCallback={returnToMenu}
+        className="w-full"
+        title = "PyEmail"
+        description='PyEmail is a Python library designed to simplify email communication. It provides straightforward interfaces for sending and receiving emails using IMAP and SMTP protocols. Easy-to-use interfaces for IMAP and SMTP connections. Retrieve, mark as read/unread, and delete emails. Send emails with attachments. Handle email parsing and metadata extraction seamlessly.'
+        // images={[TestImage1, TestImage2]}
+        techStack={['Python', "SMTP/IMAP"]}
+        github={{url: "https://github.com/PixelOmen/pyemail"}}
+      />,
+      <ProjectView
+        backCallback={returnToMenu}
+        className="w-full"
+        title = "Mediaprobe"
+        description='Mediaprobe is a straightforward Python interface/wrapper for the Mediainfo CLI tool. It calls MediaInfo as a subprocess and parses the returning JSON into objects that can easily provide metadata about a file in the form relevant datatypes.'
+        // images={[TestImage1, TestImage2]}
+        techStack={['Python', "MediaInfo"]}
+        github={{url: "https://github.com/PixelOmen/mediaprobe"}}
+      />,
+      <ProjectView
+        backCallback={returnToMenu}
+        className="w-full"
+        title = "TCLIB3"
+        description='TCLIB3 is a python library that provides functionality for converting between frames, timecode, and milliseconds, supporting both non-dropframe and dropframe timecode formats. It is designed to assist in video editing and processing tasks where precise timing and synchronization are crucial.'
+        // images={[TestImage1, TestImage2]}
+        techStack={['Python']}
+        github={{url: "https://github.com/PixelOmen/tclib3"}}
+      />,
+      <ProjectView
+        backCallback={returnToMenu}
+        className="w-full"
+        title = "RosettaPath"
+        description='RossetaPath objects translate network paths mounted to local volumes from one mount point to another across operating systems.'
+        // images={[TestImage1, TestImage2]}
+        techStack={['Python']}
+        github={{url: "https://github.com/PixelOmen/rosettapath"}}
+      />,
     ]
   }
 
@@ -100,14 +154,13 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     const xOffset = e.clientX - containerRect.left - (transitionRect.width / 2);
     const yOffset = e.clientY - containerRect.top - (transitionRect.height / 2);
     containerRef.current?.style.setProperty('height', `${containerRect.height}px`);
-    transitionDivRef.current.classList.add('duration-0');
     transitionDivRef.current.classList.remove('opacity-0');
     transitionDivRef.current.style.setProperty('left', `${xOffset}px`);
     transitionDivRef.current.style.setProperty('top', `${yOffset}px`);
     setTimeout(() => {
-      transitionDivRef.current?.classList.remove('duration-0');
-      transitionDivRef.current?.style.setProperty('transform', 'scale(80)');
-    }, 10);
+      transitionDivRef.current?.classList.add('duration-700');
+      transitionDivRef.current?.style.setProperty('transform', 'scale(70)');
+    }, 50);
     setTimeout(() => {
       setProjectID(index);
       setIsMenu(false);
@@ -116,10 +169,13 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
       if (!containerRef.current || !contentRef.current) return;
       const contentHeight = contentRef.current?.offsetHeight;
       containerRef.current.style.setProperty('height', `${contentHeight}px`);
+    }, 600);
+    setTimeout(() => {
       transitionDivRef.current?.classList.add('opacity-0');
-    }, 550);
+    }, 700);    
     setTimeout(() => {
       if (!contentRef.current) return;
+      transitionDivRef.current?.classList.remove('duration-700');
       transitionDivRef.current?.style.setProperty('transform', 'scale(1)');
       containerRef.current?.style.setProperty('height', `auto`);      
     }, 1200);    
@@ -127,7 +183,6 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
 
   function returnToMenu() {
     setIsMenu(true);
-    requestAnimationFrame
   }
 
   useEffect(() => {
@@ -147,7 +202,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
           >
             <div
               ref={transitionDivRef}
-              className="absolute h-10 w-10 top-0 left-0 rounded-full z-10 transition-all duration-1000 bg-gray-300 pointer-events-none opacity-0"
+              className="absolute h-10 w-10 top-0 left-0 rounded-full z-10 transition-all duration-0 bg-gray-300 pointer-events-none opacity-0"
             >
             </div>
             <div ref={contentRef} className="w-full">

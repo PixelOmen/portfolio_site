@@ -102,6 +102,7 @@ function Grid() {
   });
 
   useEffect(() => {
+    if (window.innerWidth < 480) return;
     startAnims();
   }, [gridDim])
 
