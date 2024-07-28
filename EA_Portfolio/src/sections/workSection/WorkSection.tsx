@@ -8,7 +8,6 @@ import ProjectThumb from "../../components/projectview/ProjectThumb";
 import JSHeader from "../../components/jsheader/JSHeader";
 
 import TestImage1 from "../../assets/testImage1.png";
-import { set } from "animejs";
 
 interface WorkSectionProps {
   scrollState?: IScrollState
@@ -25,7 +24,6 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const transitionDivRef = useRef<HTMLDivElement>(null);
-  const shapeHolder = useRef<HTMLDivElement>(null);
 
   function thumbnails() {
     return [
@@ -184,7 +182,6 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
                   </AnimReset>
                 </div>
               )}
-              <div ref={shapeHolder} className="absolute left-0 top-0 w-full pointer-events-none"></div>
             </div>
           </div>
         </JSHeader>
