@@ -31,7 +31,7 @@ export default function ProjectView({
         onClick={backCallback}
         className='hover:scale-x-125 hover:scale-y-90 transition-all duration-300 hover:text-[#EF8275]'
       >
-        <div className='text-3xl text-center casc-fadeInDown font-bold'>
+        <div className='text-3xl ml-5 mb-10 sm:mb-0 text-center casc-fadeInDown font-bold'>
           {"<---"}
         </div>
       </button>

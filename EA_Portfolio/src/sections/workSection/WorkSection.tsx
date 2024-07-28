@@ -21,8 +21,11 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   const [activate, setActivate] = useState(true);
   const [isMenu, setIsMenu] = useState(true);
   const [projectID, setProjectID] = useState(0);
+
   const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const transitionDivRef = useRef<HTMLDivElement>(null);
+  const shapeHolder = useRef<HTMLDivElement>(null);
 
   function thumbnails() {
     return [
@@ -93,33 +96,40 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   }
 
   function enterProject(e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) {
-    if (!containerRef.current || !transitionDivRef.current) return;
+    if (!containerRef.current || !transitionDivRef.current || !contentRef.current) return;
     const containerRect = containerRef.current.getBoundingClientRect();
     const transitionRect = transitionDivRef.current.getBoundingClientRect();
     const xOffset = e.clientX - containerRect.left - (transitionRect.width / 2);
     const yOffset = e.clientY - containerRect.top - (transitionRect.height / 2);
+    containerRef.current?.style.setProperty('height', `${containerRect.height}px`);
     transitionDivRef.current.classList.add('duration-0');
-    transitionDivRef.current?.classList.remove('opacity-0');
-    transitionDivRef.current?.style.setProperty('left', `${xOffset}px`);
-    transitionDivRef.current?.style.setProperty('top', `${yOffset}px`);
+    transitionDivRef.current.classList.remove('opacity-0');
+    transitionDivRef.current.style.setProperty('left', `${xOffset}px`);
+    transitionDivRef.current.style.setProperty('top', `${yOffset}px`);
     setTimeout(() => {
       transitionDivRef.current?.classList.remove('duration-0');
-      transitionDivRef.current?.style.setProperty('transform', 'scale(60)');
+      transitionDivRef.current?.style.setProperty('transform', 'scale(80)');
     }, 10);
     setTimeout(() => {
       setProjectID(index);
       setIsMenu(false);
-      transitionDivRef.current?.classList.add('opacity-0');
     }, 500);
     setTimeout(() => {
-      // transitionDivRef.current?.style.setProperty('left', `0px`);
-      // transitionDivRef.current?.style.setProperty('top', `0px`);
+      if (!containerRef.current || !contentRef.current) return;
+      const contentHeight = contentRef.current?.offsetHeight;
+      containerRef.current.style.setProperty('height', `${contentHeight}px`);
+      transitionDivRef.current?.classList.add('opacity-0');
+    }, 550);
+    setTimeout(() => {
+      if (!contentRef.current) return;
       transitionDivRef.current?.style.setProperty('transform', 'scale(1)');
-    }, 900);    
+      containerRef.current?.style.setProperty('height', `auto`);      
+    }, 1200);    
   }
 
   function returnToMenu() {
     setIsMenu(true);
+    requestAnimationFrame
   }
 
   useEffect(() => {
@@ -135,14 +145,14 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         >
           <div
             ref={containerRef}
-            className={`relative overflow-hidden w-full mb-4 rounded-lg`}
+            className={`relative overflow-hidden w-full mb-4 rounded-lg transition-all duration-200`}
           >
             <div
               ref={transitionDivRef}
-              className="absolute h-10 w-10 top-0 left-0 rounded-full z-10 transition-all duration-700 bg-gray-300 pointer-events-none opacity-0"
+              className="absolute h-10 w-10 top-0 left-0 rounded-full z-10 transition-all duration-1000 bg-gray-300 pointer-events-none opacity-0"
             >
             </div>
-            <div className="w-full">
+            <div ref={contentRef} className="w-full">
               {isMenu ? (
                 <div className="py-6 px-10 flex justify-center gap-10 flex-wrap">
                   {thumbnails().map((thumb, index) => {
@@ -174,6 +184,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
                   </AnimReset>
                 </div>
               )}
+              <div ref={shapeHolder} className="absolute left-0 top-0 w-full pointer-events-none"></div>
             </div>
           </div>
         </JSHeader>
