@@ -54,10 +54,10 @@ export default function ProjectView({
         {description}
       </div>
       {techStack && (
-        <div className='flex gap-4 mt-6 casc-fadeInLeft'>
+        <div className='flex gap-4 mt-10 mb-10 casc-fadeInLeft flex-wrap'>
           {techStack.map((tech, index) => (
-            <div key={index} className='flex gap-4'>
-              <div>
+            <div key={index} className='flex gap-2'>
+              <div className=''>
                 {tech}
               </div>
               {index < techStack.length - 1 && (<div>|</div>)}
@@ -67,7 +67,7 @@ export default function ProjectView({
       )}
       {github && (
         <div
-          className='mt-6 flex items-center casc-fadeIn group w-max'
+          className='flex items-center casc-fadeIn group w-max'
         >
           <GitHubIcon
             fillColor=''

@@ -24,7 +24,7 @@ export default function AppLoading( { className = "" }: AppLoadingProps ) {
       ref={container}
       className={`fixed h-screen w-screen top-0 right-0 flex justify-center items-center bg-slate-800 transition-all duration-${translateDuration} ${className}`}
     >
-      <div>Loading...</div>
+      <div className="">&#x261D; Just a second...</div>
     </div>
   )
 }

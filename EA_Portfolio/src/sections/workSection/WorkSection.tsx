@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 
 import type { IScrollState } from "../../lib/scrolling";
 
@@ -8,6 +8,7 @@ import ProjectThumb from "../../components/projectview/ProjectThumb";
 import JSHeader from "../../components/jsheader/JSHeader";
 
 import TestImage1 from "../../assets/testImage1.png";
+import { set } from "animejs";
 
 interface WorkSectionProps {
   scrollState?: IScrollState
@@ -20,6 +21,8 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   const [activate, setActivate] = useState(true);
   const [isMenu, setIsMenu] = useState(true);
   const [projectID, setProjectID] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const transitionDivRef = useRef<HTMLDivElement>(null);
 
   function thumbnails() {
     return [
@@ -70,7 +73,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     return [
       <ProjectView
         backCallback={returnToMenu}
-        className="w-[900px]"
+        className="w-full"
         title = "LittleLemon REST API"
         description="The LittleLemon REST API is a peer-reviewed REST API project required for the Meta Back-End Developer Professional Certification. Implements proper token authentication, user group permissions, filtering, pagination, and throttling. Made with Django and Django REST Framework (DRF)."
         // images={[TestImage1, TestImage2]}
@@ -79,7 +82,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
       />,
       <ProjectView
         backCallback={returnToMenu}
-        className="w-[900px]"
+        className="w-full"
         title = "Etools V2"
         description='Internal web app enabling access to tools that assist with post-production workflows at Roundabout Entertainment. Integrating Svelte and Flask, it is meant to replace "etools", the first attempt at an internal web app.'
         // images={[TestImage1, TestImage2]}
@@ -87,6 +90,32 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         github={{url: "https://github.com/PixelOmen/etools_v2"}}
       />,
     ]
+  }
+
+  function enterProject(e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) {
+    if (!containerRef.current || !transitionDivRef.current) return;
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const transitionRect = transitionDivRef.current.getBoundingClientRect();
+    const xOffset = e.clientX - containerRect.left - (transitionRect.width / 2);
+    const yOffset = e.clientY - containerRect.top - (transitionRect.height / 2);
+    transitionDivRef.current.classList.add('duration-0');
+    transitionDivRef.current?.classList.remove('opacity-0');
+    transitionDivRef.current?.style.setProperty('left', `${xOffset}px`);
+    transitionDivRef.current?.style.setProperty('top', `${yOffset}px`);
+    setTimeout(() => {
+      transitionDivRef.current?.classList.remove('duration-0');
+      transitionDivRef.current?.style.setProperty('transform', 'scale(60)');
+    }, 10);
+    setTimeout(() => {
+      setProjectID(index);
+      setIsMenu(false);
+      transitionDivRef.current?.classList.add('opacity-0');
+    }, 500);
+    setTimeout(() => {
+      // transitionDivRef.current?.style.setProperty('left', `0px`);
+      // transitionDivRef.current?.style.setProperty('top', `0px`);
+      transitionDivRef.current?.style.setProperty('transform', 'scale(1)');
+    }, 900);    
   }
 
   function returnToMenu() {
@@ -104,7 +133,15 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
           className="relative mb-5"
           title="work"
         >
-          <div className={`relative overflow-hidden w-full mb-2 sm:p-10`}>
+          <div
+            ref={containerRef}
+            className={`relative overflow-hidden w-full mb-4 rounded-lg`}
+          >
+            <div
+              ref={transitionDivRef}
+              className="absolute h-10 w-10 top-0 left-0 rounded-full z-10 transition-all duration-700 bg-gray-300 pointer-events-none opacity-0"
+            >
+            </div>
             <div className="w-full">
               {isMenu ? (
                 <div className="py-6 px-10 flex justify-center gap-10 flex-wrap">
@@ -115,10 +152,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
                       <div
                         key={index}
                         className={`border-2 ${anim} border-gray-600 rounded-md w-[300px] h-[200px]`}
-                        onClick={() => {
-                          setProjectID(index);
-                          setIsMenu(false);
-                        }}
+                        onClick={(e) => enterProject(e, index)}
                       >
                           {thumb}
                       </div>
@@ -126,14 +160,17 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
                   })}
                 </div>
               ) : (
-                <div className="w-full flex justify-center mb-2">
+                <div className="relative w-full flex justify-center z-0">
                   <AnimReset
                     hideOnStart={true}
                     active={activate}
                     cascadeDelay={50}
                     resetDelay={1000}
                   >
-                    {projectViews()[projectID]}
+                    <div className="">
+                      {projectViews()[projectID]}
+
+                    </div>
                   </AnimReset>
                 </div>
               )}

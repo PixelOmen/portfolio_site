@@ -22,7 +22,7 @@ export default function JSHeader({
         
         {asFunction ? (
           <>
-          <div className="text-[#368cd6] max-[420px]:hidden ">
+          <div className="text-[#368cd6] max-[450px]:hidden ">
             {prefix}
           </div>
           <span className="">
@@ -71,7 +71,7 @@ export default function JSHeader({
     {children}
 
     <header>
-      <div className={`text-pink-400 font-sourcecode text-xl sm:text-4xl flex gap-4 font-normal fadeInDown ${className}`}>
+      <div className={`text-pink-400 font-sourcecode text-3xl sm:text-4xl flex gap-4 font-normal fadeInDown ${className}`}>
       {"}"}
       </div>
     </header>
