@@ -60,7 +60,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
                 <form
                   onSubmit={formSubmit}
                   method="POST"
-                  className="flex flex-col gap-4 text-black"
+                  className="flex flex-col gap-4 text-black casc-fadeInDown"
                 >
                   <input
                     type="text"

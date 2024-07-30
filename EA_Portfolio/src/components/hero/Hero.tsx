@@ -1,8 +1,5 @@
 import { ReactNode } from 'react'
 
-// import styles from './hero.module.css'
-// import landingbg from '../../assets/landingbg.jpg'
-
 import HeroCanvas from './HeroCanvas'
 
 

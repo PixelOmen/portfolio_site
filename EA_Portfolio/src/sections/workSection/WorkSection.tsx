@@ -95,7 +95,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         className="w-full"
         title = "QTSDK"
         description='QTSDK is a command-line program that leverages the QuickTime 7 SDK for Windows to perform various operations on QuickTime files on Windows, including audio channel flagging and modifying embedded timecode. Enables QuickTime modifications to be programmatically integrated into other tools and scripts.'
-        // images={[TestImage1, TestImage2]}
+        images={[TestImage1]}
         techStack={['C++', 'QT7 SDK']}
         github={{url: "https://github.com/PixelOmen/QTSDK"}}
       />,
@@ -147,7 +147,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     ]
   }
 
-  function enterProject(e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) {
+  function projectOpenAnim(e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) {
     if (!containerRef.current || !transitionDivRef.current || !contentRef.current) return;
     const containerRect = containerRef.current.getBoundingClientRect();
     const transitionRect = transitionDivRef.current.getBoundingClientRect();
@@ -179,6 +179,10 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
       transitionDivRef.current?.style.setProperty('transform', 'scale(1)');
       containerRef.current?.style.setProperty('height', `auto`);      
     }, 1200);    
+  }
+
+  function enterProject(e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) {
+    projectOpenAnim(e, index);
   }
 
   function returnToMenu() {

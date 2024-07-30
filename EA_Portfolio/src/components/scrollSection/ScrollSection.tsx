@@ -24,24 +24,25 @@ export default function ScrollSection({
 
     function contractOnScroll(
         _: Event,
-        topRatio: number = 0.8,
+        // topRatio: number = 0.8,
         bottomRatio: number = 0.4
     ): void {
         if (!contentRef.current || !triggerRef.current) {
             throw new Error("ScrollSection:scroll listener: element not found");   
         }
-        let top = triggerRef.current.getBoundingClientRect().top;
+        // let top = triggerRef.current.getBoundingClientRect().top;
         let bottom = triggerRef.current.getBoundingClientRect().bottom;
-        if (top > (window.innerHeight * topRatio) ||
-        bottom < (window.innerHeight * bottomRatio)) 
+        // if (top > (window.innerHeight * topRatio) ||
+        // bottom < (window.innerHeight * bottomRatio))
+        if (bottom < (window.innerHeight * bottomRatio))
         {
-            contentRef.current.classList.add("p-4");
+            contentRef.current.classList.add("p-2");
             contentRef.current.classList.add(startingScale);
             contentRef.current.classList.add("blur-sm");
             contentRef.current.classList.add("rounded-3xl");
             contentRef.current.classList.remove("scale-100");
         } else {
-            contentRef.current.classList.remove("p-4");
+            contentRef.current.classList.remove("p-2");
             contentRef.current.classList.remove(startingScale);
             contentRef.current.classList.remove("blur-sm");
             contentRef.current.classList.remove("rounded-3xl");
