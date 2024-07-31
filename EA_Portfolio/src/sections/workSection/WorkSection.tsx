@@ -105,7 +105,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         title = "AmazonMMC"
         description='AmazonMMC is a CLI tool designed to facilitate the creation of Amazon Media Entertainment Core (MEC) and Media Manifest Core (MMC) XML files. Also provides functionality to generate MD5 checksums and sample directories for Amazon deliveries.'
         // images={[TestImage1, TestImage2]}
-        techStack={['Python', 'XML-ElementTree']}
+        techStack={['Pure Python', 'XML-ElementTree']}
         github={{url: "https://github.com/PixelOmen/amazonmmc"}}
       />,
       <ProjectView
@@ -114,7 +114,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         title = "PyEmail"
         description='PyEmail is a Python library designed to simplify email communication. It provides straightforward interfaces for sending and receiving emails using IMAP and SMTP protocols. Easy-to-use interfaces for IMAP and SMTP connections. Retrieve, mark as read/unread, and delete emails. Send emails with attachments. Handle email parsing and metadata extraction seamlessly.'
         // images={[TestImage1, TestImage2]}
-        techStack={['Python', "SMTP/IMAP"]}
+        techStack={['Pure Python', "SMTP/IMAP"]}
         github={{url: "https://github.com/PixelOmen/pyemail"}}
       />,
       <ProjectView
@@ -132,7 +132,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         title = "TCLIB3"
         description='TCLIB3 is a python library that provides functionality for converting between frames, timecode, and milliseconds, supporting both non-dropframe and dropframe timecode formats. It is designed to assist in video editing and processing tasks where precise timing and synchronization are crucial.'
         // images={[TestImage1, TestImage2]}
-        techStack={['Python']}
+        techStack={['Pure Python']}
         github={{url: "https://github.com/PixelOmen/tclib3"}}
       />,
       <ProjectView
@@ -141,7 +141,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         title = "RosettaPath"
         description='RossetaPath objects translate network paths mounted to local volumes from one mount point to another across operating systems.'
         // images={[TestImage1, TestImage2]}
-        techStack={['Python']}
+        techStack={['Pure Python']}
         github={{url: "https://github.com/PixelOmen/rosettapath"}}
       />,
     ]
@@ -197,6 +197,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     <div className={`bg-[#1f1f1f] p-6 sm:py-12 flex justify-center overflow-hidden ${className}`}>
       <div className="relative w-full max-w-[1500px] overflow-hidden">
         <JSHeader
+          comment="A sample of some of my work"
           className="relative mb-5"
           title="work"
         >

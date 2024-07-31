@@ -18,7 +18,25 @@ body {
   @apply text-slate-50;
   scroll-behavior: smooth;
   min-width: 390px;
-  overflow: hidden; /* AppLoading component removes this on load */
+  overflow: hidden; /* LoadingScreen component removes this on load */
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(71 85 105);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #EF8275;
+  border-radius: 6px;
+  border: 2px solid #414141;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b9f5f5;
 }
 
 

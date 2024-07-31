@@ -1,0 +1,22 @@
+@keyframes upandDown {
+  0% {
+    transform: translateY(-150%);
+  }
+  25% {
+    opacity: 100;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    transform: translateY(200%);
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.scrollWheel {
+    animation: upandDown 2s infinite;
+}

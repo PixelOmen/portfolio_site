@@ -41,7 +41,7 @@ export default function Navbar() {
     if (window.innerWidth < 640) {
       contentsSmall.current?.classList.add(styles.navbarSmallRotate);
       navbarContainer.current?.classList.add(styles.navbarContainerSmall);
-    }    
+    }
   }, [])
 
   return (
@@ -52,15 +52,16 @@ export default function Navbar() {
     className={`${styles.navbar} sm:${styles.navbarContainerSmall} text-gray-200 bg-stone-900 bg-opacity-90 font-sourcecode`}
   >
 
-    <div ref={contentsFull} className="hidden sm:flex text-xl sm:text-3xl py-4">
-      <header className="ml-auto mr-auto sm:mr-[10%]">
+    <nav ref={contentsFull} className="hidden sm:flex text-xl sm:text-3xl py-4">
+      <div className="ml-auto mr-auto sm:mr-[8%]">
         <ul className="flex gap-5 sm:gap-10">
-          <li><a href="#navWork" className={styles.navLinks}>Work</a></li>
-          <li><a href="#navResume" className={styles.navLinks}>Demos</a></li>
-          <li><a href="#navContact" className={styles.navLinks}>Contact</a></li>
+        <li><a href="" className={styles.navLinks}>About</a></li>
+          <li><a href="" className={styles.navLinks}>Work</a></li>
+          <li><a href="" className={styles.navLinks}>Demos</a></li>
+          <li><a href="" className={styles.navLinks}>Contact</a></li>
         </ul>
-      </header>
-    </div>
+      </div>
+    </nav>
 
     <div ref={contentsSmall} className="">
       <button

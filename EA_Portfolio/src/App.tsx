@@ -2,8 +2,9 @@ import Hero from "./components/hero/Hero"
 import HeroHeader from "./components/hero/HeroHeader";
 import Navbar from "./components/navbar/Navbar"
 import ScrollSection from "./components/scrollSection/ScrollSection";
-import AppLoading from "./components/ui/loading/AppLoading";
+import AppLoading from "./components/ui/loading/LoadingScreen";
 
+import AboutSection from "./sections/aboutSection/AboutSection";
 import WorkSection from './sections/workSection/WorkSection';
 import DemoSection from "./sections/demoSection/DemoSection";
 import ContactSection from "./sections/contactSection/ContactSection";
@@ -26,6 +27,7 @@ export default function App() {
           <div className="relative rounded-md top-[25%] sm:top-1/3 mx-auto overflow-hidden p-4">
             <HeroHeader/>
           </div>
+
         </Hero>
       </section>
 
@@ -34,6 +36,13 @@ export default function App() {
       <ScrollSection
         scrollObserver={scrollObserver}
         className="bg-gray-800 w-full border-t-2 border-black"
+      >
+        <AboutSection className=""/>
+      </ScrollSection>
+
+      <ScrollSection
+        scrollObserver={scrollObserver}
+        className="bg-gray-800 w-full border-black"
       >
         <WorkSection className=""/>
       </ScrollSection>

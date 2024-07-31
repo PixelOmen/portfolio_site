@@ -1,7 +1,9 @@
 interface JSHeaderProps {
+  comment?: string;
   title: string;
   prefix?: string;
   asFunction?: boolean;
+  asClass?: boolean;
   functionParams?: string[];
   className?: string;
   children?: React.ReactNode
@@ -9,15 +11,22 @@ interface JSHeaderProps {
 
 export default function JSHeader({
   title,
+  comment = '',
   prefix = 'var',
   asFunction = false,
+  asClass = false,
   functionParams = [],
   className = '',
   children
 }: JSHeaderProps ) {
   return (
     <>
-    <header className="">
+    <header>
+
+      {comment && (
+        <div className="text-2xl text-gray-500">/** {comment} */</div>
+      )}
+
       <div className={`text-3xl sm:text-4xl font-sourcecode flex gap-4 font-normal fadeInDown ${className}`}>
         
         {asFunction ? (
@@ -55,9 +64,11 @@ export default function JSHeader({
           <div className="text-green-400 brightness-90">
             {title}
           </div>
-          <div className="">
-            =
-          </div>          
+          {!asClass && (
+            <div className="">
+              =
+            </div>
+          )}
           </>
         )}
 

@@ -18,6 +18,7 @@ export default function DemoSection({}: DemoSectionProps) {
     <div className="bg-[#1f1f1f] p-6 flex justify-center overflow-hidden">
       <div className="max-w-[1500px] w-full">
         <JSHeader
+          comment="A few demos of AWS and Django functionality"
           className="text-xl sm:text-[2rem] mb-5"
           title="demos"
           prefix="function"
