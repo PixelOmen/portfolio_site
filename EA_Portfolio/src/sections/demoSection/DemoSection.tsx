@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-import axios from "axios";
-
-import AnimReset from "../../components/animReset/AnimReset";
+import { GOOGLE_AUTH_URL } from "../../lib/auth";
 import JSHeader from "../../components/jsheader/JSHeader";
 
 interface DemoSectionProps {
@@ -11,20 +9,9 @@ interface DemoSectionProps {
 
 
 export default function DemoSection({}: DemoSectionProps) {
-
-  function parseUrl() {
-    const url = new URL(window.location.href);
-    const urlParams = new URLSearchParams(url.search);
-    console.log(Array.from(urlParams.entries()));
-    const code = urlParams.get('code');
-    console.log(code);
-  }
   
   function redirectFunction() {
-    // axios.get('https://jsonplaceholder.typicode.com/posts')
-    // .then(res => {
-    //   console.log(res.data)
-    // })
+    window.location.href = GOOGLE_AUTH_URL;
   }
 
   return (
@@ -44,8 +31,7 @@ export default function DemoSection({}: DemoSectionProps) {
               style={{background: 'radial-gradient(circle, #e5e7eb  0%, #c8cace 100%)'}}
               className="p-6 text-black rounded-lg"
             >
-              <button onClick={redirectFunction} className="mr-4">Redirect</button>
-              <button onClick={parseUrl}>Parse</button>
+              <button onClick={redirectFunction}>Redirect</button>
             </div>
 
           </div>

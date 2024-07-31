@@ -8,7 +8,6 @@ import WorkSection from './sections/workSection/WorkSection';
 import DemoSection from "./sections/demoSection/DemoSection";
 import ContactSection from "./sections/contactSection/ContactSection";
 
-
 import { ScrollObserver } from "./lib/scrolling";
 
 
