@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 
 import type { IScrollState } from "../../lib/scrolling";
 
-import AnimReset from "../../components/animReset/AnimReset";
+// import AnimReset from "../../components/animReset/AnimReset";
 import JSHeader from "../../components/jsheader/JSHeader";
-
-import TestImage1 from "../../assets/testImage1.png";
+import Terminal from "../../components/terminal/Terminal";
 
 interface AboutSectionProps {
   scrollState?: IScrollState
@@ -31,9 +30,10 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
           title="EmmanuelAcosta"
           asClass={true}
         >
-            <div className="mb-4 w-full border-2">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam quos beatae minus alias eos veritatis, rerum, distinctio voluptates dolorum illo ad exercitationem, quibusdam officia. Unde et doloremque incidunt sed deserunt!
-            </div>
+          <Terminal
+            content="About me and this site"
+            className="p-4"
+          />
         </JSHeader>
       </div>
     </div>
