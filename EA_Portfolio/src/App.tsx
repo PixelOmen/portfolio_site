@@ -27,7 +27,6 @@ export default function App() {
           <div className="relative rounded-md top-[25%] sm:top-1/3 mx-auto overflow-hidden p-4">
             <HeroHeader/>
           </div>
-
         </Hero>
       </section>
 

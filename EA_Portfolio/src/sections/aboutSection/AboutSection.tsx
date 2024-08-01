@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 
 import type { IScrollState } from "../../lib/scrolling";
-
-// import AnimReset from "../../components/animReset/AnimReset";
 import JSHeader from "../../components/jsheader/JSHeader";
 import Terminal from "../../components/terminal/Terminal";
 
@@ -13,13 +11,6 @@ interface AboutSectionProps {
 }
 
 export default function AboutSection({ scrollState, className = ''}: AboutSectionProps) {
-
-
-
-  useEffect(() => {
-    
-  }, [scrollState?.wasTriggered.value]);
-
   return (
     <div className={`bg-[#1f1f1f] p-6 sm:py-12 flex justify-center overflow-hidden ${className}`}>
       <div className="relative w-full max-w-[1500px] overflow-hidden">
@@ -31,6 +22,7 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
           asClass={true}
         >
           <Terminal
+            triggered={scrollState?.wasTriggered.value}
             content="About me and this site"
             className="p-4"
           />
