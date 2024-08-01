@@ -1,6 +1,6 @@
 import React from "react";
 
-import { GOOGLE_AUTH_URL } from "../../lib/auth";
+import { GOOGLE_USER_LOGIN_URL } from "../../lib/auth";
 import JSHeader from "../../components/jsheader/JSHeader";
 
 interface DemoSectionProps {
@@ -11,7 +11,7 @@ interface DemoSectionProps {
 export default function DemoSection({}: DemoSectionProps) {
   
   function redirectFunction() {
-    window.location.href = GOOGLE_AUTH_URL;
+    window.location.href = GOOGLE_USER_LOGIN_URL;
   }
 
   return (

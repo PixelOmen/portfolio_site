@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Hero from "./components/hero/Hero"
 import HeroHeader from "./components/hero/HeroHeader";
 import Navbar from "./components/navbar/Navbar"
@@ -10,10 +12,23 @@ import DemoSection from "./sections/demoSection/DemoSection";
 import ContactSection from "./sections/contactSection/ContactSection";
 
 import { ScrollObserver } from "./lib/scrolling";
+import * as auth from "./lib/auth";
 
 
 export default function App() {
   const scrollObserver = new ScrollObserver();
+
+  useEffect(() => {
+    const currentUrl = new URL(window.location.href);
+    const redirectUrl = new URL(auth.GOOGLE_REDIRECT_URI);
+    if (redirectUrl.pathname === currentUrl.pathname) {
+      const code = auth.parseGoogleCode(currentUrl.href);
+      if (code) {
+        auth.authCodeToToken(code)
+          .then(res => {console.log(res)});
+      }
+    }
+  }, []);
 
   return (
     <>
