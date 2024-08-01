@@ -105,13 +105,17 @@ export default function Terminal({
       if (blockIndex + 1 >= prompts.length) return;
       typewriter(prompts, 0, blockIndex + 1);
     } else {
-      const contentElem = currentBlock.content;
-      contentElem.textContent = contentElem.textContent ? contentElem.textContent : '';
-      contentElem.textContent += currentBlock.text[textIndex];
+      let firstCharTimeout = textIndex === 0 ? 400 : 0;
       setTimeout(() => {
         if ( resetRef.current ) return;
-        typewriter(prompts, textIndex + 1, blockIndex);
-      }, typeSpeed);
+        const contentElem = currentBlock.content;
+        contentElem.textContent = contentElem.textContent ? contentElem.textContent : '';
+        contentElem.textContent += currentBlock.text[textIndex];
+        setTimeout(() => {
+          if ( resetRef.current ) return;
+          typewriter(prompts, textIndex + 1, blockIndex);
+        }, typeSpeed);
+      }, firstCharTimeout);
     }    
   }
 
@@ -124,6 +128,8 @@ export default function Terminal({
       prompt.content.textContent = '';
     });
   }
+  
+
   
   useEffect(() => {
     if (triggered) {
@@ -143,11 +149,11 @@ export default function Terminal({
   }, [reset]);
   
   return (
-    <div className={`mb-4 w-full ${className}`}>
-      <div className="rounded-lg text-gray-200 text-sm">
+    <div className={`mb-4 w-full overflow-hidden ${className}`}>
+      <div className="text-gray-200 text-sm">
 
         <header>        
-          <div className="relative w-full flex p-2 bg-gradient-to-b from-[#524f48] via-[#3e3d39] to-[#3e3d39]">
+          <div className="relative w-full flex p-2 rounded-t-lg bg-gradient-to-b from-[#524f48] via-[#3e3d39] to-[#3e3d39]">
             <div className="absolute left-[50%] -translate-x-[50%]">
               {header}: ~
             </div>
@@ -173,7 +179,6 @@ export default function Terminal({
         </header>
 
         <div className="relative bg-gray-900 w-full font-sourcecode p-2 text-lg rounded-sm">
-
           {/* shapeholder */}
           <div className="opacity-0">
             {createPrompts(true)}
