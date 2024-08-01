@@ -95,7 +95,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         className="w-full"
         title = "QTSDK"
         description='QTSDK is a command-line program that leverages the QuickTime 7 SDK for Windows to perform various operations on QuickTime files on Windows, including audio channel flagging and modifying embedded timecode. Enables QuickTime modifications to be programmatically integrated into other tools and scripts.'
-        images={[TestImage1]}
+        // images={[TestImage1]}
         techStack={['C++', 'QT7 SDK']}
         github={{url: "https://github.com/PixelOmen/QTSDK"}}
       />,
@@ -158,7 +158,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     transitionDivRef.current.style.setProperty('left', `${xOffset}px`);
     transitionDivRef.current.style.setProperty('top', `${yOffset}px`);
     setTimeout(() => {
-      transitionDivRef.current?.classList.add('duration-700');
+      transitionDivRef.current?.classList.add('duration-500');
       transitionDivRef.current?.style.setProperty('transform', 'scale(70)');
     }, 50);
     setTimeout(() => {
@@ -175,7 +175,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     }, 700);    
     setTimeout(() => {
       if (!contentRef.current) return;
-      transitionDivRef.current?.classList.remove('duration-700');
+      transitionDivRef.current?.classList.remove('duration-500');
       transitionDivRef.current?.style.setProperty('transform', 'scale(1)');
       containerRef.current?.style.setProperty('height', `auto`);      
     }, 1200);    
@@ -197,7 +197,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     <div className={`bg-[#1f1f1f] p-6 sm:py-12 flex justify-center overflow-hidden ${className}`}>
       <div className="relative w-full max-w-[1500px] overflow-hidden">
         <JSHeader
-          comment="A sample of some of my work"
+          comment="Samples of my work"
           className="relative mb-5"
           title="work"
         >

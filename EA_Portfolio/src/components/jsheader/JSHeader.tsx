@@ -24,7 +24,7 @@ export default function JSHeader({
     <header>
 
       {comment && (
-        <div className="text-2xl text-gray-500">/** {comment} */</div>
+        <div className={`text-lg sm:text-2xl text-gray-500`}>/** {comment} */</div>
       )}
 
       <div className={`text-3xl sm:text-4xl font-sourcecode flex gap-4 font-normal fadeInDown ${className}`}>

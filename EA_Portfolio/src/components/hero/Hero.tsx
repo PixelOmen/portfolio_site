@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import HeroCanvas from './HeroCanvas'
+import HeroBGAnim from './HeroBGAnim'
 
 
 interface HeroProps {
@@ -18,7 +18,7 @@ export default function hero({ children }: HeroProps) {
           <div
             className='absolute z-0 h-full w-full left-0 top-0 overflow-hidden pointer-events-none'
           >
-            <HeroCanvas/>
+            <HeroBGAnim/>
           </div>
         </div>
       </div>

@@ -1,16 +1,21 @@
 import { useRef, useEffect, useState } from "react";
 
+import styles from './terminal.module.css';
+
 interface PromptObject {
   block: HTMLDivElement;
   text: string;
   prompt: HTMLSpanElement;
   content: HTMLSpanElement;
+  cursor: HTMLSpanElement;
 }
 
 interface TerminalProps {
   content: string;
   header?: string;
+  userName?: string;
   typeSpeed?: number;
+  newLinePause?: number;
   className?: string;
   triggered?: boolean;
 }
@@ -18,27 +23,31 @@ interface TerminalProps {
 export default function Terminal({
   content,
   header = 'Emmanuel@Acosta',
-  typeSpeed = 5,
+  userName = 'eacosta@dev',
+  typeSpeed = 0,
+  newLinePause = 1000,
   className = '',
   triggered = false,
 }: TerminalProps ) {
 
   const [reset, setReset] = useState(false);
+  const [livePrompts, setLivePrompts] = useState<JSX.Element[]>([]);
   const resetRef = useRef(reset);
   const contentRef = useRef<HTMLDivElement>(null);
   
-  content = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam quos beatae minus alias eos veritatis, rerum, \ndistinctio voluptates dolorum ilload exercitationem, quibusdam officia. \nUnde et doloremque incidunt sed deserunt!";
-  
-  const contentBlocks = content.split('\n');
+  const contentBlocks = content.split('\\n');
 
   function promptElements(header: string, content: string, blockIndex: number, shapeholder: boolean) {
     return (
       <div key={blockIndex} data-blockindex={blockIndex} className="mb-4">
-        <span data-subtype='prompt' className="text-[#26e026] opacity-0">
-          {header}:~$
+        <span data-subtype='prompt' className="text-[#26e026]">
+          {userName ? userName : header}:~$
         </span>
         <span data-subtype='content' className="ml-4 text-gray-100">
           {shapeholder ? content : ''}
+        </span>
+        <span data-subtype='cursor' className={`${styles.cursorBlink} opacity-0`}>
+          <div className={`inline-block -translate-y-[1px]`}>|</div>
         </span>
       </div>
     )
@@ -63,14 +72,19 @@ export default function Terminal({
       const promptObject = { block: block, text: contentBlocks[i] } as PromptObject;
       for (let j = 0; j < block.children.length; j++) {
         const elem = block.children[j] as HTMLSpanElement;
-        if (elem.dataset.subtype === 'prompt') {
-          promptObject.prompt = elem;
-        }
-        if (elem.dataset.subtype === 'content') {
-          promptObject.content = elem;
-        }
+        switch (elem.dataset.subtype) {
+          case 'prompt':
+            promptObject.prompt = elem;
+            break;
+          case 'content':
+            promptObject.content = elem;
+            break;
+          case 'cursor':
+            promptObject.cursor = elem;
+            break;
+        }      
       }
-      if (!promptObject.prompt || !promptObject.content) {
+      if (!promptObject.prompt || !promptObject.content || !promptObject.cursor) {
         throw new Error('promptObject is missing prompt or content');
       }        
       promptElements.push(promptObject);
@@ -98,14 +112,16 @@ export default function Terminal({
     const currentBlock = prompts[blockIndex];
 
     if (textIndex === 0) {
+      currentBlock.cursor.classList.add(styles.cursorBlink);
       currentBlock.prompt.classList.remove('opacity-0');
     }
     
     if (textIndex >= currentBlock.text.length) {
       if (blockIndex + 1 >= prompts.length) return;
+      currentBlock.cursor.classList.remove(styles.cursorBlink);
       typewriter(prompts, 0, blockIndex + 1);
     } else {
-      let firstCharTimeout = textIndex === 0 ? 400 : 0;
+      let firstCharTimeout = textIndex === 0 ? newLinePause : 0;
       setTimeout(() => {
         if ( resetRef.current ) return;
         const contentElem = currentBlock.content;
@@ -125,11 +141,14 @@ export default function Terminal({
     const promptElements = getPromptElements();
     promptElements.forEach(prompt => {
       prompt.prompt.classList.add('opacity-0');
+      prompt.cursor.classList.remove(styles.cursorBlink);
       prompt.content.textContent = '';
     });
   }
-  
 
+  useEffect(() => {
+    setLivePrompts(createPrompts(false));
+  }, []);
   
   useEffect(() => {
     if (triggered) {
@@ -141,6 +160,7 @@ export default function Terminal({
 
   useEffect(() => {
     resetRef.current = reset;
+    if (livePrompts.length < 1) return;
     if (reset) {
       resetPrompts();
     } else {
@@ -150,7 +170,7 @@ export default function Terminal({
   
   return (
     <div className={`mb-4 w-full overflow-hidden ${className}`}>
-      <div className="text-gray-200 text-sm">
+      <div className="text-gray-200 text-[0.5rem] sm:text-sm">
 
         <header>        
           <div className="relative w-full flex p-2 rounded-t-lg bg-gradient-to-b from-[#524f48] via-[#3e3d39] to-[#3e3d39]">
@@ -158,18 +178,18 @@ export default function Terminal({
               {header}: ~
             </div>
             <div className="flex ml-auto gap-1 pr-1">
-              <div className="border-[1px] border-black rounded-full px-2 pt-[1px] text-black bg-gradient-to-b from-[#82817c] to-[#64635e]">
+              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#82817c] to-[#64635e]">
                 &minus;
               </div>
-              <div className="border-[1px] border-black rounded-full px-2 text-black bg-gradient-to-b from-[#82817c] to-[#64635e]">
+              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 text-black bg-gradient-to-b from-[#82817c] to-[#64635e]">
                 <div className="-translate-y-[1px]">&#9633;</div>
               </div>
-              <div className="border-[1px] border-black rounded-full px-2 pt-[1px] text-black bg-gradient-to-b from-[#ef7d52] to-[#de4f1b]">
+              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#ef7d52] to-[#de4f1b]">
                 &times;
               </div>
             </div>
           </div>
-          <div className="pl-6 pb-2 pt-2 flex gap-4 bg-[#373632]">
+          <div className="pl-2 sm:pl-6 py-1 sm:py-2 flex gap-4 bg-[#373632]">
             {['File', 'Edit', 'View', 'Search', 'Terminal', 'Help'].map((item, index) => {
               return (
                 <div key={index}>{item}</div>
@@ -178,18 +198,18 @@ export default function Terminal({
           </div>
         </header>
 
-        <div className="relative bg-gray-900 w-full font-sourcecode p-2 text-lg rounded-sm">
+        <div className="relative bg-gray-900 w-full font-sourcecode text-lg rounded-sm">
           {/* shapeholder */}
-          <div className="opacity-0">
+          <div className="text-sm sm:text-base opacity-0 p-4">
             {createPrompts(true)}
           </div>
 
           {/* content */}
           <article
             ref={contentRef}
-            className="absolute top-2 left-2"
+            className="absolute text-sm sm:text-base top-2 left-2 pr-4"
           >
-            {createPrompts(false)}
+            {livePrompts}
           </article>
         </div>
 

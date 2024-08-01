@@ -9,24 +9,20 @@ export default function HeroCanvas() {
   )
 }
 
+interface DotGrid {
+  width: number;
+  height: number;
+}
 
+function dimByScreen(wRatio = 58, hRatio = 50): DotGrid {
+  return {
+    width: Math.floor(window.innerWidth / wRatio),
+    height: Math.floor(window.innerHeight / hRatio)
+  }
+}
 
 function Grid() {
-  interface DotGrid {
-    width: number;
-    height: number;
-  }
-
-
-  function dimByScreen(wRatio = 50, hRatio = 50): DotGrid {
-    return {
-      width: Math.floor(window.innerWidth / wRatio),
-      height: Math.floor(window.innerHeight / hRatio)
-    }
-  }
-
   const [gridDim, updateDim] = useState(dimByScreen());
-
 
   var animDelay = 5000;
   var animAllowed = true;
@@ -42,6 +38,7 @@ function Grid() {
         clearTimeout(currentAnim);
         if (childCall) { return } else { animAllowed = true }
     }
+    const startPoint = Math.floor(Math.random() * dotIndex);
     anime({
       targets: ".gridPoint",
       scale: [
@@ -62,7 +59,7 @@ function Grid() {
       ],
       delay: anime.stagger(50, {
           grid: [gridDim.width, gridDim.height],
-          from: Math.floor(Math.random() * dotIndex),
+          from: startPoint,
       }),
     })
     currentAnim = setTimeout(() => {
