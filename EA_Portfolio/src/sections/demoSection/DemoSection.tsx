@@ -1,6 +1,6 @@
 import React from "react";
 
-import { GOOGLE_USER_LOGIN_URL } from "../../lib/auth";
+import { googleLogIn, logOut } from "../../lib/auth";
 import JSHeader from "../../components/jsheader/JSHeader";
 
 interface DemoSectionProps {
@@ -9,10 +9,6 @@ interface DemoSectionProps {
 
 
 export default function DemoSection({}: DemoSectionProps) {
-  
-  function redirectFunction() {
-    window.location.href = GOOGLE_USER_LOGIN_URL;
-  }
 
   return (
     <div className="bg-[#1f1f1f] p-6 flex justify-center overflow-hidden">
@@ -30,9 +26,20 @@ export default function DemoSection({}: DemoSectionProps) {
           >
             <div
               style={{background: 'radial-gradient(circle, #e5e7eb  0%, #c8cace 100%)'}}
-              className="p-6 text-black rounded-lg"
+              className="w-full p-6 text-black rounded-lg flex justify-center gap-4"
             >
-              <button onClick={redirectFunction}>Redirect</button>
+              <button
+                className="bg-[#EF8275] p-2 rounded-lg text-white"
+                onClick={googleLogIn}
+              >
+                  Log In
+              </button>
+              <button
+                className="bg-[#EF8275] p-2 rounded-lg text-white"
+                onClick={logOut}
+              >
+                  Log Out
+              </button>
             </div>
 
           </div>

@@ -19,15 +19,13 @@ export default function App() {
   const scrollObserver = new ScrollObserver();
 
   useEffect(() => {
-    const currentUrl = new URL(window.location.href);
-    const redirectUrl = new URL(auth.GOOGLE_REDIRECT_URI);
-    if (redirectUrl.pathname === currentUrl.pathname) {
-      const code = auth.parseGoogleCode(currentUrl.href);
-      if (code) {
-        auth.authCodeToToken(code)
-          .then(res => {console.log(res)});
-      }
-    }
+    auth.checkForGoogleRedirect()
+      .then(err => {
+        // some error handling maybe
+        if (err) {
+          console.error(err.errorString, err.axiosError);
+        }
+      });
   }, []);
 
   return (
