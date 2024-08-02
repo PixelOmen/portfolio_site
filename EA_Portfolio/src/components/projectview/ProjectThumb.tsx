@@ -83,13 +83,13 @@ export default function ProjectThumb({
         >
           <div
             style={{backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}
-            className="absolute top-0 h-full w-full blur-[4px]"
+            className="absolute top-0 h-full w-full blur-[2px] opacity-90"
           >
           </div>
           <div className="relative z-10">
             <VSCodeHeader tabName={fakeURL}/>
           </div>
-          <div className="relative flex justify-center items-center h-full font-sourcecode font-normal text-2xl">
+          <div className="relative flex justify-center items-center h-full font-sourcecode font-medium text-2xl text-gray-100">
             {title}
           </div>
         </div>

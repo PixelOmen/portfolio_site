@@ -7,7 +7,15 @@ import ProjectView from "../../components/projectview/ProjectView";
 import ProjectThumb from "../../components/projectview/ProjectThumb";
 import JSHeader from "../../components/jsheader/JSHeader";
 
-import TestImage1 from "../../assets/testImage1.png";
+import thumb1 from "../../assets/workthumbs/thumb1.png"
+import thumb2 from "../../assets/workthumbs/thumb2.png"
+import thumb3 from "../../assets/workthumbs/thumb3.png"
+import thumb4 from "../../assets/workthumbs/thumb4.png"
+import thumb5 from "../../assets/workthumbs/thumb5.png"
+import thumb6 from "../../assets/workthumbs/thumb6.png"
+import thumb7 from "../../assets/workthumbs/thumb7.png"
+import thumb8 from "../../assets/workthumbs/thumb8.png"
+
 
 interface WorkSectionProps {
   scrollState?: IScrollState
@@ -28,43 +36,43 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   function thumbnails() {
     return [
       <ProjectThumb
-        title="Little Lemon API"
-        bgImage={TestImage1}
+        title="LittleLemon API"
+        bgImage={thumb1}
         tags={['Python', 'Django', 'Django REST framework', 'RESTful API']}
       />,
       <ProjectThumb
         title="Etools V2"
-        bgImage={TestImage1}
+        bgImage={thumb2}
         tags={['Python', 'Flask', 'Svelte', 'TypeScript', 'C++', 'QT7 SDK', 'ReportLab', 'More...']}
       />,
       <ProjectThumb
         title="QTSDK"
-        bgImage={TestImage1}
+        bgImage={thumb3}
         tags={['C++', 'QT7 SDK']}
       />,
       <ProjectThumb
         title="AmazonMMC"
-        bgImage={TestImage1}
+        bgImage={thumb4}
         tags={['Pure Python', 'XML-ElementTree']}
       />,
       <ProjectThumb
         title="PyEmail"
-        bgImage={TestImage1}
+        bgImage={thumb5}
         tags={['Pure Python', "SMTP/IMAP"]}
       />,
       <ProjectThumb
         title="Mediaprobe"
-        bgImage={TestImage1}
+        bgImage={thumb6}
         tags={['Python', "MediaInfo"]}
       />,
       <ProjectThumb
         title="TCLIB3"
-        bgImage={TestImage1}
+        bgImage={thumb7}
         tags={['Pure Python']}
       />,
       <ProjectThumb
         title="RosettaPath"
-        bgImage={TestImage1}
+        bgImage={thumb8}
         tags={['Pure Python']}
       />,      
     ]
@@ -139,7 +147,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         backCallback={returnToMenu}
         className="w-full"
         title = "RosettaPath"
-        description='RossetaPath objects translate network paths mounted to local volumes from one mount point to another across operating systems.'
+        description='RossetaPath objects translate network paths mounted to local volumes from one mount point to another across operating systems. It differs from pathlib in that it can handle network paths and translate them to local paths and vice versa. It is designed to be used in conjunction with the pathlib module.'
         // images={[TestImage1, TestImage2]}
         techStack={['Pure Python']}
         github={{url: "https://github.com/PixelOmen/rosettapath"}}
