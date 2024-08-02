@@ -100,7 +100,9 @@ function Grid() {
 
   useEffect(() => {
     if (window.innerWidth < 480) return;
-    startAnims();
+    setTimeout(() => {
+      startAnims();
+    }, 2000);
   }, [gridDim])
 
 
