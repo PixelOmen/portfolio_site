@@ -47,7 +47,7 @@ export default function Terminal({
           {shapeholder ? content : ''}
         </span>
         <span data-subtype='cursor' className={`${styles.cursorBlink} opacity-0`}>
-          <div className={`inline-block -translate-y-[1px]`}>|</div>
+          <div className={`inline-block w-3 h-5 translate-y-1 bg-gray-300`}></div>
         </span>
       </div>
     )
@@ -198,7 +198,8 @@ export default function Terminal({
           </div>
         </header>
 
-        <div className="relative bg-gray-900 w-full font-sourcecode text-lg rounded-sm">
+        <div className="relative bg-[#2b1825cf] w-full outline-blue-500 font-sourcecode text-lg rounded-b-lg ">
+          <div className="absolute h-full w-full border-b-2 border-l-2 border-r-2 rounded-bl-lg rounded-br-lg border-gray-600"></div>
           {/* shapeholder */}
           <div className="text-sm sm:text-base opacity-0 p-4">
             {createPrompts(true)}

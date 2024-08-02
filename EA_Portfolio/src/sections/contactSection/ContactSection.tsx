@@ -29,11 +29,11 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
   }, [scrollState?.wasTriggered.value]);
 
   return (
-    <div className="relative pt-8 border-t-2 border-[black]">
+    <div className="relative pt-2">
 
-      <div className="absolute w-full top-4 blur-2xl z-0">
+      <div className="absolute w-full top-4 blur-2xl z-0 bg-slate-600">
         <svg preserveAspectRatio="none" viewBox="0 0 100 130" height="50" width="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0 L50 100 L100 0 Z" fill="#56a199" stroke="" strokeWidth='2px'>        
+          <path d="M0 0 L50 100 L100 0 Z" fill="#57a199" stroke="" strokeWidth='2px'>        
           </path>
         </svg>
       </div>

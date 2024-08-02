@@ -21,7 +21,7 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
   }, [scrollState?.wasTriggered.value]);
 
   return (
-    <div className={`bg-[#1f1f1f] p-6 sm:py-12 flex justify-center overflow-hidden ${className}`}>
+    <div className={`bg-[rgba(31,31,31,0)] p-6 sm:py-12 flex justify-center overflow-hidden ${className}`}>
       <div className="relative w-full max-w-[1500px] overflow-hidden">
         <JSHeader
           comment="About me and this site"

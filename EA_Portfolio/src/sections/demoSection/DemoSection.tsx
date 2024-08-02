@@ -11,7 +11,7 @@ interface DemoSectionProps {
 export default function DemoSection({}: DemoSectionProps) {
 
   return (
-    <div className="bg-[#1f1f1f] p-6 flex justify-center overflow-hidden">
+    <div className="bg-[rgba(31,31,31,0)] p-6 flex justify-center overflow-hidden min-h-[1000px]">
       <div className="max-w-[1500px] w-full">
         <JSHeader
           comment="A few demos of AWS and Django functionality"

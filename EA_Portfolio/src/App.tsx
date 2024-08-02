@@ -26,6 +26,10 @@ export default function App() {
           console.error(err.errorString, err.axiosError);
         }
       });
+
+      window.addEventListener('wheel', (e) => {
+        console.log(e.deltaY)
+      })
   }, []);
 
   return (
@@ -47,21 +51,21 @@ export default function App() {
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        className="bg-gray-800 w-full border-t-2 border-black"
+        className="w-full border-black"
       >
         <AboutSection className=""/>
       </ScrollSection>
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        className="bg-gray-800 w-full border-black"
+        className="w-full border-black"
       >
         <WorkSection className=""/>
       </ScrollSection>
 
       <ScrollSection
         scrollObserver={scrollObserver}
-        className="bg-gray-800 w-full"
+        className="w-full"
       >
         <DemoSection/>        
       </ScrollSection>

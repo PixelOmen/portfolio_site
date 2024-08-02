@@ -24,7 +24,7 @@ function dimByScreen(wRatio = 58, hRatio = 50): DotGrid {
 function Grid() {
   const [gridDim, updateDim] = useState(dimByScreen());
 
-  var animDelay = 5000;
+  var animDelay = 8000;
   var animAllowed = true;
   var currentAnim = 0;
   let dotIndex = 0;
