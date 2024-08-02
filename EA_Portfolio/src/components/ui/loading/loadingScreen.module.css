@@ -1,0 +1,54 @@
+@keyframes pulse {
+  0%, 100% {
+    transform: rotateZ(90deg) translateY(-10px);
+  }
+  
+  20% {
+    transform: rotateZ(0deg) translateY(-10px) translateX(-10px);
+  }  
+}
+
+@keyframes grow {
+  0% {
+    width: 0%;
+  }
+  33% {
+    width: 33%;
+  }
+  66% {
+    width: 66%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: rotateZ(0deg);
+  }
+  20% {
+    transform: rotateZ(1deg);
+  }
+  40% {
+    transform: rotateZ(-1deg);
+  }
+  60% {
+    transform: rotateZ(1deg);
+  }
+  80% {
+    transform: rotateZ(-1deg);
+  }
+}
+
+.fingerPulse {
+  animation: pulse 0.5s infinite;
+}
+
+.loadingBar {
+  animation: grow 2s forwards 0.2s;
+}
+
+.loadingBarContainer {
+  animation: shake 0.5s infinite;
+}
