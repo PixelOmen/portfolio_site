@@ -64,11 +64,11 @@ export default function ProjectView({
           />
         </div>
       )}
-      <div className='mt-6 text-lg casc-fadeInDown'>
+      <div className='mt-6 text-base sm:text-lg casc-fadeInDown'>
         {description}
       </div>
       {techStack && (
-        <div className='flex gap-4 mt-10 mb-10 casc-fadeInLeft flex-wrap'>
+        <div className='flex gap-2 sm:gap-4 mt-10 mb-10 casc-fadeInLeft flex-wrap'>
           {techStack.map((tech, index) => (
             <div key={index} className='flex gap-2'>
               <div className=''>
