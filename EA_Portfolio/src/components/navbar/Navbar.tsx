@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from './navbar.module.css'
 import NavButton from "./NavButton";
@@ -12,6 +12,8 @@ export default function Navbar({ sectionMap }: NavbarProps) {
   const navbarContainer = useRef<HTMLDivElement>(null);
   const contentsFull = useRef<HTMLDivElement>(null);
   const contentsSmall = useRef<HTMLDivElement>(null);
+
+  const [smallOpen, setSmallOpen] = useState(false);
 
   const observer = new IntersectionObserver((elements) => {
     elements.forEach((e) => {
@@ -31,6 +33,16 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     });
   });
 
+  function resizeHandler() {
+    if (window.innerWidth < 640) {
+      contentsSmall.current?.classList.add(styles.navbarSmallRotate);
+      navbarContainer.current?.classList.add(styles.navbarContainerSmall);
+    } else if (window.scrollY < 10) {
+      contentsSmall.current?.classList.remove(styles.navbarSmallRotate);
+      navbarContainer.current?.classList.remove(styles.navbarContainerSmall);
+    }
+  }
+
   function handleNavClick(
     e: React.MouseEvent,
     sectionName: string
@@ -47,15 +59,7 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     if (topAnchorBar.current && navbarContainer.current) {
       observer.observe(topAnchorBar.current);
     }
-    window.addEventListener('resize', () => {
-      if (window.innerWidth < 640) {
-        contentsSmall.current?.classList.add(styles.navbarSmallRotate);
-        navbarContainer.current?.classList.add(styles.navbarContainerSmall);
-      } else if (window.scrollY < 10) {
-        contentsSmall.current?.classList.remove(styles.navbarSmallRotate);
-        navbarContainer.current?.classList.remove(styles.navbarContainerSmall);
-      }
-    });
+    window.addEventListener('resize', resizeHandler);
     if (window.innerWidth < 640) {
       contentsSmall.current?.classList.add(styles.navbarSmallRotate);
       navbarContainer.current?.classList.add(styles.navbarContainerSmall);
@@ -64,10 +68,10 @@ export default function Navbar({ sectionMap }: NavbarProps) {
 
   return (
   <>
-  <div ref={topAnchorBar} className="Spacer absolute py-10" aria-hidden="true"></div>
+  <div ref={topAnchorBar} className="absolute py-10" aria-hidden="true"></div>
   <nav 
     ref={navbarContainer}
-    className={`${styles.navbar} sm:${styles.navbarContainerSmall} text-gray-200 bg-stone-900 bg-opacity-90 font-sourcecode`}
+    className={`${styles.navbar} text-gray-200 bg-stone-900 bg-opacity-90 font-sourcecode`}
   >
 
     <nav ref={contentsFull} className="hidden sm:flex text-xl sm:text-3xl py-4">
@@ -101,7 +105,7 @@ export default function Navbar({ sectionMap }: NavbarProps) {
       </div>
     </nav>
 
-    <div ref={contentsSmall} className="">
+    <nav ref={contentsSmall} className="">
       <button
         type="button"
         className={`${styles.smallMenuBtn} z-50 group text-xl sm:text-2xl rounded-full font-sourcecode p-2 px-4 hover:bg-[#b9f5f5]`}
@@ -110,7 +114,7 @@ export default function Navbar({ sectionMap }: NavbarProps) {
           Menu
         </span>
       </button>
-    </div>
+    </nav>
   </nav>
   </>
   )

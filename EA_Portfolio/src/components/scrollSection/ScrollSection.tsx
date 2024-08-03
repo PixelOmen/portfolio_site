@@ -41,13 +41,13 @@ function ScrollSection(
         if (top > (window.innerHeight * topRatio) ||
         bottom < (window.innerHeight * bottomRatio))
         {
-            contentRef.current.classList.remove("p-2");
+            contentRef.current.classList.remove("sm:p-2");
             contentRef.current.classList.add(startingScale);
             contentRef.current.classList.add("blur-sm");
             contentRef.current.classList.add("rounded-3xl");
             contentRef.current.classList.remove("scale-100");
         } else {
-            contentRef.current.classList.add("p-2");
+            contentRef.current.classList.add("sm:p-2");
             contentRef.current.classList.remove(startingScale);
             contentRef.current.classList.remove("blur-sm");
             contentRef.current.classList.remove("rounded-3xl");
