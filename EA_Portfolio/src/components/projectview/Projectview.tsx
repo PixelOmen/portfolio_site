@@ -25,12 +25,14 @@ export default function ProjectView({
 }: ProjectViewProps) {
 
   function forcePopState() {
-    history.back();
+    backCallback();
   }
   
   useEffect(() => {
     history.pushState({}, '', '');
-    window.addEventListener('popstate', backCallback);
+    window.addEventListener('popstate', () => {
+      backCallback();
+    });
     return () => {
       window.removeEventListener('popstate', backCallback)
     }

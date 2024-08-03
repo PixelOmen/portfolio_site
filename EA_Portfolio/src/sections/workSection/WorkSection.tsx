@@ -195,7 +195,9 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   function enterProject(e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) {
     setTimeout(() => {
       if (!sectionTopRef.current) return;
-      sectionTopRef.current.scrollIntoView({behavior: 'smooth'});
+      if (sectionTopRef.current.getBoundingClientRect().top <= 0) {
+        sectionTopRef.current.scrollIntoView({behavior: 'smooth'});
+      }
     }, 300);
     projectOpenAnim(e, index);
   }
