@@ -6,14 +6,17 @@ export default function HeroHeader() {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
+  function hideShow() {
+    if (window.scrollY > 300) {
+      containerRef.current?.classList.add('opacity-0')
+    } else {
+      containerRef.current?.classList.remove('opacity-0')
+    }    
+  }
+
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        containerRef.current?.classList.add('opacity-0')
-      } else {
-        containerRef.current?.classList.remove('opacity-0')
-      }
-    });
+    window.addEventListener('scroll', hideShow);
+    hideShow();
   }, []);
 
   return (

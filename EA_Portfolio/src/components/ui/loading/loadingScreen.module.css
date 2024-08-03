@@ -1,4 +1,4 @@
-@keyframes pulse {
+@keyframes hammer {
   0%, 100% {
     transform: rotateZ(90deg) translateY(-10px);
   }
@@ -41,8 +41,8 @@
   }
 }
 
-.fingerPulse {
-  animation: pulse 0.5s infinite;
+.hammer {
+  animation: hammer 0.5s infinite;
 }
 
 .loadingBar {
