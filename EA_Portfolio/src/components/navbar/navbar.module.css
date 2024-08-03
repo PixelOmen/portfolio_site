@@ -11,25 +11,6 @@
     border-bottom-right-radius: 5px;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.navLinks {
-    opacity: 1;
-    animation: fadeIn 1s forwards;
-    transition: color 0.3s;
-}
-
-.navLinks:hover {
-    color: #b9f5f5;
-}
-
 .navbarContainerSmall {
     right: 10%;
     top: 30px;
@@ -38,14 +19,17 @@
     column-gap: 0px;
     gap: 0px;
     min-width: 0%;
-    transition: transform 2s, min-width 0.5s, top 1s, background 0.4s, border-color 1s, right 3s;
+    transition: transform 2s, min-width 0.5s, top 1s, background 0.4s, border-color 1s, right 3s, border-radius 1s;
     border: 3px solid #96BBBB;
 }
 
-.navbarSmall:hover {
-    transition: border-color 1s, transform 2s;
-    border-color: rgb(35, 35, 35);
+.navbarContainerSmallOpen {
+    min-width: 250px;
+    border-radius: 20px;
+    border: 3px solid black;
 }
+
+
 
 @keyframes navRotate {
     from {
@@ -66,4 +50,26 @@
 
 .smallMenuBtn:hover {
     transition: background-color 1s;
+}
+
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.navLinks {
+    opacity: 1;
+    animation: fadeIn 1s forwards;
+    transition: color 0.3s;
+}
+
+.navLinks:hover {
+    color: #b9f5f5;
 }

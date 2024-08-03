@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import styles from './navbar.module.css'
 import NavButton from "./NavButton";
@@ -10,14 +10,19 @@ interface NavbarProps {
 export default function Navbar({ sectionMap }: NavbarProps) {
   const topAnchorBar = useRef<HTMLDivElement>(null);
   const navbarContainer = useRef<HTMLDivElement>(null);
-  const contentsFull = useRef<HTMLDivElement>(null);
-  const contentsSmall = useRef<HTMLDivElement>(null);
 
-  const [smallOpen, setSmallOpen] = useState(false);
+  const contentsFull = useRef<HTMLDivElement>(null);
+
+  const contentsSmall = useRef<HTMLDivElement>(null);
+  const smallMenuBtn = useRef<HTMLButtonElement>(null);
+  const contentsSmallOpen = useRef<HTMLDivElement>(null);
+  const smallOpenRef = useRef<boolean>(false);
+
 
   const observer = new IntersectionObserver((elements) => {
     elements.forEach((e) => {
       if (e.isIntersecting) {
+        if (smallOpenRef.current) return;
         contentsFull.current?.classList.remove('sm:hidden');
         contentsSmall.current?.classList.add('sm:hidden');
         if (window.innerWidth >= 640) {
@@ -48,11 +53,25 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     sectionName: string
   ) {
     e.preventDefault();
+    if (smallOpenRef.current) {
+      handleSmallMenuOpen();
+    }
+    if (sectionName === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const ref = sectionMap.get(sectionName);
     if (!ref || !ref.current) {
       throw new Error(`Navbar:handleNavClick: section ${sectionName} not found`);
     }
     ref.current.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function handleSmallMenuOpen() {
+    smallOpenRef.current = smallOpenRef.current ? false : true;
+    navbarContainer.current?.classList.toggle(styles.navbarContainerSmallOpen);
+    contentsSmallOpen.current?.classList.toggle('hidden');
+    smallMenuBtn.current?.classList.toggle('hidden');
   }
   
   useEffect(() => {
@@ -107,13 +126,60 @@ export default function Navbar({ sectionMap }: NavbarProps) {
 
     <nav ref={contentsSmall} className="">
       <button
+        ref={smallMenuBtn}
+        onClick={handleSmallMenuOpen}
         type="button"
-        className={`${styles.smallMenuBtn} z-50 group text-xl sm:text-2xl rounded-full font-sourcecode p-2 px-4 hover:bg-[#b9f5f5]`}
+        className={`${styles.smallMenuBtn} z-50 group text-xl sm:text-2xl font-sourcecode`}
       >
-        <span className="group-hover:text-black">
+        <div className="px-3 py-2 border-3 border-transparent group-hover:border-black group-hover:font-bold group-hover:scale-[115%] group-hover:text-black group-hover:bg-[#96BBBB] rounded-full transition-all duration-300 box-border">
           Menu
-        </span>
+        </div>
       </button>
+      <div 
+        ref={contentsSmallOpen}
+        className="hidden"
+      >
+        <div className="text-left">
+          <button
+            onClick={handleSmallMenuOpen}
+            className="ml-6 mt-4"
+          >
+            {'<---'}
+          </button>
+        </div>
+        <ul className="flex flex-col mt-4 gap-3 mb-6 text-2xl">
+        <li className="fadeInLeft">
+            <NavButton              
+              title="Home"
+              clickCallback={(e) => handleNavClick(e, "home")}
+            />
+          </li>
+          <li className="fadeInRight">
+            <NavButton              
+              title="About"
+              clickCallback={(e) => handleNavClick(e, "about")}
+            />
+          </li>
+          <li className="fadeInLeft">
+            <NavButton
+              title="Work"
+              clickCallback={(e) => handleNavClick(e, "work")}
+            />
+          </li>
+          <li className="fadeInRight">
+            <NavButton
+              title="Demos"
+              clickCallback={(e) => handleNavClick(e, "demos")}
+            />
+          </li>
+          <li className="fadeInLeft">
+            <NavButton
+              title="Contact"
+              clickCallback={(e) => handleNavClick(e, "contact")}
+            />
+          </li>
+        </ul>       
+      </div>
     </nav>
   </nav>
   </>
