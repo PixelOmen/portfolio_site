@@ -142,12 +142,12 @@ export default function Navbar({ sectionMap }: NavbarProps) {
         <div className="text-left">
           <button
             onClick={handleSmallMenuOpen}
-            className="ml-6 mt-4"
+            className="ml-6 mt-6 hover:scale-x-150 hover:scale-y-100 transition-all duration-300 hover:text-[#EF8275]"
           >
             {'<---'}
           </button>
         </div>
-        <ul className="flex flex-col mt-4 gap-3 mb-6 text-2xl">
+        <ul className="flex flex-col mt-4 gap-3 mb-6 text-2xl font-sourcecode">
         <li className="fadeInLeft">
             <NavButton              
               title="Home"
