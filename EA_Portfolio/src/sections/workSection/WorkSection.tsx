@@ -29,6 +29,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   const [isMenu, setIsMenu] = useState(true);
   const [projectID, setProjectID] = useState(0);
 
+  const sectionTopRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const transitionDivRef = useRef<HTMLDivElement>(null);
@@ -167,7 +168,9 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     transitionDivRef.current.style.setProperty('top', `${yOffset}px`);
     setTimeout(() => {
       transitionDivRef.current?.classList.add('duration-500');
-      transitionDivRef.current?.style.setProperty('transform', 'scale(70)');
+      // const scale = window.innerWidth < 758 ? 300 : 70;
+      const scale = 70;
+      transitionDivRef.current?.style.setProperty('transform', `scale(${scale})`);
     }, 50);
     setTimeout(() => {
       setProjectID(index);
@@ -190,6 +193,10 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   }
 
   function enterProject(e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) {
+    setTimeout(() => {
+      if (!sectionTopRef.current) return;
+      sectionTopRef.current.scrollIntoView({behavior: 'smooth'});
+    }, 300);
     projectOpenAnim(e, index);
   }
 
@@ -203,7 +210,10 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
 
   return (
     <div className={`bg-[rgba(31,31,31,0)]  p-6 sm:py-12 flex justify-center overflow-hidden ${className}`}>
-      <div className="relative w-full max-w-[1500px] overflow-hidden">
+      <div
+        ref={sectionTopRef}
+        className="relative w-full max-w-[1500px] overflow-hidden"
+      >
         <JSHeader
           comment="Samples of my work"
           className="relative mb-5"

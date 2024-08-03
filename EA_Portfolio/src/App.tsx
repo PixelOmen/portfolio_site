@@ -27,9 +27,9 @@ export default function App() {
         }
       });
 
-      window.addEventListener('wheel', (e) => {
-        console.log(e.deltaY)
-      })
+      // window.addEventListener('wheel', (e) => {
+      //   console.log(e.deltaY)
+      // })
   }, []);
 
   return (
