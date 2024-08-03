@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import Hero from "./components/hero/Hero"
 import HeroHeader from "./components/hero/HeroHeader";
@@ -16,6 +16,20 @@ import * as auth from "./lib/auth";
 
 
 export default function App() {
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const workRef = useRef<HTMLDivElement>(null);
+  const demoRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  const sectionMap = new Map<string, React.RefObject<HTMLDivElement>>(
+    [
+      ['about', aboutRef],
+      ['work', workRef],
+      ['demos', demoRef],
+      ['contact', contactRef]
+    ]
+  );
+  
   const scrollObserver = new ScrollObserver();
 
   useEffect(() => {
@@ -36,7 +50,7 @@ export default function App() {
     <>
       <AppLoading className="z-50"/>
       <nav className='relative h-[30px] z-40'>
-        <Navbar/>
+        <Navbar sectionMap={sectionMap}/>
       </nav>
 
       <section className="fixed top-0 w-full overflow-hidden -z-10">
@@ -50,6 +64,7 @@ export default function App() {
       <div className="h-screen left-0 box-border"></div>
 
       <ScrollSection
+        ref={aboutRef}
         scrollObserver={scrollObserver}
         className="w-full border-black"
       >
@@ -57,6 +72,7 @@ export default function App() {
       </ScrollSection>
 
       <ScrollSection
+        ref={workRef}
         scrollObserver={scrollObserver}
         className="w-full border-black"
       >
@@ -64,6 +80,7 @@ export default function App() {
       </ScrollSection>
 
       <ScrollSection
+        ref={demoRef}
         scrollObserver={scrollObserver}
         className="w-full"
       >
@@ -71,6 +88,7 @@ export default function App() {
       </ScrollSection>
 
       <ScrollSection
+        ref={contactRef}
         scrollObserver={scrollObserver}
         scrollContract={false}
         className="bg-gray-800 w-screen"

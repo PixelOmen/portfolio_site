@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, forwardRef } from "react";
 
 import { ScrollState } from "../../lib/scrolling";
 import type { IScrollObserver, IScrollState } from "../../lib/scrolling";
@@ -11,18 +11,22 @@ interface ScrollSectionProps {
     children?: React.ReactNode;
 }
 
-export default function ScrollSection({
-    scrollObserver,
-    scrollContract = true,
-    className = "",
-    triggerBoxClassName = "",
-    children,
-}: ScrollSectionProps) {
+export default forwardRef(ScrollSection)
+
+function ScrollSection(
+    {
+        scrollObserver,
+        scrollContract = true,
+        className = "",
+        triggerBoxClassName = "",
+        children,
+    }: ScrollSectionProps,
+    externalRef: React.Ref<HTMLDivElement>
+) {
 
     const triggerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);    
     const startingScale = scrollContract ? "scale-95" : "";
-
 
     function contractOnScroll(
         _: Event,
@@ -36,7 +40,6 @@ export default function ScrollSection({
         let bottom = triggerRef.current.getBoundingClientRect().bottom;
         if (top > (window.innerHeight * topRatio) ||
         bottom < (window.innerHeight * bottomRatio))
-        // if (bottom < (window.innerHeight * bottomRatio))
         {
             contentRef.current.classList.remove("p-2");
             contentRef.current.classList.add(startingScale);
@@ -92,6 +95,7 @@ export default function ScrollSection({
 
   return (
     <section ref={triggerRef} className={`flex justify-center ${triggerBoxClassName}`}>
+        <div ref={externalRef}></div>
         <div
             ref={contentRef}
             className={`${startingScale} transition-all duration-700 ease-out overflow-hidden ${className}`}
