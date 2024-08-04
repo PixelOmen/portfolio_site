@@ -168,8 +168,8 @@ export default function Navbar({ sectionMap }: NavbarProps) {
             {'<---'}
           </button>
         </div>
-        <ul className="flex flex-col mt-4 gap-3 mb-6 text-2xl font-sourcecode">
-        <li className="fadeInLeft">
+        <ul className="flex flex-col items-center mt-4 gap-3 mb-6 text-2xl font-sourcecode">
+          <li className="fadeInLeft">
             <NavButton              
               title="Home"
               clickCallback={(e) => handleNavClick(e, "home")}

@@ -64,12 +64,38 @@
     }
 }
 
+@keyframes extend {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
 .navLinks {
     opacity: 1;
     animation: fadeIn 1s forwards;
     transition: color 0.3s;
 }
 
+.navLinks::after {
+    content: '';
+    display: block;
+    left: 5%;
+    top: 0;
+    width: 0;
+    height: 2px;
+    transform: translateX(50%);
+    background: white;
+    transition: all 0.3s;
+}
+
+.navLinks:hover::after {
+    transform: translateX(0%);
+    width: 100%;
+}
+
 .navLinks:hover {
-    color: #b9f5f5;
+    color: #EF8275;
 }

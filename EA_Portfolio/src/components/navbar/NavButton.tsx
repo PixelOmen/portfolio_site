@@ -7,8 +7,10 @@ interface NavButtonProps {
 
 export default function NavButton({ title, clickCallback }: NavButtonProps) {
   return (
-    <a href="" onClick={clickCallback} className={styles.navLinks}>
-        {title}
-    </a>
+    <div className='max-w-max'>
+      <a href="" onClick={clickCallback} className={`relative ${styles.navLinks}`}>
+          {title}
+      </a>
+    </div>
   )
 }
