@@ -38,6 +38,7 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     });
   });
 
+
   function resizeHandler() {
     if (window.innerWidth < 640) {
       contentsSmall.current?.classList.add(styles.navbarSmallRotate);
@@ -48,13 +49,14 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     }
   }
 
+
   function handleNavClick(
     e: React.MouseEvent,
     sectionName: string
   ) {
     e.preventDefault();
     if (smallOpenRef.current) {
-      handleSmallMenuOpen();
+      toggleSmallMenuOpen();
     }
     if (sectionName === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -67,12 +69,30 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     ref.current.scrollIntoView({ behavior: 'smooth' });
   }
 
-  function handleSmallMenuOpen() {
+
+  function handleSmallClick(e: MouseEvent) {
+    if (!contentsSmallOpen.current) return;
+    const target = e.target as HTMLElement;
+    if (!contentsSmallOpen.current?.contains(target) && smallOpenRef.current) {
+      toggleSmallMenuOpen();
+    }
+  }
+
+  
+  function toggleSmallMenuOpen() {
     smallOpenRef.current = smallOpenRef.current ? false : true;
     navbarContainer.current?.classList.toggle(styles.navbarContainerSmallOpen);
     contentsSmallOpen.current?.classList.toggle('hidden');
     smallMenuBtn.current?.classList.toggle('hidden');
+    if (smallOpenRef.current) {
+      setTimeout(() => {
+        document.addEventListener('click', handleSmallClick);
+      }, 500);
+    } else {
+      document.removeEventListener('click', handleSmallClick);
+    }
   }
+
   
   useEffect(() => {
     if (topAnchorBar.current && navbarContainer.current) {
@@ -85,6 +105,7 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     }
   }, [])
 
+  
   return (
   <>
   <div ref={topAnchorBar} className="absolute py-10" aria-hidden="true"></div>
@@ -127,7 +148,7 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     <nav ref={contentsSmall} className="">
       <button
         ref={smallMenuBtn}
-        onClick={handleSmallMenuOpen}
+        onClick={toggleSmallMenuOpen}
         type="button"
         className={`${styles.smallMenuBtn} z-50 group text-xl sm:text-2xl font-sourcecode`}
       >
@@ -141,7 +162,7 @@ export default function Navbar({ sectionMap }: NavbarProps) {
       >
         <div className="text-left">
           <button
-            onClick={handleSmallMenuOpen}
+            onClick={toggleSmallMenuOpen}
             className="ml-6 mt-6 hover:scale-x-150 hover:scale-y-100 transition-all duration-300 hover:text-[#EF8275]"
           >
             {'<---'}
