@@ -19,12 +19,14 @@
     column-gap: 0px;
     gap: 0px;
     min-width: 0%;
-    transition: transform 2s, min-width 0.5s, top 1s, background 0.4s, border-color 1s, right 3s, border-radius 1s;
+    max-height: 100px;
+    transition: transform 2s, min-width 0.5s, width 0.5s, max-height 0.5s, top 1s, background 0.4s, border-color 1s, right 3s, border-radius 1s, gap 2s;
     border: 3px solid #96BBBB;
 }
 
 .navbarContainerSmallOpen {
     min-width: 250px;
+    max-height: 1000px;
     border-radius: 20px;
     border: 3px solid black;
 }

@@ -114,9 +114,9 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     className={`${styles.navbar} text-gray-200 bg-stone-900 bg-opacity-90 font-sourcecode`}
   >
 
-    <nav ref={contentsFull} className="hidden sm:flex text-xl sm:text-3xl py-4">
-      <div className="ml-auto mr-auto sm:mr-[8%]">
-        <ul className="flex gap-5 sm:gap-10">
+    <nav ref={contentsFull} className="hidden sm:flex justify-center text-2xl py-2 pt-3 ">
+      <div className="">
+        <ul className="flex gap-16">
           <li>
             <NavButton
               title="About"
@@ -163,12 +163,12 @@ export default function Navbar({ sectionMap }: NavbarProps) {
         <div className="text-left">
           <button
             onClick={toggleSmallMenuOpen}
-            className="ml-6 mt-6 hover:scale-x-150 hover:scale-y-100 transition-all duration-300 hover:text-[#EF8275]"
+            className="ml-8 mt-6 hover:scale-x-150 hover:scale-y-100 transition-all duration-300 hover:text-[#EF8275] hover:rotate-[360deg] fadeIn"
           >
             {'<---'}
           </button>
         </div>
-        <ul className="flex flex-col items-center mt-4 gap-3 mb-6 text-2xl font-sourcecode">
+        <ul className="flex flex-col items-center mt-6 mb-6 text-2xl font-sourcecode transition-all gap-2">
           <li className="fadeInLeft">
             <NavButton              
               title="Home"
