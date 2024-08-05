@@ -163,7 +163,7 @@ export default function Navbar({ sectionMap }: NavbarProps) {
         <div className="text-left">
           <button
             onClick={toggleSmallMenuOpen}
-            className="ml-8 mt-6 hover:scale-x-150 hover:scale-y-100 transition-all duration-300 hover:text-[#EF8275] hover:rotate-[360deg] fadeIn"
+            className="ml-6 mt-4 p-4 hover:scale-x-150 hover:scale-y-100 transition-all duration-300 hover:text-[#EF8275] hover:rotate-[360deg] fadeIn"
           >
             {'<---'}
           </button>
@@ -173,30 +173,35 @@ export default function Navbar({ sectionMap }: NavbarProps) {
             <NavButton              
               title="Home"
               clickCallback={(e) => handleNavClick(e, "home")}
+              className="py-2"
             />
           </li>
           <li className="fadeInRight">
             <NavButton              
               title="About"
               clickCallback={(e) => handleNavClick(e, "about")}
+              className="py-2"
             />
           </li>
           <li className="fadeInLeft">
             <NavButton
               title="Work"
               clickCallback={(e) => handleNavClick(e, "work")}
+              className="py-2"
             />
           </li>
           <li className="fadeInRight">
             <NavButton
               title="Demos"
               clickCallback={(e) => handleNavClick(e, "demos")}
+              className="py-2"
             />
           </li>
           <li className="fadeInLeft">
             <NavButton
               title="Contact"
               clickCallback={(e) => handleNavClick(e, "contact")}
+              className="py-2"
             />
           </li>
         </ul>       

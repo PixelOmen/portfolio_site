@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 
 const CLIENT_DOMAIN = import.meta.env.VITE_CLIENT_DOMAIN;
 const LOGGEDIN_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDIN_URL;
+const LOGGEDOUT_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDOUT_URL;
 
 const API_URL = import.meta.env.VITE_API_URL;
 const API_GOOGLE_CODE_TO_TOKEN_URL = API_URL + import.meta.env.VITE_API_GOOGLE_CODE_TO_TOKEN_URL;
@@ -26,7 +27,7 @@ export function isLoggedIn(): boolean {
 
 export function logOut(): void {
   localStorage.removeItem('access_token');
-  window.location.reload();
+  window.location.href = LOGGEDOUT_URL;
 }
 
 export function googleLogIn(): void {
@@ -46,6 +47,20 @@ function parseGoogleCode(currentUrl: string): string | null {
 }
 
 
+function handleAccessDenied(currentUrl: string) {
+  const url = new URL(currentUrl);
+  const urlParams = new URLSearchParams(url.search);
+  if (urlParams.has('error')) {
+    const error = urlParams.get('error');
+    if (error === 'access_denied') {
+      logOut();
+    }
+  } else {
+    throw new Error('No code found in URL: ' + url.href);
+  }
+}
+
+
 export async function checkForGoogleRedirect(): Promise<void | TokenError> {
   const currentUrl = new URL(window.location.href);
   const redirectUrl = new URL(GOOGLE_REDIRECT_URI);
@@ -57,7 +72,7 @@ export async function checkForGoogleRedirect(): Promise<void | TokenError> {
   }
 
   const code = parseGoogleCode(currentUrl.href);
-  if (!code) throw new Error('No code found in URL: ' + currentUrl.href);
+  if (!code) handleAccessDenied(currentUrl.href);
 
   return axios.post(API_GOOGLE_CODE_TO_TOKEN_URL, { code })
     .then(res => {
@@ -79,5 +94,4 @@ export async function checkForGoogleRedirect(): Promise<void | TokenError> {
     .catch(err => {
       return {errorString: 'Error getting token from code', axiosError: err};
     });
-
 }

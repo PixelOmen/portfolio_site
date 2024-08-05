@@ -14,7 +14,7 @@ interface DotGrid {
   height: number;
 }
 
-function dimByScreen(wRatio = 58, hRatio = 55): DotGrid {
+function dimByScreen(wRatio = 58, hRatio = 52): DotGrid {
   return {
     width: Math.floor(window.innerWidth / wRatio),
     height: Math.floor(window.innerHeight / hRatio)
