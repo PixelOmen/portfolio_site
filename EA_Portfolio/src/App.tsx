@@ -11,8 +11,9 @@ import WorkSection from './sections/workSection/WorkSection';
 import DemoSection from "./sections/demoSection/DemoSection";
 import ContactSection from "./sections/contactSection/ContactSection";
 
+// import * as auth from "./lib/auth";
+import handleRoute from "./lib/router";
 import { ScrollObserver } from "./lib/scrolling";
-import * as auth from "./lib/auth";
 
 
 export default function App() {
@@ -33,21 +34,19 @@ export default function App() {
   const scrollObserver = new ScrollObserver();
 
   useEffect(() => {
-    auth.checkForGoogleRedirect()
-      .then(err => {
-        // some error handling maybe
-        if (err) {
-          console.error(err.errorString, err.axiosError);
-        }
-      });
-
-      // window.addEventListener('wheel', (e) => {
-      //   console.log(e.deltaY)
-      // })
+    handleRoute(sectionMap);
+    // auth.checkForGoogleRedirect()
+    //   .then(err => {
+    //     // some error handling maybe
+    //     if (err) {
+    //       console.error(err.errorString, err.axiosError);
+    //     }
+    //   });
   }, []);
 
   return (
     <>
+
       <AppLoading className="z-50"/>
       <nav className='relative h-[30px] z-40'>
         <Navbar sectionMap={sectionMap}/>
