@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 
-const CLIENT_DOMAIN = import.meta.env.VITE_CLIENT_DOMAIN;
+export const CLIENT_DOMAIN = import.meta.env.VITE_CLIENT_DOMAIN;
+
 const LOGGEDIN_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDIN_URL;
 const LOGGEDOUT_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDOUT_URL;
 
@@ -8,10 +9,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 const API_GOOGLE_CODE_TO_TOKEN_URL = API_URL + import.meta.env.VITE_API_GOOGLE_CODE_TO_TOKEN_URL;
 const API_CONVERT_TOKEN_URL = API_URL + import.meta.env.VITE_API_CONVERT_TOKEN_URL;
 
-const GOOGLE_CLIENT_ID = encodeURIComponent(import.meta.env.VITE_GOOGLE_CLIENT_ID);
-const GOOGLE_SCOPE = encodeURIComponent(import.meta.env.VITE_GOOGLE_SCOPE);
 export const GOOGLE_REDIRECT_URI = CLIENT_DOMAIN + import.meta.env.VITE_GOOGLE_REDIRECT_URI; // not URIencoded for direct use
 
+const GOOGLE_SCOPE = encodeURIComponent(import.meta.env.VITE_GOOGLE_SCOPE);
+const GOOGLE_CLIENT_ID = encodeURIComponent(import.meta.env.VITE_GOOGLE_CLIENT_ID);
 const GOOGLE_USER_LOGIN_URL = `${import.meta.env.VITE_GOOGLE_USER_LOGIN_URL}?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(GOOGLE_REDIRECT_URI)}&response_type=code&scope=${GOOGLE_SCOPE}`;
 
 
@@ -30,6 +31,20 @@ export function logOut(): void {
   window.location.href = LOGGEDOUT_URL;
 }
 
+export function getAuthHeader(): string | null {
+  const token = localStorage.getItem('access_token');
+  if (!token) return null;
+  return `Bearer ${token}`;
+}
+
+
+
+// Google Specific ------------------------------------------------------------
+
+export function getGoogleToken(): string | null {
+  return localStorage.getItem('google_token');
+}
+
 export function googleLogIn(): void {
   if (isLoggedIn()) {
     window.location.href = LOGGEDIN_URL;
@@ -37,7 +52,6 @@ export function googleLogIn(): void {
     window.location.href = GOOGLE_USER_LOGIN_URL;
   }
 }
-
 
 
 function parseGoogleCode(currentUrl: string): string | null {
@@ -76,6 +90,7 @@ export async function checkForGoogleRedirect(): Promise<void | TokenError> {
 
   return axios.post(API_GOOGLE_CODE_TO_TOKEN_URL, { code })
     .then(res => {
+      localStorage.setItem('google_token', res.data.access_token);
       const payload = {
         grant_type: 'convert_token',
         client_id: GOOGLE_CLIENT_ID,

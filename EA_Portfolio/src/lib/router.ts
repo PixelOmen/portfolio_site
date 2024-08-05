@@ -4,7 +4,13 @@ export default function handleRoute(sectionMap: Map<string, React.RefObject<HTML
     const currentPath = pathname();
     if (!currentPath) return;
     if (currentPath == pathname(auth.GOOGLE_REDIRECT_URI)) {
-        auth.checkForGoogleRedirect();
+        auth.checkForGoogleRedirect()
+            .then(err => {
+                // some error handling maybe
+                if (err) {
+                console.error(err.errorString, err.axiosError);
+                }
+            });
         return;
     }
     switch (currentPath) {

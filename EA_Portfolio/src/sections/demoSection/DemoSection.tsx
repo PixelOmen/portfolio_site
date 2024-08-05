@@ -40,6 +40,12 @@ export default function DemoSection({}: DemoSectionProps) {
               >
                   Log Out
               </button>
+              <button
+                className="bg-[#EF8275] p-2 rounded-lg text-white"
+                onClick={logOut}
+              >
+                  Test Auth
+              </button>
             </div>
 
           </div>
