@@ -29,7 +29,7 @@ export default function HeroHeader() {
       </span>
       <div className="font-roboto font-thin">Full-Stack Developer</div>
       <div className="text-[6pt] sm:text-[8pt] mt-2">(but mostly back-end &#x1F601;)</div>
-      <div className='flex justify-center mt-32'>
+      <div className='flex justify-center mt-16 sm:mt-32'>
         <ScrollIcon/>
       </div>
     </header>

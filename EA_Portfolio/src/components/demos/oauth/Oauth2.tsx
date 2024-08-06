@@ -6,16 +6,16 @@ import GoogleSignIn from "../../ui/social/GoogleSignIn";
 import oauth2_badge from "../../../assets/icons/oauth2_badge.png";
 import ActionBtn from "../../ui/buttons/ActionBtn";
 
-import TestToken from "../../_debug/TestToken";
+// import TestToken from "../../_debug/TestToken";
 
 export default function Oauth2() {
 
   const [isLogggendIn, setIsLoggedIn] = useState(false);
 
-  function getUserInfo() {
-    const result = auth.getGoogleInfo();
-    console.log(result);
-  }
+  // function getUserInfo() {
+  //   const result = auth.getGoogleInfo();
+  //   console.log(result);
+  // }
 
   useEffect(() => {
     auth.isLoggedIn()

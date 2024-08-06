@@ -51,7 +51,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
             <div
               className="flex flex-col items-center sm:mt-10"
             >
-              <h1 className="casc-enterUp">Contact</h1>
+              <h1 className="casc-enterUp mt-4 sm:mt-0">Contact</h1>
               <hr className="w-40 mt-2 mb-10"/>
 
               <div

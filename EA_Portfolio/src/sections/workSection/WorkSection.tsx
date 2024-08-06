@@ -158,6 +158,9 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
 
   function projectOpenAnim(e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) {
     if (!containerRef.current || !transitionDivRef.current || !contentRef.current) return;
+    if (window.innerWidth < 758) {
+      history.pushState({}, '', '');
+    }
     const containerRect = containerRef.current.getBoundingClientRect();
     const transitionRect = transitionDivRef.current.getBoundingClientRect();
     const xOffset = e.clientX - containerRect.left - (transitionRect.width / 2);
@@ -167,9 +170,8 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     transitionDivRef.current.style.setProperty('left', `${xOffset}px`);
     transitionDivRef.current.style.setProperty('top', `${yOffset}px`);
     setTimeout(() => {
-      transitionDivRef.current?.classList.add('duration-500');
-      // const scale = window.innerWidth < 758 ? 300 : 70;
-      const scale = 70;
+      transitionDivRef.current?.classList.add(`duration-500`);
+      const scale = window.innerWidth < 758 ? 200 : 70;
       transitionDivRef.current?.style.setProperty('transform', `scale(${scale})`);
     }, 50);
     setTimeout(() => {
@@ -186,7 +188,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
     }, 700);    
     setTimeout(() => {
       if (!contentRef.current) return;
-      transitionDivRef.current?.classList.remove('duration-500');
+      transitionDivRef.current?.classList.remove(`duration-500`);
       transitionDivRef.current?.style.setProperty('transform', 'scale(1)');
       containerRef.current?.style.setProperty('height', `auto`);      
     }, 1200);    
@@ -198,7 +200,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
       if (sectionTopRef.current.getBoundingClientRect().top <= 0) {
         sectionTopRef.current.scrollIntoView({behavior: 'smooth'});
       }
-    }, 300);
+    }, 50);
     projectOpenAnim(e, index);
   }
 

@@ -25,11 +25,10 @@ export default function ProjectView({
 }: ProjectViewProps) {
 
   function forcePopState() {
-    backCallback();
+    window.innerWidth < 758 ? history.back() : backCallback();
   }
   
-  useEffect(() => {
-    history.pushState({}, '', '');
+  useEffect(() => {    
     window.addEventListener('popstate', () => {
       backCallback();
     });
