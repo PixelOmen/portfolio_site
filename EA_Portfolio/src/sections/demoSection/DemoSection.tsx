@@ -26,7 +26,7 @@ export default function DemoSection({}: DemoSectionProps) {
         >
           <div
             style={{background: 'radial-gradient(circle, #e5e7eb  0%, #c8cace 100%)'}}
-            className="w-full p-6 mb-6 text-black rounded-lg"
+            className="w-full mb-6 text-black rounded-lg"
           >
             <Oauth2/>
           </div>
