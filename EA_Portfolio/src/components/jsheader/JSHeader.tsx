@@ -82,7 +82,7 @@ export default function JSHeader({
     {children}
 
     <header>
-      <div className={`text-pink-400 font-sourcecode text-3xl sm:text-4xl flex gap-4 font-normal fadeInDown ${className}`}>
+      <div className={`text-pink-400 font-sourcecode text-3xl sm:text-4xl font-normal fadeInDown ${className}`}>
       {"}"}
       </div>
     </header>

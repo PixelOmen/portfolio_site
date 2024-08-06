@@ -51,54 +51,56 @@ export default function ProjectView({
           {"<---"}
         </div>
       </button>
-      <div>
-        <div className='text-3xl text-center casc-fadeInRight mb-6 font-bold text-[#EF8275]'>
-          {title}
+      <article>      
+        <div>
+          <div className='text-3xl text-center casc-fadeInRight mb-6 font-bold text-[#EF8275]'>
+            {title}
+          </div>
         </div>
-      </div>
-      {images && (
-        <div
-          className='flex justify-center casc-fadeInRight rounded-lg bg-gradient-to-tl from-slate-800 '
-        >
-          <ImgCarousel
-            imgURLs={images}
-            className='max-w-[500px]'
-          />
-        </div>
-      )}
-      <div className='mt-6 text-base sm:text-lg casc-fadeInDown'>
-        {description}
-      </div>
-      {techStack && (
-        <div className='flex gap-2 sm:gap-4 mt-10 mb-10 casc-fadeInLeft flex-wrap'>
-          {techStack.map((tech, index) => (
-            <div key={index} className='flex gap-2'>
-              <div className=''>
-                {tech}
+        {images && (
+          <div
+            className='flex justify-center casc-fadeInRight rounded-lg bg-gradient-to-tl from-slate-800 '
+          >
+            <ImgCarousel
+              imgURLs={images}
+              className='max-w-[500px]'
+            />
+          </div>
+        )}
+        <p className='mt-6 text-base sm:text-lg casc-fadeInDown'>
+          {description}
+        </p>
+        {techStack && (
+          <div className='flex gap-2 sm:gap-4 mt-10 mb-10 casc-fadeInLeft flex-wrap'>
+            {techStack.map((tech, index) => (
+              <div key={index} className='flex gap-2'>
+                <div className=''>
+                  {tech}
+                </div>
+                {index < techStack.length - 1 && (<div>|</div>)}
               </div>
-              {index < techStack.length - 1 && (<div>|</div>)}
-            </div>
-          ))}
-        </div>
-      )}
-      {github && (
-        <div
-          className='flex items-center casc-fadeIn group w-max'
-        >
-          <GitHubIcon
-            fillColor=''
-            className='mb-1'
-            width='30px'
-            height='30px'
-          />
-            <a
-              href={github.url} target='_blank'
-              className='px-2 pb-1 rounded-lg border-1 border-[rgba(0,0,0,0)] group-hover:ml-2 group-hover:bg-[#EF8275] group-hover:text-white group-hover:border-[rgba(1,1,1,0.2)] font-sourcecode transition-all duration-300 box-border'
-            >
-              {github.name ? github.name : "Source Code"}
-            </a>
-        </div>          
-      )}
+            ))}
+          </div>
+        )}
+        {github && (
+          <div
+            className='flex items-center casc-fadeIn group w-max'
+          >
+            <GitHubIcon
+              fillColor=''
+              className='mb-1'
+              width='30px'
+              height='30px'
+            />
+              <a
+                href={github.url} target='_blank'
+                className='px-2 pb-1 rounded-lg border-1 border-[rgba(0,0,0,0)] group-hover:ml-2 group-hover:bg-[#EF8275] group-hover:text-white group-hover:border-[rgba(1,1,1,0.2)] font-sourcecode transition-all duration-300 box-border'
+              >
+                {github.name ? github.name : "Source Code"}
+              </a>
+          </div>          
+        )}
+      </article>
     </div>
   )
 }
