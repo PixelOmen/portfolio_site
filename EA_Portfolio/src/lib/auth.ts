@@ -7,6 +7,7 @@ const LOGGEDOUT_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDOUT_URL;
 
 export const API_HOSTNAME = import.meta.env.VITE_API_HOSTNAME;
 export const API_ROOT = API_HOSTNAME + import.meta.env.VITE_API_ROOT;
+const TOKEN_TEST_URL = API_ROOT + import.meta.env.VITE_API_TOKEN_TEST_URL;
 const API_GOOGLE_CODE_TO_TOKEN_URL = API_HOSTNAME + import.meta.env.VITE_API_GOOGLE_CODE_TO_TOKEN_URL;
 const API_CONVERT_TOKEN_URL = API_HOSTNAME + import.meta.env.VITE_API_CONVERT_TOKEN_URL;
 
@@ -15,6 +16,8 @@ const GOOGLE_SCOPE = encodeURIComponent(import.meta.env.VITE_GOOGLE_SCOPE);
 const GOOGLE_CLIENT_ID = encodeURIComponent(import.meta.env.VITE_GOOGLE_CLIENT_ID);
 const GOOGLE_USER_LOGIN_URL = `${import.meta.env.VITE_GOOGLE_USER_LOGIN_URL}?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(GOOGLE_REDIRECT_URI)}&response_type=code&scope=${GOOGLE_SCOPE}`;
 
+const GOOGLE_USER_INFO_URL = import.meta.env.VITE_GOOGLE_GET_USER_INFO_URL
+
 
 export interface TokenError {
   errorString: string;
@@ -22,12 +25,28 @@ export interface TokenError {
 }
 
 
-export function isLoggedIn(): boolean {
-  return localStorage.getItem('access_token') !== null;
+export function isLoggedIn(): Promise<boolean> {
+  const authHeader = getAuthHeader();
+  if (!authHeader) {
+    return new Promise((resolve) => resolve(false));
+  }
+  return axios.get(TOKEN_TEST_URL, {
+    headers: {
+      'Authorization': authHeader
+    }
+  })
+    .then(() => {
+      return true;
+    })
+    .catch(err => {
+      console.error(err);
+      return false;
+    });
 }
 
 export function logOut(): void {
   localStorage.removeItem('access_token');
+  localStorage.removeItem('google_token');
   window.location.href = LOGGEDOUT_URL;
 }
 
@@ -45,8 +64,27 @@ export function getGoogleToken(): string | null {
   return localStorage.getItem('google_token');
 }
 
-export function googleLogIn(): void {
-  if (isLoggedIn()) {
+export function getGoogleInfo(): Promise<any> | null {
+  const googleToken = getGoogleToken();
+  if (!googleToken) return null;
+
+  return axios.get(GOOGLE_USER_INFO_URL, {
+    headers: {
+      'Authorization': 'Bearer ' + googleToken
+    }
+  })
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      console.error(err);
+      return null;
+    });
+}
+
+
+export async function googleLogIn(): Promise<void> {
+  if (await isLoggedIn()) {
     window.location.href = LOGGEDIN_URL;
   } else {
     window.location.href = GOOGLE_USER_LOGIN_URL;
@@ -80,7 +118,7 @@ export async function checkForGoogleRedirect(): Promise<void | TokenError> {
   const redirectUrl = new URL(GOOGLE_REDIRECT_URI);
   if (redirectUrl.pathname !== currentUrl.pathname) return;
 
-  if (isLoggedIn()) {
+  if (await isLoggedIn()) {
     window.location.href = LOGGEDIN_URL;
     return;
   }

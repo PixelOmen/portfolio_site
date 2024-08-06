@@ -14,7 +14,7 @@ export default function DemoSection({}: DemoSectionProps) {
 
 
   return (
-    <div className="bg-[rgba(31,31,31,0)] p-6 sm:py-12 flex justify-center overflow-hidden min-h-[1000px]">
+    <div className="bg-[rgba(31,31,31,0)] p-6 sm:py-12 flex justify-center overflow-hidden mb-12">
       <div className="max-w-[1500px] w-full">
         <JSHeader
           comment="A few demos of AWS and Django functionality"
