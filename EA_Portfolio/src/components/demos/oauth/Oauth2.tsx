@@ -26,10 +26,10 @@ export default function Oauth2() {
 
   return (
     <div            
-      className="w-full flex justify-center p-4 lg:p-10"
+      className="w-full max-w-[1200px] flex justify-center p-4 lg:px-8 border-2 border-blue-500"
     >
-      <div className="relative max-w-[1200px] flex justify-center items-center flex-wrap border-2 border-blue-400">
-        <div className="min-[800px]:max-w-[50%] sm:min-w-[350px] mt-4 min-[800px]:mt-0 order-2 min-[800px]:order-1">
+      <div className="flex justify-center items-center flex-wrap">
+        <div className="basis-[90%] min-[800px]:ml-auto min-[800px]:max-w-[50%] sm:min-w-[350px] mt-4 min-[800px]:mt-0 order-2 min-[800px]:order-1">
           <div className="sm:p-6">
             <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">OAuth2</header>
             <p className="">
@@ -60,7 +60,7 @@ export default function Oauth2() {
             <TestToken title="Test With Token" wToken={true}/> */}
           </div>
         </div>
-        <div className="w-1/2 flex justify-center flex-auto order-1 min-[800px]:order-2">
+        <div className="flex justify-center order-1 min-[800px]:order-2 min-[800px]:mx-auto basis-[20%]">
           <img src={oauth2_badge} alt="OAuth2 Badge" className="flex max-h-32 min-[800px]:max-h-72"/>
         </div>
       </div>
