@@ -27,42 +27,47 @@ export default function Oauth2() {
 
   return (
     <div            
-      className="w-full flex justify-center gap-5 border-2 border-black font-medium"
+      className="w-full p-10"
     >
-      <div>
-        <h1 className="text-[#EF8275]">OAuth2</h1>
-        <article>
-
-        </article>
-        <h2 className="text-2xl">OAuth2</h2>
-        <p className="text-lg">Click the button to log in with Google</p>
-        <p className="text-lg">Then click the button to test the API</p>
+      <div className="relative max-h-96 flex justify-between items-center flex-wrap">
+        <div className="flex-1 max-w-[600px] ml-auto mr-auto">
+          <div className="p-6">
+            <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">OAuth2</header>
+            <p className="text-lg font-">
+              OAuth2 is a system that lets you log in to an app using your existing accounts, like Google or GitHub, without sharing your password with the app. Managed by the Internet Engineering Task Force (IETF), see how easy and safe it is to use OAuth2 to log in and access your information.
+            </p>
+          </div>
+          <div className="flex gap-6 justify-center">
+            <button
+              className="bg-[#EF8275] p-2 rounded-lg text-white"
+              onClick={googleLogIn}
+            >
+                Log In
+            </button>
+            <button
+              className="bg-[#EF8275] p-2 rounded-lg text-white"
+              onClick={logOut}
+            >
+                Log Out
+            </button>
+            <button
+              className="bg-[#EF8275] p-2 rounded-lg text-white"
+              onClick={testNoToken}
+            >
+                Test NoToken
+            </button>
+            <button
+              className="bg-[#EF8275] p-2 rounded-lg text-white"
+              onClick={testWithToken}
+            >
+                Test wToken
+            </button>              
+          </div>
+        </div>
+        <div className="mr-auto ml-auto">
+          <img src={oauth2_badge} alt="OAuth2 Badge" className="max-h-72"/>
+        </div>
       </div>
-      <img src={oauth2_badge} alt="" />
-      {/* <button
-        className="bg-[#EF8275] p-2 rounded-lg text-white"
-        onClick={googleLogIn}
-      >
-          Log In
-      </button>
-      <button
-        className="bg-[#EF8275] p-2 rounded-lg text-white"
-        onClick={logOut}
-      >
-          Log Out
-      </button>
-      <button
-        className="bg-[#EF8275] p-2 rounded-lg text-white"
-        onClick={testNoToken}
-      >
-          Test NoToken
-      </button>
-      <button
-        className="bg-[#EF8275] p-2 rounded-lg text-white"
-        onClick={testWithToken}
-      >
-          Test wToken
-      </button>               */}
   </div>    
   )
 }
