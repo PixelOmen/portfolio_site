@@ -12,9 +12,11 @@ export default function ActionBtn({
   return (
     <button
       onClick={clickCallback}
-      className={`bg-[#EF8275] hover:bg-[#ec7264] hover:scale-105 transition-all duration-300 p-3 rounded-lg text-white ${className}`}
+      className={`group bg-gray-700 transition-all duration-500 rounded-lg text-white ${className}`}
     >
-      {title}
+      <div className="bg-[#EF8275] group-hover:bg-[#ec7264] hover:-translate-y-1 active:translate-y-0 active:duration-75 px-3 py-2 transition-all duration-500 rounded-lg">
+        {title}
+      </div>
     </button>
   )
 }

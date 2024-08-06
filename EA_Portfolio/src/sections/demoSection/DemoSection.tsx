@@ -1,11 +1,9 @@
-import React from "react";
-
 import JSHeader from "../../components/jsheader/JSHeader";
-
 import Oauth2 from "../../components/demos/oauth/Oauth2";
 
+
 interface DemoSectionProps {
-  children?: React.ReactNode
+  
 }
 
 
@@ -26,9 +24,16 @@ export default function DemoSection({}: DemoSectionProps) {
         >
           <div
             style={{background: 'radial-gradient(circle, #e5e7eb  0%, #c8cace 100%)'}}
-            className="w-full mb-6 flex justify-center text-black rounded-lg"
+            className="w-full mb-6 text-black rounded-lg py-10"
           >
-            <Oauth2/>
+            <div className="flex flex-col gap-10">
+              <div className="w-full flex justify-center">
+                <Oauth2/>
+              </div>
+              <div className="w-full flex justify-center">
+                <Oauth2/>
+              </div>
+            </div>
           </div>
         </JSHeader>
       </div>

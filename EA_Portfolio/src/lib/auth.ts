@@ -64,9 +64,9 @@ export function getGoogleToken(): string | null {
   return localStorage.getItem('google_token');
 }
 
-export function getGoogleInfo(): Promise<any> | null {
+export function getGoogleInfo(): Promise<any> {
   const googleToken = getGoogleToken();
-  if (!googleToken) return null;
+  if (!googleToken) return new Promise((resolve) => resolve(null));
 
   return axios.get(GOOGLE_USER_INFO_URL, {
     headers: {

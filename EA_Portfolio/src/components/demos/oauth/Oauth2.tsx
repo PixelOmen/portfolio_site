@@ -12,10 +12,12 @@ export default function Oauth2() {
 
   const [isLogggendIn, setIsLoggedIn] = useState(false);
 
-  // function getUserInfo() {
-  //   const result = auth.getGoogleInfo();
-  //   console.log(result);
-  // }
+  function getUserInfo() {
+    auth.getGoogleInfo()
+      .then(res => {
+        console.log(res);
+      });
+  }
 
   useEffect(() => {
     auth.isLoggedIn()
@@ -31,7 +33,7 @@ export default function Oauth2() {
       <div className="flex justify-center items-center flex-wrap">
         <div className="basis-[90%] min-[800px]:ml-auto min-[800px]:max-w-[50%] sm:min-w-[350px] mt-4 min-[800px]:mt-0 order-2 min-[800px]:order-1">
           <div className="sm:p-6">
-            <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">OAuth2</header>
+            <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">OAuth 2.0</header>
             <p className="">
               OAuth2 is a system that lets you log in to an app using your existing accounts, like Google or GitHub, without sharing your password with the app. It's managed by the Internet Engineering Task Force (IETF).
               <a
@@ -39,7 +41,7 @@ export default function Oauth2() {
                 href="https://oauth.net/2/"
                 target="_blank"
               >
-                Learn more about OAuth2
+                Learn more about OAuth 2.0
               </a>
             </p>
             <br/>
@@ -49,15 +51,19 @@ export default function Oauth2() {
           </div>
           <div className="flex flex-wrap gap-6 justify-center">
             {isLogggendIn ? (
+              <>
               <ActionBtn
                 title="Log Out"
                 clickCallback={auth.logOut}
-              />
+                />
+                <ActionBtn
+                  title="UserInfo"
+                  clickCallback={getUserInfo}
+                />
+              </>
             ) : (
               <GoogleSignIn clickCallback={auth.googleLogIn}/>
             )}
-            {/* <TestToken title="Test No Token" wToken={false}/>
-            <TestToken title="Test With Token" wToken={true}/> */}
           </div>
         </div>
         <div className="flex justify-center order-1 min-[800px]:order-2 min-[800px]:mx-auto basis-[20%]">
