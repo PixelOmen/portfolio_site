@@ -111,10 +111,10 @@ export default function Navbar({ sectionMap }: NavbarProps) {
   <div ref={topAnchorBar} className="absolute py-10" aria-hidden="true"></div>
   <nav 
     ref={navbarContainer}
-    className={`${styles.navbar} text-gray-200 bg-stone-900 bg-opacity-90 font-sourcecode`}
+    className={`${styles.navbar} text-gray-200 bg-stone-900 font-sourcecode bg-opacity-95`}
   >
 
-    <nav ref={contentsFull} className="hidden sm:flex justify-center text-2xl py-2 pt-3 ">
+    <nav ref={contentsFull} className="hidden sm:flex justify-center text-2xl py-2 pt-3">
       <div className="">
         <ul className="flex gap-16">
           <li>
@@ -168,7 +168,7 @@ export default function Navbar({ sectionMap }: NavbarProps) {
             {'<---'}
           </button>
         </div>
-        <ul className="flex flex-col items-center mt-6 mb-6 text-2xl font-sourcecode transition-all gap-2">
+        <ul className="flex flex-col items-center mt-2 mb-6 text-2xl font-sourcecode transition-all gap-2">
           <li className="fadeInLeft">
             <NavButton              
               title="Home"
