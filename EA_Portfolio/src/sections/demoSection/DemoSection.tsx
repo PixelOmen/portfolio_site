@@ -1,7 +1,9 @@
 import React from "react";
 
-import { googleLogIn, logOut } from "../../lib/auth";
 import JSHeader from "../../components/jsheader/JSHeader";
+
+import { googleLogIn, logOut } from "../../lib/auth";
+import { anonInstAPI, authInstAPI } from "../../lib/requests";
 
 interface DemoSectionProps {
   children?: React.ReactNode
@@ -9,6 +11,26 @@ interface DemoSectionProps {
 
 
 export default function DemoSection({}: DemoSectionProps) {
+
+  function testNoToken() {
+    anonInstAPI.get('v1/test')
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function testWithToken() {
+    authInstAPI.get('v1/test')
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
 
   return (
     <div className="bg-[rgba(31,31,31,0)] p-6 flex justify-center overflow-hidden min-h-[1000px]">
@@ -42,10 +64,16 @@ export default function DemoSection({}: DemoSectionProps) {
               </button>
               <button
                 className="bg-[#EF8275] p-2 rounded-lg text-white"
-                onClick={logOut}
+                onClick={testNoToken}
               >
-                  Test Auth
+                  Test NoToken
               </button>
+              <button
+                className="bg-[#EF8275] p-2 rounded-lg text-white"
+                onClick={testWithToken}
+              >
+                  Test wToken
+              </button>              
             </div>
 
           </div>

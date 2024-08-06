@@ -11,8 +11,7 @@ import WorkSection from './sections/workSection/WorkSection';
 import DemoSection from "./sections/demoSection/DemoSection";
 import ContactSection from "./sections/contactSection/ContactSection";
 
-// import * as auth from "./lib/auth";
-import handleRoute from "./lib/router";
+import handleRoutes from "./lib/router";
 import { ScrollObserver } from "./lib/scrolling";
 
 
@@ -34,14 +33,7 @@ export default function App() {
   const scrollObserver = new ScrollObserver();
 
   useEffect(() => {
-    handleRoute(sectionMap);
-    // auth.checkForGoogleRedirect()
-    //   .then(err => {
-    //     // some error handling maybe
-    //     if (err) {
-    //       console.error(err.errorString, err.axiosError);
-    //     }
-    //   });
+    handleRoutes(sectionMap);
   }, []);
 
   return (

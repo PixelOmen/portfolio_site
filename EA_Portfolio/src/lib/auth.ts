@@ -1,16 +1,16 @@
 import axios, { AxiosError } from "axios";
 
-export const CLIENT_DOMAIN = import.meta.env.VITE_CLIENT_DOMAIN;
+const CLIENT_DOMAIN = import.meta.env.VITE_CLIENT_DOMAIN;
 
 const LOGGEDIN_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDIN_URL;
 const LOGGEDOUT_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDOUT_URL;
 
-const API_URL = import.meta.env.VITE_API_URL;
-const API_GOOGLE_CODE_TO_TOKEN_URL = API_URL + import.meta.env.VITE_API_GOOGLE_CODE_TO_TOKEN_URL;
-const API_CONVERT_TOKEN_URL = API_URL + import.meta.env.VITE_API_CONVERT_TOKEN_URL;
+export const API_HOSTNAME = import.meta.env.VITE_API_HOSTNAME;
+export const API_ROOT = API_HOSTNAME + import.meta.env.VITE_API_ROOT;
+const API_GOOGLE_CODE_TO_TOKEN_URL = API_HOSTNAME + import.meta.env.VITE_API_GOOGLE_CODE_TO_TOKEN_URL;
+const API_CONVERT_TOKEN_URL = API_HOSTNAME + import.meta.env.VITE_API_CONVERT_TOKEN_URL;
 
 export const GOOGLE_REDIRECT_URI = CLIENT_DOMAIN + import.meta.env.VITE_GOOGLE_REDIRECT_URI; // not URIencoded for direct use
-
 const GOOGLE_SCOPE = encodeURIComponent(import.meta.env.VITE_GOOGLE_SCOPE);
 const GOOGLE_CLIENT_ID = encodeURIComponent(import.meta.env.VITE_GOOGLE_CLIENT_ID);
 const GOOGLE_USER_LOGIN_URL = `${import.meta.env.VITE_GOOGLE_USER_LOGIN_URL}?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(GOOGLE_REDIRECT_URI)}&response_type=code&scope=${GOOGLE_SCOPE}`;

@@ -1,6 +1,6 @@
 import * as auth from "./auth";
 
-export default function handleRoute(sectionMap: Map<string, React.RefObject<HTMLDivElement>>) {
+export default function handleRoutes(sectionMap: Map<string, React.RefObject<HTMLDivElement>>) {
     const currentPath = pathname();
     if (!currentPath) return;
     if (currentPath == pathname(auth.GOOGLE_REDIRECT_URI)) {
