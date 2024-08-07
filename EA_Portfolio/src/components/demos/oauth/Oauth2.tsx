@@ -72,7 +72,7 @@ export default function Oauth2() {
           </div>
         </div>
         <div className="flex justify-center order-1 min-[800px]:order-2 min-[800px]:mx-auto basis-[20%]">
-          <img src={oauth2_badge} alt="OAuth2 Badge" className="flex max-h-32 min-[800px]:max-h-72"/>
+          <img src={oauth2_badge} alt="OAuth2 Badge" title="OAuth2 Badge" className="flex max-h-32 min-[800px]:max-h-72"/>
         </div>
       </div>
   </div>    

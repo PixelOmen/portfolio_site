@@ -4,6 +4,8 @@ import type { IScrollState } from "../../lib/scrolling";
 import AnimReset from "../../components/animReset/AnimReset";
 
 import GitHubIcon from "../../components/ui/icons/GitHubIcon";
+import LinkedInIcon from "../../components/ui/icons/LinkedInIcon";
+import EmailIcon from "../../components/ui/icons/EmailIcon";
 
 interface ContactSectionProps {
   scrollState?: IScrollState
@@ -35,7 +37,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
 
       <div className="absolute w-full top-4 blur-2xl z-0 bg-slate-600">
         <svg preserveAspectRatio="none" viewBox="0 0 100 130" height="50" width="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0 L50 100 L100 0 Z" fill="#57a199" stroke="" strokeWidth='2px'>        
+          <path d="M0 0 L50 100 L100 0 Z" fill="#33415580" stroke="" strokeWidth='2px'>        
           </path>
         </svg>
       </div>
@@ -45,15 +47,20 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
         cascadeDelay={10}
         resetDelay={1500}
       >
-        <div className="relative mb-24 z-1">
+        <div className="relative mb-14 z-1">
           <div
             className="w-full"
           >
             <div
               className="flex flex-col items-center sm:mt-10"
             >
-              <h1 className="casc-enterUp mt-4 sm:mt-0">Contact</h1>
-              <hr className="w-40 mt-2 mb-10"/>
+              <h1 className="casc-enterUp mt-12 sm:mt-0">Contact</h1>
+              <hr className="w-40 mt-2 mb-8"/>
+              <div className="flex text-center casc-fadeInDown">
+                <p className="text-base sm:text-lg font-medium">
+                  Comments, questions, or business inquiries?
+                </p>
+              </div>
 
               <div
                 className="p-8 max-w-[800px] w-screen"
@@ -61,7 +68,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
                 <form
                   onSubmit={formSubmit}
                   method="POST"
-                  className="flex flex-col gap-4 text-black casc-fadeInDown"
+                  className="flex flex-col gap-4 text-black casc-fadeInUp"
                 >
                   <input
                     type="text"
@@ -92,13 +99,31 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
             </div>
           </div>
         </div>
+
+        <div className="flex justify-center py-4 casc-enterUp gap-8 bg-[#32445d80]">
+          <a 
+            href="https://github.com/PixelOmen"
+            target="_blank"
+            className="hover:scale-110 transition-all duration-300"
+          >
+            <GitHubIcon fillColor="white" className="w-12 sm:w-12"/>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/emmanuelacostapost/" target="_blank"
+            className="hover:scale-110 transition-all duration-300"
+          >
+            <LinkedInIcon fillColor="#0a68c6" className="w-14 sm:w-[60px]"/>
+          </a>
+          <a
+            href="mailto:3D.Acosta@gmail.com"
+            target="_blank"
+            className="ml-1 hover:scale-110 transition-all duration-300"
+          >
+            <EmailIcon fillColor="white" className="w-12 sm:w-12"/>
+          </a>
+        </div>
       </AnimReset>
 
-      <div className="flex justify-center mb-6">
-        <a href="https://github.com/PixelOmen">
-          <GitHubIcon fillColor="white" className="w-16"/>
-        </a>
-      </div>
     </div>
   )
 }
