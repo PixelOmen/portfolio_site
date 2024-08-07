@@ -100,7 +100,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
           </div>
         </div>
 
-        <div className="flex justify-center py-4 casc-enterUp gap-8 bg-[#32445d80]">
+        <div className="flex justify-center py-4 casc-enterUp gap-8 bg-[#32445d80] border-t-2 border-black">
           <a 
             href="https://github.com/PixelOmen"
             target="_blank"
