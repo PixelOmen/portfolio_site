@@ -24,6 +24,13 @@ export interface TokenError {
   axiosError: AxiosError;
 }
 
+function generateState(length: number): string {
+  const array = new Uint8Array(length);
+  window.crypto.getRandomValues(array);
+  const state = Array.from(array);
+  return btoa(String.fromCharCode.apply(null, state));
+}
+
 
 export function isLoggedIn(): Promise<boolean> {
   const authHeader = getAuthHeader();
@@ -73,13 +80,6 @@ export function getGoogleInfo(): Promise<any> {
       'Authorization': 'Bearer ' + googleToken
     }
   })
-    .then(res => {
-      return res.data;
-    })
-    .catch(err => {
-      console.error(err);
-      return null;
-    });
 }
 
 

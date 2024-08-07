@@ -82,7 +82,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
                   />              
                   <button
                     type="submit"
-                    className={`mx-auto w-full bg-[#fd6d5e] rounded-md p-2 text-slate-50 font-medium text-xl shake hover:brightness-125 active:bg-[#c53e2f]  active:w-[90%] transition-all shadow-xl`}
+                    className={`mx-auto w-full bg-[#ed6354] hover:bg-[#d6584a] rounded-md p-2 text-white font-medium text-xl shake hover:brightness-125 active:bg-[#c53e2f]  active:w-[90%] transition-all shadow-xl`}
                   >
                     Submit
                   </button>

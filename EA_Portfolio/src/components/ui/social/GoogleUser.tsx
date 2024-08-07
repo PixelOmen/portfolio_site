@@ -30,7 +30,7 @@ export default function GoogleUser({
               />
             </div>
           )}
-          <div className="translate-y-[1px] text-nowrap overflow-hidden overflow-ellipsis">
+          <div className="translate-y-[1px] text-lg text-nowrap overflow-hidden overflow-ellipsis">
             {userInfo.name}
           </div>
         </div>
