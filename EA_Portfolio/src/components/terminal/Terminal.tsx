@@ -199,7 +199,8 @@ export default function Terminal({
         </header>
 
         <div className="relative bg-[#2b1825cf] w-full outline-blue-500 font-sourcecode text-lg rounded-b-lg ">
-          <div className="absolute h-full w-full border-b-2 border-l-2 border-r-2 rounded-bl-lg rounded-br-lg border-gray-600"></div>
+          <div className="h-full w-full border-b-2 border-l-2 border-r-2 rounded-bl-lg rounded-br-lg border-gray-600"></div>
+
           {/* shapeholder */}
           <div className="leading-6 text-xs sm:text-base opacity-0 p-3 sm:p-4">
             {createPrompts(true)}
@@ -208,10 +209,11 @@ export default function Terminal({
           {/* content */}
           <article
             ref={contentRef}
-            className="absolute top-2 left-2 leading-6 text-xs sm:text-base pr-4"
+            className="absolute top-2 left-2 leading-6 text-xs sm:text-base pr-6"
           >
             {livePrompts}
           </article>
+
         </div>
 
       </div>

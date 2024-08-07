@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import type { IScrollState } from "../../lib/scrolling";
 import AnimReset from "../../components/animReset/AnimReset";
 
+import GitHubIcon from "../../components/ui/icons/GitHubIcon";
+
 interface ContactSectionProps {
   scrollState?: IScrollState
 }
@@ -43,7 +45,6 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
         cascadeDelay={10}
         resetDelay={1500}
       >
-
         <div className="relative mb-24 z-1">
           <div
             className="w-full"
@@ -86,13 +87,18 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
                   >
                     Submit
                   </button>
-                </form>
+                </form>                
               </div>
             </div>
           </div>
         </div>
       </AnimReset>
 
+      <div className="flex justify-center mb-6">
+        <a href="https://github.com/PixelOmen">
+          <GitHubIcon fillColor="white" className="w-16"/>
+        </a>
+      </div>
     </div>
   )
 }
