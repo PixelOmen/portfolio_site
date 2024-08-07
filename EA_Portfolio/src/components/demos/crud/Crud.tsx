@@ -31,11 +31,11 @@ export default function Oauth2() {
 
   return (
     <div            
-      className="w-full max-w-[1300px] flex justify-center sm:p-4 lg:px-8"
+      className="w-full max-w-[1300px] flex justify-center p-4 lg:px-8"
     >
-      <div className="flex justify-center items-center flex-wrap py-6">
-        <div className="pl-5 basis-[50%] min-[800px]:ml-auto min-[800px]:max-w-[50%] sm:min-w-[350px] mt-4 min-[800px]:mt-0 order-1 min-[800px]:order-2">
-          <div className="p-2 pt-0 sm:p-6 sm:pt-0">
+      <div className="flex justify-center items-center max-[719px]:flex-wrap">
+        <div className="min-[720px]:basis-[45%] min-[720px]:ml-auto sm:min-w-[350px] mt-4 min-[720px]:mt-0 order-1 min-[720px]:order-2">
+          <div className="p-4 pt-0 sm:p-6 sm:pt-0">
             <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">CRUD</header>
             <p className="">
               CRUD stands for Create, Read, Update, and Delete. It is a set of operations that can be performed on a database or data store. This demo allows you to perform CRUD operations on a database using a RESTful API, associating your Google account with the data you create. Only you can see the posts you create, you can delete them at any time, and posts will be deleted after 24 hours.
@@ -49,7 +49,7 @@ export default function Oauth2() {
             </p>
           </div>
         </div>
-        <div className="flex justify-center order-2 min-[800px]:order-1 min-[800px]:mx-auto basis-[50%] px-5">
+        <div className="max-[720px]:w-full min-[720px]:ml-auto order-2 min-[720px]:order-1 min-[720px]:basis-[55%] min-[720px]:max-w-[50%]">
           <UserPosts/>
         </div>
       </div>
