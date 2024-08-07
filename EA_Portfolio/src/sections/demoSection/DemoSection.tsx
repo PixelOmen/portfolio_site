@@ -1,5 +1,6 @@
 import JSHeader from "../../components/jsheader/JSHeader";
 import Oauth2 from "../../components/demos/oauth/Oauth2";
+import Crud from "../../components/demos/crud/Crud";
 
 
 interface DemoSectionProps {
@@ -31,7 +32,7 @@ export default function DemoSection({}: DemoSectionProps) {
                 <Oauth2/>
               </div>
               <div className="w-full flex justify-center">
-                <Oauth2/>
+                <Crud/>
               </div>
             </div>
           </div>
