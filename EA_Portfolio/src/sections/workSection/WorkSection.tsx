@@ -69,12 +69,12 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
       <ProjectThumb
         title="TCLIB3"
         bgImage={thumb7}
-        tags={['Pure Python']}
+        tags={['Pure Python', 'Pytest']}
       />,
       <ProjectThumb
         title="RosettaPath"
         bgImage={thumb8}
-        tags={['Pure Python']}
+        tags={['Pure Python', 'Pytest']}
       />,      
     ]
   }
@@ -141,7 +141,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         title = "TCLIB3"
         description='TCLIB3 is a python library that provides functionality for converting between frames, timecode, and milliseconds, supporting both non-dropframe and dropframe timecode formats. It is designed to assist in video editing and processing tasks where precise timing and synchronization are crucial.'
         // images={[TestImage1, TestImage2]}
-        techStack={['Pure Python']}
+        techStack={['Pure Python', 'Pytest']}
         github={{url: "https://github.com/PixelOmen/tclib3"}}
       />,
       <ProjectView
@@ -150,7 +150,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         title = "RosettaPath"
         description='RossetaPath objects translate network paths mounted to local volumes from one mount point to another across operating systems. It differs from pathlib in that it can handle network paths and translate them to local paths and vice versa. It is designed to be used in conjunction with the pathlib module.'
         // images={[TestImage1, TestImage2]}
-        techStack={['Pure Python']}
+        techStack={['Pure Python', 'Pytest']}
         github={{url: "https://github.com/PixelOmen/rosettapath"}}
       />,
     ]

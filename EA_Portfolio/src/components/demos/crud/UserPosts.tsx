@@ -208,11 +208,11 @@ function SinglePost({
 
   return (
     <div
-    className="w-full border-2 border-gray-400 bg-gray-200 rounded-lg text-xs drop-shadow-md shadow-black"
-    data-userid={owner}
+      className="w-full border-2 border-gray-400 bg-gray-200 rounded-lg text-xs drop-shadow-md shadow-black"
+      data-userid={owner}
     >
 
-      <div className="p-2">
+      <div className="p-2 overflow-hidden">
 
         <div className="mb-2">
           <div className="flex gap-1 items-center">
@@ -247,7 +247,7 @@ function SinglePost({
             <div
               title="Click to edit"
               ref={displayRef}
-              className="cursor-pointer bg-gray-300 hover:bg-[#EF8275] hover:text-white rounded-sm p-2"
+              className="cursor-pointer bg-gray-300 hover:bg-[#EF8275] hover:text-white rounded-lg p-2 enterDown"
             >
               {content}
             </div>
