@@ -1,65 +1,77 @@
 import { useEffect, useRef, useState } from "react";
 
+import * as auth from "../../../lib/auth";
+import { authInstAPI } from "../../../lib/requests";
+
 interface UserPostsProps {
 }
 
 export default function UserPosts( {} : UserPostsProps) {
 
   const [editRequested, setEditRequested] = useState(-1);
+  const [posts, setPosts] = useState<any[]>([]);
+  const newTextAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  function getPosts() {
+    authInstAPI.get('v1/user-posts/')
+      .then(res => {
+        setPosts(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
 
   function editCallback(postid: number) {
     setEditRequested(postid);
   }
 
+  function addPost(e: KeyboardEvent) {
+    if (e.key == 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      console.log('Enter pressed');
+    }
+  }
+
+  useEffect(() => {
+    auth.isLoggedIn()
+      .then(res => {
+        if (res) {
+          getPosts();
+        }
+      });
+    newTextAreaRef.current?.addEventListener('keydown', addPost);
+
+    return () => {
+      newTextAreaRef.current?.removeEventListener('keydown', addPost);
+    }
+  }, []);
+
   return (
     <div className="w-full">
       <div className="h-[300px] border-2 border-gray-500 bg-gray-200 rounded-lg rounded-bl-none rounded-br-none">
         <div className="flex flex-col gap-5 h-full p-4 overflow-y-auto">
-          <SinglePost
-            dateCreated="2021-10-10"
-            content="This is a post"
-            userid={1}
-            postid={1}
-            editCallback={editCallback}
-            editRequested={editRequested}
-          />
-          <SinglePost
-            dateCreated="2021-10-10"
-            content="This is a post"
-            userid={1}
-            postid={2}
-            editCallback={editCallback}
-            editRequested={editRequested}
-          />
-          <SinglePost
-            dateCreated="2021-10-10"
-            content="This is a post"
-            userid={1}
-            postid={3}
-            editCallback={editCallback}
-            editRequested={editRequested}
-          />
-          <SinglePost
-            dateCreated="2021-10-10"
-            content="This is a post"
-            userid={1}
-            postid={4}
-            editCallback={editCallback}
-            editRequested={editRequested}
-          />
-          <SinglePost
-            dateCreated="2021-10-10"
-            content="This is a post"
-            userid={1}
-            postid={5}
-            editCallback={editCallback}
-            editRequested={editRequested}
-          />
+          {posts && posts.map(post => {
+              return (
+                <SinglePost
+                  key={post.id}
+                  id={post.id}
+                  date_posted={post.date_posted}
+                  content={post.content}
+                  owner={post.owner}
+                  editCallback={editCallback}
+                  editRequested={editRequested}
+                />
+              )
+            }
+          )}
         </div>
       </div>
       <textarea
-        rows={2}
-        placeholder="Enter a post..."
+        ref={newTextAreaRef}
+        rows={3}
+        maxLength={200}
+        placeholder="Enter a post and press Enter..."
         className="w-full border-2 border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-gray-200 p-2"
       />
     </div>
@@ -70,19 +82,19 @@ export default function UserPosts( {} : UserPostsProps) {
 
 
 interface SinglePostProps {
-  dateCreated: string;
+  id: number;
+  date_posted: string;
   content: string;
-  userid: number;
-  postid: number;
+  owner: number;
   editRequested: number;
   editCallback: (postid: number) => void;
 }
 
 function SinglePost({
-  dateCreated,
+  id,
+  date_posted,
   content,
-  userid,
-  postid,
+  owner,
   editRequested,
   editCallback
 } : SinglePostProps) {
@@ -92,7 +104,7 @@ function SinglePost({
   const editRef = useRef<HTMLTextAreaElement>(null);
 
   function requestEdit() {
-    editCallback(postid);
+    editCallback(id);
   }
 
   function cancelEdit() {
@@ -108,7 +120,7 @@ function SinglePost({
 
   useEffect(() => {
 
-    if (editRequested == postid) {
+    if (editRequested == id) {
       setIsEditing(true)
       setTimeout(() => {
         editRef.current?.focus();
@@ -127,7 +139,7 @@ function SinglePost({
   return (
     <div
     className="w-full border-2 border-gray-400 bg-gray-200 rounded-lg text-xs"
-    data-userid={userid}
+    data-userid={owner}
     >
 
       <div className="p-2">
@@ -135,7 +147,7 @@ function SinglePost({
         <div className="mb-2">
           <div className="flex gap-1 items-center">
             <div className="ml-1">
-              {dateCreated}
+              {new Date(date_posted).toLocaleString()}
             </div>
             <button
               title="Delete"
@@ -152,7 +164,13 @@ function SinglePost({
         >
       
           {isEditing ? (
-            <textarea ref={editRef} className="w-full border-2 border-black bg-gray-500 text-white p-2 rounded-sm" defaultValue={content}/>
+            <textarea
+              ref={editRef}
+              rows={3}
+              maxLength={200}
+              defaultValue={content}
+              className="w-full border-2 border-black bg-gray-500 text-white p-2 rounded-sm"
+            />
           ) : (
             <div
               title="Click to edit"

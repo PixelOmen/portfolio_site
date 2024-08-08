@@ -23,7 +23,6 @@ export default function Oauth2() {
     if (isLogggendIn) {
       auth.getGoogleInfo()
         .then(res => {
-          console.log(res.data);
           setUserInfo(res.data);
         })
         .catch(err => {
