@@ -40,7 +40,7 @@ body {
 }
 
 
-@keyframes fadeIn {
+@keyframes fadeInKeys {
   from {
     opacity: 0;
   }
@@ -123,23 +123,23 @@ body {
 
 
 .fadeIn {
-  animation: fadeIn 1s;
+  animation: fadeInKeys 1s;
 }
 
 .fadeInRight {
-  animation: fadeIn 1s, transX 1s;
+  animation: fadeInKeys 1s, transX 1s;
 }
 
 .fadeInLeft {
-  animation: fadeIn 1s, -transX 1s;
+  animation: fadeInKeys 1s, -transX 1s;
 }
 
 .fadeInUp {
-  animation: fadeIn 1s, transY 1s;
+  animation: fadeInKeys 1s, transY 1s;
 }
 
 .fadeInDown {
-  animation: fadeIn 1s, -transY 1s;
+  animation: fadeInKeys 1s, -transY 1s;
 
 }
 

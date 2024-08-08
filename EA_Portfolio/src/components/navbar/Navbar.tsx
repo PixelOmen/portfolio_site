@@ -15,6 +15,7 @@ export default function Navbar({ sectionMap }: NavbarProps) {
 
   const contentsSmall = useRef<HTMLDivElement>(null);
   const smallMenuBtn = useRef<HTMLButtonElement>(null);
+  const smallMenuBackBtn = useRef<HTMLButtonElement>(null);
   const contentsSmallOpen = useRef<HTMLDivElement>(null);
   const smallOpenRef = useRef<boolean>(false);
 
@@ -86,9 +87,13 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     smallMenuBtn.current?.classList.toggle('hidden');
     if (smallOpenRef.current) {
       setTimeout(() => {
+        smallMenuBackBtn.current?.classList.remove('opacity-0');
+      }, 100);
+      setTimeout(() => {
         document.addEventListener('click', handleSmallClick);
       }, 500);
     } else {
+      smallMenuBackBtn.current?.classList.add('opacity-0');
       document.removeEventListener('click', handleSmallClick);
     }
   }
@@ -162,8 +167,9 @@ export default function Navbar({ sectionMap }: NavbarProps) {
       >
         <div className="text-left">
           <button
+            ref={smallMenuBackBtn}
             onClick={toggleSmallMenuOpen}
-            className="ml-6 mt-4 p-4 hover:scale-x-150 hover:scale-y-100 transition-all duration-300 hover:text-[#EF8275] hover:rotate-[360deg] fadeIn"
+            className="ml-6 mt-4 p-4 opacity-0 transition-all duration-300 hover:scale-x-150 hover:scale-y-100 hover:rotate-[360deg] hover:text-[#EF8275]"
           >
             {'<---'}
           </button>
