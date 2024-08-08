@@ -46,7 +46,7 @@ export default function Oauth2() {
           </div>
         </div>
         <div className="max-[720px]:w-full min-[720px]:ml-auto order-2 min-[720px]:order-1 min-[720px]:basis-[55%] min-[720px]:max-w-[50%]">
-          <UserPosts/>
+          <UserPosts locked={!isLogggendIn}/>
         </div>
       </div>
   </div>    

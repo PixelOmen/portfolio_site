@@ -95,15 +95,17 @@ export default function UserPosts({locked = true}: UserPostsProps) {
 
   return (
     <div className="relative w-full">
-      <div
-        ref={lockedScreenRef}
-        className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 rounded-lg"
-      >
-        <div className="flex flex-col gap-10 justify-center items-center h-full">
-          <LockIcon/>
-          <GoogleSignIn clickCallback={auth.googleLogIn}/>
-        </div>
-      </div>
+        {locked && (
+          <div
+            ref={lockedScreenRef}
+            className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 rounded-lg"
+          >
+            <div className="flex flex-col gap-10 justify-center items-center h-full">
+              <LockIcon/>
+              <GoogleSignIn clickCallback={auth.googleLogIn}/>
+            </div>
+          </div>
+        )}
       <div className="h-[340px] border-2 border-gray-500 bg-gray-200 rounded-lg rounded-bl-none rounded-br-none">
         <div
           ref={postAreaRef}
@@ -175,10 +177,11 @@ function SinglePost({
   const editRef = useRef<HTMLTextAreaElement>(null);
 
   function getDate(): {date: string, modified: boolean} {
-    const modified = date_posted != date_modified;
-    const displayDate = modified ? date_modified : date_posted;
-    const date = new Date(displayDate).toLocaleString();
-    return {date, modified}
+    const postedDate = new Date(date_posted).toLocaleString();
+    const modifiedDate = new Date(date_modified).toLocaleString();
+    const modified = postedDate != modifiedDate;
+    const displayDate = modified ? modifiedDate : postedDate;
+    return {date: displayDate, modified}
   }
 
   function requestEdit() {
