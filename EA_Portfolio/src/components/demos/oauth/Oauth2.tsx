@@ -23,6 +23,7 @@ export default function Oauth2() {
     if (isLogggendIn) {
       auth.getGoogleInfo()
         .then(res => {
+          console.log(res.data);
           setUserInfo(res.data);
         })
         .catch(err => {
@@ -36,8 +37,8 @@ export default function Oauth2() {
     <div            
       className="w-full max-w-[1300px] flex justify-center sm:p-4 lg:px-8"
     >
-      <div className="flex justify-center items-center max-[719px]:flex-wrap py-6">
-        <div className="min-[720px]:sm:basis-[55%] min-[720px]:max-w-[55%] sm:min-w-[350px] mt-4 min-[720px]:mt-0 order-2 min-[720px]:order-1 px-4">
+      <div className="flex justify-center items-center max-[719px]:flex-wrap py-6 max-w-full">
+        <div className="max-w-full min-[720px]:sm:basis-[55%] min-[720px]:max-w-[55%] sm:min-w-[350px] mt-4 min-[720px]:mt-0 order-2 min-[720px]:order-1 px-4">
           <div className="p-2 pt-0 sm:p-6 sm:pt-0">
             <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">OAuth 2.0</header>
             <p className="">
@@ -55,14 +56,17 @@ export default function Oauth2() {
               If you have a google account, click the link below to see how easy it is to use OAuth2 to log in. Most of the of the other demos here will use your Google account to authenticate.
             </p>
           </div>
-          <div className="mx-auto flex flex-wrap gap-6 justify-center items-center mt-4 sm:mt-0 border-2 border-[#EF8275] py-4 rounded-xl">
+          <div className="mx-auto flex flex-wrap gap-6 justify-center items-center mt-4 sm:mt-0 rounded-xl">
             {isLogggendIn ? (
               <>
-                <GoogleUser userInfo={userInfo}/>
-                <ActionBtn
-                  title="Log Out"
-                  clickCallback={auth.logOut}
-                />
+                <div className="max-w-full flex flex-wrap gap-6 w-full justify-between items-center border-2 border-[#EF8275] rounded-xl py-2 px-5 sm:px-10">
+                  <GoogleUser userInfo={userInfo}/>
+                  <ActionBtn
+                    title="Log Out"
+                    clickCallback={auth.logOut}
+                    containerClassName="ml-auto sm:mr-5"
+                  />
+                </div>
               </>
             ) : (
               <div>

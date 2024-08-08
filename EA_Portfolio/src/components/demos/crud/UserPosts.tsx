@@ -1,4 +1,3 @@
-import { set } from "animejs";
 import { useEffect, useRef, useState } from "react";
 
 interface UserPostsProps {
@@ -14,7 +13,7 @@ export default function UserPosts( {} : UserPostsProps) {
 
   return (
     <div className="w-full">
-      <div className="h-[300px] border-2 border-black bg-gray-200 rounded-lg rounded-bl-none rounded-br-none">
+      <div className="h-[300px] border-2 border-gray-500 bg-gray-200 rounded-lg rounded-bl-none rounded-br-none">
         <div className="flex flex-col gap-5 h-full p-4 overflow-y-auto">
           <SinglePost
             dateCreated="2021-10-10"
@@ -61,7 +60,7 @@ export default function UserPosts( {} : UserPostsProps) {
       <textarea
         rows={2}
         placeholder="Enter a post..."
-        className="w-full border-2 border-black enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-gray-200 p-2"
+        className="w-full border-2 border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-gray-200 p-2"
       />
     </div>
   )
@@ -134,13 +133,13 @@ function SinglePost({
       <div className="p-2">
 
         <div className="mb-2">
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <div className="ml-1">
               {dateCreated}
             </div>
             <button
               title="Delete"
-              className="ml-auto mr-1 font-sourcecode text-red-600 font-bold text-md hover:scale-150"
+              className="ml-auto px-2 font-sourcecode text-red-600 font-bold text-lg duration-200 hover:scale-150 hover:rotate-180"
             >
               X
             </button>

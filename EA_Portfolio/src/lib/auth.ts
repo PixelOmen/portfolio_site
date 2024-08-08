@@ -54,7 +54,9 @@ export function isLoggedIn(): Promise<boolean> {
 export function logOut(): void {
   localStorage.removeItem('access_token');
   localStorage.removeItem('google_token');
-  window.location.href = LOGGEDOUT_URL;
+  setTimeout(() => {
+    window.location.href = LOGGEDOUT_URL;
+  }, 500);
 }
 
 export function getAuthHeader(): string | null {

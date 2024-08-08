@@ -20,7 +20,7 @@ export default function GoogleUser({
   return (
     <div className="flex justify-center items-center font-roboto max-w-full p-2">
       {userInfo ? (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center max-w-full">
           {(userInfo.picture && !nameOnly) && (
             <div className="flex-none">
               <img
@@ -30,7 +30,7 @@ export default function GoogleUser({
               />
             </div>
           )}
-          <div className="translate-y-[1px] text-lg text-nowrap overflow-hidden overflow-ellipsis">
+          <div className="max-w-1/2 translate-y-[1px] text-lg text-nowrap overflow-hidden overflow-ellipsis">
             {userInfo.name}
           </div>
         </div>

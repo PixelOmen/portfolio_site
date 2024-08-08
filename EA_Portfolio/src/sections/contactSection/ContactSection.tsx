@@ -100,27 +100,35 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
           </div>
         </div>
 
-        <div className="flex justify-center py-4 casc-enterUp gap-8 bg-[#32445d80] border-t-2 border-black">
-          <a 
-            href="https://github.com/PixelOmen"
-            target="_blank"
-            className="hover:scale-110 transition-all duration-300"
-          >
-            <GitHubIcon fillColor="white" className="w-12 sm:w-12"/>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/emmanuelacostapost/" target="_blank"
-            className="hover:scale-110 transition-all duration-300"
-          >
-            <LinkedInIcon fillColor="#0a68c6" className="w-14 sm:w-[60px]"/>
-          </a>
-          <a
-            href="mailto:3D.Acosta@gmail.com"
-            target="_blank"
-            className="ml-1 hover:scale-110 transition-all duration-300"
-          >
-            <EmailIcon fillColor="white" className="w-12 sm:w-12"/>
-          </a>
+        <div className="py-2 casc-enterUp bg-[#32445d80] border-t-2 border-black">
+          <div className="flex justify-center gap-8">
+            <a 
+              href="https://github.com/PixelOmen"
+              target="_blank"
+              className="hover:scale-110 transition-all duration-300"
+            >
+              <GitHubIcon fillColor="white" className="w-12 sm:w-12"/>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/emmanuelacostapost/" target="_blank"
+              className="hover:scale-110 transition-all duration-300"
+            >
+              <LinkedInIcon fillColor="#0a68c6" className="w-14 sm:w-[60px]"/>
+            </a>
+            <a
+              href="mailto:3D.Acosta@gmail.com"
+              target="_blank"
+              className="ml-1 hover:scale-110 transition-all duration-300"
+            >
+              <EmailIcon fillColor="white" className="w-12 sm:w-12"/>
+            </a>
+          </div>
+          <div className="text-center pb-3 casc-enterUp">
+            <span className="text-gray-500 ml-3">
+              EMMANUEL ACOSTA 
+            </span>
+            <span className="text-[#ed6354] ml-1">©2024</span>
+          </div>
         </div>
       </AnimReset>
 

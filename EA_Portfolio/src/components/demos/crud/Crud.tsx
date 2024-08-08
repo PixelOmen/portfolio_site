@@ -7,7 +7,6 @@ import UserPosts from "./UserPosts";
 export default function Oauth2() {
 
   const [isLogggendIn, setIsLoggedIn] = useState(false);
-  const [userInfo, setUserInfo] = useState(undefined);
 
   useEffect(() => {
     auth.isLoggedIn()
@@ -18,14 +17,7 @@ export default function Oauth2() {
 
   useEffect(() => {
     if (isLogggendIn) {
-      auth.getGoogleInfo()
-        .then(res => {
-          setUserInfo(res.data);
-        })
-        .catch(err => {
-          console.error(err);
-          auth.logOut();
-        });
+
     }
   }, [isLogggendIn]);
 
