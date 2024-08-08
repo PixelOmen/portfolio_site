@@ -10,11 +10,15 @@ export default function UserPosts( {} : UserPostsProps) {
 
   const [editRequested, setEditRequested] = useState(-1);
   const [posts, setPosts] = useState<any[]>([]);
+  const postAreaRef = useRef<HTMLDivElement>(null);
   const newTextAreaRef = useRef<HTMLTextAreaElement>(null);
 
   function getPosts() {
     authInstAPI.get('v1/user-posts/')
       .then(res => {
+        if (res.data.length == 0) {
+          addPost("Here's one to get you started!");
+        }
         setPosts(res.data);
       })
       .catch(err => {
@@ -22,15 +26,52 @@ export default function UserPosts( {} : UserPostsProps) {
       });
   }
 
-  function editCallback(postid: number) {
+  function handleEditRequest(postid: number): void {
     setEditRequested(postid);
   }
 
-  function addPost(e: KeyboardEvent) {
-    if (e.key == 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      console.log('Enter pressed');
+  function handleEditConfirm(postid: number, content: string): void {
+    if (!content) return;
+    setEditRequested(-1);
+    authInstAPI.put(`v1/user-posts/${postid}/`, {content})
+    .then(() => {
+        getPosts();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function deletePost(postid: number): void {
+    authInstAPI.delete(`v1/user-posts/${postid}/`)
+      .then(() => {
+        getPosts();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function addPost(content: string): void {
+    if (!content) return;
+    authInstAPI.post('v1/user-posts/', {content})
+      .then(() => {
+        getPosts();
+        setTimeout(() => {
+          postAreaRef.current?.scrollTo({top: 5000, behavior: 'smooth'});
+        }, 100);
+      })
+      .catch(err => {
+        console.error(err);
+      });
     }
+    
+    function addPostViaEnter(e: KeyboardEvent) {
+      if (e.key == 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        addPost(newTextAreaRef.current!.value);
+        newTextAreaRef.current!.value = '';
+      }
   }
 
   useEffect(() => {
@@ -40,26 +81,32 @@ export default function UserPosts( {} : UserPostsProps) {
           getPosts();
         }
       });
-    newTextAreaRef.current?.addEventListener('keydown', addPost);
+    newTextAreaRef.current?.addEventListener('keydown', addPostViaEnter);
 
     return () => {
-      newTextAreaRef.current?.removeEventListener('keydown', addPost);
+      newTextAreaRef.current?.removeEventListener('keydown', addPostViaEnter);
     }
   }, []);
 
   return (
     <div className="w-full">
-      <div className="h-[300px] border-2 border-gray-500 bg-gray-200 rounded-lg rounded-bl-none rounded-br-none">
-        <div className="flex flex-col gap-5 h-full p-4 overflow-y-auto">
+      <div className="h-[340px] border-2 border-gray-500 bg-gray-200 rounded-lg rounded-bl-none rounded-br-none">
+        <div
+          ref={postAreaRef}
+          className="flex flex-col gap-5 h-full p-4 overflow-y-auto"
+        >
           {posts && posts.map(post => {
               return (
                 <SinglePost
                   key={post.id}
                   id={post.id}
                   date_posted={post.date_posted}
+                  date_modified={post.date_modified}
                   content={post.content}
                   owner={post.owner}
-                  editCallback={editCallback}
+                  editRequestCallback={handleEditRequest}
+                  editConfirmCallback={handleEditConfirm}
+                  deleteCallback={deletePost}
                   editRequested={editRequested}
                 />
               )
@@ -69,10 +116,10 @@ export default function UserPosts( {} : UserPostsProps) {
       </div>
       <textarea
         ref={newTextAreaRef}
-        rows={3}
+        rows={2}
         maxLength={200}
         placeholder="Enter a post and press Enter..."
-        className="w-full border-2 border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-gray-200 p-2"
+        className="w-full py-3 px-4 border-2 outline-none border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-gray-200 focus:border-black duration-500"
       />
     </div>
   )
@@ -81,40 +128,63 @@ export default function UserPosts( {} : UserPostsProps) {
 
 
 
+
+
+
+
 interface SinglePostProps {
   id: number;
   date_posted: string;
+  date_modified: string;
   content: string;
   owner: number;
   editRequested: number;
-  editCallback: (postid: number) => void;
+  editRequestCallback: (postid: number) => void;
+  editConfirmCallback: (postid: number, content: string) => void;
+  deleteCallback: (postid: number) => void;
 }
 
 function SinglePost({
   id,
   date_posted,
+  date_modified,
   content,
   owner,
   editRequested,
-  editCallback
+  editRequestCallback,
+  editConfirmCallback,
+  deleteCallback
 } : SinglePostProps) {
 
   const [isEditing, setIsEditing] = useState(false);
   const displayRef = useRef<HTMLDivElement>(null);
   const editRef = useRef<HTMLTextAreaElement>(null);
 
+  function getDate(): {date: string, modified: boolean} {
+    const modified = date_posted != date_modified;
+    const displayDate = modified ? date_modified : date_posted;
+    const date = new Date(displayDate).toLocaleString();
+    return {date, modified}
+  }
+
   function requestEdit() {
-    editCallback(id);
+    editRequestCallback(id);
+  }
+
+  function editConfirm() {
+    editConfirmCallback(id, editRef.current!.value);
   }
 
   function cancelEdit() {
     setIsEditing(false);
-    editCallback(-1);
+    editRequestCallback(-1);
   }
 
-  function escapeEdit(e: KeyboardEvent) {
+  function handleKeydown(e: KeyboardEvent) {
     if (e.key == 'Escape') {
       cancelEdit();
+    } else if (e.key == 'Enter' && !e.shiftKey) {
+      editConfirm();
     }
   }
 
@@ -127,18 +197,18 @@ function SinglePost({
         editRef.current?.setSelectionRange(
           editRef.current.value.length, editRef.current.value.length
         );
-        editRef.current?.addEventListener('keydown', escapeEdit);
+        editRef.current?.addEventListener('keydown', handleKeydown);
       }, 100);
     } else {
       setIsEditing(false);
-      editRef.current?.removeEventListener('keydown', escapeEdit);
+      editRef.current?.removeEventListener('keydown', handleKeydown);
     }
 
   }, [editRequested]);
 
   return (
     <div
-    className="w-full border-2 border-gray-400 bg-gray-200 rounded-lg text-xs"
+    className="w-full border-2 border-gray-400 bg-gray-200 rounded-lg text-xs drop-shadow-md shadow-black"
     data-userid={owner}
     >
 
@@ -147,11 +217,13 @@ function SinglePost({
         <div className="mb-2">
           <div className="flex gap-1 items-center">
             <div className="ml-1">
-              {new Date(date_posted).toLocaleString()}
+              {getDate().date}
+              {getDate().modified && <span className="text-xs text-gray-500"> (edited)</span>}
             </div>
             <button
+              onClick={() => deleteCallback(id)}
               title="Delete"
-              className="ml-auto px-2 font-sourcecode text-red-600 font-bold text-lg duration-200 hover:scale-150 hover:rotate-180"
+              className="ml-auto px-2 font-sourcecode text-red-600 font-bold text-lg duration-200 hover:scale-x-150 hover:scale-y-125 hover:rotate-180 scale-y-75"
             >
               X
             </button>
@@ -175,7 +247,7 @@ function SinglePost({
             <div
               title="Click to edit"
               ref={displayRef}
-              className="cursor-pointer bg-gray-300 hover:bg-orange-100 rounded-sm p-2"
+              className="cursor-pointer bg-gray-300 hover:bg-[#EF8275] hover:text-white rounded-sm p-2"
             >
               {content}
             </div>
@@ -193,6 +265,7 @@ function SinglePost({
             </button>
             - Press Enter to
             <button
+              onClick={() => editConfirmCallback(id, editRef.current!.value)}
               className="text-blue-600 px-1"
             >
               Save

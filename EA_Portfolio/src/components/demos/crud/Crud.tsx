@@ -30,7 +30,7 @@ export default function Oauth2() {
           <div className="p-4 pt-0 sm:p-6 sm:pt-0">
             <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">CRUD</header>
             <p className="">
-              CRUD stands for Create, Read, Update, and Delete. It is a set of operations that can be performed on a database or data store. This demo allows you to perform CRUD operations on a database using a RESTful API, associating your Google account with the data you create. Only you can see the posts you create, you can delete them at any time, and posts will be deleted after 24 hours.
+              CRUD stands for Create, Read, Update, and Delete. It is a set of operations that can be performed on a database or data store. This demo allows you to perform CRUD operations on a database using a RESTful API, associating your Google account with the data you create. 
               <a
                 className="text-[#EF8275] underline ml-2 font-bold"
                 href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete"
@@ -38,6 +38,10 @@ export default function Oauth2() {
               >
                 Learn more
               </a>
+            </p>
+            <br/>
+            <p>
+              Only you can see the posts you create and you can delete them at any time. Try logging out and back in to see your posts persisting in the database. Posts are automatically deleted at midnight PST.
             </p>
           </div>
         </div>

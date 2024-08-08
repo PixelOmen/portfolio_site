@@ -127,7 +127,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
             <span className="text-gray-500 ml-3">
               EMMANUEL ACOSTA 
             </span>
-            <span className="text-[#ed6354] ml-1">©2024</span>
+            <span className="text-[#ed6354] ml-1">© 2024</span>
           </div>
         </div>
       </AnimReset>
