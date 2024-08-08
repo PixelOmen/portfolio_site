@@ -3,15 +3,20 @@ import { useEffect, useRef, useState } from "react";
 import * as auth from "../../../lib/auth";
 import { authInstAPI } from "../../../lib/requests";
 
+import LockIcon from "../../ui/icons/LockIcon";
+import GoogleSignIn from "../../ui/social/GoogleSignIn";
+
 interface UserPostsProps {
+  locked?: boolean;
 }
 
-export default function UserPosts( {} : UserPostsProps) {
+export default function UserPosts({locked = true}: UserPostsProps) {
 
   const [editRequested, setEditRequested] = useState(-1);
   const [posts, setPosts] = useState<any[]>([]);
   const postAreaRef = useRef<HTMLDivElement>(null);
   const newTextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const lockedScreenRef = useRef<HTMLDivElement>(null);
 
   function getPosts() {
     authInstAPI.get('v1/user-posts/')
@@ -89,7 +94,16 @@ export default function UserPosts( {} : UserPostsProps) {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="relative w-full">
+      <div
+        ref={lockedScreenRef}
+        className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 rounded-lg"
+      >
+        <div className="flex flex-col gap-10 justify-center items-center h-full">
+          <LockIcon/>
+          <GoogleSignIn clickCallback={auth.googleLogIn}/>
+        </div>
+      </div>
       <div className="h-[340px] border-2 border-gray-500 bg-gray-200 rounded-lg rounded-bl-none rounded-br-none">
         <div
           ref={postAreaRef}
@@ -119,7 +133,7 @@ export default function UserPosts( {} : UserPostsProps) {
         rows={2}
         maxLength={200}
         placeholder="Enter a post and press Enter..."
-        className="w-full py-3 px-4 border-2 outline-none border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-gray-200 focus:border-black duration-500"
+        className="block w-full py-3 px-4 border-2 outline-none border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-gray-200 focus:border-black duration-500"
       />
     </div>
   )
