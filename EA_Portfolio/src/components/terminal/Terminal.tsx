@@ -198,11 +198,10 @@ export default function Terminal({
           </div>
         </header>
 
-        <div className="relative bg-[#2b1825cf] w-full outline-blue-500 font-sourcecode text-lg rounded-b-lg ">
-          <div className="h-full w-full border-b-2 border-l-2 border-r-2 rounded-bl-lg rounded-br-lg border-gray-600"></div>
+        <div className="relative bg-[#2b1825cf] w-full font-sourcecode text-lg rounded-b-lg ">      
 
           {/* shapeholder */}
-          <div className="leading-6 text-xs sm:text-base opacity-0 p-3 sm:p-4">
+          <div className="leading-6 text-xs sm:text-base opacity-0 p-3 sm:p-2">
             {createPrompts(true)}
           </div>
 

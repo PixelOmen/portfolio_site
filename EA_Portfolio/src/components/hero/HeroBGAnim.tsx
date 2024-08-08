@@ -14,7 +14,7 @@ interface DotGrid {
   height: number;
 }
 
-function dimByScreen(wRatio = 58, hRatio = 52): DotGrid {
+function dimByScreen(wRatio = 80, hRatio = 49): DotGrid {
   return {
     width: Math.floor(window.innerWidth / wRatio),
     height: Math.floor(window.innerHeight / hRatio)
@@ -54,8 +54,8 @@ function Grid() {
           { value: 0, easing: "easeInOutSine", duration: 50 },
       ],
       opacity: [
-          { value: 1, easing: "easeOutSine", duration: 250 },
-          { value: 0.1, easing: "easeInOutSine", duration: 1200 },
+          { value: 0.6, easing: "easeOutSine", duration: 250 },
+          { value: 0, easing: "easeInOutSine", duration: 1200 },
       ],
       delay: anime.stagger(50, {
           grid: [gridDim.width, gridDim.height],
@@ -73,12 +73,12 @@ function Grid() {
     for (let gridY = 0; gridY < gridDim.height; gridY++) {
       dots.push(
         <div
-          className="rounded-xl border-2 opacity-40 border-slate-800 p-4"
+          className="rounded-3xl border-2 border-[rgb(21,29,46)] p-4"
           data-index={dotIndex}
           key={`${gridX}-${gridY}`}
         >
           <div
-            className="gridPoint rounded-md h-5 w-7 opacity-10 bg-slate-600"
+            className="gridPoint rounded-xl h-4 w-12 opacity-0 bg-slate-700"
             data-index={dotIndex}
           >
           </div>

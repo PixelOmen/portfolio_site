@@ -24,12 +24,12 @@ export interface TokenError {
   axiosError: AxiosError;
 }
 
-function generateState(length: number): string {
-  const array = new Uint8Array(length);
-  window.crypto.getRandomValues(array);
-  const state = Array.from(array);
-  return btoa(String.fromCharCode.apply(null, state));
-}
+// function generateState(length: number): string {
+//   const array = new Uint8Array(length);
+//   window.crypto.getRandomValues(array);
+//   const state = Array.from(array);
+//   return btoa(String.fromCharCode.apply(null, state));
+// }
 
 
 export function isLoggedIn(): Promise<boolean> {
