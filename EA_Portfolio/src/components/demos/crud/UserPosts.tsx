@@ -106,7 +106,7 @@ export default function UserPosts({locked = true}: UserPostsProps) {
             </div>
           </div>
         )}
-      <div className="h-[340px] border-2 border-gray-500 bg-gray-200 rounded-lg rounded-bl-none rounded-br-none">
+      <div className={`h-[340px] border-2 border-gray-500 bg-gray-200 rounded-lg rounded-bl-none rounded-br-none ${locked && 'opacity-0'}`}>
         <div
           ref={postAreaRef}
           className="flex flex-col gap-5 h-full p-4 overflow-y-auto"
@@ -135,7 +135,7 @@ export default function UserPosts({locked = true}: UserPostsProps) {
         rows={2}
         maxLength={200}
         placeholder="Enter a post and press Enter..."
-        className="block w-full py-3 px-4 border-2 outline-none border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-gray-200 focus:border-black duration-500"
+        className={`block w-full py-3 px-4 border-2 outline-none border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-gray-200 focus:border-black duration-500 ${locked && 'opacity-0'}`}
       />
     </div>
   )
