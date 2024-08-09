@@ -16,7 +16,7 @@ export default function ActionBtn({
       onClick={clickCallback}
       className={`group rounded-xl text-white ${className}`}
     >
-      <div className={`bg-[#EF8275] hover:bg-[#f66757] group-hover:scale-105 active:-translate-y-0 active:duration-75 px-3 py-1 transition-all duration-300 rounded-lg ${btnClassName}`}>
+      <div className={`bg-[#EF8275] hover:bg-[#f66757] hover:scale-105 active:scale-100 active:duration-75 px-3 py-1 transition-all duration-300 rounded-lg ${btnClassName}`}>
         {title}
       </div>
     </button>

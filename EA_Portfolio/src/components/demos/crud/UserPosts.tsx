@@ -95,17 +95,17 @@ export default function UserPosts({locked = true}: UserPostsProps) {
 
   return (
     <div className="relative w-full">
-        {locked && (
-          <div
-            ref={lockedScreenRef}
-            className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 rounded-lg"
-          >
-            <div className="flex flex-col gap-10 justify-center items-center h-full">
-              <LockIcon/>
-              <GoogleSignIn clickCallback={auth.googleLogIn}/>
-            </div>
+      {locked && (
+        <div
+          ref={lockedScreenRef}
+          className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 rounded-lg"
+        >
+          <div className="flex flex-col gap-10 justify-center items-center h-full">
+            <LockIcon/>
+            <GoogleSignIn clickCallback={auth.googleLogIn}/>
           </div>
-        )}
+        </div>
+      )}
       <div className={`h-[340px] border-2 border-gray-500 bg-gray-200 rounded-lg rounded-bl-none rounded-br-none ${locked && 'opacity-0'}`}>
         <div
           ref={postAreaRef}
@@ -272,7 +272,7 @@ function SinglePost({
         </div>
 
         {isEditing && (
-          <div className="mt-1">
+          <div className="mt-1 pl-1">
             Press Esc to
             <button
               onClick={cancelEdit}
