@@ -50,7 +50,7 @@ export default function S3Images() {
         </div>
 
         <div
-          className="min-[720px]:basis-[50%] min-[720px]:ml-auto sm:min-w-[350px] mt-4 min-[720px]:mt-0"
+          className="max-[720px]:w-full min-[720px]:basis-[50%] min-[720px]:ml-auto sm:min-w-[350px] mt-4 min-[720px]:mt-0"
         >
           <UserImages locked={!isLogggendIn}/>
         </div>
