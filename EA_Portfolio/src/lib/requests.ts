@@ -19,6 +19,14 @@ export const authInstAPI = axios.create({
     }
 });
 
+export const anonInstAPI = axios.create({
+    baseURL: auth.API_ROOT,
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
+});
+
 export const userUploadsAPI = axios.create({
     baseURL: auth.API_ROOT,
     headers: {
@@ -27,10 +35,10 @@ export const userUploadsAPI = axios.create({
     }
 });
 
-export const anonInstAPI = axios.create({
+export const anonFormInstAPI = axios.create({
     baseURL: auth.API_ROOT,
     headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         'Accept': 'application/json',
     }
 });
