@@ -6,7 +6,7 @@ interface GoogleSignInProps {
 
 export default function GoogleSignIn( {clickCallback}: GoogleSignInProps ) {
   return (
-    <button className='flex items-center' onClick={clickCallback}>
+    <button className='flex items-center min-w-max' onClick={clickCallback}>
         <div className='bg-gray-100 px-3 py-3 h-full flex items-center rounded-l-md'>
             <img
                 src={googleLogo}
