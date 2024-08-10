@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import * as auth from "../../../lib/auth";
 import UserImages from "./UserImages";
+import DemoLink from "../../ui/links/DemoLink";
 
 export default function S3Images() {
 
@@ -31,18 +32,19 @@ export default function S3Images() {
           <div className="p-4 pt-0 sm:p-6 sm:pt-0">
             <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">Media Storage</header>
             <p className="">
-              CRUD stands for Create, Read, Update, and Delete. It is a set of operations that can be performed on a database or data store. This demo allows you to perform CRUD operations on a database using a RESTful API, associating your Google account with the data you create. 
-              <a
-                className="text-[#EF8275] underline ml-2 font-bold"
-                href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete"
-                target="_blank"
-              >
-                Learn more
-              </a>
+              This demo allows you to upload images to an <DemoLink
+                displayText="AWS S3"
+                url="https://aws.amazon.com/s3/"
+                className="ml-0 mr-1"
+              /> bucket. The images are stored in a private bucket and associated with your Google account. Everytime an image loads, it is fetched from the bucket using a pre-signed URL, powered by <DemoLink
+                displayText="Django-storages"
+                url="https://django-storages.readthedocs.io/en/latest//"
+                className="ml-0 mr-0"
+              />.
             </p>
             <br/>
             <p>
-              Only you can see the posts you create and you can delete them at any time. Try logging out and back in to see your posts persisting in the database. Posts are automatically deleted at midnight PST.
+              Only you can see the images you upload and you can delete them at any time. Your images will persist even if you logout. Images are limited to 5MB in size and you can have a maximum of 6 images at a time. Images are automatically deleted at midnight PST.
             </p>
           </div>
         </div>

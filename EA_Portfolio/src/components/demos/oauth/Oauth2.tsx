@@ -6,6 +6,7 @@ import ActionBtn from "../../ui/buttons/ActionBtn";
 import GoogleUser from "../../ui/social/GoogleUser";
 import GoogleSignIn from "../../ui/social/GoogleSignIn";
 import oauth2_badge from "../../../assets/icons/oauth2_badge.png";
+import DemoLink from "../../ui/links/DemoLink";
 
 export default function Oauth2() {
 
@@ -42,13 +43,11 @@ export default function Oauth2() {
             <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">OAuth 2.0</header>
             <p className="">
               OAuth 2.0 is a standard that allows you log in to an app using a different existing account, like from Google or Facebook, without sharing your password with the app.
-              <a
-                className="text-[#EF8275] underline ml-2 font-bold"
-                href="https://oauth.net/2/"
-                target="_blank"
-              >
-                Learn more
-              </a>
+              <DemoLink
+                displayText="Learn more"
+                url="https://oauth.net/2/"
+                className="mr-2"
+              />
             </p>
             <br/>
             <p>

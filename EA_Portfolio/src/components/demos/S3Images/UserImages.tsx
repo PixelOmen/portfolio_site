@@ -15,6 +15,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
   const fileInputId = useId();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
   const lockedScreenRef = useRef<HTMLDivElement>(null);
   const serverLimits = useRef<ServerLimits | null>(null);
   const [allowedImgTypes, setAllowedImgTypes] = useState<string[]>([]);
@@ -113,6 +114,9 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
     userUploadsAPI.post('v1/user-images/', formData)
       .then(() => {
         getImages();
+        setTimeout(() => {
+          imageContainerRef.current?.scrollTo({top: 5000, behavior: 'smooth'});
+        }, 500);
       })
       .catch(err => {
         console.error(err);
@@ -180,10 +184,11 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
         </div>
       )}
       <div
-        className={`h-[340px] p-4 border-2 border-gray-500 bg-gray-200 rounded-lg overflow-y-auto ${locked && 'opacity-0'}`}
+        ref={imageContainerRef}
+        className={`h-[340px] border-2 border-gray-500 bg-gray-200 rounded-lg overflow-y-auto ${locked && 'opacity-0'}`}
       >
         <div
-          className="flex gap-5 justify-center flex-wrap"
+          className="p-6 flex gap-5 justify-center flex-wrap"
         >
         {imageData && imageData.map(data => (
             <SingleImage
@@ -290,7 +295,7 @@ function SingleImage({
         src={image}
         title={`ImageID: ${id} - Posted: ${new Date(date_posted).toLocaleString()}`}
         alt={`ImageID: ${id}`}
-        className="w-full sm:w-32 h-full sm:h-32 object-cover hover:scale-110 transform duration-500"
+        className="w-32 h-32 object-cover hover:scale-110 transform duration-500"
       />
     </div>
   )
