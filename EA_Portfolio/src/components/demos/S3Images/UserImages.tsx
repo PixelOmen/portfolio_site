@@ -20,6 +20,8 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
   const [allowedImgTypes, setAllowedImgTypes] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
 
+  const [imageData, setImageData] = useState<SingleImageProps[]>([]);
+
   function getServerLimits() {
     authInstAPI.get('v1/server-limits/')
       .then(res => {
@@ -47,8 +49,8 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
   }
 
   function handleUpload() {
+    setError("");
     if (!fileInputRef.current?.files || fileInputRef.current.files.length < 1) {
-      setError("");
       return;
     } 
     if (!serverLimits.current) {
@@ -66,12 +68,24 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       return;
     }
 
+    function handleDelete(id: number) {
+      userUploadsAPI.delete(`v1/user-images/${id}/`)
+        .then(res => {
+          console.log(res);
+          getImages();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+
     setError("");
     const formData = new FormData();
     formData.append('image', file);
     userUploadsAPI.post('v1/user-images/', formData)
       .then(res => {
         console.log(res);
+        getImages();
       })
       .catch(err => {
         console.error(err);
@@ -79,9 +93,21 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       });
   }
 
+  function getImages() {
+    authInstAPI.get('v1/user-images/')
+      .then(res => {
+        console.log(res.data);
+        setImageData(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
   useEffect(() => {
     if (locked) return;
     getServerLimits();
+    getImages();
     fileInputRef.current?.addEventListener('change', handleUpload);
 
     return () => {
@@ -105,12 +131,23 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       <div
         className={`h-[340px] p-4 border-2 border-gray-500 bg-gray-200 rounded-lg overflow-y-auto ${locked && 'opacity-0'}`}
       >
-        test
+        <div
+          className="flex gap-5 justify-center flex-wrap"
+        >
+        {imageData && imageData.map(data => (
+            <SingleImage
+              key={data.id}
+              id={data.id}
+              image={data.image}
+              date_posted={data.date_posted}
+            />
+          ))}
+        </div>
       </div>
-      <div className={`mt-2 flex justify-center ${locked && 'opacity-0'}`}>
+      <div className={`mt-4 sm:mt-2 flex justify-center ${locked && 'opacity-0'}`}>
         <label
           htmlFor={fileInputId}
-          className="block max-w-max cursor-pointer bg-[#EF8275] hover:bg-[#f66757] text-white rounded-md p-2 px-3 hover:px-4 active:px-3 duration-200" 
+          className="block w-full sm:w-[90%] text-center cursor-pointer bg-[#EF8275] hover:bg-[#f66757] text-white rounded-md p-2 hover:w-full active:w-[90%] duration-200" 
         >
           Upload Image
         </label>
@@ -128,6 +165,45 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
           {error}
         </div>
       )}
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+interface SingleImageProps {
+  id: number;
+  image: string;
+  date_posted: string;
+}
+
+function SingleImage({
+  id,
+  image,
+  date_posted  
+}: SingleImageProps ) {
+
+  function handleClick() {
+
+  }
+
+  return (
+    <div
+      onClick={handleClick}
+      className="rounded-xl overflow-hidden border-2 border-black"
+    >
+      <img
+        src={image}
+        title={`ImageID: ${id} - Posted: ${new Date(date_posted).toLocaleString()}`}
+        alt={`ImageID: ${id}`}
+        className="w-full sm:w-32 h-full sm:h-32 object-cover hover:scale-110 transform duration-500 cursor-pointer"
+      />
     </div>
   )
 }
