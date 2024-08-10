@@ -3,6 +3,7 @@ import * as auth from "./auth";
 
 export interface ServerLimits {
     max_image_size: number;
+    max_user_images: number;
     max_post_size: number;
     allowed_image_extensions: string[];
   }

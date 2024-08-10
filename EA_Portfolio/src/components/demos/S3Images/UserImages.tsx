@@ -19,8 +19,19 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
   const serverLimits = useRef<ServerLimits | null>(null);
   const [allowedImgTypes, setAllowedImgTypes] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
-
+  
   const [imageData, setImageData] = useState<SingleImageProps[]>([]);
+  const [imagesLoaded, setImagesLoaded] = useState<boolean>(false);
+  const loadedCountRef = useRef<number>(0);
+  const imageCountRef = useRef<number>(imageData.length);
+  const uploadLabelRef = useRef<HTMLLabelElement>(null);
+
+  const uploadLabelReady = "Upload Image";
+  const uploadLabelUploading = "Loading...";
+
+
+
+  // ----- Validation, Limits, Loading ---------
 
   function getServerLimits() {
     authInstAPI.get('v1/server-limits/')
@@ -38,6 +49,9 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       return "Server limits not loaded";
     }
     const currentLimits = serverLimits.current;
+    if (imageCountRef.current >= currentLimits.max_user_images) {
+      return `Max images reached 😢. Delete an image to upload a new one.`;
+    }
     if (file.size > currentLimits.max_image_size) {
       const maxSize = currentLimits.max_image_size / 1024 / 1024;
       return `File size too large, max size is ${maxSize}MB, sorry 😢`;
@@ -46,6 +60,30 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       return "File type unsupported, sorry 😢";
     }
     return "";
+  }
+
+  function loadedCallback() {
+    loadedCountRef.current++;
+    if (loadedCountRef.current >= imageCountRef.current) {
+      setImagesLoaded(true);
+    }
+  }
+
+
+
+  // ------- API Calls ---------
+
+  function getImages() {
+    authInstAPI.get('v1/user-images/')
+      .then(res => {
+        imageCountRef.current = res.data.length;
+        loadedCountRef.current = 0;
+        setImagesLoaded(false);
+        setImageData(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   function handleUpload() {
@@ -71,21 +109,22 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
     setError("");
     const formData = new FormData();
     formData.append('image', file);
+    setImagesLoaded(false);
     userUploadsAPI.post('v1/user-images/', formData)
-      .then(res => {
-        console.log(res);
+      .then(() => {
         getImages();
       })
       .catch(err => {
         console.error(err);
         setError(error);
+        setImagesLoaded(true);
       });
   }
 
   function handleDelete(id: number) {
+    setError("");
     userUploadsAPI.delete(`v1/user-images/${id}/`)
-      .then(res => {
-        console.log(res);
+      .then(() => {
         getImages();
       })
       .catch(err => {
@@ -93,15 +132,10 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       });
   }
 
-  function getImages() {
-    authInstAPI.get('v1/user-images/')
-      .then(res => {
-        setImageData(res.data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }
+
+
+
+  // -------- Effects ----------
 
   useEffect(() => {
     if (locked) return;
@@ -113,6 +147,24 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       fileInputRef.current?.removeEventListener('change', handleUpload);
     }
   }, [locked]);
+
+
+  useEffect(() => {
+    if (locked || !uploadLabelRef.current) return;
+    if (imagesLoaded) {
+      uploadLabelRef.current.textContent = uploadLabelReady;
+      uploadLabelRef.current.classList.remove('w-[90%]');
+      uploadLabelRef.current.classList.remove('pointer-events-none');
+    } else {
+      uploadLabelRef.current.textContent = uploadLabelUploading;
+      uploadLabelRef.current.classList.add('w-[90%]');
+      uploadLabelRef.current.classList.add('pointer-events-none');
+    }
+}, [imagesLoaded])
+
+
+
+
 
   return (
     <div className="relative w-full">
@@ -140,16 +192,18 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
               image={data.image}
               date_posted={data.date_posted}
               deleteCallback={handleDelete}
+              loadedCallback={loadedCallback}
             />
           ))}
         </div>
       </div>
       <div className={`mt-4 sm:mt-2 flex justify-center ${locked && 'opacity-0'}`}>
         <label
+          ref={uploadLabelRef}
           htmlFor={fileInputId}
-          className="block w-full sm:w-[90%] text-center cursor-pointer bg-[#EF8275] hover:bg-[#f66757] text-white rounded-md p-2 hover:w-full active:w-[90%] duration-200" 
+          className="block w-full text-center cursor-pointer bg-[#EF8275] hover:bg-[#f66757] text-white rounded-md p-2 hover:w-full active:w-[90%] duration-200" 
         >
-          Upload Image
+          {uploadLabelReady}
         </label>
         <input
           ref={fileInputRef}
@@ -182,13 +236,15 @@ interface SingleImageProps {
   image: string;
   date_posted: string;
   deleteCallback: (id: number) => void;
+  loadedCallback: () => void;
 }
 
 function SingleImage({
   id,
   image,
   date_posted,
-  deleteCallback
+  deleteCallback,
+  loadedCallback
 }: SingleImageProps ) {
 
   const loadingRef = useRef<HTMLDivElement>(null);
@@ -197,6 +253,7 @@ function SingleImage({
   useEffect(() => {
     if (imgRef.current === null) return;
     imgRef.current.onload = () => {
+      loadedCallback();
       if (loadingRef.current) {
         loadingRef.current.classList.add('-translate-y-[100%]');
       }
