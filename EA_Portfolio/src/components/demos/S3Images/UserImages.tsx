@@ -40,7 +40,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
     const currentLimits = serverLimits.current;
     if (file.size > currentLimits.max_image_size) {
       const maxSize = currentLimits.max_image_size / 1024 / 1024;
-      return `File size too large, max size is ${maxSize}MB`;
+      return `File size too large, max size is ${maxSize}MB, sorry 😢`;
     }
     if (!currentLimits.allowed_image_extensions.includes(file.type.toLowerCase())) {
       return "File type unsupported, sorry 😢";
@@ -68,17 +68,6 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       return;
     }
 
-    function handleDelete(id: number) {
-      userUploadsAPI.delete(`v1/user-images/${id}/`)
-        .then(res => {
-          console.log(res);
-          getImages();
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    }
-
     setError("");
     const formData = new FormData();
     formData.append('image', file);
@@ -93,10 +82,20 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       });
   }
 
+  function handleDelete(id: number) {
+    userUploadsAPI.delete(`v1/user-images/${id}/`)
+      .then(res => {
+        console.log(res);
+        getImages();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
   function getImages() {
     authInstAPI.get('v1/user-images/')
       .then(res => {
-        console.log(res.data);
         setImageData(res.data);
       })
       .catch(err => {
@@ -140,6 +139,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
               id={data.id}
               image={data.image}
               date_posted={data.date_posted}
+              deleteCallback={handleDelete}
             />
           ))}
         </div>
@@ -161,7 +161,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
         />
       </div>
       {error && (
-        <div className="fadeInDown text-center text-red-500 mt-1">
+        <div className="text-center text-red-500 mt-1 rounded-lg animate-pulse">
           {error}
         </div>
       )}
@@ -181,28 +181,59 @@ interface SingleImageProps {
   id: number;
   image: string;
   date_posted: string;
+  deleteCallback: (id: number) => void;
 }
 
 function SingleImage({
   id,
   image,
-  date_posted  
+  date_posted,
+  deleteCallback
 }: SingleImageProps ) {
 
-  function handleClick() {
+  const loadingRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
 
-  }
+  useEffect(() => {
+    if (imgRef.current === null) return;
+    imgRef.current.onload = () => {
+      if (loadingRef.current) {
+        loadingRef.current.classList.add('-translate-y-[100%]');
+      }
+    }
+  }, []);
 
   return (
     <div
-      onClick={handleClick}
-      className="rounded-xl overflow-hidden border-2 border-black"
+      className="group relative rounded-xl overflow-hidden border-2 border-black"
     >
+      <div
+        ref={loadingRef}
+        className="absolute w-full h-full bg-slate-600 z-10 duration-300"
+      >
+        <div className="flex justify-center items-center h-full">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-200"></div>
+        </div>
+      </div>
+      <div
+        className="absolute w-full top-0 left-1 z-10 translate-y-2 translate-x-12 group-hover:translate-x-0 transition-all duration-300"
+      >
+        <div className="ml-auto px-1 text-right w-max bg-gray-200 border-2 border-gray-700 rounded-lg">
+          <button
+            onClick={() => deleteCallback(id)}
+            title="Delete"
+            className="px-2 font-sourcecode text-red-600 font-bold text-lg duration-200 hover:scale-x-150 hover:scale-y-125 hover:rotate-180 scale-y-100"
+          >
+            X
+          </button>
+        </div>
+      </div>
       <img
+        ref={imgRef}
         src={image}
         title={`ImageID: ${id} - Posted: ${new Date(date_posted).toLocaleString()}`}
         alt={`ImageID: ${id}`}
-        className="w-full sm:w-32 h-full sm:h-32 object-cover hover:scale-110 transform duration-500 cursor-pointer"
+        className="w-full sm:w-32 h-full sm:h-32 object-cover hover:scale-110 transform duration-500"
       />
     </div>
   )
