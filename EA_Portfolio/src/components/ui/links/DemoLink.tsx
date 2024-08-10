@@ -13,7 +13,7 @@ export default function DemoLink({
 }: DemoLinkProps ) {
   return (
       <a
-        className={`text-[#EF8275] underline ml-2 font-bold ${className}`}
+        className={`text-[#EF8275] underline font-bold ${className}`}
         href={url}
         target={newTab ? "_blank" : "_self"}
       >
