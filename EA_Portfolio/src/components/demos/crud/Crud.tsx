@@ -36,13 +36,11 @@ export default function Oauth2() {
                 displayText="AWS RDS"
                 url="https://aws.amazon.com/rds/"
                 className="ml-0 mr-1"
-              />
-              via a <DemoLink
+              /> via a <DemoLink
                 displayText="RESTful API"
                 url="https://aws.amazon.com/what-is/restful-api/"
                 className="ml-0 mr-1"
-              />
-              powered by <DemoLink
+              /> powered by <DemoLink
                 displayText="DRF"
                 url="https://www.django-rest-framework.org/"
                 className="ml-0 mr-1"
