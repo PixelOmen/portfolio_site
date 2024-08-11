@@ -26,7 +26,7 @@ export default function DemoSection({}: DemoSectionProps) {
             className="w-full mb-6 text-black rounded-lg py-10"
           >
             <div className="flex flex-col gap-16">
-              <div className="w-full flex justify-center">
+              <div className="mx-auto">
                 <Oauth2/>
               </div>
               <div className="flex mx-auto items-center w-[90%] text-[#EF8275]">
@@ -34,10 +34,10 @@ export default function DemoSection({}: DemoSectionProps) {
                 <hr className="w-full -translate-y-[1px] border-2 border-[#EF8275] border-dotted"/>
                 <div>{">"}</div>
               </div>
-              <div className="w-full flex justify-center">
+              <div className="mx-auto">
                 <Crud/>
               </div>
-              <div className="w-full flex justify-center">
+              <div className="mx-auto">
                 <MediaStorage/>
               </div>              
             </div>

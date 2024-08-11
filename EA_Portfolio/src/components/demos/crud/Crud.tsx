@@ -21,18 +21,18 @@ export default function Oauth2() {
 
   return (
     <div            
-      className="w-full max-w-[1300px] flex justify-center p-4 lg:px-8"
+      className="w-full max-w-[1400px] flex justify-center p-4 lg:px-8"
     >
       <div className="flex justify-center items-center max-[719px]:flex-wrap">
         <div className="min-[720px]:basis-[45%] min-[720px]:ml-auto sm:min-w-[350px] mt-4 min-[720px]:mt-0 order-1 min-[720px]:order-2">
           <div className="pt-0 sm:p-6 sm:pt-0">
             <header className="text-center text-3xl font-bold text-[#EF8275] mb-4">CRUD</header>
             <p className="">
-              CRUD stands for Create, Read, Update, and Delete. It is a set of operations that can be performed on a database or data store. This demo allows you to perform CRUD operations on a <DemoLink
+                CRUD stands for Create, Read, Update, and Delete. It is a set of operations that can be performed on a database or data store. This demo allows you to perform CRUD operations on a <DemoLink
                 displayText="PostgreSQL"
                 url="https://www.postgresql.org/about/"
-                className="ml-0 mr-1"
-              /> database running on <DemoLink
+                className="ml-0 mr-0"
+              /><></> database running on <DemoLink
                 displayText="AWS RDS"
                 url="https://aws.amazon.com/rds/"
                 className="ml-0 mr-1"
