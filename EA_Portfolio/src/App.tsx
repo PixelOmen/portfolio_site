@@ -33,6 +33,7 @@ export default function App() {
   const scrollObserver = new ScrollObserver();
 
   useEffect(() => {
+    console.log("%c🤪I'm watching you🤪", 'color: red; font-size: 18px');
     handleRoutes(sectionMap);
   }, []);
 
