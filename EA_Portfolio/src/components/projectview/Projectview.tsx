@@ -40,13 +40,13 @@ export default function ProjectView({
   return (
     <div
       style={{background: 'radial-gradient(circle, #e5e7eb  0%, #c8cace 100%)'}}
-      className={`w-full font-sourcecode py-8 px-10 pb-12 rounded-lg text-black transition-all overflow-hidden ${className}`}
+      className={`w-full font-sourcecode py-8 px-5 sm:px-10 pb-12 rounded-lg text-black transition-all overflow-hidden ${className}`}
     >
       <button
         onClick={forcePopState}
         className='hover:scale-x-125 hover:scale-y-90 transition-all duration-300 hover:text-[#EF8275]'
       >
-        <div className='text-3xl ml-5 mb-10 sm:mb-0 text-center casc-fadeInDown font-bold'>
+        <div className='text-3xl sm:ml-5 mb-10 sm:mb-0 text-center casc-fadeInDown font-bold'>
           {"<---"}
         </div>
       </button>

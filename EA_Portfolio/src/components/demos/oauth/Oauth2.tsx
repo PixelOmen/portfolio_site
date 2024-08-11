@@ -42,8 +42,7 @@ export default function Oauth2() {
           <div className="p-2 pt-0 sm:p-6 sm:pt-0 text-center">
             <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">OAuth 2.0</header>
             <p className="">
-              OAuth 2.0 is a standard that allows you log in to an app using a different existing account, like from Google or Facebook, without sharing your password with the app.
-              <DemoLink
+              OAuth 2.0 is a standard that allows you log in to an app using a different existing account, like from Google or Facebook, without sharing your password with the app. <DemoLink
                 displayText="Learn more"
                 url="https://oauth.net/2/"
                 className="mr-2"
@@ -71,10 +70,10 @@ export default function Oauth2() {
                 </div>
               </>
             ) : (
-              <div className="flex items-center gap-4">
-                <span className="text-[#EF8275] font-bold">{"---->"}</span>
+              <div className="flex justify-center items-center gap-4 overflow-hidden">
+                <span className="text-[#EF8275] font-bold text-nowrap">{"---->"}</span>
                 <GoogleSignIn clickCallback={auth.googleLogIn}/>
-                <span className="text-[#EF8275] font-bold">{"<----"}</span>
+                <span className="text-[#EF8275] font-bold text-nowrap">{"<----"}</span>
               </div>
             )}
           </div>

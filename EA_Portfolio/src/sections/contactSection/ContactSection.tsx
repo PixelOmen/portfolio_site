@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 
+import { anonFormInstAPI } from "../../lib/requests";
+
 import type { IScrollState } from "../../lib/scrolling";
 import AnimReset from "../../components/animReset/AnimReset";
 
@@ -16,11 +18,17 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
 
   const [triggered, setTriggered] = useState(false);
 
-  function formSubmit(e: React.FormEvent) {
+  function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log('sent')
-    // const formEvent = e.target as HTMLFormElement
-    // const formData = new FormData(formEvent)
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+    anonFormInstAPI.post('/v1/email-test/', data)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
 
@@ -66,23 +74,25 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
                 className="p-8 max-w-[800px] w-screen"
               >
                 <form
-                  onSubmit={formSubmit}
-                  method="POST"
+                  onSubmit={handleFormSubmit}
                   className="flex flex-col gap-4 text-black casc-fadeInUp"
                 >
                   <input
                     type="text"
+                    name="name"
                     placeholder="Name"
                     className="h-8 p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
                     required={true}
                   />
                   <input
                     type="email"
+                    name="email"
                     placeholder="Email"
                     className="h-8 p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
                     required={true}
                   />
                   <textarea
+                    name="message"
                     placeholder="Message"
                     rows={5}
                     className="p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
