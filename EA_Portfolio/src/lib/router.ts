@@ -30,5 +30,7 @@ function demo(demoref: React.RefObject<HTMLDivElement>) {
     if (!demoref.current) {
         console.error('No demo ref in handleRoute');
     }
-    demoref.current?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+        demoref.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 1000);
 }
