@@ -38,29 +38,32 @@ function Grid() {
         clearTimeout(currentAnim);
         if (childCall) { return } else { animAllowed = true }
     }
-    const startPoint = Math.floor(Math.random() * dotIndex);
-    anime({
-      targets: ".gridPoint",
-      scale: [
-          { value: 1.5, easing: "easeOutSine", duration: 250 },
-          { value: 1, easing: "easeInOutSine", duration: 1500 },
-      ],
-      translateY: [
-          { value: -20, easing: "easeOutSine", duration: 100 },
-          { value: 0, easing: "easeInOutSine", duration: 1000 },
-      ],
-      translateX: [
-          { value: -40, easing: "easeOutSine", duration: 500 },
-          { value: 0, easing: "easeInOutSine", duration: 50 },
-      ],
-      opacity: [
-          { value: 0.6, easing: "easeOutSine", duration: 250 },
-          { value: 0, easing: "easeInOutSine", duration: 1200 },
-      ],
-      delay: anime.stagger(50, {
-          grid: [gridDim.width, gridDim.height],
-          from: startPoint,
-      }),
+
+    requestAnimationFrame(() => {
+      const startPoint = Math.floor(Math.random() * dotIndex);
+      anime({
+        targets: ".gridPoint",
+        scale: [
+            { value: 1.5, easing: "easeOutSine", duration: 250 },
+            { value: 1, easing: "easeInOutSine", duration: 1500 },
+        ],
+        translateY: [
+            { value: -20, easing: "easeOutSine", duration: 100 },
+            { value: 0, easing: "easeInOutSine", duration: 1000 },
+        ],
+        translateX: [
+            { value: -40, easing: "easeOutSine", duration: 500 },
+            { value: 0, easing: "easeInOutSine", duration: 50 },
+        ],
+        opacity: [
+            { value: 0.6, easing: "easeOutSine", duration: 250 },
+            { value: 0, easing: "easeInOutSine", duration: 1200 },
+        ],
+        delay: anime.stagger(50, {
+            grid: [gridDim.width, gridDim.height],
+            from: startPoint,
+        }),
+      });
     })
     currentAnim = setTimeout(() => {
       startAnims(true);
