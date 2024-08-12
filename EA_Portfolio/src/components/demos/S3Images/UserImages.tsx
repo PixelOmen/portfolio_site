@@ -157,10 +157,12 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
     if (locked || !uploadLabelRef.current) return;
     if (imagesLoaded) {
       uploadLabelRef.current.textContent = uploadLabelReady;
+      uploadLabelRef.current.classList.add('min-w-full');
       uploadLabelRef.current.classList.remove('min-w-[90%]');
       uploadLabelRef.current.classList.remove('pointer-events-none');
     } else {
       uploadLabelRef.current.textContent = uploadLabelUploading;
+      uploadLabelRef.current.classList.remove('min-w-full');
       uploadLabelRef.current.classList.add('min-w-[90%]');
       uploadLabelRef.current.classList.add('pointer-events-none');
     }
@@ -202,11 +204,11 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
           ))}
         </div>
       </div>
-      <div className={`mt-4 sm:mt-2 flex justify-center ${locked && 'opacity-0'}`}>
+      <div className={`relative mt-4 sm:mt-2 flex justify-center ${locked && 'opacity-0'}`}>
         <label
           ref={uploadLabelRef}
           htmlFor={fileInputId}
-          className="block min-w-full text-center cursor-pointer bg-[#EF8275] hover:bg-[#f66757] text-white rounded-md p-2 active:w-[90%] duration-200" 
+          className="block min-w-[90%] text-center cursor-pointer bg-[#EF8275] hover:bg-[#f66757] text-white rounded-md p-2 active:min-w-[90%] duration-200" 
         >
           {uploadLabelReady}
         </label>
