@@ -14,7 +14,7 @@ interface DotGrid {
   height: number;
 }
 
-function dimByScreen(wRatio = 78, hRatio = 49): DotGrid {
+function dimByScreen(wRatio = 72, hRatio = 46): DotGrid {
   return {
     width: Math.floor(window.innerWidth / wRatio),
     height: Math.floor(window.innerHeight / hRatio)
@@ -73,12 +73,12 @@ function Grid() {
     for (let gridY = 0; gridY < gridDim.height; gridY++) {
       dots.push(
         <div
-          className="rounded-3xl border-2 border-[rgb(21,29,46)] p-4"
+          className="rounded-xl border-2 border-[rgb(21,29,46)] p-4"
           data-index={dotIndex}
           key={`${gridX}-${gridY}`}
         >
           <div
-            className="gridPoint rounded-xl h-4 w-12 opacity-0 bg-slate-700"
+            className={`gridPoint h-4 w-12 rounded-md opacity-0 bg-slate-700`}
             data-index={dotIndex}
           >
           </div>
