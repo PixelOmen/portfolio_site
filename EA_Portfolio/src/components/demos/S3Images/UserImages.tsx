@@ -65,7 +65,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
   function loadedCallback() {
     loadedCountRef.current++;
-    if (loadedCountRef.current >= imageCountRef.current) {
+    if (loadedCountRef.current >= imageCountRef.current || imageCountRef.current === 0) {
       setImagesLoaded(true);
     }
   }
@@ -79,8 +79,12 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       .then(res => {
         imageCountRef.current = res.data.length;
         loadedCountRef.current = 0;
-        setImagesLoaded(false);
         setImageData(res.data);
+        if (res.data.length > 0) {
+          setImagesLoaded(false);
+        } else {
+          setImagesLoaded(true);
+        }
       })
       .catch(err => {
         console.error(err);
@@ -127,11 +131,13 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
   function handleDelete(id: number) {
     setError("");
+    setImagesLoaded(false);
     userUploadsAPI.delete(`v1/user-images/${id}/`)
       .then(() => {
         getImages();
       })
       .catch(err => {
+        setImagesLoaded(true);
         console.error(err);
       });
   }
@@ -177,7 +183,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       {locked && (
         <div
           ref={lockedScreenRef}
-          className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 rounded-lg"
+          className="absolute top-0 left-0 w-full h-full bg-gray-600 bg-opacity-50 z-10 rounded-lg"
         >
           <div className="flex flex-col gap-10 justify-center items-center h-full">
             <LockIcon/>
@@ -204,11 +210,11 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
           ))}
         </div>
       </div>
-      <div className={`relative mt-4 sm:mt-2 flex justify-center ${locked && 'opacity-0'}`}>
+      <div className={`relative mt-2 sm:mt-3 flex justify-center ${locked && 'opacity-0'}`}>
         <label
           ref={uploadLabelRef}
           htmlFor={fileInputId}
-          className="block min-w-[90%] text-center cursor-pointer bg-[#EF8275] hover:bg-[#f66757] text-white rounded-md p-2 active:min-w-[90%] duration-200" 
+          className="block min-w-full text-center cursor-pointer bg-[#EF8275] hover:bg-[#f66757] text-white rounded-md p-2 active:min-w-[90%] duration-200" 
         >
           {uploadLabelReady}
         </label>
@@ -221,11 +227,9 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
           multiple={false}
         />
       </div>
-      {error && (
-        <div className="text-center text-red-500 mt-1 rounded-lg animate-pulse">
-          {error}
-        </div>
-      )}
+      <div className="min-h-6 mt-1  text-center text-red-500 rounded-lg animate-pulse transition-all duration-200">
+        {error}
+      </div>
     </div>
   )
 }

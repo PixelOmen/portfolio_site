@@ -22,7 +22,7 @@ export default function DemoSection({}: DemoSectionProps) {
           functionParams={["aws", "django"]}
         >
           <div
-            style={{background: 'radial-gradient(circle, #e5e7eb  0%, #c8cace 100%)'}}
+            // style={{background: 'radial-gradient(circle, #e5e7eb  0%, #c8cace 100%)'}}
             className="w-full mb-6 text-black rounded-lg py-10"
           >
             <div className="flex flex-col gap-16">

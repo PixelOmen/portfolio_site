@@ -28,7 +28,7 @@ export default function S3Images() {
     >
       <div className="flex justify-center items-center max-[719px]:flex-wrap">
         
-        <div className="max-[720px]:w-full min-[720px]:ml-auto min-[720px]:basis-[55%] min-[720px]:max-w-[45%]">
+        <div className="text-white max-[720px]:w-full min-[720px]:ml-auto min-[720px]:basis-[55%] min-[720px]:max-w-[45%]">
           <div className="pt-0 sm:p-6 sm:pt-0">
             <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">Media Storage</header>
             <p className="">

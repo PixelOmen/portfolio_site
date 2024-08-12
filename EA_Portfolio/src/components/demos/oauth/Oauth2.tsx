@@ -38,7 +38,7 @@ export default function Oauth2() {
       className="w-full max-w-[1400px] flex justify-center sm:p-4 lg:px-8"
     >
       <div className="flex justify-center items-center max-[719px]:flex-wrap py-6 max-w-full">
-        <div className="max-w-full min-[720px]:sm:basis-[55%] min-[720px]:max-w-[55%] sm:min-w-[350px] mt-4 min-[720px]:mt-0 order-2 min-[720px]:order-1 px-4">
+        <div className="text-white max-w-full min-[720px]:sm:basis-[55%] min-[720px]:max-w-[55%] sm:min-w-[350px] mt-4 min-[720px]:mt-0 order-2 min-[720px]:order-1 px-4">
           <div className="p-2 pt-0 sm:p-6 sm:pt-0 text-left">
             <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">OAuth 2.0</header>
             <p className="">

@@ -98,7 +98,7 @@ export default function UserPosts({locked = true}: UserPostsProps) {
       {locked && (
         <div
           ref={lockedScreenRef}
-          className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 rounded-lg"
+          className="absolute top-0 left-0 w-full h-full bg-gray-600 bg-opacity-50 z-10 rounded-lg"
         >
           <div className="flex flex-col gap-10 justify-center items-center h-full">
             <LockIcon/>
