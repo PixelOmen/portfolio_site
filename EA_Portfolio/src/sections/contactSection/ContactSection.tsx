@@ -64,7 +64,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
             >
               <h1 className="casc-enterUp mt-12 sm:mt-0">Contact</h1>
               <hr className="w-40 mt-2 mb-8"/>
-              <div className="flex text-center casc-fadeInDown">
+              <div className="opacity-0 flex text-center casc-fadeInDown">
                 <p className="text-base sm:text-lg font-medium">
                   Comments, questions, or business inquiries?
                 </p>
@@ -75,7 +75,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
               >
                 <form
                   onSubmit={handleFormSubmit}
-                  className="flex flex-col gap-4 text-black casc-fadeInUp"
+                  className="opacity-0 flex flex-col gap-4 text-black casc-fadeInUp"
                 >
                   <input
                     type="text"
@@ -110,7 +110,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
           </div>
         </div>
 
-        <div className="py-2 casc-enterUp bg-[#32445d80] border-t-2 border-black">
+        <div className="opacity-0 py-2 casc-enterUp bg-[#32445d80] border-t-2 border-black">
           <div className="flex justify-center gap-8">
             <a 
               href="https://github.com/PixelOmen"

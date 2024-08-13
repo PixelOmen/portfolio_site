@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import anime from "animejs"
 
 export default function HeroCanvas() {
@@ -91,11 +91,12 @@ function Grid() {
     }
   }
 
-  var resizeDelay = setTimeout(() => {}, 100);
+  var resizeDebounce = useRef<number>(-1);
 
   window.addEventListener('resize', () => {
-    clearTimeout(resizeDelay);
-    resizeDelay = setTimeout(() => {
+    clearTimeout(resizeDebounce.current);
+    resizeDebounce.current = setTimeout(() => {
+      console.log('called')
       stopAnims();
       updateDim(dimByScreen());
     }, 500)

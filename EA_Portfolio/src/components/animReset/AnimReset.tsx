@@ -23,7 +23,7 @@ export default function AnimReset({
   children
 }: AnimResetProps) {
 
-  const [animTimer, setAnimTimer] = useState(-1);
+  const animDebounce = useRef<number>(-1);
   const [resetComplete, setResetComplete] = useState(true);
   const [opacityResetElems, setOpacityResetElems] = useState<HTMLElement[]>([]);
 
@@ -31,19 +31,17 @@ export default function AnimReset({
 
   function handleAnims(active: boolean) {
     if (active) {
-      clearTimeout(animTimer);
+      clearTimeout(animDebounce.current);
       if (resetComplete) {
         setResetComplete(false);
         setOpacityResetElems(startAnims(contentRef.current));
       }
     } else {
-      clearTimeout(animTimer);
-      setAnimTimer(
-          setTimeout(() => {
-            reset(opacityResetElems);
-            setResetComplete(true);
-        }, deActivateDelay)
-      );
+      clearTimeout(animDebounce.current);
+      animDebounce.current = setTimeout(() => {
+          reset(opacityResetElems);
+          setResetComplete(true);
+      }, deActivateDelay)
     }
   }
 
@@ -59,7 +57,9 @@ export default function AnimReset({
 
   useEffect(() => {
     if (hideOnStart) {
-      animUtils.cascadeAnim(contentRef.current, 0, [], {hideOnly: true});
+      requestAnimationFrame(() => {
+        animUtils.cascadeAnim(contentRef.current, 0, [], {hideOnly: true});
+      });
     }
   }, []);
 
