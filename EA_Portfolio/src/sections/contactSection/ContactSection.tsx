@@ -53,8 +53,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
       const form = e.target as HTMLFormElement;
       const data = new FormData(form);
       anonFormInstAPI.post('/v1/user-messages/', data)
-        .then(res => {
-          console.log(res.data);
+        .then(() => {
           form.reset();
           setSuccessMsg();
         })
@@ -134,7 +133,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
                     required={true}
                   />
                   <textarea
-                    name="message"
+                    name="content"
                     placeholder="Message"
                     rows={5}
                     className="p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
