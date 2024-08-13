@@ -96,7 +96,6 @@ function Grid() {
   window.addEventListener('resize', () => {
     clearTimeout(resizeDebounce.current);
     resizeDebounce.current = setTimeout(() => {
-      console.log('called')
       stopAnims();
       updateDim(dimByScreen());
     }, 500)

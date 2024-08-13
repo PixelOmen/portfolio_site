@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 import { anonFormInstAPI } from "../../lib/requests";
 
@@ -17,18 +17,52 @@ interface ContactSectionProps {
 export default function ContactSection({ scrollState }: ContactSectionProps) {
 
   const [triggered, setTriggered] = useState(false);
+  const formDebounce = useRef<number>(-1);
+
+  const standardMsg = "Comments, questions, or business inquiries?";
+  const successMsg = "Message sent successfully. Thank you!";
+  const throttleMsg = "I'm getting too many messages 😢. Please wait a minute and try again."
+  const [msg, setMsg] = useState(standardMsg);
+
+  function setSuccessMsg() {
+    setMsg(successMsg);
+    setTimeout(() => {
+      setMsg(standardMsg);
+    }, 5000);
+  }
+
+  function setErrorMsg(err: any) {
+    console.error(err);
+    if (err.response.status === 429) {
+      setMsg(throttleMsg);
+      setTimeout(() => {
+        setMsg(standardMsg);
+      }, 5000);
+    } else {
+      setMsg("Error sending message 😢. Please try again.");
+      setTimeout(() => {
+        setMsg(standardMsg);
+      }, 5000);
+    }
+  }
 
   function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const data = new FormData(form);
-    anonFormInstAPI.post('/v1/email-test/', data)
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    clearTimeout(formDebounce.current);
+    formDebounce.current = setTimeout(() => {
+      const form = e.target as HTMLFormElement;
+      const data = new FormData(form);
+      anonFormInstAPI.post('/v1/user-messages/', data)
+        .then(res => {
+          console.log(res.data);
+          form.reset();
+          setSuccessMsg();
+        })
+        .catch(err => {
+          console.error(err);
+          setErrorMsg(err);
+        });
+    }, 500);
   }
 
 
@@ -65,9 +99,15 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
               <h1 className="casc-enterUp mt-12 sm:mt-0">Contact</h1>
               <hr className="w-40 mt-2 mb-8"/>
               <div className="opacity-0 flex text-center casc-fadeInDown">
-                <p className="text-base sm:text-lg font-medium">
-                  Comments, questions, or business inquiries?
-                </p>
+                {msg === standardMsg ? (
+                  <p className="text-base sm:text-lg font-medium">
+                    {msg}
+                  </p>
+                ) : (
+                  <p className="text-base sm:text-lg font-medium animate-pulse text-red-400">
+                    {msg}
+                  </p>
+                )}
               </div>
 
               <div
@@ -82,6 +122,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
                     name="name"
                     placeholder="Name"
                     className="h-8 p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
+                    maxLength={50}
                     required={true}
                   />
                   <input
@@ -89,6 +130,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
                     name="email"
                     placeholder="Email"
                     className="h-8 p-2 rounded-sm bg-slate-300 placeholder:text-slate-500"
+                    maxLength={50}
                     required={true}
                   />
                   <textarea
