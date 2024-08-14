@@ -48,6 +48,7 @@ export const anonFormInstAPI = axios.create({
 // ----- Interceptors -----
 authInstAPI.interceptors.request.use(
     config => {
+        auth.logOutOnInvalidToken();
         const tokenHeader = auth.getAuthHeader();
         if (!tokenHeader) {
             return Promise.reject('No token for authInstAPI');
@@ -62,6 +63,7 @@ authInstAPI.interceptors.request.use(
 
 userUploadsAPI.interceptors.request.use(
     config => {
+        auth.logOutOnInvalidToken();
         const tokenHeader = auth.getAuthHeader();
         if (!tokenHeader) {
             return Promise.reject('No token for userUploadsAPI');

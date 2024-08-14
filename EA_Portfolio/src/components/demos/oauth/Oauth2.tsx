@@ -10,7 +10,7 @@ import DemoLink from "../../ui/links/DemoLink";
 
 export default function Oauth2() {
 
-  const [isLogggendIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(undefined);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function Oauth2() {
   }, []);
 
   useEffect(() => {
-    if (isLogggendIn) {
+    if (isLoggedIn) {
       auth.getGoogleInfo()
         .then(res => {
           setUserInfo(res.data);
@@ -31,7 +31,7 @@ export default function Oauth2() {
           auth.logOut();
         });
     }
-  }, [isLogggendIn]);
+  }, [isLoggedIn]);
 
   return (
     <div            
@@ -58,7 +58,7 @@ export default function Oauth2() {
             </p>
           </div>
           <div className="mx-auto flex flex-wrap gap-6 justify-center items-center mt-4 sm:mt-0 rounded-xl">
-            {isLogggendIn ? (
+            {isLoggedIn ? (
               <>
                 <div className="max-w-full flex flex-wrap gap-6 w-full justify-between items-center border-2 border-[#EF8275] rounded-xl py-2 px-5 sm:px-10">
                   <GoogleUser userInfo={userInfo}/>

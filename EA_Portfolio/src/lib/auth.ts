@@ -46,8 +46,18 @@ export function isLoggedIn(): Promise<boolean> {
       return true;
     })
     .catch(err => {
+      if (authHeader != null) {
+        return false;
+      }
       console.error(err);
       return false;
+    });
+}
+
+export function logOutOnInvalidToken(): void {
+  isLoggedIn()
+    .then(res => {
+      if (!res && getAuthHeader() != null) logOut();
     });
 }
 
