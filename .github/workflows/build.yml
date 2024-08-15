@@ -1,4 +1,4 @@
-name: Deploy Static Files
+name: Build Static Files
 on: 
   push:
     branches:
