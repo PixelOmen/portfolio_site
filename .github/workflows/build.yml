@@ -28,7 +28,7 @@ jobs:
 
       - name: debug
         working-directory: EA_Portfolio/src/sections/workSection/
-        run: ls ../../components/projectview/ProjectView
+        run: ls ../../components/projectview/
 
       - name: Build the React app
         working-directory: EA_Portfolio
