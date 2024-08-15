@@ -27,6 +27,7 @@ jobs:
         run: echo "${{ secrets.SECRETS_PROD }}" > EA_Portfolio/.env
 
       - name: debug
+        working-directory: EA_Portfolio/src
         run: ls
 
       - name: Build the React app
