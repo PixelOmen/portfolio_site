@@ -28,7 +28,7 @@ jobs:
 
       - name: debug
         working-directory: EA_Portfolio
-        run: ls src/sections/workSection/WorkSection.tsx
+        run: ls src/sections/workSection/
 
       - name: Build the React app
         working-directory: EA_Portfolio
