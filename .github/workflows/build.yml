@@ -35,11 +35,11 @@ jobs:
         run: npm run build 
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v3
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_GITHUB_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Upload static files to S3
         run: |
-          aws s3 sync EA_Portfolio/dist/ s3://<YOUR_BUCKET_NAME>/ --delete          
+          aws s3 sync EA_Portfolio/dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME }}/ --delete          
