@@ -1,0 +1,28 @@
+name: Invalidate CloudFront Cache
+
+on:
+  workflow_run:
+    workflows:
+    - 'Build and Deploy Static Files'
+    types:
+    - completed
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_GITHUB_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation --distribution-id <DISTRIBUTION_ID> --paths "/*"
+        
