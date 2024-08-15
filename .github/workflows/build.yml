@@ -39,3 +39,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_GITHUB_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Upload static files to S3
+        run: |
+          aws s3 sync EA_Portfolio/dist/ s3://<YOUR_BUCKET_NAME>/ --delete          
