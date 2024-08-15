@@ -20,9 +20,8 @@ jobs:
           node-version: '20'        
           
       - name: Install dependencies
-        run: |
-          cd EA_Portfolio
-          npm install
+        working-directory: EA_Portfolio
+        run: npm install
 
       - name: Create .env file from secret
         run: echo "${{ secrets.SECRETS_PROD }}" > EA_Portfolio/.env
@@ -31,6 +30,5 @@ jobs:
         run: ls
 
       - name: Build the React app
-        run: |
-          cd EA_Portfolio
-          npm run build
+        working-directory: EA_Portfolio
+        run: npm run build
