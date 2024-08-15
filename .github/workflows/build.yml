@@ -1,4 +1,4 @@
-name: Build Static Files
+name: Build and Deploy Static Files
 on: 
   push:
     branches:
@@ -29,3 +29,12 @@ jobs:
       - name: Build the React app
         working-directory: EA_Portfolio
         run: npm run build
+
+      - name: Load AWS env
+        run: source EA_Portfolio/.env        
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_GITHUB_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
