@@ -88,6 +88,8 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       })
       .catch(err => {
         console.error(err);
+        setError(err.message);
+        setImagesLoaded(true);
       });
   }
 
@@ -124,8 +126,14 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       })
       .catch(err => {
         console.error(err);
-        setError(error);
-        setImagesLoaded(true);
+        if (err.response.status === 429) {
+          setError("Too many uploads today 😢, please come back tomorrow.");
+          setImagesLoaded(true);
+          return;
+        } else {
+          setError(err.message);
+          setImagesLoaded(true);
+        }
       });
   }
 
@@ -137,8 +145,9 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
         getImages();
       })
       .catch(err => {
-        setImagesLoaded(true);
         console.error(err);
+        setError(err.message);
+        setImagesLoaded(true);
       });
   }
 
