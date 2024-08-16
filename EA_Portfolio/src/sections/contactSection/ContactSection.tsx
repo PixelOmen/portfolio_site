@@ -52,7 +52,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
     formDebounce.current = setTimeout(() => {
       const form = e.target as HTMLFormElement;
       const data = new FormData(form);
-      anonFormInstAPI.post('/v1/user-messages/', data)
+      anonFormInstAPI.post('/v1/anon-messages/', data)
         .then(() => {
           form.reset();
           setSuccessMsg();
