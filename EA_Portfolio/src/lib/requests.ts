@@ -6,7 +6,7 @@ export interface ServerLimits {
     max_user_images: number;
     max_post_size: number;
     allowed_image_extensions: string[];
-  }
+}
 
 
 

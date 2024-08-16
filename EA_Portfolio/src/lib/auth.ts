@@ -5,11 +5,12 @@ const CLIENT_DOMAIN = import.meta.env.VITE_CLIENT_DOMAIN;
 const LOGGEDIN_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDIN_URL;
 const LOGGEDOUT_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDOUT_URL;
 
-export const API_HOSTNAME = import.meta.env.VITE_API_HOSTNAME;
-export const API_ROOT = API_HOSTNAME + import.meta.env.VITE_API_ROOT;
+export const API_ROOT = import.meta.env.VITE_API_ROOT;
 const TOKEN_TEST_URL = API_ROOT + import.meta.env.VITE_API_TOKEN_TEST_URL;
-const API_GOOGLE_CODE_TO_TOKEN_URL = API_HOSTNAME + import.meta.env.VITE_API_GOOGLE_CODE_TO_TOKEN_URL;
-const API_CONVERT_TOKEN_URL = API_HOSTNAME + import.meta.env.VITE_API_CONVERT_TOKEN_URL;
+
+const SOCIAL_ROOT = import.meta.env.VITE_SOCIAL_ROOT;
+const SOCIAL_GOOGLE_CODE_TO_TOKEN_URL = SOCIAL_ROOT + import.meta.env.VITE_SOCIAL_GOOGLE_CODE_TO_TOKEN_URL;
+const SOCIAL_CONVERT_TOKEN_URL = SOCIAL_ROOT + import.meta.env.VITE_SOCIAL_CONVERT_TOKEN_URL;
 
 export const GOOGLE_REDIRECT_URI = CLIENT_DOMAIN + import.meta.env.VITE_GOOGLE_REDIRECT_URI; // not URIencoded for direct use
 const GOOGLE_SCOPE = encodeURIComponent(import.meta.env.VITE_GOOGLE_SCOPE);
@@ -138,7 +139,7 @@ export async function checkForGoogleRedirect(): Promise<void | TokenError> {
   const code = parseGoogleCode(currentUrl.href);
   if (!code) handleAccessDenied(currentUrl.href);
 
-  return axios.post(API_GOOGLE_CODE_TO_TOKEN_URL, { code })
+  return axios.post(SOCIAL_GOOGLE_CODE_TO_TOKEN_URL, { code })
     .then(res => {
       localStorage.setItem('google_token', res.data.access_token);
       const payload = {
@@ -147,7 +148,7 @@ export async function checkForGoogleRedirect(): Promise<void | TokenError> {
         backend: 'google-oauth2',
         token: res.data.access_token
       }
-      return axios.post(API_CONVERT_TOKEN_URL, payload)
+      return axios.post(SOCIAL_CONVERT_TOKEN_URL, payload)
         .then(res => {
           localStorage.setItem('access_token', res.data.access_token);
           window.location.href = LOGGEDIN_URL;
