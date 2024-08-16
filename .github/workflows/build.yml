@@ -2,9 +2,7 @@ name: Build and Deploy Static Files
 on: 
   push:
     branches:
-      - main
-    tags:
-      - v*
+      - production
 
 permissions:
   id-token: write
