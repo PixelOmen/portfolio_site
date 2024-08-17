@@ -202,7 +202,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       )}
       <div
         ref={imageContainerRef}
-        className={`h-[340px] border-2 border-gray-500 bg-gray-200 rounded-lg overflow-y-auto ${locked && 'opacity-0'}`}
+        className={`h-[340px] border-2 border-gray-500 bg-slate-200 rounded-lg overflow-y-auto ${locked && 'opacity-0'}`}
       >
         <div
           className="p-6 flex gap-5 justify-center flex-wrap"

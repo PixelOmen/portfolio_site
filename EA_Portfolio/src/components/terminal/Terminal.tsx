@@ -37,13 +37,13 @@ export default function Terminal({
   
   const contentBlocks = content.split('\\n');
 
-  function promptElements(header: string, content: string, blockIndex: number, shapeholder: boolean) {
+  function promptElements(content: string, blockIndex: number, shapeholder: boolean) {
     return (
       <div key={blockIndex} data-blockindex={blockIndex} className="mb-4">
         <span data-subtype='prompt' className="text-[#26e026]">
           {userName ? userName : header}:~$
         </span>
-        <span data-subtype='content' className="ml-4 text-gray-100">
+        <span data-subtype='content' className="ml-4 text-gray-200">
           {shapeholder ? content : ''}
         </span>
         <span data-subtype='cursor' className={`${styles.cursorBlink} opacity-0`}>
@@ -57,7 +57,7 @@ export default function Terminal({
     return (
       contentBlocks.map((item, index) => {
         return (
-          promptElements(header, item, index, shapeholder)
+          promptElements(item, index, shapeholder)
         )
       })
     )
@@ -178,13 +178,13 @@ export default function Terminal({
               {header}: ~
             </div>
             <div className="flex ml-auto gap-1 pr-1">
-              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#82817c] to-[#64635e]">
+              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#82817c] to-[#64635e] cursor-default">
                 &minus;
               </div>
-              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 text-black bg-gradient-to-b from-[#82817c] to-[#64635e]">
+              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 text-black bg-gradient-to-b from-[#82817c] to-[#64635e] cursor-default">
                 <div className="-translate-y-[1px]">&#9633;</div>
               </div>
-              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#ef7d52] to-[#de4f1b]">
+              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#ef7d52] to-[#de4f1b] cursor-pointer">
                 &times;
               </div>
             </div>
@@ -201,14 +201,14 @@ export default function Terminal({
         <div className="relative bg-[#2b1825cf] w-full font-sourcecode text-lg rounded-b-lg ">      
 
           {/* shapeholder */}
-          <div className="leading-6 text-xs sm:text-base opacity-0 p-3 sm:p-2">
+          <div className="leading-6 text-xs sm:text-lg opacity-0 p-3 sm:p-2">
             {createPrompts(true)}
           </div>
 
           {/* content */}
           <article
             ref={contentRef}
-            className="absolute top-2 left-2 leading-6 text-xs sm:text-base pr-6"
+            className="absolute top-2 left-2 leading-6 text-xs sm:text-lg pr-2"
           >
             {livePrompts}
           </article>

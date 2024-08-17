@@ -58,7 +58,7 @@ export default function App() {
       <ScrollSection
         ref={aboutRef}
         scrollObserver={scrollObserver}
-        className="w-full"
+        className="w-full mb-52"
       >
         <AboutSection className=""/>
       </ScrollSection>
@@ -66,7 +66,7 @@ export default function App() {
       <ScrollSection
         ref={workRef}
         scrollObserver={scrollObserver}
-        className="w-full"
+        className="w-full mb-52"
       >
         <WorkSection className=""/>
       </ScrollSection>

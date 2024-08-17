@@ -5,7 +5,6 @@ import type { IScrollState } from "../../lib/scrolling";
 import AnimReset from "../../components/animReset/AnimReset";
 import ProjectView from "../../components/projectview/ProjectView";
 import ProjectThumb from "../../components/projectview/ProjectThumb";
-import JSHeader from "../../components/jsheader/JSHeader";
 
 import thumb1 from "../../assets/workthumbs/thumb1.png"
 import thumb2 from "../../assets/workthumbs/thumb2.png"
@@ -218,55 +217,60 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         ref={sectionTopRef}
         className="relative w-full max-w-[1500px] overflow-hidden"
       >
-        <JSHeader
-          comment="Samples of my work"
-          className="relative mb-5"
-          title="work"
+
+        <div className="text-[#EF8275] w-full text-5xl mb-3 text-center font-medium">
+          Work
+          <span className="ml-3 font-thin text-white">Samples</span>
+          <div className="text-lg font-light text-gray-200 mt-2">
+            Click a project for more details
+          </div>
+          <hr className="inline-block w-3/4"/>
+        </div>
+
+
+        <div
+          ref={containerRef}
+          className={`relative overflow-hidden w-full mb-4 rounded-lg transition-all duration-200`}
         >
           <div
-            ref={containerRef}
-            className={`relative overflow-hidden w-full mb-4 rounded-lg transition-all duration-200`}
+            ref={transitionDivRef}
+            className="absolute h-10 w-10 top-0 left-0 rounded-full z-10 transition-all duration-0 bg-gray-300 pointer-events-none opacity-0"
           >
-            <div
-              ref={transitionDivRef}
-              className="absolute h-10 w-10 top-0 left-0 rounded-full z-10 transition-all duration-0 bg-gray-300 pointer-events-none opacity-0"
-            >
-            </div>
-            <div ref={contentRef} className="w-full">
-              {isMenu ? (
-                <div className="py-6 px-10 flex justify-center gap-10 flex-wrap">
-                  {thumbnails().map((thumb, index) => {
-                    const anims = ['fadeInUp', 'fadeInLeft', 'fadeInRight', 'fadeInDown'];
-                    const anim = anims[Math.floor(Math.random() * anims.length)];
-                    return (
-                      <div
-                        key={index}
-                        className={`border-2 ${anim} border-gray-600 rounded-md w-[300px] h-[200px]`}
-                        onClick={(e) => enterProject(e, index)}
-                      >
-                          {thumb}
-                      </div>
-                    )        
-                  })}
-                </div>
-              ) : (
-                <div className="relative w-full flex justify-center z-0">
-                  <AnimReset
-                    hideOnStart={true}
-                    active={activate}
-                    cascadeDelay={50}
-                    resetDelay={1000}
-                  >
-                    <div className="">
-                      {projectViews()[projectID]}
-
-                    </div>
-                  </AnimReset>
-                </div>
-              )}
-            </div>
           </div>
-        </JSHeader>
+          <div ref={contentRef} className="w-full">
+            {isMenu ? (
+              <div className="py-6 px-10 flex justify-center gap-10 flex-wrap">
+                {thumbnails().map((thumb, index) => {
+                  const anims = ['fadeInUp', 'fadeInLeft', 'fadeInRight', 'fadeInDown'];
+                  const anim = anims[Math.floor(Math.random() * anims.length)];
+                  return (
+                    <div
+                      key={index}
+                      className={`border-2 ${anim} border-gray-600 rounded-md w-[300px] h-[200px]`}
+                      onClick={(e) => enterProject(e, index)}
+                    >
+                        {thumb}
+                    </div>
+                  )        
+                })}
+              </div>
+            ) : (
+              <div className="relative w-full flex justify-center z-0">
+                <AnimReset
+                  hideOnStart={true}
+                  active={activate}
+                  cascadeDelay={50}
+                  resetDelay={1000}
+                >
+                  <div className="">
+                    {projectViews()[projectID]}
+
+                  </div>
+                </AnimReset>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )
