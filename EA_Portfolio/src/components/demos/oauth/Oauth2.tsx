@@ -37,7 +37,7 @@ export default function Oauth2() {
     <div            
       className="w-full max-w-[1400px] flex justify-center sm:p-4 lg:px-8"
     >
-      <div className="flex justify-center items-center max-[719px]:flex-wrap py-6 max-w-full">
+      <div className="lg:px-24 flex justify-center items-center max-[719px]:flex-wrap py-6 max-w-full">
         <div className="mt-4 px-4 max-w-full min-[720px]:sm:basis-[55%] min-[720px]:max-w-[55%] sm:min-w-[350px] min-[720px]:mt-0 order-2 min-[720px]:order-1 text-white">
           <div className="p-2 pt-0 sm:p-6 sm:pt-0 text-left">
             <header className="text-3xl font-bold text-[#EF8275] text-center mb-4">OAuth 2.0</header>
@@ -50,7 +50,7 @@ export default function Oauth2() {
             </p>
             <br/>
             <p>
-              If you have a google account, click the link below to see how easy it is to use OAuth2 to log in. The "scope" of access is limted to only your profile picture and email, which Google will aso confirm on the login page.
+              If you have a google account, click the link below to see how easy it is to use OAuth2 to log in. The "scope" of access is limted to only your profile picture and email, which will aso be confirmed by Google on the login page.
             </p>
             <div className="mt-10 sm:mt-6 mx-auto flex flex-wrap gap-6 justify-center items-center rounded-xl">
               {isLoggedIn ? (
