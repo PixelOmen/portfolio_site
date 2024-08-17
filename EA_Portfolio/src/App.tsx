@@ -58,23 +58,23 @@ export default function App() {
       <ScrollSection
         ref={aboutRef}
         scrollObserver={scrollObserver}
-        className="w-full mb-52"
+        className="w-full mb-52 pt-24"
       >
-        <AboutSection className=""/>
+        <AboutSection/>
       </ScrollSection>
 
       <ScrollSection
         ref={workRef}
         scrollObserver={scrollObserver}
-        className="w-full mb-52"
+        className="w-full mb-52 pt-24"
       >
-        <WorkSection className=""/>
+        <WorkSection/>
       </ScrollSection>
 
       <ScrollSection
         ref={demoRef}
         scrollObserver={scrollObserver}
-        className="w-full"
+        className="w-full pt-24"
       >
         <DemoSection/>        
       </ScrollSection>
