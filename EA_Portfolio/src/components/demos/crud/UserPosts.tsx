@@ -145,7 +145,7 @@ export default function UserPosts({locked = true}: UserPostsProps) {
         />
         <div
           onClick={addPostViaClick}
-          className="absolute top-1/2 -translate-y-1/2 right-5 px-2 text-base text-black border-2 border-gray-500 rounded-full cursor-pointer"
+          className={`absolute top-1/2 -translate-y-1/2 right-5 px-2 text-base text-black border-2 border-gray-500 rounded-full cursor-pointer ${locked && 'opacity-0'}`}
         >
           {">"}
         </div>
