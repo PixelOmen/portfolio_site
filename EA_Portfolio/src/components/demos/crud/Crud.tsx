@@ -21,7 +21,7 @@ export default function Oauth2() {
 
   return (
     <div            
-      className="w-full max-w-[1400px] flex justify-center p-4 lg:px-8"
+      className="w-full max-w-[1800px] flex justify-center p-4 lg:px-8"
     >
       <div className="flex justify-center items-center max-[719px]:flex-wrap">
         <div className="text-white min-[720px]:basis-[45%] min-[720px]:ml-auto sm:min-w-[350px] mt-4 min-[720px]:mt-0 order-1 min-[720px]:order-2">

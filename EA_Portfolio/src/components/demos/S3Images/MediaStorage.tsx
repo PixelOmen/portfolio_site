@@ -24,7 +24,7 @@ export default function S3Images() {
 
   return (
     <div            
-      className="w-full max-w-[1400px] flex justify-center p-4 lg:px-8"
+      className="w-full max-w-[1800px] flex justify-center p-4 lg:px-8"
     >
       <div className="flex justify-center items-center max-[719px]:flex-wrap">
         
@@ -44,7 +44,7 @@ export default function S3Images() {
             </p>
             <br/>
             <p>
-              Only you can see the images you upload and you can delete them at any time. Your images will persist even if you logout. Images are limited to 5MB in size and you can have a maximum of 8 images at a time. Images are automatically deleted at midnight PST.
+              Only you can see the images you upload and you can delete them at any time. Your images will persist even if you logout. Images are limited to 5MB in size and you can have a maximum of 10 images at a time. Images are automatically deleted at midnight PST.
             </p>
           </div>
         </div>
