@@ -71,12 +71,17 @@ export default function UserPosts({locked = true}: UserPostsProps) {
       });
     }
     
-    function addPostViaEnter(e: KeyboardEvent) {
-      if (e.key == 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        addPost(newTextAreaRef.current!.value);
-        newTextAreaRef.current!.value = '';
-      }
+  function addPostViaEnter(e: KeyboardEvent) {
+    if (e.key == 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      addPost(newTextAreaRef.current!.value);
+      newTextAreaRef.current!.value = '';
+    }
+  }
+
+  function addPostViaClick() {
+    addPost(newTextAreaRef.current!.value);
+    newTextAreaRef.current!.value = '';
   }
 
   useEffect(() => {
@@ -130,13 +135,21 @@ export default function UserPosts({locked = true}: UserPostsProps) {
           )}
         </div>
       </div>
-      <textarea
-        ref={newTextAreaRef}
-        rows={2}
-        maxLength={200}
-        placeholder="Enter a post and press Enter..."
-        className={`block w-full py-3 px-4 border-2 outline-none border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-slate-200 focus:border-black duration-500 ${locked && 'opacity-0'}`}
-      />
+      <div className="relative">
+        <textarea
+          ref={newTextAreaRef}
+          rows={2}
+          maxLength={200}
+          placeholder="Enter a post and press Enter..."
+          className={`block w-full py-3 pl-4 pr-14 border-2 outline-none border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-slate-200 focus:border-black duration-500 ${locked && 'opacity-0'}`}
+        />
+        <div
+          onClick={addPostViaClick}
+          className="absolute top-1/2 -translate-y-1/2 right-5 px-2 text-base text-black border-2 border-gray-500 rounded-full cursor-pointer"
+        >
+          {">"}
+        </div>
+      </div>
     </div>
   )
 }
@@ -272,7 +285,7 @@ function SinglePost({
         </div>
 
         {isEditing && (
-          <div className="mt-1 pl-1">
+          <div className="mt-1 pl-1 max-[400px]:text-[0.6rem]">
             Press Esc to
             <button
               onClick={cancelEdit}
