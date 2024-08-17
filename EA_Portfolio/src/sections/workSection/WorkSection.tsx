@@ -212,17 +212,17 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   }, [scrollState?.wasTriggered.value]);
 
   return (
-    <div className={`bg-[rgba(31,31,31,0)] p-6 sm:py-12 flex justify-center overflow-hidden ${className}`}>
+    <div className={`p-6 sm:py-12 flex justify-center overflow-hidden ${className}`}>
       <div
         ref={sectionTopRef}
         className="relative w-full max-w-[1500px] overflow-hidden"
       >
 
-        <div className="text-[#EF8275] w-full text-5xl mb-3 text-center font-medium">
+        <div className="text-[#EF8275] w-full text-4xl sm:text-5xl mb-3 text-center font-medium">
           Work
           <span className="ml-3 font-thin text-white">Samples</span>
-          <div className="text-lg font-light text-gray-200 mt-2">
-            Click a project for more details
+          <div className="mt-2 px-2 text-base sm:text-lg font-light text-gray-300 ">
+            Some of the projects and tools I've developed over the years.
           </div>
           <hr className="inline-block w-3/4"/>
         </div>

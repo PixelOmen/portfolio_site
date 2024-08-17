@@ -6,17 +6,19 @@ interface GoogleSignInProps {
 
 export default function GoogleSignIn( {clickCallback}: GoogleSignInProps ) {
   return (
-    <button className='flex items-center min-w-max' onClick={clickCallback}>
-        <div className='bg-gray-100 px-3 py-3 h-full flex items-center rounded-l-md'>
-            <img
-                src={googleLogo}
-                alt="Google Logo"
-                className="w-6 h-6"
-            />
-        </div>
-        <div className='bg-[#4286f7] h-full font-roboto flex items-center px-4 py-3 text-white rounded-r-md'>
-            Sign in with Google
-        </div>
-    </button>
+    <div>
+        <button className='flex items-center' onClick={clickCallback}>
+            <div className='bg-gray-100 px-3 py-3 h-full rounded-l-md min-w-max'>
+                <img
+                    src={googleLogo}
+                    alt="Google Logo"
+                    className="w-6 h-6"
+                />
+            </div>
+            <div className='bg-[#4286f7] h-full font-roboto flex items-center px-4 py-3 text-white rounded-r-md text-nowrap'>
+                Sign in with Google
+            </div>
+        </button>
+    </div>
   )
 }

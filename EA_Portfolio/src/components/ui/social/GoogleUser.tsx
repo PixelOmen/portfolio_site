@@ -18,7 +18,7 @@ export default function GoogleUser({
   nameOnly = false
 }: GoogleUserProps) {
   return (
-    <div className="flex justify-center items-center font-roboto max-w-full p-2">
+    <div className="flex justify-center items-center font-roboto max-w-full">
       {userInfo ? (
         <div className="flex justify-center items-center max-w-full">
           {(userInfo.picture && !nameOnly) && (
@@ -30,8 +30,8 @@ export default function GoogleUser({
               />
             </div>
           )}
-          <div className="max-w-1/2 translate-y-[1px] text-lg text-nowrap overflow-hidden overflow-ellipsis">
-            {userInfo.name}
+          <div className=" translate-y-[1px] text-lg text-nowrap overflow-hidden overflow-ellipsis">
+           {userInfo.name}
           </div>
         </div>
       ) : (
