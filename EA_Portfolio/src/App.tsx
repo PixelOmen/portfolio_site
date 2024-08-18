@@ -20,7 +20,9 @@ export default function App() {
   const workRef = useRef<HTMLDivElement>(null);
   const demoRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+  const tabHiddenTimerRef = useRef<number>(0);
 
+  const scrollObserver = new ScrollObserver();
   const sectionMap = new Map<string, React.RefObject<HTMLDivElement>>(
     [
       ['about', aboutRef],
@@ -29,12 +31,23 @@ export default function App() {
       ['contact', contactRef]
     ]
   );
+
+  function visibilityRefresh() {
+    if (document.visibilityState === 'hidden') {
+      tabHiddenTimerRef.current = Date.now();
+    } else {
+      const timeHidden = Date.now() - tabHiddenTimerRef.current;
+      if (timeHidden > 300000) {
+        window.location.reload();
+      }
+    }
+  }
   
-  const scrollObserver = new ScrollObserver();
 
   useEffect(() => {
     console.log("%c🤪I'm watching you🤪", 'color: red; font-size: 18px');
     handleRoutes(sectionMap);
+    document.addEventListener('visibilitychange', visibilityRefresh);
   }, []);
 
   return (

@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontSmoothing: {
+        antialiased: 'antialiased',
+      }
+    },
     fontFamily: {
       sans: ['Poppins', 'sans-serif'],
       roboto : ['Roboto', 'sans-serif'],
