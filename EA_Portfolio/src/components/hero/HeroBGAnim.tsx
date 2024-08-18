@@ -31,6 +31,7 @@ function Grid() {
 
   function stopAnims() {
     animAllowed = false;
+    anime.remove('.gridPoint');
   }
 
   function startAnims(childCall = false) {
