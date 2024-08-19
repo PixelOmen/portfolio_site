@@ -54,6 +54,7 @@ export default function App() {
     <>
 
       <AppLoading className="z-50"/>
+      
       <nav className='relative h-[30px] z-40'>
         <Navbar sectionMap={sectionMap}/>
       </nav>

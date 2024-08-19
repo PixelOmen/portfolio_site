@@ -201,14 +201,14 @@ export default function Terminal({
         <div className="relative bg-[#2b1825cf] w-full font-sourcecode text-lg rounded-b-lg ">      
 
           {/* shapeholder */}
-          <div className="leading-6 text-xs sm:text-lg opacity-0 p-3 sm:p-2">
+          <div className="leading-6 text-sm sm:text-lg opacity-0 p-3 sm:p-2">
             {createPrompts(true)}
           </div>
 
           {/* content */}
           <article
             ref={contentRef}
-            className="absolute top-2 left-2 leading-6 text-xs sm:text-lg pr-2"
+            className="absolute top-2 left-2 leading-6 text-sm sm:text-lg pr-2"
           >
             {livePrompts}
           </article>
