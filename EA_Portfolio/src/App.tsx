@@ -14,6 +14,8 @@ import ContactSection from "./sections/contactSection/ContactSection";
 import handleRoutes from "./lib/router";
 import { ScrollObserver } from "./lib/scrolling";
 
+import { logFPS } from "./components/_debug/fps";
+
 
 export default function App() {
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -48,6 +50,7 @@ export default function App() {
     console.log("%c🤪I'm watching you🤪", 'color: red; font-size: 18px');
     handleRoutes(sectionMap);
     document.addEventListener('visibilitychange', visibilityRefresh);
+    logFPS();
   }, []);
 
   return (
