@@ -218,13 +218,13 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         className="relative w-full max-w-[1500px] overflow-hidden"
       >
 
-        <div className="text-[#EF8275] w-full text-4xl sm:text-5xl mb-3 text-center font-medium">
+        <div className="text-[#EF8275] w-full text-4xl sm:text-5xl mb-8 text-center font-medium">
           Work
           <span className="ml-3 font-thin text-gray-200 font-roboto">Samples</span>
           <div className="mt-2 px-2 text-base sm:text-lg font-light font-sans text-gray-200 ">
             Some of the projects and tools I've developed over the years.
           </div>
-          <hr className="inline-block w-3/4"/>
+          <hr className="block mx-auto mt-4 w-3/4"/>
         </div>
 
 

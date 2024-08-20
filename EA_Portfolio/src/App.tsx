@@ -14,8 +14,6 @@ import ContactSection from "./sections/contactSection/ContactSection";
 import handleRoutes from "./lib/router";
 import { ScrollObserver } from "./lib/scrolling";
 
-import { logFPS } from "./components/_debug/fps";
-
 
 export default function App() {
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -50,7 +48,6 @@ export default function App() {
     console.log("%c🤪I'm watching you🤪", 'color: red; font-size: 18px');
     handleRoutes(sectionMap);
     document.addEventListener('visibilitychange', visibilityRefresh);
-    logFPS();
   }, []);
 
   return (
@@ -75,7 +72,7 @@ export default function App() {
       <ScrollSection
         ref={aboutRef}
         scrollObserver={scrollObserver}
-        className="w-full mb-52 pt-24"
+        className="w-full mb-8 pt-24"
       >
         <AboutSection/>
       </ScrollSection>
@@ -83,7 +80,7 @@ export default function App() {
       <ScrollSection
         ref={workRef}
         scrollObserver={scrollObserver}
-        className="w-full mb-52 pt-24"
+        className="w-full mb-8 pt-24"
       >
         <WorkSection/>
       </ScrollSection>
