@@ -82,6 +82,7 @@ function Grid() {
           key={`${gridX}-${gridY}`}
         >
           <div
+            style={{ willChange: "transform, opacity" }}
             className={`gridPoint h-4 w-12 rounded-md opacity-0 bg-slate-700`}
             data-index={dotIndex}
           >
