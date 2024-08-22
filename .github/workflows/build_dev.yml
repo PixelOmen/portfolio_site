@@ -1,8 +1,8 @@
-name: Build and Deploy Static Files
+name: Build and Deploy Static Files (Dev)
 on: 
   push:
     branches:
-      - production
+      - dev
 
 permissions:
   id-token: write
