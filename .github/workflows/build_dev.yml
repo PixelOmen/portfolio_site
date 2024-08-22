@@ -26,7 +26,7 @@ jobs:
         run: npm install
 
       - name: Create .env file from secret
-        run: echo "${{ secrets.VITE_SECRETS_PROD }}" > EA_Portfolio/.env
+        run: echo "${{ secrets.VITE_SECRETS_DEV }}" > EA_Portfolio/.env
 
       - name: Build the React app
         working-directory: EA_Portfolio
