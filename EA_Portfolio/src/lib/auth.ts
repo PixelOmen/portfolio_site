@@ -130,17 +130,23 @@ export async function checkForGoogleRedirect(): Promise<void | TokenError> {
   const currentUrl = new URL(window.location.href);
   const redirectUrl = new URL(GOOGLE_REDIRECT_URI);
   if (redirectUrl.pathname !== currentUrl.pathname) return;
-
+  
   if (await isLoggedIn()) {
     window.location.href = LOGGEDIN_URL;
     return;
   }
-
+  
   const code = parseGoogleCode(currentUrl.href);
   if (!code) handleAccessDenied(currentUrl.href);
-
+  
+  console.log('Converting Google Auth to Token');
   return axios.post(SOCIAL_GOOGLE_CODE_TO_TOKEN_URL, { code })
     .then(res => {
+
+      if (!res.data.access_token) {
+        return {errorString: 'No access token in response', axiosError: null};
+      }
+
       localStorage.setItem('google_token', res.data.access_token);
       const payload = {
         grant_type: 'convert_token',
@@ -148,6 +154,7 @@ export async function checkForGoogleRedirect(): Promise<void | TokenError> {
         backend: 'google-oauth2',
         token: res.data.access_token
       }
+      
       return axios.post(SOCIAL_CONVERT_TOKEN_URL, payload)
         .then(res => {
           localStorage.setItem('access_token', res.data.access_token);
@@ -157,6 +164,7 @@ export async function checkForGoogleRedirect(): Promise<void | TokenError> {
           return {errorString: 'Error converting token', axiosError: err};
         });
     })
+    
     .catch(err => {
       return {errorString: 'Error getting token from code', axiosError: err};
     });
