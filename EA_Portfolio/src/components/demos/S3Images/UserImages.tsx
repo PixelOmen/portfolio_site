@@ -37,7 +37,6 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
   function getUserLimits() {
     authInstAPI.get('v1/user-limits/')
       .then(res => {
-        console.log(res.data);
         userLimits.current = res.data;
         setAllowedImgTypes(res.data.allowed_image_mimes);
       })
