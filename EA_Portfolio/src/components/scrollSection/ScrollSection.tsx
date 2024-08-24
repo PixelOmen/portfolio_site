@@ -56,7 +56,8 @@ function ScrollSection(
         } else {
             if (activeRef.current) return;
             activeRef.current = true;
-            history.replaceState({ "backScroll": name}, "", `/${name}`);            
+            const path = name == "home" ? "" : name;
+            history.replaceState({ "backScroll": name}, "", `/${path}`);
             if (!scrollContract) return;
             contentRef.current.classList.remove(startingScale);
             contentRef.current.classList.remove("blur-sm");
@@ -89,9 +90,9 @@ function ScrollSection(
     }
     
 
-
-
+    // Init before render
     const scrollState = initScrollState();
+
 
     useEffect(() => {
         scrollState.setTriggerElement(triggerRef.current);
@@ -102,7 +103,7 @@ function ScrollSection(
 
   return (
     <section ref={triggerRef} className={`flex justify-center ${triggerBoxClassName}`}>
-        <div ref={externalRef}></div>
+        <div ref={externalRef} data-section={name}/>
         <div
             ref={contentRef}
             className={`${startingScale} transition-all duration-700 ease-out overflow-hidden ${className}`}

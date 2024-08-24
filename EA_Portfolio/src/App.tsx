@@ -16,6 +16,7 @@ import { ScrollObserver } from "./lib/scrolling";
 
 
 export default function App() {
+  const homeRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const workRef = useRef<HTMLDivElement>(null);
   const demoRef = useRef<HTMLDivElement>(null);
@@ -25,6 +26,7 @@ export default function App() {
   const scrollObserver = new ScrollObserver();
   const sectionMap = new Map<string, React.RefObject<HTMLDivElement>>(
     [
+      ['home', homeRef],
       ['about', aboutRef],
       ['work', workRef],
       ['demos', demoRef],
@@ -51,7 +53,7 @@ export default function App() {
   }, []);
 
   return (
-    <>
+    <main className="">
 
       <AppLoading className="z-50"/>
       
@@ -59,7 +61,7 @@ export default function App() {
         <Navbar sectionMap={sectionMap}/>
       </nav>
 
-      <section className="fixed top-0 w-full overflow-hidden -z-10">
+      <section className="fixed top-0 w-full overflow-hidden -z-10" data-section="hero">
         <Hero>
           <div className="relative rounded-md top-[20%] sm:top-1/3 mx-auto overflow-hidden p-4">
             <HeroHeader/>
@@ -67,7 +69,19 @@ export default function App() {
         </Hero>
       </section>
 
-      <div className="h-screen left-0 box-border"></div>
+      {/* Hero Spacer */}
+      <div className="h-screen left-0 box-border"/>
+
+      {/* For Scrolling Triggers */}
+      <ScrollSection
+        name="home"
+        ref={homeRef}
+        scrollObserver={scrollObserver}
+        triggerBoxClassName="absolute top-0 w-full opacity-0"
+        className="h-96 w-24 border-2"
+        bottomRatio={0.1}
+      >
+      </ScrollSection>
 
       <ScrollSection
         name="about"
@@ -106,7 +120,7 @@ export default function App() {
         <ContactSection/>
       </ScrollSection>
 
-    </>
+    </main>
   )
 }
 

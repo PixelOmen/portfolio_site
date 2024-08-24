@@ -61,10 +61,6 @@ export default function Navbar({ sectionMap }: NavbarProps) {
     if (smallOpenRef.current) {
       toggleSmallMenuOpen();
     }
-    if (sectionName === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
     const section = sectionMap.get(sectionName);
     if (!section || !section.current) {
       throw new Error(`Navbar:handleNavClick: section ${sectionName} not found`);
