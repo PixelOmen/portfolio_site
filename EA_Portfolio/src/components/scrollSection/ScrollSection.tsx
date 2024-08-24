@@ -9,6 +9,8 @@ interface ScrollSectionProps {
     scrollContract?: boolean;
     className?: string;
     triggerBoxClassName?: string;
+    topRatio?: number;
+    bottomRatio?: number;
     children?: React.ReactNode;
 }
 
@@ -21,6 +23,8 @@ function ScrollSection(
         scrollContract = true,
         className = "",
         triggerBoxClassName = "",
+        topRatio = 0.7,
+        bottomRatio= 0.4,        
         children,
     }: ScrollSectionProps,
     externalRef: React.Ref<HTMLDivElement>
@@ -33,16 +37,16 @@ function ScrollSection(
 
     function contractOnScroll(
         _: Event,
-        topRatio: number = 0.7,
-        bottomRatio: number = 0.4
+        ratioTop: number = topRatio,
+        ratioBottom: number = bottomRatio
     ): void {
         if (!contentRef.current || !triggerRef.current) {
             throw new Error("ScrollSection:scroll listener: element not found");   
         }
         let top = triggerRef.current.getBoundingClientRect().top;
         let bottom = triggerRef.current.getBoundingClientRect().bottom;
-        if (top > (window.innerHeight * topRatio) ||
-        bottom < (window.innerHeight * bottomRatio))
+        if (top > (window.innerHeight * ratioTop) ||
+        bottom < (window.innerHeight * ratioBottom))
         {
             activeRef.current = false;
             if (!scrollContract) return;

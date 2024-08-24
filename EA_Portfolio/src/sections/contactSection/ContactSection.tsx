@@ -68,6 +68,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
   useEffect(() => {
     if (scrollState?.wasTriggered.value) {
       setTriggered(true);
+      console.log('entered contact section');
     } else {
       setTriggered(false);
     }
