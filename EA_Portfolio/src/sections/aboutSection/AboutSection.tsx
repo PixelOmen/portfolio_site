@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import type { IScrollState } from "../../lib/scrolling";
 import Terminal from "../../components/terminal/Terminal";
@@ -12,9 +12,18 @@ interface AboutSectionProps {
 export default function AboutSection({ scrollState, className = ''}: AboutSectionProps) {
 
   const [singleTrigger, setSingleTrigger] = useState(false);
+  const preLoadPhase = useRef<boolean>(true);
 
   useEffect(() => {
-    if (scrollState?.wasTriggered.value && !singleTrigger) {
+    if (preLoadPhase.current) {
+      setTimeout(() => {
+        preLoadPhase.current = false;
+      }, 2000)
+    }
+  }, []);
+
+  useEffect(() => {
+    if (scrollState?.wasTriggered.value && !singleTrigger && !preLoadPhase.current) {
       setSingleTrigger(true);
     }
   }, [scrollState?.wasTriggered.value]);
