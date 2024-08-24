@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useId } from "react";
 
 import * as auth from "../../../lib/auth";
 import { authInstAPI, userUploadsAPI } from "../../../lib/requests";
-import type { ServerLimits } from "../../../lib/requests";
+import type { UserLimits } from "../../../lib/requests";
 
 import LockIcon from "../../ui/icons/LockIcon";
 import GoogleSignIn from "../../ui/social/GoogleSignIn";
@@ -17,7 +17,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const lockedScreenRef = useRef<HTMLDivElement>(null);
-  const serverLimits = useRef<ServerLimits | null>(null);
+  const userLimits = useRef<UserLimits | null>(null);
   const [allowedImgTypes, setAllowedImgTypes] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
   
@@ -34,11 +34,12 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
   // ----- Validation, Limits, Loading ---------
 
-  function getServerLimits() {
-    authInstAPI.get('v1/server-limits/')
+  function getUserLimits() {
+    authInstAPI.get('v1/user-limits/')
       .then(res => {
-        serverLimits.current = res.data;
-        setAllowedImgTypes(res.data.allowed_image_extensions);
+        console.log(res.data);
+        userLimits.current = res.data;
+        setAllowedImgTypes(res.data.allowed_image_mimes);
       })
       .catch(err => {
         console.error(err);
@@ -46,10 +47,10 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
   }
 
   function validateFile(file: File): string {
-    if (!serverLimits.current) {
-      return "Server limits not loaded";
+    if (!userLimits.current) {
+      return "User limits not loaded";
     }
-    const currentLimits = serverLimits.current;
+    const currentLimits = userLimits.current;
     if (imageCountRef.current >= currentLimits.max_user_images) {
       return `Max images reached 😢. Delete an image to upload a new one.`;
     }
@@ -57,7 +58,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       const maxSize = currentLimits.max_image_size / 1024 / 1024;
       return `File size too large, max size is ${maxSize}MB, sorry 😢`;
     }
-    if (!currentLimits.allowed_image_extensions.includes(file.type.toLowerCase())) {
+    if (!currentLimits.allowed_image_mimes.includes(file.type.toLowerCase())) {
       return "File type unsupported, sorry 😢";
     }
     return "";
@@ -98,8 +99,8 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
     if (!fileInputRef.current?.files || fileInputRef.current.files.length < 1) {
       return;
     } 
-    if (!serverLimits.current) {
-      setError("Server limits not loaded");
+    if (!userLimits.current) {
+      setError("User limits not loaded");
       return;
     }
 
@@ -158,7 +159,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
   useEffect(() => {
     if (locked) return;
-    getServerLimits();
+    getUserLimits();
     getImages();
     fileInputRef.current?.addEventListener('change', handleUpload);
 

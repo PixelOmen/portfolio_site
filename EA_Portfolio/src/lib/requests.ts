@@ -1,11 +1,11 @@
 import axios from "axios";
 import * as auth from "./auth";
 
-export interface ServerLimits {
+export interface UserLimits {
     max_image_size: number;
     max_user_images: number;
     max_post_size: number;
-    allowed_image_extensions: string[];
+    allowed_image_mimes: string[];
 }
 
 
