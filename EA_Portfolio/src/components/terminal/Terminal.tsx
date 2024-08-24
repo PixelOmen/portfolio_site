@@ -173,23 +173,23 @@ export default function Terminal({
       <div className="text-gray-200 text-[0.5rem] sm:text-sm">
 
         <header>        
-          <div className="relative w-full flex p-2 rounded-t-lg bg-gradient-to-b from-[#524f48] via-[#3e3d39] to-[#3e3d39]">
-            <div className="absolute left-[50%] -translate-x-[50%]">
+          <div className="relative w-full flex p-2 pb-4 rounded-t-lg bg-gradient-to-b from-[#524f48] via-[#3e3d39] to-[#3e3d39]">
+            <div className="absolute left-[50%] -translate-x-[50%] text-[0.8rem] sm:text-base font-semibold">
               {header}: ~
             </div>
             <div className="flex ml-auto gap-1 pr-1">
-              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#82817c] to-[#64635e] cursor-default">
+              <div className="border-[1px] border-gray-800 rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#82817c] to-[#64635e] cursor-default">
                 &minus;
               </div>
-              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 text-black bg-gradient-to-b from-[#82817c] to-[#64635e] cursor-default">
+              <div className="border-[1px] border-gray-800 rounded-full px-1 sm:px-2 text-black bg-gradient-to-b from-[#82817c] to-[#64635e] cursor-default">
                 <div className="-translate-y-[1px]">&#9633;</div>
               </div>
-              <div className="border-[1px] border-black rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#ef7d52] to-[#de4f1b] cursor-pointer">
+              <div className="border-[1px] border-gray-800 rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#ef7d52] to-[#de4f1b] cursor-pointer">
                 &times;
               </div>
             </div>
           </div>
-          <div className="pl-2 sm:pl-6 py-1 sm:py-2 flex gap-4 bg-[#373632]">
+          <div className="pl-2 sm:pl-6 py-1 sm:py-2 flex gap-4 bg-[#373632] text-gray-300 ">
             {['File', 'Edit', 'View', 'Search', 'Terminal', 'Help'].map((item, index) => {
               return (
                 <div key={index}>{item}</div>

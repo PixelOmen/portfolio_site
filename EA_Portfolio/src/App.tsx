@@ -46,8 +46,8 @@ export default function App() {
 
   useEffect(() => {
     console.log("%c🤪I'm watching you🤪", 'color: red; font-size: 18px');
-    handleRoutes(sectionMap);
     document.addEventListener('visibilitychange', visibilityRefresh);
+    handleRoutes(sectionMap, true);
   }, []);
 
   return (
