@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import * as auth from "../../../lib/auth";
-import { authInstAPI } from "../../../lib/requests";
+import { authAPI } from "../../../lib/requests";
 
 import LockIcon from "../../ui/icons/LockIcon";
 import GoogleSignIn from "../../ui/social/GoogleSignIn";
@@ -19,7 +19,7 @@ export default function UserPosts({locked = true}: UserPostsProps) {
   const lockedScreenRef = useRef<HTMLDivElement>(null);
 
   function getPosts() {
-    authInstAPI.get('v1/user-posts/')
+    authAPI.get('v1/user-posts/')
       .then(res => {
         if (res.data.length == 0) {
           addPost("Here's one to get you started!");
@@ -38,7 +38,7 @@ export default function UserPosts({locked = true}: UserPostsProps) {
   function handleEditConfirm(postid: number, content: string): void {
     if (!content) return;
     setEditRequested(-1);
-    authInstAPI.put(`v1/user-posts/${postid}/`, {content})
+    authAPI.put(`v1/user-posts/${postid}/`, {content})
     .then(() => {
         getPosts();
       })
@@ -48,7 +48,7 @@ export default function UserPosts({locked = true}: UserPostsProps) {
   }
 
   function deletePost(postid: number): void {
-    authInstAPI.delete(`v1/user-posts/${postid}/`)
+    authAPI.delete(`v1/user-posts/${postid}/`)
       .then(() => {
         getPosts();
       })
@@ -59,7 +59,7 @@ export default function UserPosts({locked = true}: UserPostsProps) {
 
   function addPost(content: string): void {
     if (!content) return;
-    authInstAPI.post('v1/user-posts/', {content})
+    authAPI.post('v1/user-posts/', {content})
       .then(() => {
         getPosts();
         setTimeout(() => {

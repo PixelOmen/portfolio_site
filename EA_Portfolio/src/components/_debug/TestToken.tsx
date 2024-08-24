@@ -1,4 +1,4 @@
-import { anonInstAPI, authInstAPI } from "../../lib/requests";
+import { anonAPI, authAPI } from "../../lib/requests";
 
 interface TestTokenProps {
   title?: string;
@@ -8,7 +8,7 @@ interface TestTokenProps {
 export default function TestToken( { title = "Test", wToken = true }: TestTokenProps ) {
 
   function testNoToken() {
-    anonInstAPI.get('v1/token-test')
+    anonAPI.get('v1/token-test')
       .then(res => {
         console.log(res);
       })
@@ -18,7 +18,7 @@ export default function TestToken( { title = "Test", wToken = true }: TestTokenP
   }
 
   function testWithToken() {
-    authInstAPI.get('v1/token-test')
+    authAPI.get('v1/token-test')
       .then(res => {
         console.log(res);
       })

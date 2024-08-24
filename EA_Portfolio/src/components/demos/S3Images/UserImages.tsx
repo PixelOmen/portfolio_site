@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, useId } from "react";
 
 import * as auth from "../../../lib/auth";
-import { authInstAPI, userUploadsAPI } from "../../../lib/requests";
-import type { UserLimits } from "../../../lib/requests";
+import { authAPI, userUploadsAPI } from "../../../lib/requests";
+import type { UserLimits } from "../../../lib/userLimits";
 
 import LockIcon from "../../ui/icons/LockIcon";
 import GoogleSignIn from "../../ui/social/GoogleSignIn";
@@ -35,7 +35,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
   // ----- Validation, Limits, Loading ---------
 
   function getUserLimits() {
-    authInstAPI.get('v1/user-limits/')
+    authAPI.get('v1/user-limits/')
       .then(res => {
         userLimits.current = res.data;
         setAllowedImgTypes(res.data.allowed_image_mimes);
@@ -75,7 +75,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
   // ------- API Calls ---------
 
   function getImages() {
-    authInstAPI.get('v1/user-images/')
+    authAPI.get('v1/user-images/')
       .then(res => {
         imageCountRef.current = res.data.length;
         loadedCountRef.current = 0;
@@ -236,7 +236,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
           multiple={false}
         />
       </div>
-      <div className="min-h-6 mt-1  text-center text-red-500 rounded-lg animate-pulse transition-all duration-200">
+      <div className="min-h-6 mt-1 text-center text-red-500 rounded-lg animate-pulse transition-all duration-200">
         {error}
       </div>
     </div>

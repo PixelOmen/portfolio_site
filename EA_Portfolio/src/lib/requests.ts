@@ -1,17 +1,9 @@
 import axios from "axios";
 import * as auth from "./auth";
 
-export interface UserLimits {
-    max_image_size: number;
-    max_user_images: number;
-    max_post_size: number;
-    allowed_image_mimes: string[];
-}
-
-
 
 // ----- API Instances -----
-export const authInstAPI = axios.create({
+export const authAPI = axios.create({
     baseURL: auth.API_ROOT,
     headers: {
         'Content-Type': 'application/json',
@@ -19,7 +11,7 @@ export const authInstAPI = axios.create({
     }
 });
 
-export const anonInstAPI = axios.create({
+export const anonAPI = axios.create({
     baseURL: auth.API_ROOT,
     headers: {
         'Content-Type': 'application/json',
@@ -35,7 +27,7 @@ export const userUploadsAPI = axios.create({
     }
 });
 
-export const anonFormInstAPI = axios.create({
+export const anonFormAPI = axios.create({
     baseURL: auth.API_ROOT,
     headers: {
         'Content-Type': 'multipart/form-data',
@@ -46,7 +38,7 @@ export const anonFormInstAPI = axios.create({
 
 
 // ----- Interceptors -----
-authInstAPI.interceptors.request.use(
+authAPI.interceptors.request.use(
     config => {
         auth.logOutOnInvalidToken();
         const tokenHeader = auth.getAuthHeader();

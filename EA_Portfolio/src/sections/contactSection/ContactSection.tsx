@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react"
 
-import { anonFormInstAPI } from "../../lib/requests";
+import { anonFormAPI } from "../../lib/requests";
 
 import type { IScrollState } from "../../lib/scrolling";
 import AnimReset from "../../components/animReset/AnimReset";
@@ -52,7 +52,7 @@ export default function ContactSection({ scrollState }: ContactSectionProps) {
     formDebounce.current = setTimeout(() => {
       const form = e.target as HTMLFormElement;
       const data = new FormData(form);
-      anonFormInstAPI.post('/v1/anon-messages/', data)
+      anonFormAPI.post('/v1/anon-messages/', data)
         .then(() => {
           form.reset();
           setSuccessMsg();
