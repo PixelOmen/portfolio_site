@@ -1,24 +1,14 @@
-import { useState, useEffect } from "react";
-
-import * as auth from "../../../lib/auth";
+import type { UserLimits } from "../../../lib/userLimits";
 
 import UserPosts from "./UserPosts";
 import DemoLink from "../../ui/links/DemoLink";
 
-export default function Oauth2() {
+interface CrudProps {
+  isLogggendIn: boolean;
+  userLimits: UserLimits | null;
+}
 
-  const [isLogggendIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    auth.isLoggedIn()
-      .then(res => {
-        setIsLoggedIn(res);
-      });
-  }, []);
-
-  useEffect(() => {
-  }, [isLogggendIn]);
-
+export default function Crud( { isLogggendIn = false, userLimits }: CrudProps ) {
   return (
     <div            
       className="w-full max-w-[1800px] flex justify-center p-4 lg:px-8"
@@ -54,7 +44,7 @@ export default function Oauth2() {
           </div>
         </div>
         <div className="max-[720px]:w-full min-[720px]:ml-auto order-2 min-[720px]:order-1 min-[720px]:basis-[55%] min-[720px]:max-w-[50%] mt-4 min-[720px]:mt-0">
-          <UserPosts locked={!isLogggendIn}/>
+          <UserPosts locked={!isLogggendIn} userLimits={userLimits}/>
         </div>
       </div>
   </div>    

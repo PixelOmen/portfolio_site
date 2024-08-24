@@ -1,27 +1,15 @@
-import { useState, useEffect } from "react";
+import type { UserLimits } from "../../../lib/userLimits";
 
-import * as auth from "../../../lib/auth";
 import UserImages from "./UserImages";
 import DemoLink from "../../ui/links/DemoLink";
 
-export default function S3Images() {
 
-  const [isLogggendIn, setIsLoggedIn] = useState(false);
-  
+interface UserImagesProps {
+  isLogggendIn?: boolean;
+  userLimits: UserLimits | null;
+}
 
-  useEffect(() => {
-    auth.isLoggedIn()
-      .then(res => {
-        setIsLoggedIn(res);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (isLogggendIn) {
-
-    }
-  }, [isLogggendIn]);
-
+export default function MediaStorage( { isLogggendIn = false, userLimits }: UserImagesProps ) {
   return (
     <div            
       className="w-full max-w-[1800px] flex justify-center p-4 lg:px-8"
@@ -52,7 +40,7 @@ export default function S3Images() {
         <div
           className="max-[720px]:w-full min-[720px]:basis-[50%] min-[720px]:ml-auto sm:min-w-[350px] mt-4 min-[720px]:mt-0"
         >
-          <UserImages locked={!isLogggendIn}/>
+          <UserImages locked={!isLogggendIn} userLimits={userLimits}/>
         </div>
 
       </div>

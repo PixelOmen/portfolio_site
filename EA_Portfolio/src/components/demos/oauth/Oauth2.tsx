@@ -8,17 +8,14 @@ import GoogleSignIn from "../../ui/social/GoogleSignIn";
 import oauth2_badge from "../../../assets/icons/oauth2_badge.png";
 import DemoLink from "../../ui/links/DemoLink";
 
-export default function Oauth2() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+interface UserInfo {
+  isLoggedIn?: boolean;
+}
+
+export default function Oauth2( { isLoggedIn = false }: UserInfo ) {
+
   const [userInfo, setUserInfo] = useState(undefined);
-
-  useEffect(() => {
-    auth.isLoggedIn()
-      .then(res => {
-        setIsLoggedIn(res);
-      });
-  }, []);
 
   useEffect(() => {
     if (isLoggedIn) {

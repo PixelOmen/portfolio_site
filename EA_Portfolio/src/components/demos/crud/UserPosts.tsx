@@ -2,15 +2,17 @@ import { useEffect, useRef, useState } from "react";
 
 import * as auth from "../../../lib/auth";
 import { authAPI } from "../../../lib/requests";
+import type { UserLimits } from "../../../lib/userLimits";
 
 import LockIcon from "../../ui/icons/LockIcon";
 import GoogleSignIn from "../../ui/social/GoogleSignIn";
 
 interface UserPostsProps {
   locked?: boolean;
+  userLimits: UserLimits | null;
 }
 
-export default function UserPosts({locked = true}: UserPostsProps) {
+export default function UserPosts({locked = true, userLimits}: UserPostsProps) {
 
   const [editRequested, setEditRequested] = useState(-1);
   const [posts, setPosts] = useState<any[]>([]);
@@ -84,6 +86,9 @@ export default function UserPosts({locked = true}: UserPostsProps) {
     newTextAreaRef.current!.value = '';
   }
 
+
+  // ---- Effects ------
+
   useEffect(() => {
     auth.isLoggedIn()
       .then(res => {
@@ -139,7 +144,7 @@ export default function UserPosts({locked = true}: UserPostsProps) {
         <textarea
           ref={newTextAreaRef}
           rows={2}
-          maxLength={200}
+          maxLength={userLimits ? userLimits.max_post_length : 200}
           placeholder="Enter a post and press Enter..."
           className={`block w-full py-3 pl-4 pr-14 border-2 outline-none border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-slate-200 focus:border-black duration-500 ${locked && 'opacity-0'}`}
         />

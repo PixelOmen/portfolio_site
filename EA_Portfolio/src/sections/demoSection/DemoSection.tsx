@@ -1,14 +1,31 @@
+import { useEffect, useState } from "react";
+
+import * as auth from "../../lib/auth";
+import { getUserLimits, UserLimits } from "../../lib/userLimits";
+
 import Oauth2 from "../../components/demos/oauth/Oauth2";
 import Crud from "../../components/demos/crud/Crud";
-import MediaStorage from "../../components/demos/S3Images/MediaStorage";
+import MediaStorage from "../../components/demos/mediaStorage/MediaStorage";
 
 
-interface DemoSectionProps {
-  
-}
+export default function DemoSection() {
 
+  const [isLogggendIn, setIsLoggedIn] = useState(false);
+  const [userLimitsState, setUserLimitsState] = useState<UserLimits | null>(null);
 
-export default function DemoSection({}: DemoSectionProps) {
+  async function setUserLimits() {
+    const res = await getUserLimits();
+    setUserLimitsState(res);
+  }
+
+  useEffect(() => {
+    auth.isLoggedIn()
+      .then(res => {
+        setIsLoggedIn(res);
+      });
+      setUserLimits();
+  }, []);
+
   return (        
     <div>
 
@@ -28,7 +45,7 @@ export default function DemoSection({}: DemoSectionProps) {
         >
           <div className="flex flex-col gap-16">
             <div className="mx-auto">
-              <Oauth2/>
+              <Oauth2 isLoggedIn={isLogggendIn}/>
             </div>
             <div className="flex mx-auto items-center w-[90%] text-[#EF8275]">
               <div>{"<"}</div>
@@ -36,10 +53,10 @@ export default function DemoSection({}: DemoSectionProps) {
               <div>{">"}</div>
             </div>
             <div className="mx-auto">
-              <Crud/>
+              <Crud isLogggendIn={isLogggendIn} userLimits={userLimitsState}/>
             </div>
             <div className="mx-auto">
-              <MediaStorage/>
+              <MediaStorage isLogggendIn={isLogggendIn} userLimits={userLimitsState}/>
             </div>              
           </div>
         </div>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useId } from "react";
 
 import * as auth from "../../../lib/auth";
 import { authAPI, userUploadsAPI } from "../../../lib/requests";
-import { getUserLimits, UserLimits, validateImageUpload } from "../../../lib/userLimits";
+import { UserLimits, validateImageUpload } from "../../../lib/userLimits";
 
 import LockIcon from "../../ui/icons/LockIcon";
 import GoogleSignIn from "../../ui/social/GoogleSignIn";
@@ -10,18 +10,17 @@ import DemoError from "../demoError/DemoError";
 
 interface UserImagesProps {
   locked?: boolean;
+  userLimits: UserLimits | null | undefined;
 }
 
-export default function UserImages( { locked = true }: UserImagesProps ) {
+export default function UserImages( { locked = true, userLimits }: UserImagesProps ) {
 
   const fileInputId = useId();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const lockedScreenRef = useRef<HTMLDivElement>(null);
+  const allowedImgTypes = userLimits ? userLimits.allowed_image_mimes : [];
   const [error, setError] = useState<string>("");
-  
-  const userLimits = useRef<UserLimits | null>(null);
-  const allowedImgTypes = useRef<string[]>([]);
 
   const [imageData, setImageData] = useState<SingleImageProps[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState<boolean>(false);
@@ -35,11 +34,6 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
 
   // ----- Limits, Loading ---------
-  async function setUserLimits() {
-    userLimits.current = await getUserLimits();
-    allowedImgTypes.current = userLimits.current.allowed_image_mimes;
-  }
-
   function loadedCallback() {
     loadedCountRef.current++;
     if (loadedCountRef.current >= imageCountRef.current || imageCountRef.current === 0) {
@@ -74,14 +68,14 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
     if (!fileInputRef.current?.files || fileInputRef.current.files.length < 1) {
       return;
     } 
-    if (!userLimits.current) {
+    if (!userLimits) {
       setError("User limits not loaded");
       return;
     }
 
     const file = fileInputRef.current.files[0];
     fileInputRef.current.value = '';
-    const error = validateImageUpload(file, userLimits.current, imageCountRef.current);
+    const error = validateImageUpload(file, userLimits, imageCountRef.current);
     if (error) {
       console.error(error);
       setError(error);
@@ -134,7 +128,6 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
   useEffect(() => {
     if (locked) return;
-    setUserLimits();
     getImages();
     fileInputRef.current?.addEventListener('change', handleUpload);
 
@@ -208,7 +201,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
           ref={fileInputRef}
           id={fileInputId}
           type="file"
-          accept={allowedImgTypes.current.join(",")}
+          accept={allowedImgTypes.join(",")}
           className="hidden"
           multiple={false}
         />

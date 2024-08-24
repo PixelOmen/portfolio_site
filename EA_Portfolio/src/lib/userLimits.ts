@@ -1,16 +1,16 @@
-import { authAPI } from './requests';
+import { anonAPI } from './requests';
 
 export interface UserLimits {
     max_image_size: number;
     max_user_images: number;
-    max_post_size: number;
+    max_post_length: number;
     allowed_image_mimes: string[];
 }
 
 
 
 export function getUserLimits(): Promise<UserLimits> {
-  return authAPI.get('v1/user-limits/')
+  return anonAPI.get('v1/user-limits/')
     .then(res => {
       return res.data;
     })
