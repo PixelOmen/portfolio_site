@@ -65,11 +65,11 @@ export default function Navbar({ sectionMap }: NavbarProps) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    const ref = sectionMap.get(sectionName);
-    if (!ref || !ref.current) {
+    const section = sectionMap.get(sectionName);
+    if (!section || !section.current) {
       throw new Error(`Navbar:handleNavClick: section ${sectionName} not found`);
     }
-    ref.current.scrollIntoView({ behavior: 'smooth' });
+    section.current.scrollIntoView({ behavior: 'smooth' });
   }
 
 

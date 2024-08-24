@@ -208,7 +208,11 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   }
 
   useEffect(() => {
-    scrollState?.wasTriggered.value ? setActivate(true) : setActivate(false);
+    if (scrollState?.wasTriggered.value) {
+      setActivate(true);
+     } else {
+      setActivate(false);
+    }
   }, [scrollState?.wasTriggered.value]);
 
   return (

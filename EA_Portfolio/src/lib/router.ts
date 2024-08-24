@@ -17,13 +17,13 @@ export default function handleRoutes(sectionMap: Map<string, React.RefObject<HTM
       });
     return;
   }
-  const sectionRef = sectionMap.get(currentPath);
-  if (!sectionRef) return;
-  if (!sectionRef.current) {
+  const section = sectionMap.get(currentPath);
+  if (!section) return;
+  if (!section.current) {
     console.error('No ref in handleRoute');
     return;
   }
   setTimeout(() => {
-    sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    section.current?.scrollIntoView({ behavior: 'smooth' });
   }, 1000);
 }

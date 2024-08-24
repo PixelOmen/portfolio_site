@@ -70,30 +70,34 @@ export default function App() {
       <div className="h-screen left-0 box-border"></div>
 
       <ScrollSection
+        name="about"
         ref={aboutRef}
         scrollObserver={scrollObserver}
-        className="w-full mb-8 pt-24"
+        className="w-full mb-64 pt-24"
       >
         <AboutSection/>
       </ScrollSection>
 
       <ScrollSection
+        name="work"
         ref={workRef}
         scrollObserver={scrollObserver}
-        className="w-full mb-8 pt-24"
+        className="w-full mb-64 pt-24"
       >
         <WorkSection/>
       </ScrollSection>
 
       <ScrollSection
+        name="demos"
         ref={demoRef}
         scrollObserver={scrollObserver}
-        className="w-full pt-24"
+        className="w-full mb-64 pt-24"
       >
         <DemoSection/>        
       </ScrollSection>
 
       <ScrollSection
+        name="contact"
         ref={contactRef}
         scrollObserver={scrollObserver}
         scrollContract={false}

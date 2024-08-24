@@ -18,7 +18,7 @@ export default function Crud( { isLogggendIn = false, userLimits }: CrudProps ) 
           <div className="pt-0 sm:p-6 sm:pt-0">
             <header className="text-center text-3xl font-bold text-[#EF8275] mb-4">CRUD</header>
             <p className="">
-                CRUD stands for Create, Read, Update, and Delete. It is a set of operations that can be performed on a database or data store. This demo allows you to perform CRUD operations on a <DemoLink
+                CRUD stands for Create, Read, Update, and Delete. It is a set of operations that can be performed on a database or data store. You can perform CRUD operations here on a <DemoLink
                 displayText="PostgreSQL"
                 url="https://www.postgresql.org/about/"
                 className="ml-0 mr-0"
@@ -26,7 +26,7 @@ export default function Crud( { isLogggendIn = false, userLimits }: CrudProps ) 
                 displayText="AWS RDS"
                 url="https://aws.amazon.com/rds/"
                 className="ml-0 mr-1"
-              /> via a <DemoLink
+              />, via a <DemoLink
                 displayText="RESTful API"
                 url="https://aws.amazon.com/what-is/restful-api/"
                 className="ml-0 mr-1"

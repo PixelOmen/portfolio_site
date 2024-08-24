@@ -2,13 +2,18 @@ import { useEffect, useState } from "react";
 
 import * as auth from "../../lib/auth";
 import { getUserLimits, UserLimits } from "../../lib/userLimits";
+import { IScrollState } from "../../lib/scrolling";
 
 import Oauth2 from "../../components/demos/oauth/Oauth2";
 import Crud from "../../components/demos/crud/Crud";
 import MediaStorage from "../../components/demos/mediaStorage/MediaStorage";
 
 
-export default function DemoSection() {
+interface DemoSectionProps {
+  scrollState?: IScrollState;
+}
+
+export default function DemoSection( {scrollState}: DemoSectionProps ) {
 
   const [isLogggendIn, setIsLoggedIn] = useState(false);
   const [userLimitsState, setUserLimitsState] = useState<UserLimits | null>(null);
@@ -23,17 +28,21 @@ export default function DemoSection() {
       .then(res => {
         setIsLoggedIn(res);
       });
-      setUserLimits();
+      setUserLimits();      
   }, []);
+
+  useEffect(() => {
+    // For future use, if needed
+  }, [scrollState]);
 
   return (        
     <div>
 
-      <div className="px-2 mx-auto max-w-[1500px] text-4xl sm:text-5xl text-gray-200 font-roboto font-thin text-center">
+      <div className="px-6 mx-auto max-w-[1500px] text-4xl sm:text-5xl text-gray-200 font-roboto font-thin text-center">
           Backend
         <span className="text-[#EF8275] w-full ml-3 font-medium">Demos</span>
         <div className="mt-2 px-2 text-base sm:text-lg font-light font-sans text-gray-200">
-          Live demos showcasing the integration of various frameworks, services, and tech stacks.
+          Live demos showcasing the integration of various services and tech stacks.
         </div>
         <hr className="mx-auto mt-4 block w-3/4"/>
       </div>

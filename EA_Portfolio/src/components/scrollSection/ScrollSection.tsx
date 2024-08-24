@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 
 import { ScrollState } from "../../lib/scrolling";
-import type { IScrollObserver, IScrollState } from "../../lib/scrolling";
+import { IScrollObserver, IScrollState } from "../../lib/scrolling";
 
 interface ScrollSectionProps {
+    name: string;
     scrollObserver: IScrollObserver;
     scrollContract?: boolean;
     className?: string;
@@ -15,6 +16,7 @@ export default forwardRef(ScrollSection)
 
 function ScrollSection(
     {
+        name,
         scrollObserver,
         scrollContract = true,
         className = "",
@@ -25,7 +27,8 @@ function ScrollSection(
 ) {
 
     const triggerRef = useRef<HTMLDivElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);    
+    const contentRef = useRef<HTMLDivElement>(null);
+    const activeRef = useRef<boolean>(false);
     const startingScale = scrollContract ? "scale-95" : "";
 
     function contractOnScroll(
@@ -41,14 +44,18 @@ function ScrollSection(
         if (top > (window.innerHeight * topRatio) ||
         bottom < (window.innerHeight * bottomRatio))
         {
+            activeRef.current = false;
+            if (!scrollContract) return;
             contentRef.current.classList.add(startingScale);
             contentRef.current.classList.add("blur-sm");
-            contentRef.current.classList.add("rounded-3xl");
             contentRef.current.classList.remove("scale-100");
         } else {
+            if (activeRef.current) return;
+            activeRef.current = true;
+            history.replaceState({ "backScroll": name}, "", `/${name}`);            
+            if (!scrollContract) return;
             contentRef.current.classList.remove(startingScale);
             contentRef.current.classList.remove("blur-sm");
-            contentRef.current.classList.remove("rounded-3xl");
             contentRef.current.classList.add("scale-100");
         }
     }
@@ -84,9 +91,7 @@ function ScrollSection(
 
     useEffect(() => {
         scrollState.setTriggerElement(triggerRef.current);
-        if (scrollContract) {
-            window.addEventListener("scroll", contractOnScroll);
-        }
+        window.addEventListener("scroll", contractOnScroll);
     }, []);
 
 
