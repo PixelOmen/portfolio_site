@@ -2,10 +2,11 @@ import { useEffect, useRef, useState, useId } from "react";
 
 import * as auth from "../../../lib/auth";
 import { authAPI, userUploadsAPI } from "../../../lib/requests";
-import type { UserLimits } from "../../../lib/userLimits";
+import { getUserLimits, UserLimits, validateImageUpload } from "../../../lib/userLimits";
 
 import LockIcon from "../../ui/icons/LockIcon";
 import GoogleSignIn from "../../ui/social/GoogleSignIn";
+import DemoError from "../demoError/DemoError";
 
 interface UserImagesProps {
   locked?: boolean;
@@ -17,10 +18,11 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const lockedScreenRef = useRef<HTMLDivElement>(null);
-  const userLimits = useRef<UserLimits | null>(null);
-  const [allowedImgTypes, setAllowedImgTypes] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
   
+  const userLimits = useRef<UserLimits | null>(null);
+  const allowedImgTypes = useRef<string[]>([]);
+
   const [imageData, setImageData] = useState<SingleImageProps[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState<boolean>(false);
   const loadedCountRef = useRef<number>(0);
@@ -32,35 +34,10 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
 
 
-  // ----- Validation, Limits, Loading ---------
-
-  function getUserLimits() {
-    authAPI.get('v1/user-limits/')
-      .then(res => {
-        userLimits.current = res.data;
-        setAllowedImgTypes(res.data.allowed_image_mimes);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }
-
-  function validateFile(file: File): string {
-    if (!userLimits.current) {
-      return "User limits not loaded";
-    }
-    const currentLimits = userLimits.current;
-    if (imageCountRef.current >= currentLimits.max_user_images) {
-      return `Max images reached 😢. Delete an image to upload a new one.`;
-    }
-    if (file.size > currentLimits.max_image_size) {
-      const maxSize = currentLimits.max_image_size / 1024 / 1024;
-      return `File size too large, max size is ${maxSize}MB, sorry 😢`;
-    }
-    if (!currentLimits.allowed_image_mimes.includes(file.type.toLowerCase())) {
-      return "File type unsupported, sorry 😢";
-    }
-    return "";
+  // ----- Limits, Loading ---------
+  async function setUserLimits() {
+    userLimits.current = await getUserLimits();
+    allowedImgTypes.current = userLimits.current.allowed_image_mimes;
   }
 
   function loadedCallback() {
@@ -69,7 +46,6 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
       setImagesLoaded(true);
     }
   }
-
 
 
   // ------- API Calls ---------
@@ -105,7 +81,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
     const file = fileInputRef.current.files[0];
     fileInputRef.current.value = '';
-    const error = validateFile(file);
+    const error = validateImageUpload(file, userLimits.current, imageCountRef.current);
     if (error) {
       console.error(error);
       setError(error);
@@ -158,7 +134,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
   useEffect(() => {
     if (locked) return;
-    getUserLimits();
+    setUserLimits();
     getImages();
     fileInputRef.current?.addEventListener('change', handleUpload);
 
@@ -185,10 +161,9 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
 
 
 
-
-
   return (
     <div className="relative w-full">
+
       {locked && (
         <div
           ref={lockedScreenRef}
@@ -200,6 +175,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
           </div>
         </div>
       )}
+
       <div
         ref={imageContainerRef}
         className={`h-[340px] border-2 border-gray-500 bg-slate-200 rounded-lg overflow-y-auto ${locked && 'opacity-0'}`}
@@ -207,7 +183,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
         <div
           className="p-6 flex gap-5 justify-center flex-wrap"
         >
-        {imageData && imageData.map(data => (
+          {imageData && imageData.map(data => (
             <SingleImage
               key={data.id}
               id={data.id}
@@ -219,6 +195,7 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
           ))}
         </div>
       </div>
+
       <div className={`relative mt-2 sm:mt-3 flex justify-center ${locked && 'opacity-0'}`}>
         <label
           ref={uploadLabelRef}
@@ -231,21 +208,17 @@ export default function UserImages( { locked = true }: UserImagesProps ) {
           ref={fileInputRef}
           id={fileInputId}
           type="file"
-          accept={allowedImgTypes.join(",")}
+          accept={allowedImgTypes.current.join(",")}
           className="hidden"
           multiple={false}
         />
       </div>
-      <div className="min-h-6 mt-1 text-center text-red-500 rounded-lg animate-pulse transition-all duration-200">
-        {error}
-      </div>
+
+      <DemoError error={error}/>
+
     </div>
   )
 }
-
-
-
-
 
 
 
