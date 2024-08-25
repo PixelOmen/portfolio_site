@@ -18,6 +18,7 @@ interface TerminalProps {
   newLinePause?: number;
   className?: string;
   triggered?: boolean;
+  eastereggCallback?: () => void;
 }
 
 export default function Terminal({
@@ -28,6 +29,7 @@ export default function Terminal({
   newLinePause = 1000,
   className = '',
   triggered = false,
+  eastereggCallback
 }: TerminalProps ) {
 
   const [reset, setReset] = useState(false);
@@ -178,13 +180,15 @@ export default function Terminal({
               {header}: ~
             </div>
             <div className="flex ml-auto gap-1 pr-1">
-              <div className="border-[1px] border-gray-800 rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#82817c] to-[#64635e] cursor-default">
+              <div className="border-[1px] border-gray-800 rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#82817c] to-[#64635e] cursor-default select-none">
                 &minus;
               </div>
-              <div className="border-[1px] border-gray-800 rounded-full px-1 sm:px-2 text-black bg-gradient-to-b from-[#82817c] to-[#64635e] cursor-default">
+              <div className="border-[1px] border-gray-800 rounded-full px-1 sm:px-2 text-black bg-gradient-to-b from-[#82817c] to-[#64635e] cursor-default select-none">
                 <div className="-translate-y-[1px]">&#9633;</div>
               </div>
-              <div className="border-[1px] border-gray-800 rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#ef7d52] to-[#de4f1b] cursor-pointer">
+              <div
+                onClick={eastereggCallback}
+                className="border-[1px] border-gray-800 rounded-full px-1 sm:px-2 pt-[1px] text-black bg-gradient-to-b from-[#ef7d52] to-[#de4f1b] cursor-pointer select-none">
                 &times;
               </div>
             </div>
