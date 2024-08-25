@@ -48,7 +48,11 @@ function ScrollSection(
         if (top > (window.innerHeight * ratioTop) ||
         bottom < (window.innerHeight * ratioBottom))
         {
+            if (!activeRef.current) return
             activeRef.current = false;
+            if (name == "contact") {
+                history.replaceState({"backScroll": name}, "", `/demos`);
+            }
             if (!scrollContract) return;
             contentRef.current.classList.add(startingScale);
             contentRef.current.classList.add("blur-sm");
@@ -57,7 +61,7 @@ function ScrollSection(
             if (activeRef.current) return;
             activeRef.current = true;
             const path = name == "home" ? "" : name;
-            history.replaceState({ "backScroll": name}, "", `/${path}`);
+            history.replaceState({"backScroll": name}, "", `/${path}`);
             if (!scrollContract) return;
             contentRef.current.classList.remove(startingScale);
             contentRef.current.classList.remove("blur-sm");

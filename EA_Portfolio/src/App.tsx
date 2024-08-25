@@ -87,7 +87,7 @@ export default function App() {
         name="about"
         ref={aboutRef}
         scrollObserver={scrollObserver}
-        className="w-full mb-40 pt-24"
+        className="w-full mb-40 pt-32"
       >
         <AboutSection/>
       </ScrollSection>
@@ -96,7 +96,7 @@ export default function App() {
         name="work"
         ref={workRef}
         scrollObserver={scrollObserver}
-        className="w-full mb-40 pt-24"
+        className="w-full mb-40 pt-32"
       >
         <WorkSection/>
       </ScrollSection>
@@ -105,7 +105,7 @@ export default function App() {
         name="demos"
         ref={demoRef}
         scrollObserver={scrollObserver}
-        className="w-full mb-40 pt-24"
+        className="w-full mb-40 pt-32"
       >
         <DemoSection/>        
       </ScrollSection>

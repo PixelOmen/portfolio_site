@@ -48,9 +48,9 @@ export default function DemoSection( {scrollState}: DemoSectionProps ) {
       </div>
 
       
-      <div className="bg-[rgba(31,31,31,0)] w-full flex justify-center p-6 sm:py-12">
+      <div className="bg-[rgba(31,31,31,0)] w-full flex justify-center p-6 sm:pt-12">
         <div
-          className="w-full mb-6 text-black rounded-lg py-10"
+          className="w-full mb-6 text-black rounded-lg pt-10"
         >
           <div className="flex flex-col gap-16">
             <div className="mx-auto">
