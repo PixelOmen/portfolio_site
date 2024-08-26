@@ -45,21 +45,21 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
               Who am I? What do I do? What is this site? Why am I asking so many questions?
             </div>            
             <hr className="block mx-auto mt-4 w-3/4"/>
-            <div className="mt-2 w-[91%] mx-auto text-base sm:text-2xl text-slate-300 text-center font-normal">
+            <div className="mt-2 w-[91%] mx-auto text-base sm:text-2xl text-slate-300 text-left font-normal">
               <p className="mt-12 mb-4">
-                Hello and welcome!&#9995;
+                Hello and welcome! &#9995;
               </p>
               <p className="mb-6">
                 My name is <a href="https://www.linkedin.com/in/emmanuelacostapost/" className="text-[#EF8275]">Emmanuel</a>. I'm a software engineer and full stack developer with a passion for leveraging cloud infrastructure to create secure, dynamic, and scalable web applications. I specialize in most things Python, including building RESTful APIs utilizing Django and PostgreSQL, as well as deploying scalable applications on AWS.
               </p>
               <p className="mb-6">
-                I built this site not only as place to showcase my work and skills, but also as a personal case study in design and functionality with React, Django, and AWS. Please feel free to check out my work, including several server-side Django and AWS demos below.&#128071;
+                I built this site not only as place to showcase my work and skills, but also as a personal case study in design and functionality with React, Django, and AWS. Please feel free to check out my work, including several server-side Django and AWS demos below. &#128071;
               </p>
               <p className="mb-6">
                 Have an idea but don't know how to realize it? Let's <a href="mailto:3D.Acosta@gmail.com" className="text-[#EF8275]">connect</a> and make it real!&#129309;
               </p>
               <p>
-                Thanks for visting!&#128406;
+                Thanks for visting! &#128406;
               </p>
             </div>
           </article>

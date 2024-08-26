@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import anime from "animejs"
 
 export default function HeroCanvas() {
@@ -22,18 +22,13 @@ function dimByScreen(wRatio = 72, hRatio = 46): DotGrid {
 }
 
 function Grid() {
-  const [gridDim, updateDim] = useState(dimByScreen());
+  const { width, height } = dimByScreen();
 
   var animDelay = 20000;
   var animAllowed = true;
   var currentAnim = 0;
   let dotIndex = 0;
-
-  function stopAnims() {
-    animAllowed = false;
-    anime.remove('.gridPoint');
-  }
-
+  
   function startAnims(childCall = false) {
     if (!animAllowed) {
         clearTimeout(currentAnim);
@@ -61,7 +56,7 @@ function Grid() {
             { value: 0, easing: "easeInOutSine", duration: 1200 },
         ],
         delay: anime.stagger(50, {
-            grid: [gridDim.width, gridDim.height],
+            grid: [width, height],
             from: startPoint,
         }),
       });
@@ -73,8 +68,8 @@ function Grid() {
 
   const dots = [];
 
-  for (let gridX = 0; gridX < gridDim.width; gridX++) {
-    for (let gridY = 0; gridY < gridDim.height; gridY++) {
+  for (let gridX = 0; gridX < width; gridX++) {
+    for (let gridY = 0; gridY < height; gridY++) {
       dots.push(
         <div
           className="rounded-xl border-2 border-[rgb(21,29,46)] p-4"
@@ -98,8 +93,7 @@ function Grid() {
   window.addEventListener('resize', () => {
     clearTimeout(resizeDebounce.current);
     resizeDebounce.current = setTimeout(() => {
-      stopAnims();
-      updateDim(dimByScreen());
+      window.location.reload();
     }, 500)
   });
 
@@ -108,12 +102,12 @@ function Grid() {
     setTimeout(() => {
       startAnims();
     }, 2000);
-  }, [gridDim]);
+  }, []);
 
 
   return (
     <div
-      style={{ gridTemplateColumns: `repeat(${gridDim.width}, 1fr)`}}
+      style={{ gridTemplateColumns: `repeat(${width}, 1fr)`}}
       className="grid w-fit"
     >
       {dots}

@@ -48,7 +48,7 @@ export function isLoggedIn(): Promise<boolean> {
     })
     .catch(err => {
       if (authHeader != null) {
-        return false;
+        logOut();
       }
       console.error(err);
       return false;
