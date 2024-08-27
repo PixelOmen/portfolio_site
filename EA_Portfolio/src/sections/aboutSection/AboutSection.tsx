@@ -45,7 +45,7 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
               Who am I? What do I do? What is this site? Why am I asking so many questions?
             </div>            
             <hr className="block mx-auto mt-4 w-3/4"/>
-            <div className="mt-2 w-[91%] mx-auto text-base sm:text-2xl text-slate-300 text-left font-normal">
+            <div className="mt-2 w-[91%] mx-auto text-base sm:text-2xl text-slate-300 text-center font-normal">
               <p className="mt-12 mb-4">
                 Hello and welcome! &#9995;
               </p>
