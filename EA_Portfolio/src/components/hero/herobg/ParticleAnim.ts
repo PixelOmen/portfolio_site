@@ -137,7 +137,6 @@ export default class ParticleAnimation {
       }
     }
   
-    // This function remaps a value from one range to another range
     remapValue(value: number, start1: number, end1: number, start2: number, end2: number) {
       const remapped = (value - start1) * (end2 - start2) / (end1 - start1) + start2;
       return remapped > 0 ? remapped : 0;
@@ -146,12 +145,11 @@ export default class ParticleAnimation {
     animate() {
       this.clearContext();
       this.circles.forEach((circle, i) => {
-        // Handle the alpha value
         const edge = [
-          circle.x + circle.translateX - circle.size, // distance from left edge
-          this.canvasSize.w - circle.x - circle.translateX - circle.size, // distance from right edge
-          circle.y + circle.translateY - circle.size, // distance from top edge
-          this.canvasSize.h - circle.y - circle.translateY - circle.size, // distance from bottom edge
+          circle.x + circle.translateX - circle.size,
+          this.canvasSize.w - circle.x - circle.translateX - circle.size,
+          circle.y + circle.translateY - circle.size,
+          this.canvasSize.h - circle.y - circle.translateY - circle.size,
         ];
         const closestEdge = edge.reduce((a, b) => Math.min(a, b));
         const remapClosestEdge = +this.remapValue(closestEdge, 0, 20, 0, 1).toFixed(2);
@@ -164,15 +162,11 @@ export default class ParticleAnimation {
         circle.x += circle.dx;
         circle.y += circle.dy;
         circle.translateX += ((this.mouse.x / (this.settings.staticity / circle.magnetism)) - circle.translateX) / this.settings.ease;
-        circle.translateY += ((this.mouse.y / (this.settings.staticity / circle.magnetism)) - circle.translateY) / this.settings.ease;
-        // circle gets out of the canvas
-        if (circle.x < -circle.size || circle.x > this.canvasSize.w + circle.size || circle.y < -circle.size || circle.y > this.canvasSize.h + circle.size) {
-          // remove the circle from the array
-          this.circles.splice(i, 1);
-          // create a new circle
+        circle.translateY += ((this.mouse.y / (this.settings.staticity / circle.magnetism)) - circle.translateY) / this.settings.ease;        
+        if (circle.x < -circle.size || circle.x > this.canvasSize.w + circle.size || circle.y < -circle.size || circle.y > this.canvasSize.h + circle.size) {          
+          this.circles.splice(i, 1);          
           const circle = this.circleParams();
-          this.drawCircle(circle);
-          // update the circle position
+          this.drawCircle(circle);          
         } else {
           this.drawCircle({ ...circle, x: circle.x, y: circle.y, translateX: circle.translateX, translateY: circle.translateY, alpha: circle.alpha }, true);
         }

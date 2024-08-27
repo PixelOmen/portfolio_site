@@ -157,9 +157,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
 
   function projectOpenAnim(e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) {
     if (!containerRef.current || !transitionDivRef.current || !contentRef.current) return;
-    if (window.innerWidth < 758) {
-      history.pushState({}, '', '');
-    }
+    history.pushState({}, '', '');
     const containerRect = containerRef.current.getBoundingClientRect();
     const transitionRect = transitionDivRef.current.getBoundingClientRect();
     const xOffset = e.clientX - containerRect.left - (transitionRect.width / 2);

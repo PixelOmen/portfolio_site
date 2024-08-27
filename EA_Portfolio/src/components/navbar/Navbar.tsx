@@ -10,9 +10,7 @@ interface NavbarProps {
 export default function Navbar({ sectionMap }: NavbarProps) {
   const topAnchorBar = useRef<HTMLDivElement>(null);
   const navbarContainer = useRef<HTMLDivElement>(null);
-
   const contentsFull = useRef<HTMLDivElement>(null);
-
   const contentsSmall = useRef<HTMLDivElement>(null);
   const smallMenuBtn = useRef<HTMLButtonElement>(null);
   const smallMenuBackBtn = useRef<HTMLButtonElement>(null);
