@@ -50,16 +50,13 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
                 Hello and welcome! &#9995;
               </p>
               <p className="mb-6">
-                My name is <a href="https://www.linkedin.com/in/emmanuelacostapost/" className="text-[#EF8275]">Emmanuel</a>. I'm a software engineer and full stack developer with a passion for leveraging cloud infrastructure to create secure, dynamic, and scalable web applications. I specialize in most things Python, including building RESTful APIs utilizing Django and PostgreSQL, as well as deploying scalable applications on AWS.
+                My name is <a href="https://www.linkedin.com/in/emmanuelacostapost/" className="text-[#EF8275]">Emmanuel</a>. I'm a software engineer and full stack developer with a passion for leveraging cloud infrastructure to create secure, dynamic, and scalable web applications. I specialize in most things Python, including building RESTful APIs with Django and PostgreSQL, as well as deploying scalable applications on AWS.
               </p>
               <p className="mb-6">
-                I built this site not only as place to showcase my work and skills, but also as a personal case study in design and functionality with React, Django, and AWS. Please feel free to check out my work, including several server-side Django and AWS demos below. &#128071;
+                I built this site not only to showcase my work, but also as a small-scale demonstration of a secure and scalable microservices architecture with production-grade infrastructure. Please feel free to check out my work, including several server-side Django and AWS demos below. &#128071;
               </p>
               <p className="mb-6">
-                Have an idea but don't know how to realize it? Let's <a href="mailto:3D.Acosta@gmail.com" className="text-[#EF8275]">connect</a> and make it real!&#129309;
-              </p>
-              <p>
-                Thanks for visting! &#128406;
+              Drop me a message below, I'll help you bring your vision to life! &#129309;
               </p>
             </div>
           </article>
@@ -71,7 +68,7 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
               triggered={singleTrigger}
               className="sm:p-4"
               eastereggCallback={hideTerminal}
-              content="Hello and welcome!&#9995;\nMy name is Emmanuel. I'm a software engineer and full stack developer with a passion for leveraging cloud infrastructure to create secure, dynamic, and scalable web applications.&#128293;&#128187;&#128293;\nI specialize in most things Python, including building RESTful APIs utilizing Django and PostgreSQL, as well as deploying scalable applications on AWS.&#128640;&#9729;\nI built this site not only as place to showcase my work and skills, but also as a personal case study in design and functionality with React, Django, and AWS.&#129300;&#129322;\nPlease feel free to check out my work, including several server-side Django and AWS demos below.&#128071;\nHave an idea but don't know how to realize it? Let's connect and make it real!&#129309;\nThanks for visting!&#128406;"
+              content="Hello and welcome!&#9995;\nMy name is Emmanuel. I'm a software engineer and full stack developer with a passion for leveraging cloud infrastructure to create secure, dynamic, and scalable web applications.&#128293;&#128187;&#128293;\nI specialize in most things Python, including building RESTful APIs with Django and PostgreSQL, as well as deploying scalable applications on AWS.&#128640;&#9729;\nI built this site not only to showcase my work, but also as a small-scale demonstration of a secure and scalable microservices architecture with production-grade infrastructure.&#128170;\nDrop me a message below, I'll help you bring your vision to life!&#129309;"
             />
           </div>
         )}

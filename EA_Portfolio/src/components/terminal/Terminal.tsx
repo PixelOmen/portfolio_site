@@ -172,7 +172,7 @@ export default function Terminal({
   
   return (
     <div className={`mb-4 w-full overflow-hidden ${className}`}>
-      <div className="text-gray-200 text-[0.5rem] sm:text-sm">
+      <div className="text-gray-200 text-[0.5rem] sm:text-sm pt-5">
 
         <header>        
           <div className="relative w-full flex p-2 pb-4 rounded-t-lg bg-gradient-to-b from-[#524f48] via-[#3e3d39] to-[#3e3d39]">
@@ -193,7 +193,7 @@ export default function Terminal({
               </div>
             </div>
           </div>
-          <div className="pl-2 sm:pl-6 py-1 sm:py-2 flex gap-4 bg-[#373632] text-gray-300 ">
+          <div className="pl-2 sm:pl-6 py-1 sm:py-2 flex gap-4 bg-[#373632] text-gray-300 select-none">
             {['File', 'Edit', 'View', 'Search', 'Terminal', 'Help'].map((item, index) => {
               return (
                 <div key={index}>{item}</div>
@@ -202,7 +202,7 @@ export default function Terminal({
           </div>
         </header>
 
-        <div className="relative bg-[#2b1825cf] w-full font-sourcecode text-lg rounded-b-lg ">      
+        <div className="relative bg-[#2b1825cf] w-full font-sourcecode text-lg rounded-b-lg pt-5">      
 
           {/* shapeholder */}
           <div className="leading-6 text-sm sm:text-lg opacity-0 p-3 sm:p-2">

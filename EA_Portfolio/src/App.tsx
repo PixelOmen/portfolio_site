@@ -49,7 +49,7 @@ export default function App() {
   useEffect(() => {
     console.log("%c🤪I'm watching you🤪", 'color: red; font-size: 18px');
     document.addEventListener('visibilitychange', visibilityRefresh);
-    handleRoutes(sectionMap, true);
+    handleRoutes(sectionMap, false);
   }, []);
 
   return (
@@ -87,7 +87,7 @@ export default function App() {
         name="about"
         ref={aboutRef}
         scrollObserver={scrollObserver}
-        className="w-full mb-40 pt-32"
+        className="w-full mb-48 pt-32"
       >
         <AboutSection/>
       </ScrollSection>

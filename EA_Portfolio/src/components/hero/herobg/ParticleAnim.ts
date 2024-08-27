@@ -102,9 +102,9 @@ export default class ParticleAnimation {
       const y = Math.floor(Math.random() * this.canvasSize.h);
       const translateX = 0;
       const translateY = 0;
-      const size = Math.floor(Math.random() * 2) + 1;
+      const size = Math.floor(Math.random() * 4) + 1;
       const alpha = 0;
-      const targetAlpha = parseFloat((Math.random() * 0.3).toFixed(1));
+      const targetAlpha = parseFloat((Math.random() * 0.1).toFixed(1));
       const dx = (Math.random() - 0.5) * this.settings.randomX;
       const dy = (Math.random() - 0.5) * this.settings.randomY;
       const magnetism = 0.1 + Math.random() * 4;
