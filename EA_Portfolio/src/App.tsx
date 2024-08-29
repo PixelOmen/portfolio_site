@@ -7,6 +7,7 @@ import ScrollSection from "./components/scrollSection/ScrollSection";
 import AppLoading from "./components/ui/loading/LoadingScreen";
 
 import AboutSection from "./sections/aboutSection/AboutSection";
+import HowItWorksSection from "./sections/howItWorksSection/HowItWorksSection";
 import WorkSection from './sections/workSection/WorkSection';
 import DemoSection from "./sections/demoSection/DemoSection";
 import ContactSection from "./sections/contactSection/ContactSection";
@@ -18,6 +19,7 @@ import { ScrollObserver } from "./lib/scrolling";
 export default function App() {
   const homeRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
+  const howRef = useRef<HTMLDivElement>(null);
   const workRef = useRef<HTMLDivElement>(null);
   const demoRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
@@ -28,6 +30,7 @@ export default function App() {
     [
       ['home', homeRef],
       ['about', aboutRef],
+      ['howitworks', howRef],
       ['work', workRef],
       ['demos', demoRef],
       ['contact', contactRef]
@@ -90,6 +93,15 @@ export default function App() {
         className="w-full mb-48 pt-32"
       >
         <AboutSection/>
+      </ScrollSection>
+
+      <ScrollSection
+        name="howitworks"
+        ref={howRef}
+        scrollObserver={scrollObserver}
+        className="w-full mb-40 pt-32"
+      >
+        <HowItWorksSection/>
       </ScrollSection>
 
       <ScrollSection

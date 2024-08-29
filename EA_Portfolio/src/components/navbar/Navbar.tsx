@@ -128,6 +128,12 @@ export default function Navbar({ sectionMap }: NavbarProps) {
           </li>
           <li>
             <NavButton
+              title="How"
+              clickCallback={(e) => handleNavClick(e, "howitworks")}
+            />
+          </li>          
+          <li>
+            <NavButton
               title="Work"
               clickCallback={(e) => handleNavClick(e, "work")}
             />
@@ -188,20 +194,27 @@ export default function Navbar({ sectionMap }: NavbarProps) {
             />
           </li>
           <li className="fadeInLeft">
+            <NavButton              
+              title="How"
+              clickCallback={(e) => handleNavClick(e, "howitworks")}
+              className="py-2"
+            />
+          </li>          
+          <li className="fadeInRight">
             <NavButton
               title="Work"
               clickCallback={(e) => handleNavClick(e, "work")}
               className="py-2"
             />
           </li>
-          <li className="fadeInRight">
+          <li className="fadeInLeft">
             <NavButton
               title="Demos"
               clickCallback={(e) => handleNavClick(e, "demos")}
               className="py-2"
             />
           </li>
-          <li className="fadeInLeft">
+          <li className="fadeInRight">
             <NavButton
               title="Contact"
               clickCallback={(e) => handleNavClick(e, "contact")}

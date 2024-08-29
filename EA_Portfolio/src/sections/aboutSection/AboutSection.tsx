@@ -56,7 +56,7 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
                 I built this site not only to showcase my work, but also as a small-scale demonstration of a secure and scalable microservices architecture with production-grade infrastructure. Please feel free to check out my work, including several server-side Django and AWS demos below. &#128071;
               </p>
               <p className="mb-6">
-              Drop me a message below, I'll help you bring your vision to life! &#129309;
+                Drop me a message below to find out how I can help you bring your vision to life. &#129309;
               </p>
             </div>
           </article>
@@ -68,7 +68,7 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
               triggered={singleTrigger}
               className="sm:p-4"
               eastereggCallback={hideTerminal}
-              content="Hello and welcome!&#9995;\nMy name is Emmanuel. I'm a software engineer and full stack developer with a passion for leveraging cloud infrastructure to create secure, dynamic, and scalable web applications.&#128293;&#128187;&#128293;\nI specialize in most things Python, including building RESTful APIs with Django and PostgreSQL, as well as deploying scalable applications on AWS.&#128640;&#9729;\nI built this site not only to showcase my work, but also as a small-scale demonstration of a secure and scalable microservices architecture with production-grade infrastructure.&#128170;\nDrop me a message below, I'll help you bring your vision to life!&#129309;"
+              content="Hello and welcome!&#9995;\nMy name is Emmanuel. I'm a software engineer and full stack developer with a passion for leveraging cloud infrastructure to create secure, dynamic, and scalable web applications.&#128293;&#128187;&#128293;\nI specialize in most things Python, including building RESTful APIs with Django and PostgreSQL, as well as deploying scalable applications on AWS.&#128640;&#9729;\nI built this site not only to showcase my work, but also as a small-scale demonstration of a secure and scalable microservices architecture with production-grade infrastructure.&#128170;\nDrop me a message below to find out how I can help you bring your vision to life.&#129309;"
             />
           </div>
         )}
