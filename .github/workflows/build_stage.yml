@@ -1,8 +1,8 @@
-name: Build and Deploy Static Files (Dev)
+name: Build and Deploy Static Files (Stage)
 on: 
   push:
     branches:
-      - dev
+      - stage
 
 permissions:
   id-token: write
@@ -26,7 +26,7 @@ jobs:
         run: npm install
 
       - name: Create .env file from secret
-        run: echo "${{ secrets.VITE_SECRETS_DEV }}" > EA_Portfolio/.env
+        run: echo "${{ secrets.VITE_SECRETS_STAGE }}" > EA_Portfolio/.env
 
       - name: Build the React app
         working-directory: EA_Portfolio
@@ -40,4 +40,4 @@ jobs:
 
       - name: Upload static files to S3
         run: |
-          aws s3 sync EA_Portfolio/dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME_DEV }}/ --delete
+          aws s3 sync EA_Portfolio/dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME_STAGE }}/ --delete
