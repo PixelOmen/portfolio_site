@@ -45,8 +45,8 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
               Who am I? What do I do? What is this site? Why am I asking so many questions?
             </div>            
             <hr className="block mx-auto mt-4 w-3/4"/>
-            <div className="mt-2 w-[91%] mx-auto text-base sm:text-2xl text-slate-300 text-center font-normal">
-              <p className="mt-12 mb-4">
+            <div className="mt-10 p-6 sm:p-10 mx-auto text-base sm:text-2xl text-slate-200 text-left font-light bg-slate-800 rounded-md border-2 border-black">
+              <p className="mb-4">
                 Hello and welcome! &#9995;
               </p>
               <p className="mb-6">
@@ -55,7 +55,7 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
               <p className="mb-6">
                 I built this site not only to showcase my work, but also as a small-scale demonstration of a secure and scalable microservices architecture with production-grade infrastructure. Please feel free to check out my work, including several server-side Django and AWS demos below. &#128071;
               </p>
-              <p className="mb-6">
+              <p className="">
                 Drop me a message below to find out how I can help you bring your vision to life. &#129309;
               </p>
             </div>
