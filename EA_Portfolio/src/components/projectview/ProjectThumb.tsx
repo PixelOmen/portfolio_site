@@ -89,8 +89,10 @@ export default function ProjectThumb({
           <div className="relative z-10">
             <VSCodeHeader tabName={fakeURL}/>
           </div>
-          <div className="relative flex justify-center items-center h-full font-sourcecode font-medium text-2xl text-gray-100">
-            {title}
+          <div
+            dangerouslySetInnerHTML={{__html: title}}
+            className="relative flex justify-center items-center h-full font-sourcecode font-medium text-2xl text-gray-100 text-center"
+          >
           </div>
         </div>
       </div>

@@ -7,13 +7,15 @@ import ProjectView from "../../components/projectview/ProjectView";
 import ProjectThumb from "../../components/projectview/ProjectThumb";
 
 import thumb1 from "../../assets/workthumbs/thumb1.png"
-import thumb2 from "../../assets/workthumbs/thumb2.png"
 import thumb3 from "../../assets/workthumbs/thumb3.png"
 import thumb4 from "../../assets/workthumbs/thumb4.png"
 import thumb5 from "../../assets/workthumbs/thumb5.png"
 import thumb6 from "../../assets/workthumbs/thumb6.png"
 import thumb7 from "../../assets/workthumbs/thumb7.png"
 import thumb8 from "../../assets/workthumbs/thumb8.png"
+import thumb9 from "../../assets/workthumbs/thumb9.png"
+import thumb10 from "../../assets/workthumbs/thumb10.png"
+import thumb11 from "../../assets/workthumbs/thumb11.png"
 
 
 interface WorkSectionProps {
@@ -36,14 +38,24 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
   function thumbnails() {
     return [
       <ProjectThumb
-        title="LittleLemon API"
-        bgImage={thumb1}
-        tags={['Python', 'Django', 'Django REST framework', 'RESTful API']}
+        title="This Project (Infrastructure)"
+        bgImage={thumb9}
+        tags={['AWS', 'Terraform']}
       />,
       <ProjectThumb
-        title="Etools V2"
-        bgImage={thumb2}
-        tags={['Python', 'Flask', 'Svelte', 'TypeScript', 'C++', 'QT7 SDK', 'ReportLab', 'More...']}
+        title="This Project<br>(Back-End)"
+        bgImage={thumb10}
+        tags={['Django', 'Docker', 'Celery', 'Redis', 'Much More...']}
+      />,       
+      <ProjectThumb
+        title="This Project<br>(Front-End)"
+        bgImage={thumb11}
+        tags={['React', 'Vite', 'TailwindCSS', 'TypeScript', 'GitHub Actions']}
+      />,      
+      <ProjectThumb
+        title="LittleLemon API"
+        bgImage={thumb1}
+        tags={['Django', 'Django REST framework']}
       />,
       <ProjectThumb
         title="QTSDK"
@@ -83,27 +95,40 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
       <ProjectView
         backCallback={returnToMenu}
         className="w-full"
+        title = "This Project (Infrastructure)"
+        description="The infrastructure for this portfolio project is built using Terraform to provision and manage AWS resources efficiently. The setup includes a highly available VPC with public and private subnets, Internet/NAT gateways, application load balancers, an RDS managed PostgreSQL database, and more. Static assets are stored in S3 buckets and served through CloudFront. ECS (Elastic Container Service) is used to run Docker containers, including a Django web application, Celery workers, and Redis. Terraform manages all aspects, from defining ECS task definitions with CloudWatch logging to configuring environment variables and IAM roles for secure and scalable deployment."
+        techStack={['Terraform', 'AWS VPC', 'AWS ECR', 'AWS ECS', 'AWS RDS', 'AWS IAM', 'AWS CloudWatch', 'AWS S3', 'AWS CloudFront',]}
+        github={{url: "https://github.com/PixelOmen/portfolio_terraform"}}
+      />,
+      <ProjectView
+        backCallback={returnToMenu}
+        className="w-full"
+        title = "This Project (Back-End)"
+        description="The back-end for this portfolio project is built with Django and Django REST framework. The Django application is containerized with Docker and deployed to AWS ECS. It includes a RESTful API for serving demo data, authenticated with Oauth 2.0 via Google, a Celery task queue for asynchronous processing, and Redis for caching. Continuous integration and deployment (CI/CD) are managed through GitHub Actions, automating the build, test, and deployment processes. Scalable, secure, and maintainable."
+        techStack={['Python', 'Django', 'Django REST Framework', 'Drf-Social-Oauth2', 'Docker', 'Celery', 'Redis', 'PostgreSQL', 'AWS ECS', 'AWS S3', 'GitHub Actions']}
+        github={{url: "https://github.com/PixelOmen/portfolio_api"}}
+      />,
+      <ProjectView
+        backCallback={returnToMenu}
+        className="w-full"
+        title = "This Project (Front-End)"
+        description="The front-end for this portfolio project is a single-page application (SPA), built with React, Vite, Axios, and TailwindCSS. Axios is used for handling HTTP requests, providing a clean and consistent API for interacting with the back-end managing token authentication. The deployment process is fully automated through GitHub Actions, which builds the front-end and deploys it to AWS S3 for static hosting. Designed to be responsive, accessible, and performant, with a focus on user experience. It showcases various projects, skills, and contact information, providing a clean and intuitive interface for visitors to explore."
+        techStack={['React', 'Vite', 'TailwindCSS', 'Axios', 'TypeScript', 'AWS S3', 'AWS CloudFront', 'GitHub Actions']}
+        github={{url: "https://github.com/PixelOmen/portfolio_site"}}
+      />,
+      <ProjectView
+        backCallback={returnToMenu}
+        className="w-full"
         title = "LittleLemon REST API"
         description="The LittleLemon REST API is a peer-reviewed REST API project required for the Meta Back-End Developer Professional Certification. Implements proper token authentication, user group permissions, filtering, pagination, and throttling. Made with Django and Django REST Framework (DRF)."
-        // images={[TestImage1, TestImage2]}
         techStack={['Python', 'Django', 'Django REST Framework']}
         github={{url: "https://github.com/PixelOmen/littlelemon_drf_rest_api"}}
       />,
       <ProjectView
         backCallback={returnToMenu}
         className="w-full"
-        title = "Etools V2"
-        description='Internal web app enabling access to tools that assist with post-production workflows at Roundabout Entertainment. Integrating Svelte and Flask, it is meant to replace "etools", the first attempt at an internal web app.'
-        // images={[TestImage1, TestImage2]}
-        techStack={['Python', 'Flask', 'Svelte', 'TypeScript', 'C++', 'QT7 SDK', 'ReportLab']}
-        github={{url: "https://github.com/PixelOmen/etools_v2"}}
-      />,
-      <ProjectView
-        backCallback={returnToMenu}
-        className="w-full"
         title = "QTSDK"
-        description='QTSDK is a command-line program that leverages the QuickTime 7 SDK for Windows to perform various operations on QuickTime files on Windows, including audio channel flagging and modifying embedded timecode. Enables QuickTime modifications to be programmatically integrated into other tools and scripts.'
-        // images={[TestImage1]}
+        description='QTSDK is a command-line program that leverages the QuickTime 7 SDK for Windows to perform various operations on QuickTime files on Windows, including audio channel flagging and modifying embedded timecode. Enables QuickTime modifications to be programmatically integrated into other tools and scripts.'        
         techStack={['C++', 'QT7 SDK']}
         github={{url: "https://github.com/PixelOmen/QTSDK"}}
       />,
@@ -111,8 +136,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         backCallback={returnToMenu}
         className="w-full"
         title = "AmazonMMC"
-        description='AmazonMMC is a CLI tool designed to facilitate the creation of Amazon Media Entertainment Core (MEC) and Media Manifest Core (MMC) XML files. Also provides functionality to generate MD5 checksums and sample directories for Amazon deliveries.'
-        // images={[TestImage1, TestImage2]}
+        description='AmazonMMC is a CLI tool designed to facilitate the creation of Amazon Media Entertainment Core (MEC) and Media Manifest Core (MMC) XML files. Also provides functionality to generate MD5 checksums and sample directories for Amazon deliveries.'        
         techStack={['Pure Python', 'XML-ElementTree']}
         github={{url: "https://github.com/PixelOmen/amazonmmc"}}
       />,
@@ -120,8 +144,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         backCallback={returnToMenu}
         className="w-full"
         title = "PyEmail"
-        description='PyEmail is a Python library designed to simplify email communication. It provides straightforward interfaces for sending and receiving emails using IMAP and SMTP protocols. Easy-to-use interfaces for IMAP and SMTP connections. Retrieve, mark as read/unread, and delete emails. Send emails with attachments. Handle email parsing and metadata extraction seamlessly.'
-        // images={[TestImage1, TestImage2]}
+        description='PyEmail is a Python library designed to simplify email communication. It provides straightforward interfaces for sending and receiving emails using IMAP and SMTP protocols. Easy-to-use interfaces for IMAP and SMTP connections. Retrieve, mark as read/unread, and delete emails. Send emails with attachments. Handle email parsing and metadata extraction seamlessly.'        
         techStack={['Pure Python', "SMTP/IMAP"]}
         github={{url: "https://github.com/PixelOmen/pyemail"}}
       />,
@@ -129,8 +152,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         backCallback={returnToMenu}
         className="w-full"
         title = "Mediaprobe"
-        description='Mediaprobe is a straightforward Python interface/wrapper for the Mediainfo CLI tool. It calls MediaInfo as a subprocess and parses the returning JSON into objects that can easily provide metadata about a file in the form relevant datatypes.'
-        // images={[TestImage1, TestImage2]}
+        description='Mediaprobe is a straightforward Python interface/wrapper for the Mediainfo CLI tool. It calls MediaInfo as a subprocess and parses the returning JSON into objects that can easily provide metadata about a file in the form relevant datatypes.'        
         techStack={['Python', "MediaInfo"]}
         github={{url: "https://github.com/PixelOmen/mediaprobe"}}
       />,
@@ -138,8 +160,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         backCallback={returnToMenu}
         className="w-full"
         title = "TCLIB3"
-        description='TCLIB3 is a python library that provides functionality for converting between frames, timecode, and milliseconds, supporting both non-dropframe and dropframe timecode formats. It is designed to assist in video editing and processing tasks where precise timing and synchronization are crucial.'
-        // images={[TestImage1, TestImage2]}
+        description='TCLIB3 is a python library that provides functionality for converting between frames, timecode, and milliseconds, supporting both non-dropframe and dropframe timecode formats. It is designed to assist in video editing and processing tasks where precise timing and synchronization are crucial.'        
         techStack={['Pure Python', 'Pytest']}
         github={{url: "https://github.com/PixelOmen/tclib3"}}
       />,
@@ -147,8 +168,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         backCallback={returnToMenu}
         className="w-full"
         title = "RosettaPath"
-        description='RossetaPath objects translate network paths mounted to local volumes from one mount point to another across operating systems. It differs from pathlib in that it can handle network paths and translate them to local paths and vice versa. It is designed to be used in conjunction with the pathlib module.'
-        // images={[TestImage1, TestImage2]}
+        description='RossetaPath objects translate network paths mounted to local volumes from one mount point to another across operating systems. It differs from pathlib in that it can handle network paths and translate them to local paths and vice versa. It is designed to be used in conjunction with the pathlib module.'        
         techStack={['Pure Python', 'Pytest']}
         github={{url: "https://github.com/PixelOmen/rosettapath"}}
       />,
@@ -251,7 +271,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
                       className={`border-2 ${anim} border-gray-600 rounded-md w-[300px] h-[200px]`}
                       onClick={(e) => enterProject(e, index)}
                     >
-                        {thumb}
+                      {thumb}
                     </div>
                   )        
                 })}
@@ -266,7 +286,6 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
                 >
                   <div className="">
                     {projectViews()[projectID]}
-
                   </div>
                 </AnimReset>
               </div>
