@@ -45,9 +45,9 @@ export default function AboutSection({
                   description="Hosted on AWS, this project takes advantage of cloud-native services, including RDS for managed PostgreSQL databases, S3 for static asset storage, and CloudFront for fast, global content delivery. The architecture is designed for resilience and high availability."
                 />
                 <HIWItem
-                  title="Containerization with Docker"
-                  description="Containerized using Docker, the application stack is fully portable and consistent across all environments. Docker Compose is utilized for local development, while AWS ECS handles container orchestration in production, ensuring seamless deployment and scaling."
-                />            
+                  title="Microservices Architecture"
+                  description="This project is built on a foundation of decoupled, independently deployable services. Each service is designed to handle specific business functions, ensuring scalability and maintainability."
+                  />            
                 <HIWItem
                   title="Database Management"
                   description="Utilizing PostgreSQL via Amazon RDS, the database layer is optimized for performance and security. The setup includes automated backups and robust migration strategies to ensure data integrity and seamless updates."
@@ -63,21 +63,21 @@ export default function AboutSection({
               </div>
               <div className="min-[440px]:min-w-96 flex-1 flex flex-col gap-y-8 sm:gap-y-5 pb-8 sm:pb-5">
                 <HIWItem
-                  title="Microservices Architecture"
-                  description="This project is built on a foundation of decoupled, independently deployable services. Each service is designed to handle specific business functions, ensuring scalability and maintainability."
+                  title="Infrastructure as Code (Terraform)"
+                  description="Infrastructure is defined and managed using Terraform, enabling consistent and repeatable deployments across all environments. With version-controlled IaC, every change is tracked and auditable, ensuring transparency and reducing the risk of configuration drift. Terraform's modular approach allows for easy updates and scaling, making infrastructure management efficient and scalable."
+                />
+                <HIWItem
+                  title="Containerization with Docker"
+                  description="Containerized using Docker, the application stack is fully portable and consistent across all environments. Docker Compose is utilized for local development, while AWS ECS handles container orchestration in production, ensuring seamless deployment and scaling."
                 />            
+                <HIWItem
+                  title="Security Best Practices"
+                  description="Security is built into every layer of the infrastructure, from OAuth2 for authentication to the principle of least privilege in IAM roles. All of it helps maintain a secure and compliant environment."
+                />                                   
                 <HIWItem
                   title="CI/CD Pipeline"
                   description="Automated CI/CD pipeline orchestrates the building, testing, and deployment. GitHub Actions integrates with AWS services to ensure consistent continuous delivery on every deployment."
                 />
-                <HIWItem
-                  title="Security Best Practices"
-                  description="Security is built into every layer of the infrastructure, from OAuth2 for authentication to the principle of least privilege in IAM roles. All of it helps maintain a secure and compliant environment."
-                />                        
-                <HIWItem
-                  title="Automated Compute Scaling"
-                  description="Infrastructure designed to scale automatically based on demand, using ECS service scaling. This ensures that the application remains responsive and cost-efficient, adapting to traffic fluctuations seamlessly."
-                />            
                 <HIWItem
                   title="Monitoring and Logging"
                   description="Comprehensive monitoring and logging ensure that every aspect of the application is tracked and recorded. Using AWS CloudWatch and integrated logging solutions, any issues can be identified and addressed promptly."
