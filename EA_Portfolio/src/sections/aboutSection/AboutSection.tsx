@@ -38,7 +38,7 @@ export default function AboutSection({ scrollState, className = ''}: AboutSectio
       >
 
         {showEasteregg ? (
-          <article className="fadeIn w-full text-4xl sm:text-5xl mb-8 text-center font-medium">
+          <article className="sm:p-6 fadeIn w-full text-4xl sm:text-5xl mb-8 text-center font-medium">
             <span className="text-[#EF8275]">About</span>            
             <span className="ml-3 font-thin text-gray-200 font-roboto">Me</span>
             <div className="mt-2 px-2 text-base sm:text-lg font-light font-sans text-gray-200 ">
