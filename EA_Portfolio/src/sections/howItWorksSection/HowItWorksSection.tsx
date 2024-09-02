@@ -31,6 +31,9 @@ export default function AboutSection({
         </div>
 
         <ExpandContextProvider>
+          <div className="p-4 sm:p-6 bg-slate-800 rounded-md border-2 border-black">
+            While the scope of this project might not demand a full-fledged production infrastructure, I've implemented a setup that mirrors industry standards. This isn’t just about building something that works—it's about demonstrating how to build something that scales, adapts, and performs under real-world conditions. Here’s a look at the robust architecture powering this project.
+          </div>
           <div className="flex justify-center gap-10 mt-8 text-[#EF8275] font-bold">
               <ContextButtons/>
           </div>

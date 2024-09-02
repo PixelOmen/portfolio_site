@@ -22,16 +22,16 @@ export default function HIWItem({
 
   function open() {
     headerRef.current?.classList.remove('rounded-b-md');
-    descriptionRef.current?.classList.remove('max-h-0');
-    descriptionRef.current?.classList.add('max-h-40');
+    descriptionRef.current?.classList.remove('max-h-0', 'sm:max-h-0');
+    descriptionRef.current?.classList.add('max-h-64', 'sm:max-h-40');
     arrowRef.current?.classList.add('rotate-90');
     openRef.current = true;
   }
 
   function close() {
     headerRef.current?.classList.add('rounded-b-md');
-    descriptionRef.current?.classList.add('max-h-0');
-    descriptionRef.current?.classList.remove('max-h-40');
+    descriptionRef.current?.classList.add('max-h-0', 'sm:max-h-0');
+    descriptionRef.current?.classList.remove('max-h-64', 'sm:max-h-40');
     arrowRef.current?.classList.remove('rotate-90');
     openRef.current = false
   }
@@ -59,7 +59,7 @@ export default function HIWItem({
       <header
         ref={headerRef}
         onClick={toggleExpand}
-        className="relative px-4 py-2 sm:py-1 bg-gray-600 flex justify-between items-center cursor-pointer rounded-t-md transition-all duration-1000 border-2 border-black z-10"
+        className="relative px-4 py-2 sm:py-1 max-h- bg-gray-600 flex justify-between items-center cursor-pointer rounded-t-md transition-all duration-1000 border-2 border-black z-10"
       >
         <div>
           {title}
