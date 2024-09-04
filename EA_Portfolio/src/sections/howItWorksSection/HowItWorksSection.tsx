@@ -104,18 +104,18 @@ function ContextButtons() {
   return (
     <>
       <button
-        onClick={() => setValues(true)}
-        title="Expand All"
-        className="hover:scale-x-125 transition-all active:scale-x-100"
-      >
-        {"<--->"}
-      </button>
-      <button
         onClick={() => setValues(false)}
         title="Collapse All"
         className="hover:scale-x-75 transition-all active:scale-x-100"
       >
         {">---<"}            
+      </button>
+      <button
+        onClick={() => setValues(true)}
+        title="Expand All"
+        className="hover:scale-x-125 transition-all active:scale-x-100"
+      >
+        {"<--->"}
       </button>
     </>
   )
