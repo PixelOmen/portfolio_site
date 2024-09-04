@@ -115,6 +115,11 @@ export default function UserImages( { locked = true, userLimits }: UserImagesPro
         getImages();
       })
       .catch(err => {
+        if (err.response.status == 404) {
+          getImages();
+          console.warn("Image not found. Refreshing images.");
+          return;
+        }        
         console.error(err);
         setError(err.message);
         setImagesLoaded(true);

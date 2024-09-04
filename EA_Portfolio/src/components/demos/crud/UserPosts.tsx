@@ -45,7 +45,13 @@ export default function UserPosts({locked = true, userLimits}: UserPostsProps) {
         getPosts();
       })
       .catch(err => {
-        console.error(err);
+        if (err.response.status == 404) {
+          getPosts();
+          console.warn("Post not found. Refreshing posts.");
+          return;
+        } else {
+          console.error(err);
+        }
       });
   }
 
@@ -55,6 +61,11 @@ export default function UserPosts({locked = true, userLimits}: UserPostsProps) {
         getPosts();
       })
       .catch(err => {
+        if (err.response.status == 404) {
+          getPosts();
+          console.warn("Post not found. Refreshing posts.");
+          return;
+        }
         console.error(err);
       });
   }
