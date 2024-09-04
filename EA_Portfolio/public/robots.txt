@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /backdoor/
+Disallow: /api/
+Allow: /
+
+# Link to sitemap
+Sitemap: https://eacosta.dev/sitemap.xml
