@@ -5,6 +5,7 @@ const CLIENT_DOMAIN = import.meta.env.VITE_CLIENT_DOMAIN;
 const LOGGEDIN_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDIN_URL;
 const LOGGEDOUT_URL = CLIENT_DOMAIN + import.meta.env.VITE_LOGGEDOUT_URL;
 
+export const CHAT_ROOT = import.meta.env.VITE_CHAT_ROOT;
 export const API_ROOT = import.meta.env.VITE_API_ROOT;
 const TOKEN_TEST_URL = API_ROOT + import.meta.env.VITE_API_TOKEN_TEST_URL;
 
