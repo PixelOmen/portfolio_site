@@ -14,7 +14,6 @@ import ContactSection from "./sections/contactSection/ContactSection";
 
 import handleRoutes from "./lib/router";
 import { ScrollObserver } from "./lib/scrolling";
-import { chatSocketConnection } from "./lib/ws";
 
 
 export default function App() {
@@ -40,9 +39,6 @@ export default function App() {
   useEffect(() => {
     console.log("%c🤪I'm watching you🤪", 'color: red; font-size: 18px');
     handleRoutes(sectionMap, false);
-    chatSocketConnection("/", (event) => {
-      console.log(event);
-    });
   }, []);
 
   return (

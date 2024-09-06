@@ -31,5 +31,9 @@ export function chatSocketConnection(
     onMessageCallback: (event: any) => void,
     onCloseCallback?: (event: any) => void
 ): WebSocket {
+  const access_token = localStorage.getItem('access_token');
+  if (access_token) {
+    document.cookie = `access_token=${access_token}`;
+  }
   return rootSocketConnection(CHAT_ROOT + subpath, onMessageCallback, onCloseCallback);
 }

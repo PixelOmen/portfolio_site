@@ -7,6 +7,7 @@ import { IScrollState } from "../../lib/scrolling";
 import Oauth2 from "../../components/demos/oauth/Oauth2";
 import Crud from "../../components/demos/crud/Crud";
 import MediaStorage from "../../components/demos/mediaStorage/MediaStorage";
+import Chat from "../../components/demos/chat/Chat";
 
 
 interface DemoSectionProps {
@@ -15,7 +16,7 @@ interface DemoSectionProps {
 
 export default function DemoSection( {scrollState}: DemoSectionProps ) {
 
-  const [isLogggendIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userLimitsState, setUserLimitsState] = useState<UserLimits | null>(null);
 
   async function setUserLimits() {
@@ -54,7 +55,7 @@ export default function DemoSection( {scrollState}: DemoSectionProps ) {
         >
           <div className="flex flex-col gap-16">
             <div className="mx-auto">
-              <Oauth2 isLoggedIn={isLogggendIn}/>
+              <Oauth2 isLoggedIn={isLoggedIn}/>
             </div>
             <div className="flex mx-auto items-center w-[90%] text-[#EF8275]">
               <div>{"<"}</div>
@@ -62,11 +63,14 @@ export default function DemoSection( {scrollState}: DemoSectionProps ) {
               <div>{">"}</div>
             </div>
             <div className="mx-auto">
-              <Crud isLogggendIn={isLogggendIn} userLimits={userLimitsState}/>
+              <Crud isLogggendIn={isLoggedIn} userLimits={userLimitsState}/>
             </div>
             <div className="mx-auto">
-              <MediaStorage isLogggendIn={isLogggendIn} userLimits={userLimitsState}/>
-            </div>              
+              <MediaStorage isLogggendIn={isLoggedIn} userLimits={userLimitsState}/>
+            </div>
+            <div className="mx-auto">
+              <Chat isLogggendIn={isLoggedIn} userLimits={userLimitsState}/>
+            </div>                            
           </div>
         </div>
       </div>
