@@ -76,6 +76,7 @@ export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
       }
       addToPosts(postData);
     }
+    postAreaRef.current?.scrollTo({top: 5000, behavior: 'smooth'});
   }
 
   function handleError(event: any) {
