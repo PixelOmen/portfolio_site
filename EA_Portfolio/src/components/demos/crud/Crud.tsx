@@ -39,7 +39,7 @@ export default function Crud( { isLogggendIn = false, userLimits }: CrudProps ) 
             </p>
             <br/>
             <p>
-              Only you can see the posts you create and you can delete them at any time. Your posts will persist even if you logout. Posts are automatically deleted at midnight PST.
+              You can click on your previous posts to update them. Only you can see the posts you create and you can delete them at any time. Your posts will persist even if you logout. Posts are automatically deleted at midnight PST.
             </p>
           </div>
         </div>

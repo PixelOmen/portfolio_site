@@ -1,12 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 
 import * as auth from "../../../lib/auth";
-import { authAPI } from "../../../lib/requests";
-import { chatSocketConnection } from "../../../lib/ws";
 import type { UserLimits } from "../../../lib/userLimits";
+import { chatSocketConnection, ServerMessage } from "../../../lib/ws";
+import DemoError from "../demoError/DemoError";
 
 import LockIcon from "../../ui/icons/LockIcon";
 import GoogleSignIn from "../../ui/social/GoogleSignIn";
+
+interface ChatPostData {
+  chatID: string;
+  content: string;
+  owner: "gpt" | "user";
+  date_posted: string;
+}
 
 interface ChatPostsProps {
   locked?: boolean;
@@ -15,100 +22,128 @@ interface ChatPostsProps {
 
 export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
 
-  const [editRequested, setEditRequested] = useState(-1);
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<ChatPostData[]>([]);
   const postAreaRef = useRef<HTMLDivElement>(null);
   const newTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const lockedScreenRef = useRef<HTMLDivElement>(null);
+
   const chatSocketConnRef = useRef<WebSocket | null>(null);
+  const allowSendRef = useRef<boolean>(true);
+  const [error, setError] = useState<string>("");
 
-  function getPosts() {
-    authAPI.get('v1/user-posts/')
-      .then(res => {
-        if (res.data.length == 0) {
-          addPost("Here's one to get you started!");
-        }
-        setPosts(res.data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+
+  function disableSend() {
+    allowSendRef.current = false;
+    newTextAreaRef.current!.disabled = true;
+    newTextAreaRef.current!.placeholder = "Processing...";
+    newTextAreaRef.current!.classList.add('bg-slate-400');
+    newTextAreaRef.current!.classList.add('placeholder-gray-100');
   }
 
-  function handleEditRequest(postid: number): void {
-    setEditRequested(postid);
+  function enableSend() {
+    allowSendRef.current = true;
+    newTextAreaRef.current!.disabled = false;
+    newTextAreaRef.current!.placeholder = "Message ChatGPT...";
+    newTextAreaRef.current!.classList.remove('bg-slate-400');
+    newTextAreaRef.current!.classList.remove('placeholder-gray-100');
+    newTextAreaRef.current!.focus();
   }
 
-  function handleEditConfirm(postid: number, content: string): void {
-    if (!content) return;
-    setEditRequested(-1);
-    authAPI.put(`v1/user-posts/${postid}/`, {content})
-    .then(() => {
-        getPosts();
-      })
-      .catch(err => {
-        if (err.response.status == 404) {
-          getPosts();
-          console.warn("Post not found. Refreshing posts.");
-          return;
-        } else {
-          console.error(err);
-        }
-      });
+  function addToPosts(data: ChatPostData) {
+    setPosts(prevPosts => [...prevPosts, data]);
+    setTimeout(() => {
+      postAreaRef.current?.scrollTo({top: 5000, behavior: 'smooth'});
+    }, 200);
   }
 
-  function deletePost(postid: number): void {
-    authAPI.delete(`v1/user-posts/${postid}/`)
-      .then(() => {
-        getPosts();
-      })
-      .catch(err => {
-        if (err.response.status == 404) {
-          getPosts();
-          console.warn("Post not found. Refreshing posts.");
-          return;
-        }
-        console.error(err);
-      });
+  function appendStream(data: ServerMessage) {
+    if (!data.chatID) {
+      console.error("No chatID in stream data.");
+      return;
+    }
+
+    const existingDiv = postAreaRef.current?.querySelector(`[data-chatid="${data.chatID}"]`);
+
+    if (existingDiv) {
+      existingDiv.textContent += data.payload;
+      return;
+    } else {
+      const postData: ChatPostData = {
+        chatID: data.chatID,
+        content: data.payload.replace('\n\n', '<br>'),
+        owner: "gpt",
+        date_posted: new Date().toLocaleString()
+      }
+      addToPosts(postData);
+    }
   }
 
-  function addPost(content: string): void {
-    if (!content) return;
-    authAPI.post('v1/user-posts/', {content})
-      .then(() => {
-        getPosts();
+  function handleError(event: any) {
+    console.error(event);
+    setError("An error occurred. Please try again later. Code: " + event.code);
+  }
+
+  function handleServerMessage(event: any) {
+    // console.log(event);
+    const data: ServerMessage = JSON.parse(event.data);
+    if (data.error) {
+      setError(data.error);
+      enableSend();
+      return;
+    }
+    switch (data.type) {
+      case "data":
+        console.log(data.payload);
+        enableSend();
+        return;
+      case "endStream":
+        enableSend();
         setTimeout(() => {
           postAreaRef.current?.scrollTo({top: 5000, behavior: 'smooth'});
-        }, 100);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+        }, 200);
+        return;
+      case "stream":
+        appendStream(data);
+        return;
+      default:
+        console.error("Unknown message type: " + data.type);
     }
+  }
+
+  function sendPost(content: string): void {
+    if (!content || !chatSocketConnRef.current) return;
+    disableSend();
+    addToPosts({
+      chatID: "user",
+      content,
+      owner: "user",
+      date_posted: new Date().toLocaleString()
+    });
+    chatSocketConnRef.current.send(content);
+  }
     
   function addPostViaEnter(e: KeyboardEvent) {
     if (e.key == 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      addPost(newTextAreaRef.current!.value);
+      if (!allowSendRef.current) return;
+      sendPost(newTextAreaRef.current!.value);
       newTextAreaRef.current!.value = '';
     }
   }
 
   function addPostViaClick() {
-    addPost(newTextAreaRef.current!.value);
+    if (!allowSendRef.current) return;
+    sendPost(newTextAreaRef.current!.value);
     newTextAreaRef.current!.value = '';
   }
 
 
-  // ---- Effects ------
-
+  // ------------------ Effects ------------------
   useEffect(() => {
     auth.isLoggedIn()
       .then(res => {
         if (res) {
-          chatSocketConnRef.current = chatSocketConnection("/", (event) => {
-            console.log(event);
-          });
+          chatSocketConnRef.current = chatSocketConnection("/", handleServerMessage, handleError);
         }
       });
     newTextAreaRef.current?.addEventListener('keydown', addPostViaEnter);
@@ -136,19 +171,14 @@ export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
           ref={postAreaRef}
           className="flex flex-col gap-5 h-full p-4 overflow-y-auto"
         >
-          {posts && posts.map(post => {
+          {posts && posts.map((post, index) => {
               return (
                 <SinglePost
-                  key={post.id}
-                  id={post.id}
-                  date_posted={post.date_posted}
-                  date_modified={post.date_modified}
+                  key={index}
+                  chatID={post.chatID}
                   content={post.content}
                   owner={post.owner}
-                  editRequestCallback={handleEditRequest}
-                  editConfirmCallback={handleEditConfirm}
-                  deleteCallback={deletePost}
-                  editRequested={editRequested}
+                  date_posted={post.date_posted}
                 />
               )
             }
@@ -160,7 +190,7 @@ export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
           ref={newTextAreaRef}
           rows={2}
           maxLength={userLimits ? userLimits.max_post_length : 200}
-          placeholder="Enter a post and press Enter..."
+          placeholder="Message ChatGPT..."
           className={`block w-full py-3 pl-4 pr-14 border-2 outline-none border-gray-500 enterDown border-t-0 rounded-lg rounded-tl-none rounded-tr-none bg-slate-200 focus:border-black duration-500 ${locked && 'opacity-0'}`}
         />
         <div
@@ -170,6 +200,9 @@ export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
           {">"}
         </div>
       </div>
+
+      <DemoError error={error}/>
+
     </div>
   )
 }
@@ -182,79 +215,18 @@ export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
 
 
 interface SinglePostProps {
-  id: number;
-  date_posted: string;
-  date_modified: string;
+  chatID: string;
   content: string;
-  owner: number;
-  editRequested: number;
-  editRequestCallback: (postid: number) => void;
-  editConfirmCallback: (postid: number, content: string) => void;
-  deleteCallback: (postid: number) => void;
+  owner: string;
+  date_posted: string;
 }
 
 function SinglePost({
-  id,
-  date_posted,
-  date_modified,
+  chatID,
   content,
   owner,
-  editRequested,
-  editRequestCallback,
-  editConfirmCallback,
-  deleteCallback
+  date_posted
 } : SinglePostProps) {
-
-  const [isEditing, setIsEditing] = useState(false);
-  const displayRef = useRef<HTMLDivElement>(null);
-  const editRef = useRef<HTMLTextAreaElement>(null);
-
-  function getDate(): {date: string, modified: boolean} {
-    const postedDate = new Date(date_posted).toLocaleString();
-    const modifiedDate = new Date(date_modified).toLocaleString();
-    const modified = postedDate != modifiedDate;
-    const displayDate = modified ? modifiedDate : postedDate;
-    return {date: displayDate, modified}
-  }
-
-  function requestEdit() {
-    editRequestCallback(id);
-  }
-
-  function editConfirm() {
-    editConfirmCallback(id, editRef.current!.value);
-  }
-
-  function cancelEdit() {
-    setIsEditing(false);
-    editRequestCallback(-1);
-  }
-
-  function handleKeydown(e: KeyboardEvent) {
-    if (e.key == 'Escape') {
-      cancelEdit();
-    } else if (e.key == 'Enter' && !e.shiftKey) {
-      editConfirm();
-    }
-  }
-
-  useEffect(() => {
-
-    if (editRequested == id) {
-      setIsEditing(true)
-      setTimeout(() => {
-        editRef.current?.focus();
-        editRef.current?.setSelectionRange(
-          editRef.current.value.length, editRef.current.value.length
-        );
-        editRef.current?.addEventListener('keydown', handleKeydown);
-      }, 100);
-    } else {
-      setIsEditing(false);
-      editRef.current?.removeEventListener('keydown', handleKeydown);
-    }
-
-  }, [editRequested]);
 
   return (
     <div
@@ -266,62 +238,23 @@ function SinglePost({
 
         <div className="mb-2">
           <div className="flex gap-1 items-center">
-            <div className="ml-1">
-              {getDate().date}
-              {getDate().modified && <span className="text-xs text-gray-500"> (edited)</span>}
+            <div className={`${owner == "user" ? "ml-1" : "ml-auto"}`}>
+              {owner == "user" ? "You" : "GPT"} - {date_posted}
             </div>
-            <button
-              onClick={() => deleteCallback(id)}
-              title="Delete"
-              className="ml-auto px-2 font-sourcecode text-red-600 font-bold text-lg duration-200 hover:scale-x-150 hover:scale-y-125 hover:rotate-180 scale-y-75"
-            >
-              X
-            </button>
           </div>
         </div>
 
         <div
-          onClick={requestEdit}
           className="transition-all duration-200"
         >
-      
-          {isEditing ? (
-            <textarea
-              ref={editRef}
-              rows={3}
-              maxLength={200}
-              defaultValue={content}
-              className="w-full border-2 border-black bg-gray-500 text-white p-2 rounded-sm"
-            />
-          ) : (
-            <div
-              title="Click to edit"
-              ref={displayRef}
-              className="cursor-pointer bg-gray-300 hover:bg-[#EF8275] hover:text-white rounded-lg p-2 enterDown"
-            >
-              {content}
-            </div>
-          )}
-        </div>
-
-        {isEditing && (
-          <div className="mt-1 pl-1 max-[400px]:text-[0.6rem]">
-            Press Esc to
-            <button
-              onClick={cancelEdit}
-              className="text-blue-600 px-1"
-            >
-              Cancel
-            </button>
-            - Press Enter to
-            <button
-              onClick={() => editConfirmCallback(id, editRef.current!.value)}
-              className="text-blue-600 px-1"
-            >
-              Save
-            </button>
+          <div
+            data-chatid={chatID}
+            data-owner={owner}
+            className="bg-gray-300 rounded-lg p-2 enterDown"
+          >
+            {content}
           </div>
-        )}
+        </div>
 
       </div>
 
