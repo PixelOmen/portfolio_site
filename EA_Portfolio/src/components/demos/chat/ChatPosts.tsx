@@ -84,7 +84,6 @@ export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
   }
 
   function handleServerMessage(event: any) {
-    // console.log(event);
     const data: ServerMessage = JSON.parse(event.data);
     if (data.error) {
       setError(data.error);
@@ -97,6 +96,7 @@ export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
         enableSend();
         return;
       case "endStream":
+        setError("");
         enableSend();
         setTimeout(() => {
           postAreaRef.current?.scrollTo({top: 5000, behavior: 'smooth'});

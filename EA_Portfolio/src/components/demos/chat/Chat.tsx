@@ -16,7 +16,7 @@ export default function Chat( { isLogggendIn = false, userLimits }: ChatProps ) 
       <div className="flex justify-center items-center max-[719px]:flex-wrap">
         <div className="text-white min-[720px]:basis-[45%] min-[720px]:ml-auto sm:min-w-[350px] mt-4 min-[720px]:mt-0 order-1 min-[720px]:order-2">
           <div className="pt-0 sm:p-6 sm:pt-0">
-            <header className="text-center text-3xl font-bold text-[#EF8275] mb-4">WebSockets / Chatbot</header>
+            <header className="text-center text-3xl font-bold text-[#EF8275] mb-4">WebSockets (Chatbot)</header>
             <p className="">
                 This demo utilizes <DemoLink
                 displayText="Django Channels"

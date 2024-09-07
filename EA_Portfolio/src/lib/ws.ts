@@ -40,5 +40,4 @@ export function chatSocketConnection(
     document.cookie = `access_token=${access_token}`;
   }
   return rootSocketConnection(CHAT_ROOT + subpath, onMessageCallback, onCloseCallback);
-
 }
