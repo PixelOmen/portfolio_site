@@ -25,14 +25,14 @@ export default function AboutSection({
           How
           <span className="ml-3 font-thin text-gray-200 font-roboto">It Works</span>
           <div className="mt-2 px-2 text-base sm:text-lg font-light font-sans text-gray-200 ">
-            A dive into the architecture powering this project.
+            A look at the architecture powering this project.
           </div>
-          <hr className="block mx-auto mt-4 w-3/4"/>
+          <hr className="block mx-auto mt-4 px-2 sm:w-3/4"/>
         </div>
 
         <ExpandContextProvider>
           <div className="p-4 sm:p-6 bg-slate-800 rounded-md border-2 border-black">
-            While the scope of this project might not demand a full-fledged production infrastructure, I've implemented a setup that mirrors industry standards. It's not just about building something that works — it's about demonstrating how to build something that scales, adapts, and performs under real-world conditions. Here's a look at the architecture powering this project.
+            While the scope of this project might not demand a full-fledged production infrastructure, I've implemented a setup that mirrors industry standards. It's not just about building something that works - it's about demonstrating how to build something that scales, adapts, and performs under real-world conditions.
           </div>
           <div className="flex justify-center gap-10 mt-8 text-[#EF8275] font-bold">
               <ContextButtons/>
@@ -104,18 +104,18 @@ function ContextButtons() {
   return (
     <>
       <button
-        onClick={() => setValues(false)}
-        title="Collapse All"
-        className="hover:scale-x-75 transition-all active:scale-x-100"
-      >
-        {">---<"}            
-      </button>
-      <button
         onClick={() => setValues(true)}
         title="Expand All"
         className="hover:scale-x-125 transition-all active:scale-x-100"
       >
         {"<--->"}
+      </button>
+      <button
+        onClick={() => setValues(false)}
+        title="Collapse All"
+        className="hover:scale-x-75 transition-all active:scale-x-100"
+      >
+        {">---<"}            
       </button>
     </>
   )

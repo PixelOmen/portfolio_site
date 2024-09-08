@@ -246,7 +246,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
           <div className="mt-2 px-2 text-base sm:text-lg font-light font-sans text-gray-200 ">
             Some of the projects and tools I've developed over the years.
           </div>
-          <hr className="block mx-auto mt-4 w-3/4"/>
+          <hr className="block mx-auto mt-4 px-2 sm:w-3/4"/>
         </div>
 
 

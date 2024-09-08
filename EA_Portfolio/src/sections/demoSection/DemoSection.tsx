@@ -45,7 +45,7 @@ export default function DemoSection( {scrollState}: DemoSectionProps ) {
         <div className="mt-2 px-2 text-base sm:text-lg font-light font-sans text-gray-200">
           Live demos showcasing the integration of various services and tech stacks.
         </div>
-        <hr className="mx-auto mt-4 block w-3/4"/>
+        <hr className="block mx-auto mt-4 px-2 sm:w-3/4"/>
       </div>
 
       
