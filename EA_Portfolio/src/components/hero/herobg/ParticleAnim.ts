@@ -12,6 +12,8 @@ export default class ParticleAnimation {
       ease: number;
       randomX: number;
       randomY: number;
+      windowWidth: number;
+      windowHeight: number;
     };
 
     constructor(
@@ -22,6 +24,8 @@ export default class ParticleAnimation {
         ease = 50,
         randomX = 2,
         randomY = 2,
+        windowWidth = window.innerWidth,
+        windowHeight = window.innerHeight,
       } = {}
     ) {
       this.canvas = elem;
@@ -41,6 +45,8 @@ export default class ParticleAnimation {
         ease: ease,
         randomX: randomX,
         randomY: randomY,
+        windowWidth: windowWidth,
+        windowHeight: windowHeight,
       };
       this.circles = [];
       this.mouse = {
@@ -64,10 +70,24 @@ export default class ParticleAnimation {
     init() {
       this.initCanvas();
       this.animate();
-      window.addEventListener('resize', this.initCanvas);
+      this.handleResize = this.handleResize.bind(this);
+      window.addEventListener('resize', this.handleResize);
       window.addEventListener('mousemove', this.onMouseMove);
     }
-  
+
+    handleResize() {
+      if (window.innerWidth != this.settings.windowWidth) {
+        this.settings.windowWidth = window.innerWidth;
+        this.initCanvas();
+        return;
+      }
+      if (Math.abs(window.innerHeight - this.settings.windowHeight) > 300) {
+        this.settings.windowHeight = window.innerHeight;
+        this.initCanvas();
+        return;
+      }
+    }
+    
     initCanvas() {
       this.resizeCanvas();
       this.drawParticles();
