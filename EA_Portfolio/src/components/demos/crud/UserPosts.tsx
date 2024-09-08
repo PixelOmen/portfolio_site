@@ -77,7 +77,7 @@ export default function UserPosts({locked = true, userLimits}: UserPostsProps) {
         getPosts();
         setTimeout(() => {
           postAreaRef.current?.scrollTo({top: 5000, behavior: 'smooth'});
-        }, 100);
+        }, 200);
       })
       .catch(err => {
         console.error(err);

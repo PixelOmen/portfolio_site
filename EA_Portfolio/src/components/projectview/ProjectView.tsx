@@ -66,7 +66,7 @@ export default function ProjectView({
             />
           </div>
         )}
-        <p className='mt-6 text-base sm:text-lg casc-fadeInDown'>
+        <p className='mt-6 text-base sm:text-lg casc-fadeInUp'>
           {description}
         </p>
         {techStack && (

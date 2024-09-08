@@ -66,6 +66,7 @@ export function logOutOnInvalidToken(): void {
 export function logOut(): void {
   localStorage.removeItem('access_token');
   localStorage.removeItem('google_token');
+  document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   setTimeout(() => {
     window.location.href = LOGGEDOUT_URL;
   }, 500);
