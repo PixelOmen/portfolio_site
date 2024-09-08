@@ -34,7 +34,7 @@ export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
 
   function disableSend() {
     allowSendRef.current = false;
-    newTextAreaRef.current!.disabled = true;
+    // newTextAreaRef.current!.disabled = true;
     newTextAreaRef.current!.placeholder = "Processing...";
     newTextAreaRef.current!.classList.add('bg-slate-400');
     newTextAreaRef.current!.classList.add('placeholder-gray-100');
@@ -42,7 +42,7 @@ export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
 
   function enableSend() {
     allowSendRef.current = true;
-    newTextAreaRef.current!.disabled = false;
+    // newTextAreaRef.current!.disabled = false;
     newTextAreaRef.current!.placeholder = "Message ChatGPT...";
     newTextAreaRef.current!.classList.remove('bg-slate-400');
     newTextAreaRef.current!.classList.remove('placeholder-gray-100');
