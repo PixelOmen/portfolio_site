@@ -112,7 +112,7 @@ export default function WorkSection({ scrollState, className = ''}: WorkSectionP
         backCallback={returnToMenu}
         className="w-full"
         title = "This Project (Front-End)"
-        description="The front-end for this portfolio project is a single-page application (SPA), built with React, Vite, Axios, and TailwindCSS. Axios is used for handling HTTP requests, providing a clean and consistent API for interacting with the back-end managing token authentication. The deployment process is fully automated through GitHub Actions, which builds the front-end and deploys it to AWS S3 for static hosting. Designed to be responsive, accessible, and performant, with a focus on user experience. It showcases various projects, skills, and contact information, providing a clean and intuitive interface for visitors to explore."
+        description="The front-end for this portfolio project is a single-page application (SPA), built with React, Vite, Axios, and TailwindCSS. The deployment process is fully automated through GitHub Actions, which builds the front-end and deploys it to AWS S3 for static hosting. Designed to be responsive, accessible, and performant, with a focus on user experience. It showcases various projects, skills, and contact information, providing a clean and intuitive interface for visitors to explore."
         techStack={['React', 'Vite', 'TailwindCSS', 'Axios', 'TypeScript', 'AWS S3', 'AWS CloudFront', 'GitHub Actions']}
         github={{url: "https://github.com/PixelOmen/portfolio_site"}}
       />,
