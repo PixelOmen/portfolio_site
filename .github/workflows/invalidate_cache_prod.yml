@@ -1,4 +1,4 @@
-name: Invalidate CloudFront Cache
+name: Invalidate CloudFront Cache (Prod)
 
 on:
   workflow_run:
