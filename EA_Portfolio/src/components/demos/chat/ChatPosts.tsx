@@ -70,7 +70,7 @@ export default function ChatPosts({locked = true, userLimits}: ChatPostsProps) {
     } else {
       const postData: ChatPostData = {
         chatID: data.chatID,
-        content: data.payload.replace('\n\n', '<br>'),
+        content: data.payload.replace('\\n', ''),
         owner: "gpt",
         date_posted: new Date().toLocaleString()
       }
